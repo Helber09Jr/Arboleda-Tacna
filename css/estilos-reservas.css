@@ -3088,25 +3088,6 @@ label:has(~ input[required])::after {
    PREVISUALIZACIÓN EN TARJETAS DE SUB-SELECCIÓN
    ========================================================== */
 
-.tarjeta-subopcion {
-  position: relative;
-  overflow: hidden;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-}
-
-.preview-imagen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background-size: cover;
-  background-position: center;
-  background-color: #e0e0e0;
-  border-radius: 10px 10px 0 0;
-}
 
 .preview-imagen::after {
   content: '';
@@ -3232,13 +3213,6 @@ label:has(~ input[required])::after {
     height: 80px;
   }
   
-  .tarjeta-subopcion .subopcion-nombre {
-    margin-top: 90px;
-  }
-  
-  .tarjeta-subopcion {
-    min-height: 160px;
-  }
 }
 
 /* ==========================================================
