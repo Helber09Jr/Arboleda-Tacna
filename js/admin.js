@@ -488,6 +488,17 @@ function inicializarFiltros() {
   if (verTodasReservas) {
     verTodasReservas.onclick = () => filtrarPorEstado('');
   }
+
+  // Accordion para filtros en móvil
+  const btnToggleFiltros = document.getElementById('btnToggleFiltros');
+  const contenedorFiltros = document.getElementById('contenedorFiltros');
+
+  if (btnToggleFiltros) {
+    btnToggleFiltros.onclick = () => {
+      contenedorFiltros.classList.toggle('oculto');
+      btnToggleFiltros.classList.toggle('activo');
+    };
+  }
 }
 
 function aplicarFiltros() {

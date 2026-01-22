@@ -957,11 +957,48 @@ body {
 
 .seccion-filtros {
   background: var(--blanco);
-  padding: 20px 24px;
   border-radius: 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   margin-bottom: 24px;
   border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.boton-toggle-filtros {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--blanco);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--azul-principal);
+  transition: all 0.3s ease;
+}
+
+.boton-toggle-filtros:hover {
+  background: rgba(0, 82, 180, 0.05);
+}
+
+.boton-toggle-filtros svg:first-child {
+  width: 20px;
+  height: 20px;
+  stroke: var(--azul-principal);
+}
+
+.boton-toggle-filtros .icono-toggle {
+  width: 18px;
+  height: 18px;
+  stroke: var(--azul-principal);
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+.boton-toggle-filtros.activo .icono-toggle {
+  transform: rotate(180deg);
 }
 
 .contenedor-filtros {
@@ -969,6 +1006,18 @@ body {
   flex-wrap: wrap;
   gap: 15px;
   align-items: flex-end;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  max-height: 500px;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.contenedor-filtros.oculto {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 24px;
 }
 
 .filtro-item {
@@ -2552,12 +2601,32 @@ body {
    RESPONSIVE
    ========================================================== */
 
+/* Desktop - Filtros siempre abiertos */
+@media (min-width: 1025px) {
+  .boton-toggle-filtros {
+    display: none;
+  }
+
+  .contenedor-filtros {
+    max-height: 500px;
+    opacity: 1;
+    padding: 20px 24px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .filtros-acciones {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+  }
+}
+
 @media (max-width: 1024px) {
   .tarjeta-reserva-admin {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .boton-ver-detalle {
     width: 100%;
     justify-content: center;
@@ -2580,12 +2649,38 @@ body {
     padding: 20px 15px;
   }
 
+  .boton-toggle-filtros {
+    display: flex;
+  }
+
   .contenedor-filtros {
     flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    padding: 0 24px;
+  }
+
+  .contenedor-filtros:not(.oculto) {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 20px 24px;
   }
 
   .filtro-item {
     width: 100%;
+  }
+
+  .filtros-acciones {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .boton-limpiar-filtros,
+  .boton-exportar-excel {
+    flex: 1;
+    min-width: 120px;
   }
 
   .detalle-grid {
