@@ -872,45 +872,6 @@ button {
   text-transform: uppercase;
 }
 
-/* Botón vista previa (ojo) */
-.btn-vista-previa {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.95);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 5;
-}
-
-.btn-vista-previa svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--azul-principal);
-}
-
-.btn-vista-previa:hover {
-  background: var(--azul-principal);
-  transform: scale(1.1);
-}
-
-.btn-vista-previa:hover svg {
-  stroke: var(--blanco);
-}
-
-.btn-vista-previa:focus-visible {
-  outline: 3px solid var(--dorado-claro);
-  outline-offset: 2px;
-}
-
 .tarjeta-plato-contenido {
   padding: 20px;
 }
@@ -2687,19 +2648,6 @@ button {
     height: 18px;
   }
   
-  /* Botón vista previa más pequeño en móvil */
-  .btn-vista-previa {
-    width: 32px;
-    height: 32px;
-    top: 10px;
-    right: 10px;
-  }
-  
-  .btn-vista-previa svg {
-    width: 16px;
-    height: 16px;
-  }
-  
   .controles-carta {
     flex-direction: column;
     align-items: stretch;
@@ -2925,19 +2873,6 @@ button {
   
   .tarjeta-plato-imagen {
     height: 120px;
-  }
-  
-  /* Botón vista previa aún más pequeño */
-  .btn-vista-previa {
-    width: 28px;
-    height: 28px;
-    top: 8px;
-    right: 8px;
-  }
-  
-  .btn-vista-previa svg {
-    width: 14px;
-    height: 14px;
   }
   
   .tarjeta-plato-contenido {
