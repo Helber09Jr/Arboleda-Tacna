@@ -437,25 +437,21 @@ button {
 }
 
 .tarjeta-instalacion-reserva {
-  border-radius: 24px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: 2px solid transparent;
-  position: relative;
   display: flex;
   flex-direction: column;
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 360px;
+  background: var(--blanco);
 }
 
 .tarjeta-instalacion-reserva:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.25);
-  border-color: var(--dorado-claro);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border-color: var(--azul-suave);
 }
 
 .tarjeta-instalacion-reserva:focus-visible {
@@ -464,13 +460,16 @@ button {
 }
 
 .tarjeta-icono-reserva {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0.75) 100%);
+  flex-shrink: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .tarjeta-imagen-overlay {
@@ -486,44 +485,37 @@ button {
 }
 
 .tarjeta-contenido-reserva {
-  padding: 28px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  position: absolute;
+  position: relative;
   z-index: 2;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.3));
-  backdrop-filter: blur(2px);
-  justify-content: flex-end;
+  background: var(--blanco);
+  margin-top: auto;
 }
 
 .tarjeta-titulo-reserva {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--blanco);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--azul-principal);
   margin-bottom: 8px;
   font-family: 'Montserrat', sans-serif;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  letter-spacing: 0.5px;
 }
 
 .tarjeta-descripcion-reserva {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.6;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
   margin-bottom: 15px;
   flex: 1;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .tarjeta-info-reserva {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 15px;
 }
 
 .info-capacidad,
@@ -531,53 +523,48 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 500;
 }
 
 .info-capacidad svg,
 .info-horario svg {
   width: 18px;
   height: 18px;
-  stroke: var(--dorado-claro);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  stroke: var(--azul-suave);
 }
 
 .boton-seleccionar-instalacion {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px 28px;
-  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--azul-principal);
   color: var(--blanco);
   border: none;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 8px 20px rgba(0, 82, 180, 0.25);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .boton-seleccionar-instalacion svg {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.4s ease;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
 }
 
 .boton-seleccionar-instalacion:hover {
-  background: linear-gradient(135deg, var(--azul-suave) 0%, var(--azul-principal) 100%);
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 82, 180, 0.4);
+  background: var(--azul-suave);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 82, 180, 0.3);
 }
 
 .boton-seleccionar-instalacion:hover svg {
-  transform: translateX(6px) scale(1.2);
+  transform: translateX(4px);
 }
 
 .boton-seleccionar-instalacion:focus-visible {
@@ -714,40 +701,38 @@ button {
 }
 
 .tarjeta-subopcion {
-  border: 2px solid transparent;
-  border-radius: 16px;
+  border: 2px solid var(--gris-medio);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s ease;
   text-align: center;
   position: relative;
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  min-height: 220px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .subopcion-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+  background: rgba(0, 0, 0, 0.45);
   z-index: 1;
-  transition: all 0.4s ease;
 }
 
 .tarjeta-subopcion:hover {
-  border-color: var(--dorado-claro);
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0, 82, 180, 0.3);
+  border-color: var(--azul-principal);
+  background: #e8f4ff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 82, 180, 0.2);
 }
 
 .tarjeta-subopcion:hover .subopcion-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .tarjeta-subopcion:focus-visible {
@@ -756,26 +741,23 @@ button {
 }
 
 .subopcion-nombre {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--blanco);
   position: relative;
   z-index: 2;
   padding: 0 15px;
-  padding-top: 12px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  letter-spacing: 0.3px;
+  padding-top: 15px;
 }
 
 .subopcion-capacidad {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
   position: relative;
   z-index: 2;
   padding: 0 15px;
-  padding-bottom: 16px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  padding-bottom: 15px;
 }
 
 /* Modal Mesas (formulario directo) */
