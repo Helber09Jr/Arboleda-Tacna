@@ -463,22 +463,17 @@ button {
 }
 
 .tarjeta-icono-reserva {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
+  flex-shrink: 0;
+  height: 150px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  position: relative;
 }
 
 .tarjeta-imagen-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  display: none;
 }
 
 .tarjeta-icono-reserva svg {
