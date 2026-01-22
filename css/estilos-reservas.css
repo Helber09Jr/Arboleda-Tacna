@@ -446,6 +446,9 @@ button {
   border: 2px solid transparent;
   display: flex;
   flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .tarjeta-instalacion-reserva:hover {
@@ -460,11 +463,19 @@ button {
 }
 
 .tarjeta-icono-reserva {
-  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
-  padding: 30px;
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.8) 0%, rgba(74, 144, 226, 0.8) 100%);
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 220px;
+  position: relative;
+}
+
+.tarjeta-imagen-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .tarjeta-icono-reserva svg {
@@ -701,13 +712,29 @@ button {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 180px;
+  justify-content: flex-end;
+}
+
+.subopcion-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  z-index: 1;
 }
 
 .tarjeta-subopcion:hover {
   border-color: var(--azul-principal);
-  background: #e8f4ff;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 82, 180, 0.2);
+}
+
+.tarjeta-subopcion:hover .subopcion-overlay {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .tarjeta-subopcion:focus-visible {
@@ -718,13 +745,17 @@ button {
 .subopcion-nombre {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--azul-principal);
+  color: var(--blanco);
+  position: relative;
+  z-index: 2;
 }
 
 .subopcion-capacidad {
   font-size: 0.85rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
 /* Modal Mesas (formulario directo) */
