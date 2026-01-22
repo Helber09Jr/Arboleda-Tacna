@@ -878,13 +878,25 @@ body {
   align-items: center;
   gap: 16px;
   transition: all 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 2px solid rgba(0, 0, 0, 0.04);
+}
+
+#filtrarPendientes,
+#filtrarReservados,
+#filtrarCancelados,
+#verTodasReservas {
+  cursor: pointer;
 }
 
 .tarjeta-estadistica:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 82, 180, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 82, 180, 0.2);
+}
+
+.tarjeta-estadistica.activo {
+  border-color: var(--azul-principal);
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.05), rgba(0, 82, 180, 0.02));
 }
 
 .icono-estadistica {
@@ -945,11 +957,48 @@ body {
 
 .seccion-filtros {
   background: var(--blanco);
-  padding: 20px 24px;
   border-radius: 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   margin-bottom: 24px;
   border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.boton-toggle-filtros {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--blanco);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--azul-principal);
+  transition: all 0.3s ease;
+}
+
+.boton-toggle-filtros:hover {
+  background: rgba(0, 82, 180, 0.05);
+}
+
+.boton-toggle-filtros svg:first-child {
+  width: 20px;
+  height: 20px;
+  stroke: var(--azul-principal);
+}
+
+.boton-toggle-filtros .icono-toggle {
+  width: 18px;
+  height: 18px;
+  stroke: var(--azul-principal);
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+.boton-toggle-filtros.activo .icono-toggle {
+  transform: rotate(180deg);
 }
 
 .contenedor-filtros {
@@ -957,6 +1006,18 @@ body {
   flex-wrap: wrap;
   gap: 15px;
   align-items: flex-end;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  max-height: 500px;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.contenedor-filtros.oculto {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 24px;
 }
 
 .filtro-item {
@@ -1033,11 +1094,89 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.cabecera-lista > div:first-child {
+  flex: 1;
 }
 
 .contador-resultados {
   font-size: 0.9rem;
   color: #888;
+  display: block;
+  margin-top: 4px;
+}
+
+.opciones-vista-reservas {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.select-ordenar {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #333;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-ordenar:hover {
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+.select-ordenar:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+.selector-vista {
+  display: flex;
+  gap: 6px;
+  background: #f5f5f5;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.boton-vista {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.boton-vista svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.boton-vista:hover {
+  color: var(--azul-principal);
+  border-color: var(--azul-principal);
+}
+
+.boton-vista.activo {
+  background: var(--azul-principal);
+  color: white;
+  border-color: var(--azul-principal);
 }
 
 .lista-reservas-admin {
@@ -2540,12 +2679,32 @@ body {
    RESPONSIVE
    ========================================================== */
 
+/* Desktop - Filtros siempre abiertos */
+@media (min-width: 1025px) {
+  .boton-toggle-filtros {
+    display: none;
+  }
+
+  .contenedor-filtros {
+    max-height: 500px;
+    opacity: 1;
+    padding: 20px 24px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .filtros-acciones {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+  }
+}
+
 @media (max-width: 1024px) {
   .tarjeta-reserva-admin {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .boton-ver-detalle {
     width: 100%;
     justify-content: center;
@@ -2568,12 +2727,38 @@ body {
     padding: 20px 15px;
   }
 
+  .boton-toggle-filtros {
+    display: flex;
+  }
+
   .contenedor-filtros {
     flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    padding: 0 24px;
+  }
+
+  .contenedor-filtros:not(.oculto) {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 20px 24px;
   }
 
   .filtro-item {
     width: 100%;
+  }
+
+  .filtros-acciones {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .boton-limpiar-filtros,
+  .boton-exportar-excel {
+    flex: 1;
+    min-width: 120px;
   }
 
   .detalle-grid {
@@ -3788,4 +3973,164 @@ body {
     flex-direction: column;
     gap: 4px;
   }
+}
+
+/* ==========================================================
+   FLATPICKR - CALENDARIO PERSONALIZADO
+   ========================================================== */
+
+.flatpickr-calendar {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.flatpickr-innerContainer {
+  border-radius: 8px;
+}
+
+.flatpickr-months {
+  background: var(--azul-principal);
+  color: white;
+  padding: 12px;
+}
+
+.flatpickr-month {
+  background: transparent;
+  color: white;
+}
+
+.flatpickr-month .flatpickr-next-month,
+.flatpickr-month .flatpickr-prev-month {
+  fill: white;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.flatpickr-month .flatpickr-next-month:hover,
+.flatpickr-month .flatpickr-prev-month:hover {
+  opacity: 1;
+}
+
+.flatpickr-monthDropdown-months {
+  background: var(--azul-principal);
+  color: white;
+}
+
+.flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+  background: var(--azul-principal);
+  color: white;
+}
+
+.flatpickr-weekdaycontainer {
+  background: rgba(0, 82, 180, 0.05);
+}
+
+.flatpickr-weekday {
+  color: var(--azul-principal);
+  font-weight: 600;
+}
+
+.flatpickr-day {
+  color: #333;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.flatpickr-day:hover {
+  background: rgba(0, 82, 180, 0.1);
+  border-color: var(--azul-principal);
+}
+
+.flatpickr-day.selected {
+  background: var(--azul-principal);
+  border-color: var(--azul-principal);
+  color: white;
+  font-weight: 600;
+}
+
+.flatpickr-day.selected:hover {
+  background: var(--azul-suave);
+  border-color: var(--azul-suave);
+}
+
+.flatpickr-day.today {
+  border-color: var(--azul-principal);
+  color: var(--azul-principal);
+  font-weight: 600;
+}
+
+.flatpickr-day.other-month {
+  color: #ccc;
+}
+
+.flatpickr-time {
+  background: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+}
+
+.flatpickr-time input {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  color: #333;
+}
+
+.flatpickr-time input:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+/* ==========================================================
+   VISTA TABLA DE RESERVAS
+   ========================================================== */
+
+.lista-reservas-admin.vista-tabla {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.lista-reservas-admin.vista-tabla .tarjeta-reserva-admin {
+  display: table-row;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0;
+  gap: 0;
+  grid-template-columns: none;
+  transition: background-color 0.2s ease;
+}
+
+.lista-reservas-admin.vista-tabla .tarjeta-reserva-admin:hover {
+  background-color: rgba(0, 82, 180, 0.03);
+}
+
+.lista-reservas-admin.vista-tabla .tarjeta-reserva-admin > div {
+  display: table-cell;
+  padding: 15px;
+  border: none;
+  vertical-align: middle;
+}
+
+.lista-reservas-admin.vista-tabla .reserva-info-principal {
+  display: table-cell;
+  width: 30%;
+  padding: 15px;
+}
+
+.lista-reservas-admin.vista-tabla .reserva-info-socio {
+  display: table-cell;
+  width: 40%;
+  padding: 15px;
+}
+
+.lista-reservas-admin.vista-tabla .boton-ver-detalle {
+  display: table-cell;
+  width: 20%;
+  padding: 15px;
+  text-align: right;
 }

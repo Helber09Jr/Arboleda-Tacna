@@ -66,6 +66,10 @@ let auditFiltrada = [];
 let unsubscribeAuth = null;
 let autenticacionVerificada = false;
 
+// Opciones de vista y ordenamiento
+let vistaActual = 'tarjetas'; // 'tarjetas' o 'tabla'
+let ordenActual = 'fecha-desc'; // orden por defecto
+
 // ==========================================================
 // INICIALIZACIÓN
 // ==========================================================
@@ -300,6 +304,7 @@ function inicializarEventos() {
   }
 
   inicializarFiltros();
+  inicializarOpcionesVista();
   inicializarModal();
   inicializarModalConfirmacion();
   inicializarReservaManual();
@@ -462,13 +467,62 @@ function inicializarFiltros() {
   const filtroEstado = document.getElementById('filtroEstado');
   const filtroBusqueda = document.getElementById('filtroBusqueda');
   const btnLimpiar = document.getElementById('btnLimpiarFiltros');
-  
+
+  // Inicializar Flatpickr en inputs de fecha
+  if (filtroFechaInicio && typeof flatpickr !== 'undefined') {
+    flatpickr(filtroFechaInicio, {
+      mode: 'single',
+      dateFormat: 'd/m/Y',
+      locale: 'es',
+      onChange: aplicarFiltros
+    });
+  }
+
+  if (filtroFechaFin && typeof flatpickr !== 'undefined') {
+    flatpickr(filtroFechaFin, {
+      mode: 'single',
+      dateFormat: 'd/m/Y',
+      locale: 'es',
+      onChange: aplicarFiltros
+    });
+  }
+
   if (filtroFechaInicio) filtroFechaInicio.onchange = aplicarFiltros;
   if (filtroFechaFin) filtroFechaFin.onchange = aplicarFiltros;
   if (filtroInstalacion) filtroInstalacion.onchange = aplicarFiltros;
   if (filtroEstado) filtroEstado.onchange = aplicarFiltros;
   if (filtroBusqueda) filtroBusqueda.oninput = aplicarFiltros;
   if (btnLimpiar) btnLimpiar.onclick = limpiarFiltros;
+
+  // Event listeners para filtrar por estado desde iconos de estadísticas
+  const filtrarPendientes = document.getElementById('filtrarPendientes');
+  const filtrarReservados = document.getElementById('filtrarReservados');
+  const filtrarCancelados = document.getElementById('filtrarCancelados');
+  const verTodasReservas = document.getElementById('verTodasReservas');
+
+  if (filtrarPendientes) {
+    filtrarPendientes.onclick = () => filtrarPorEstado('pendiente');
+  }
+  if (filtrarReservados) {
+    filtrarReservados.onclick = () => filtrarPorEstado('reservado');
+  }
+  if (filtrarCancelados) {
+    filtrarCancelados.onclick = () => filtrarPorEstado('cancelado');
+  }
+  if (verTodasReservas) {
+    verTodasReservas.onclick = () => filtrarPorEstado('');
+  }
+
+  // Accordion para filtros en móvil
+  const btnToggleFiltros = document.getElementById('btnToggleFiltros');
+  const contenedorFiltros = document.getElementById('contenedorFiltros');
+
+  if (btnToggleFiltros) {
+    btnToggleFiltros.onclick = () => {
+      contenedorFiltros.classList.toggle('oculto');
+      btnToggleFiltros.classList.toggle('activo');
+    };
+  }
 }
 
 function aplicarFiltros() {
@@ -532,9 +586,148 @@ function limpiarFiltros() {
   document.getElementById('filtroInstalacion').value = '';
   document.getElementById('filtroEstado').value = '';
   document.getElementById('filtroBusqueda').value = '';
-  
+
   aplicarFiltros();
   mostrarToast('Filtros limpiados');
+}
+
+function filtrarPorEstado(estado) {
+  // Establecer el filtro de estado
+  const filtroEstado = document.getElementById('filtroEstado');
+  if (filtroEstado) {
+    filtroEstado.value = estado;
+  }
+
+  // Actualizar estado visual de los iconos
+  const filtrarPendientes = document.getElementById('filtrarPendientes');
+  const filtrarReservados = document.getElementById('filtrarReservados');
+  const filtrarCancelados = document.getElementById('filtrarCancelados');
+  const verTodasReservas = document.getElementById('verTodasReservas');
+
+  // Remover clase activo de todos
+  if (filtrarPendientes) filtrarPendientes.classList.remove('activo');
+  if (filtrarReservados) filtrarReservados.classList.remove('activo');
+  if (filtrarCancelados) filtrarCancelados.classList.remove('activo');
+  if (verTodasReservas) verTodasReservas.classList.remove('activo');
+
+  // Agregar clase activo al seleccionado
+  switch(estado) {
+    case 'pendiente':
+      if (filtrarPendientes) filtrarPendientes.classList.add('activo');
+      break;
+    case 'reservado':
+      if (filtrarReservados) filtrarReservados.classList.add('activo');
+      break;
+    case 'cancelado':
+      if (filtrarCancelados) filtrarCancelados.classList.add('activo');
+      break;
+    default:
+      if (verTodasReservas) verTodasReservas.classList.add('activo');
+  }
+
+  // Aplicar los filtros
+  aplicarFiltros();
+
+  // Hacer scroll hacia la sección de resultados
+  const seccionReservas = document.querySelector('.seccion-reservas-admin');
+  if (seccionReservas) {
+    seccionReservas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Mostrar mensaje
+  if (estado) {
+    const estadoTexto = {
+      'pendiente': 'Pendientes',
+      'reservado': 'Reservados',
+      'cancelado': 'Cancelados'
+    }[estado];
+    mostrarToast(`Mostrando ${estadoTexto}`);
+  } else {
+    mostrarToast('Mostrando todas las reservas');
+  }
+}
+
+// ==========================================================
+// OPCIONES DE VISTA Y ORDENAMIENTO
+// ==========================================================
+
+function inicializarOpcionesVista() {
+  const btnVistaTarjetas = document.getElementById('btnVistaTarjetas');
+  const btnVistaTabla = document.getElementById('btnVistaTabla');
+  const ordenarPor = document.getElementById('ordenarPor');
+
+  if (btnVistaTarjetas) {
+    btnVistaTarjetas.onclick = () => cambiarVista('tarjetas');
+  }
+  if (btnVistaTabla) {
+    btnVistaTabla.onclick = () => cambiarVista('tabla');
+  }
+  if (ordenarPor) {
+    ordenarPor.onchange = () => {
+      ordenActual = ordenarPor.value;
+      renderizarReservas();
+    };
+  }
+}
+
+function cambiarVista(vista) {
+  vistaActual = vista;
+
+  // Actualizar botones
+  const btnVistaTarjetas = document.getElementById('btnVistaTarjetas');
+  const btnVistaTabla = document.getElementById('btnVistaTabla');
+
+  if (btnVistaTarjetas && btnVistaTabla) {
+    if (vista === 'tarjetas') {
+      btnVistaTarjetas.classList.add('activo');
+      btnVistaTabla.classList.remove('activo');
+    } else {
+      btnVistaTarjetas.classList.remove('activo');
+      btnVistaTabla.classList.add('activo');
+    }
+  }
+
+  renderizarReservas();
+}
+
+function ordenarReservas(reservas) {
+  const copia = [...reservas];
+
+  switch(ordenActual) {
+    case 'fecha-asc':
+      return copia.sort((a, b) => {
+        const fechaA = a.fecha.toDate ? a.fecha.toDate() : new Date(a.fecha);
+        const fechaB = b.fecha.toDate ? b.fecha.toDate() : new Date(b.fecha);
+        return fechaA - fechaB;
+      });
+
+    case 'estado':
+      return copia.sort((a, b) => {
+        const estadoOrder = { 'pendiente': 0, 'reservado': 1, 'cancelado': 2 };
+        return (estadoOrder[a.estado] || 0) - (estadoOrder[b.estado] || 0);
+      });
+
+    case 'nombre':
+      return copia.sort((a, b) => {
+        const nombreA = a.socio?.nombre || '';
+        const nombreB = b.socio?.nombre || '';
+        return nombreA.localeCompare(nombreB);
+      });
+
+    case 'instalacion':
+      return copia.sort((a, b) => {
+        const instA = a.subInstalacion || '';
+        const instB = b.subInstalacion || '';
+        return instA.localeCompare(instB);
+      });
+
+    default: // fecha-desc
+      return copia.sort((a, b) => {
+        const fechaA = a.fecha.toDate ? a.fecha.toDate() : new Date(a.fecha);
+        const fechaB = b.fecha.toDate ? b.fecha.toDate() : new Date(b.fecha);
+        return fechaB - fechaA;
+      });
+  }
 }
 
 // ==========================================================
@@ -545,22 +738,28 @@ function renderizarReservas() {
   const contenedor = document.getElementById('listaReservas');
   const sinResultados = document.getElementById('sinResultados');
   const contador = document.getElementById('contadorResultados');
-  
+
   if (!contenedor) return;
-  
+
   contador.textContent = `${reservasFiltradas.length} resultado${reservasFiltradas.length !== 1 ? 's' : ''}`;
-  
+
   if (reservasFiltradas.length === 0) {
     contenedor.innerHTML = '';
     sinResultados.classList.remove('oculto');
     return;
   }
-  
+
   sinResultados.classList.add('oculto');
-  
+
+  // Aplicar ordenamiento
+  const reservasOrdenadas = ordenarReservas(reservasFiltradas);
+
+  // Actualizar clases según la vista actual
+  contenedor.className = `lista-reservas-admin vista-${vistaActual}`;
+
   let html = '';
-  
-  reservasFiltradas.forEach(reserva => {
+
+  reservasOrdenadas.forEach(reserva => {
     const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
     const fechaFormateada = formatearFecha(fecha);
     const nombreSocio = reserva.socio?.nombre || 'Sin nombre';
