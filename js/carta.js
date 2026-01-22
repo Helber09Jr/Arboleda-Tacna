@@ -322,16 +322,10 @@ function crearTarjetaDetallada(plato) {
 
   return `
     <article class="tarjeta-plato ${claseAgotado}" data-plato-id="${plato.id}" tabindex="0">
-      <div class="tarjeta-plato-imagen">
+      <div class="tarjeta-plato-imagen" data-plato-id="${plato.id}">
         ${htmlEtiquetas}
         <img src="${plato.imagen}" alt="${plato.nombre}" loading="lazy">
         <span class="badge-categoria">${nombreCategoria}</span>
-        <button class="btn-vista-previa" data-plato-id="${plato.id}" aria-label="Ver imagen grande de ${plato.nombre}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </button>
         ${badgeAgotado}
       </div>
       <div class="tarjeta-plato-contenido">
@@ -418,19 +412,19 @@ function agregarEventListenersPlatos() {
     };
   });
   
-  // Botones de vista previa (ojo)
-  document.querySelectorAll('.btn-vista-previa').forEach(boton => {
-    boton.onclick = (e) => {
+  // Click en imagen de tarjeta (abre vista previa)
+  document.querySelectorAll('.tarjeta-plato-imagen').forEach(imagen => {
+    imagen.onclick = (e) => {
       e.stopPropagation();
-      const platoId = boton.getAttribute('data-plato-id');
+      const platoId = imagen.getAttribute('data-plato-id');
       abrirModalVistaPrevia(platoId);
     };
   });
-  
+
   // Click en tarjetas (abre modal de personalización)
   document.querySelectorAll('.tarjeta-plato').forEach(tarjeta => {
     tarjeta.onclick = (e) => {
-      if (!e.target.closest('button')) {
+      if (!e.target.closest('button') && !e.target.closest('.tarjeta-plato-imagen')) {
         const platoId = tarjeta.getAttribute('data-plato-id');
         abrirModalPlato(platoId);
       }
