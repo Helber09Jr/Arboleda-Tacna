@@ -437,18 +437,18 @@ button {
 }
 
 .tarjeta-instalacion-reserva {
-  background: var(--blanco);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: 2px solid transparent;
+  position: relative;
   display: flex;
   flex-direction: column;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  min-height: 280px;
 }
 
 .tarjeta-instalacion-reserva:hover {
@@ -463,13 +463,13 @@ button {
 }
 
 .tarjeta-icono-reserva {
-  background: linear-gradient(135deg, rgba(0, 82, 180, 0.8) 0%, rgba(74, 144, 226, 0.8) 100%);
-  padding: 40px;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.7) 0%, rgba(0, 82, 180, 0.7) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 220px;
-  position: relative;
+  z-index: 1;
 }
 
 .tarjeta-imagen-overlay {
@@ -483,6 +483,7 @@ button {
   height: 60px;
   stroke: var(--blanco);
   transition: transform 0.4s ease;
+  z-index: 2;
 }
 
 .tarjeta-instalacion-reserva:hover .tarjeta-icono-reserva svg {
@@ -494,6 +495,10 @@ button {
   display: flex;
   flex-direction: column;
   flex: 1;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.98);
+  margin-top: auto;
 }
 
 .tarjeta-titulo-reserva {
@@ -574,7 +579,7 @@ button {
 }
 
 .tarjeta-mesas .tarjeta-icono-reserva {
-  background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-claro) 100%);
+  background: linear-gradient(135deg, rgba(200, 169, 94, 0.7) 0%, rgba(217, 184, 108, 0.7) 100%);
 }
 
 .tarjeta-mesas .boton-seleccionar-instalacion {
@@ -702,28 +707,26 @@ button {
 }
 
 .tarjeta-subopcion {
-  background: var(--gris-claro);
   border: 2px solid var(--gris-medio);
   border-radius: 12px;
-  padding: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   position: relative;
   background-size: cover;
   background-position: center;
-  min-height: 180px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-end;
+  padding: 0;
+  overflow: hidden;
 }
 
 .subopcion-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.45);
   z-index: 1;
 }
 
@@ -734,7 +737,7 @@ button {
 }
 
 .tarjeta-subopcion:hover .subopcion-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .tarjeta-subopcion:focus-visible {
@@ -748,6 +751,8 @@ button {
   color: var(--blanco);
   position: relative;
   z-index: 2;
+  padding: 0 15px;
+  padding-top: 15px;
 }
 
 .subopcion-capacidad {
@@ -756,6 +761,8 @@ button {
   font-weight: 500;
   position: relative;
   z-index: 2;
+  padding: 0 15px;
+  padding-bottom: 15px;
 }
 
 /* Modal Mesas (formulario directo) */
