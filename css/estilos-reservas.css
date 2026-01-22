@@ -445,7 +445,9 @@ button {
   border: 2px solid transparent;
   display: flex;
   flex-direction: column;
-  background: var(--blanco);
+  justify-content: flex-end;
+  position: relative;
+  min-height: 320px;
 }
 
 .tarjeta-instalacion-reserva:hover {
@@ -460,16 +462,12 @@ button {
 }
 
 .tarjeta-icono-reserva {
-  flex-shrink: 0;
-  height: 150px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 1;
 }
 
 .tarjeta-imagen-overlay {
@@ -485,30 +483,29 @@ button {
 }
 
 .tarjeta-contenido-reserva {
-  padding: 20px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  flex: 1;
   position: relative;
   z-index: 2;
-  background: var(--blanco);
-  margin-top: auto;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6));
+  backdrop-filter: blur(2px);
+  gap: 12px;
 }
 
 .tarjeta-titulo-reserva {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: var(--azul-principal);
-  margin-bottom: 8px;
+  color: var(--blanco);
+  margin-bottom: 4px;
   font-family: 'Montserrat', sans-serif;
 }
 
 .tarjeta-descripcion-reserva {
   font-size: 0.9rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.5;
-  margin-bottom: 15px;
-  flex: 1;
+  margin-bottom: 12px;
 }
 
 .tarjeta-info-reserva {
@@ -524,7 +521,7 @@ button {
   align-items: center;
   gap: 8px;
   font-size: 0.85rem;
-  color: #555;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
 }
 
@@ -532,7 +529,7 @@ button {
 .info-horario svg {
   width: 18px;
   height: 18px;
-  stroke: var(--azul-suave);
+  stroke: rgba(255, 255, 255, 0.9);
 }
 
 .boton-seleccionar-instalacion {
