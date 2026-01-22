@@ -463,6 +463,25 @@ function inicializarFiltros() {
   const filtroBusqueda = document.getElementById('filtroBusqueda');
   const btnLimpiar = document.getElementById('btnLimpiarFiltros');
 
+  // Inicializar Flatpickr en inputs de fecha
+  if (filtroFechaInicio && typeof flatpickr !== 'undefined') {
+    flatpickr(filtroFechaInicio, {
+      mode: 'single',
+      dateFormat: 'd/m/Y',
+      locale: 'es',
+      onChange: aplicarFiltros
+    });
+  }
+
+  if (filtroFechaFin && typeof flatpickr !== 'undefined') {
+    flatpickr(filtroFechaFin, {
+      mode: 'single',
+      dateFormat: 'd/m/Y',
+      locale: 'es',
+      onChange: aplicarFiltros
+    });
+  }
+
   if (filtroFechaInicio) filtroFechaInicio.onchange = aplicarFiltros;
   if (filtroFechaFin) filtroFechaFin.onchange = aplicarFiltros;
   if (filtroInstalacion) filtroInstalacion.onchange = aplicarFiltros;

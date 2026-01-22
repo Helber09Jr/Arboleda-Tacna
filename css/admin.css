@@ -3896,3 +3896,111 @@ body {
     gap: 4px;
   }
 }
+
+/* ==========================================================
+   FLATPICKR - CALENDARIO PERSONALIZADO
+   ========================================================== */
+
+.flatpickr-calendar {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.flatpickr-innerContainer {
+  border-radius: 8px;
+}
+
+.flatpickr-months {
+  background: var(--azul-principal);
+  color: white;
+  padding: 12px;
+}
+
+.flatpickr-month {
+  background: transparent;
+  color: white;
+}
+
+.flatpickr-month .flatpickr-next-month,
+.flatpickr-month .flatpickr-prev-month {
+  fill: white;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.flatpickr-month .flatpickr-next-month:hover,
+.flatpickr-month .flatpickr-prev-month:hover {
+  opacity: 1;
+}
+
+.flatpickr-monthDropdown-months {
+  background: var(--azul-principal);
+  color: white;
+}
+
+.flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+  background: var(--azul-principal);
+  color: white;
+}
+
+.flatpickr-weekdaycontainer {
+  background: rgba(0, 82, 180, 0.05);
+}
+
+.flatpickr-weekday {
+  color: var(--azul-principal);
+  font-weight: 600;
+}
+
+.flatpickr-day {
+  color: #333;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.flatpickr-day:hover {
+  background: rgba(0, 82, 180, 0.1);
+  border-color: var(--azul-principal);
+}
+
+.flatpickr-day.selected {
+  background: var(--azul-principal);
+  border-color: var(--azul-principal);
+  color: white;
+  font-weight: 600;
+}
+
+.flatpickr-day.selected:hover {
+  background: var(--azul-suave);
+  border-color: var(--azul-suave);
+}
+
+.flatpickr-day.today {
+  border-color: var(--azul-principal);
+  color: var(--azul-principal);
+  font-weight: 600;
+}
+
+.flatpickr-day.other-month {
+  color: #ccc;
+}
+
+.flatpickr-time {
+  background: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+}
+
+.flatpickr-time input {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  color: #333;
+}
+
+.flatpickr-time input:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}

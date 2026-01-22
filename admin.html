@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/admin.css">
+  <!-- Flatpickr para calendario mejorado -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
@@ -247,11 +249,11 @@
         <div id="contenedorFiltros" class="contenedor-filtros">
           <div class="filtro-item">
             <label for="filtroFechaInicio">Desde</label>
-            <input type="date" id="filtroFechaInicio">
+            <input type="text" id="filtroFechaInicio" placeholder="dd/mm/aaaa">
           </div>
           <div class="filtro-item">
             <label for="filtroFechaFin">Hasta</label>
-            <input type="date" id="filtroFechaFin">
+            <input type="text" id="filtroFechaFin" placeholder="dd/mm/aaaa">
           </div>
           <div class="filtro-item">
             <label for="filtroInstalacion">Instalación</label>
@@ -942,6 +944,8 @@
   </div>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
   <script type="module" src="js/admin.js?v=4"></script>
 </body>
 </html>
