@@ -66,6 +66,10 @@ let auditFiltrada = [];
 let unsubscribeAuth = null;
 let autenticacionVerificada = false;
 
+// Opciones de vista y ordenamiento
+let vistaActual = 'tarjetas'; // 'tarjetas' o 'tabla'
+let ordenActual = 'fecha-desc'; // orden por defecto
+
 // ==========================================================
 // INICIALIZACIÓN
 // ==========================================================
@@ -300,6 +304,7 @@ function inicializarEventos() {
   }
 
   inicializarFiltros();
+  inicializarOpcionesVista();
   inicializarModal();
   inicializarModalConfirmacion();
   inicializarReservaManual();
@@ -643,6 +648,89 @@ function filtrarPorEstado(estado) {
 }
 
 // ==========================================================
+// OPCIONES DE VISTA Y ORDENAMIENTO
+// ==========================================================
+
+function inicializarOpcionesVista() {
+  const btnVistaTarjetas = document.getElementById('btnVistaTarjetas');
+  const btnVistaTabla = document.getElementById('btnVistaTabla');
+  const ordenarPor = document.getElementById('ordenarPor');
+
+  if (btnVistaTarjetas) {
+    btnVistaTarjetas.onclick = () => cambiarVista('tarjetas');
+  }
+  if (btnVistaTabla) {
+    btnVistaTabla.onclick = () => cambiarVista('tabla');
+  }
+  if (ordenarPor) {
+    ordenarPor.onchange = () => {
+      ordenActual = ordenarPor.value;
+      renderizarReservas();
+    };
+  }
+}
+
+function cambiarVista(vista) {
+  vistaActual = vista;
+
+  // Actualizar botones
+  const btnVistaTarjetas = document.getElementById('btnVistaTarjetas');
+  const btnVistaTabla = document.getElementById('btnVistaTabla');
+
+  if (btnVistaTarjetas && btnVistaTabla) {
+    if (vista === 'tarjetas') {
+      btnVistaTarjetas.classList.add('activo');
+      btnVistaTabla.classList.remove('activo');
+    } else {
+      btnVistaTarjetas.classList.remove('activo');
+      btnVistaTabla.classList.add('activo');
+    }
+  }
+
+  renderizarReservas();
+}
+
+function ordenarReservas(reservas) {
+  const copia = [...reservas];
+
+  switch(ordenActual) {
+    case 'fecha-asc':
+      return copia.sort((a, b) => {
+        const fechaA = a.fecha.toDate ? a.fecha.toDate() : new Date(a.fecha);
+        const fechaB = b.fecha.toDate ? b.fecha.toDate() : new Date(b.fecha);
+        return fechaA - fechaB;
+      });
+
+    case 'estado':
+      return copia.sort((a, b) => {
+        const estadoOrder = { 'pendiente': 0, 'reservado': 1, 'cancelado': 2 };
+        return (estadoOrder[a.estado] || 0) - (estadoOrder[b.estado] || 0);
+      });
+
+    case 'nombre':
+      return copia.sort((a, b) => {
+        const nombreA = a.socio?.nombre || '';
+        const nombreB = b.socio?.nombre || '';
+        return nombreA.localeCompare(nombreB);
+      });
+
+    case 'instalacion':
+      return copia.sort((a, b) => {
+        const instA = a.subInstalacion || '';
+        const instB = b.subInstalacion || '';
+        return instA.localeCompare(instB);
+      });
+
+    default: // fecha-desc
+      return copia.sort((a, b) => {
+        const fechaA = a.fecha.toDate ? a.fecha.toDate() : new Date(a.fecha);
+        const fechaB = b.fecha.toDate ? b.fecha.toDate() : new Date(b.fecha);
+        return fechaB - fechaA;
+      });
+  }
+}
+
+// ==========================================================
 // RENDERIZAR LISTA DE RESERVAS
 // ==========================================================
 
@@ -650,22 +738,28 @@ function renderizarReservas() {
   const contenedor = document.getElementById('listaReservas');
   const sinResultados = document.getElementById('sinResultados');
   const contador = document.getElementById('contadorResultados');
-  
+
   if (!contenedor) return;
-  
+
   contador.textContent = `${reservasFiltradas.length} resultado${reservasFiltradas.length !== 1 ? 's' : ''}`;
-  
+
   if (reservasFiltradas.length === 0) {
     contenedor.innerHTML = '';
     sinResultados.classList.remove('oculto');
     return;
   }
-  
+
   sinResultados.classList.add('oculto');
-  
+
+  // Aplicar ordenamiento
+  const reservasOrdenadas = ordenarReservas(reservasFiltradas);
+
+  // Actualizar clases según la vista actual
+  contenedor.className = `lista-reservas-admin vista-${vistaActual}`;
+
   let html = '';
-  
-  reservasFiltradas.forEach(reserva => {
+
+  reservasOrdenadas.forEach(reserva => {
     const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
     const fechaFormateada = formatearFecha(fecha);
     const nombreSocio = reserva.socio?.nombre || 'Sin nombre';

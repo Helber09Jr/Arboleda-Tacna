@@ -301,10 +301,40 @@
       <!-- Lista de Reservas -->
       <section class="seccion-reservas-admin">
         <div class="cabecera-lista">
-          <h2 class="titulo-seccion-admin">Reservas</h2>
-          <span id="contadorResultados" class="contador-resultados">0 resultados</span>
+          <div>
+            <h2 class="titulo-seccion-admin">Reservas</h2>
+            <span id="contadorResultados" class="contador-resultados">0 resultados</span>
+          </div>
+          <div class="opciones-vista-reservas">
+            <select id="ordenarPor" class="select-ordenar">
+              <option value="fecha-desc">Más recientes primero</option>
+              <option value="fecha-asc">Más antiguos primero</option>
+              <option value="estado">Por estado</option>
+              <option value="nombre">Por nombre</option>
+              <option value="instalacion">Por instalación</option>
+            </select>
+            <div class="selector-vista">
+              <button id="btnVistaTarjetas" class="boton-vista activo" title="Vista en tarjetas">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </button>
+              <button id="btnVistaTabla" class="boton-vista" title="Vista en tabla">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="3" y1="3" x2="21" y2="3"></line>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="3" y1="15" x2="21" y2="15"></line>
+                  <line x1="3" y1="21" x2="21" y2="21"></line>
+                  <line x1="10" y1="3" x2="10" y2="21"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-        
+
         <div id="listaReservas" class="lista-reservas-admin">
           <!-- Se genera dinámicamente -->
         </div>

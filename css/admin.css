@@ -1094,11 +1094,89 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.cabecera-lista > div:first-child {
+  flex: 1;
 }
 
 .contador-resultados {
   font-size: 0.9rem;
   color: #888;
+  display: block;
+  margin-top: 4px;
+}
+
+.opciones-vista-reservas {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.select-ordenar {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #333;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-ordenar:hover {
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+.select-ordenar:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+.selector-vista {
+  display: flex;
+  gap: 6px;
+  background: #f5f5f5;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.boton-vista {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.boton-vista svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.boton-vista:hover {
+  color: var(--azul-principal);
+  border-color: var(--azul-principal);
+}
+
+.boton-vista.activo {
+  background: var(--azul-principal);
+  color: white;
+  border-color: var(--azul-principal);
 }
 
 .lista-reservas-admin {
@@ -4003,4 +4081,56 @@ body {
   outline: none;
   border-color: var(--azul-principal);
   box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+/* ==========================================================
+   VISTA TABLA DE RESERVAS
+   ========================================================== */
+
+.lista-reservas-admin.vista-tabla {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.lista-reservas-admin.vista-tabla .tarjeta-reserva-admin {
+  display: table-row;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0;
+  gap: 0;
+  grid-template-columns: none;
+  transition: background-color 0.2s ease;
+}
+
+.lista-reservas-admin.vista-tabla .tarjeta-reserva-admin:hover {
+  background-color: rgba(0, 82, 180, 0.03);
+}
+
+.lista-reservas-admin.vista-tabla .tarjeta-reserva-admin > div {
+  display: table-cell;
+  padding: 15px;
+  border: none;
+  vertical-align: middle;
+}
+
+.lista-reservas-admin.vista-tabla .reserva-info-principal {
+  display: table-cell;
+  width: 30%;
+  padding: 15px;
+}
+
+.lista-reservas-admin.vista-tabla .reserva-info-socio {
+  display: table-cell;
+  width: 40%;
+  padding: 15px;
+}
+
+.lista-reservas-admin.vista-tabla .boton-ver-detalle {
+  display: table-cell;
+  width: 20%;
+  padding: 15px;
+  text-align: right;
 }
