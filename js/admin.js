@@ -62,6 +62,10 @@ let usuariosAdminData = [];
 let auditData = [];
 let auditFiltrada = [];
 
+// Control de autenticación
+let unsubscribeAuth = null;
+let autenticacionVerificada = false;
+
 // ==========================================================
 // INICIALIZACIÓN
 // ==========================================================
@@ -71,61 +75,95 @@ document.addEventListener('DOMContentLoaded', () => {
   inicializarEventos();
 });
 
-async function verificarAutenticacion() {
-  onAuthStateChanged(auth, async (usuario) => {
-    if (usuario) {
-      usuarioActual = usuario;
+function verificarAutenticacion() {
+  // Desuscribirse de listener anterior si existe
+  if (unsubscribeAuth) {
+    unsubscribeAuth();
+    unsubscribeAuth = null;
+  }
 
-      // Obtener datos de usuario admin
-      usuarioAdminData = await obtenerUsuarioAdminPorUid(usuario.uid);
+  // Registrar nuevo listener
+  unsubscribeAuth = onAuthStateChanged(auth, async (usuario) => {
+    try {
+      if (usuario && !autenticacionVerificada) {
+        usuarioActual = usuario;
+        console.log('Usuario autenticado en Firebase:', usuario.email);
 
-      if (!usuarioAdminData) {
-        // Usuario no tiene rol asignado - Implementar mecanismo bootstrap
-        console.log('Usuario sin rol asignado. Verificando si es el primer admin...');
+        // Obtener datos de usuario admin con reintentos
+        let usuarioData = await obtenerUsuarioAdminPorUid(usuario.uid);
+        let reintentos = 0;
+        const maxReintentos = 3;
 
-        const adminsExisten = await verificarSiExistenAdmins();
+        // Si no existe en Firestore, intentar crear o reintentar
+        while (!usuarioData && reintentos < maxReintentos) {
+          console.log(`Intento ${reintentos + 1} de ${maxReintentos}`);
 
-        if (!adminsExisten) {
-          // No hay admins en la base de datos - Crear este usuario como super_admin
-          console.log('No hay admins. Auto-creando usuario como super_admin...');
-          await crearPrimerAdmin(usuario);
+          const adminsExisten = await verificarSiExistenAdmins();
 
-          // Recargar datos del usuario después de crearlo
-          usuarioAdminData = await obtenerUsuarioAdminPorUid(usuario.uid);
+          if (!adminsExisten) {
+            // No hay admins - Crear este usuario como super_admin
+            console.log('No hay admins. Auto-creando usuario como super_admin...');
+            await crearPrimerAdmin(usuario);
 
-          // Verificar que se cargó correctamente
-          if (!usuarioAdminData) {
-            console.error('Error: No se pudo cargar el usuario creado');
-            cerrarSesion();
-            mostrarToast('Error al configurar la cuenta. Por favor intenta nuevamente');
-            return;
+            // Esperar un poco antes de recargar
+            await new Promise(resolve => setTimeout(resolve, 500));
           }
-        } else {
-          // Otros admins existen pero este usuario no es admin
-          console.error('Usuario no autorizado como admin');
-          cerrarSesion();
-          mostrarToast('Tu cuenta no tiene permisos de administrador');
+
+          // Reintentamos obtener los datos
+          usuarioData = await obtenerUsuarioAdminPorUid(usuario.uid);
+          reintentos++;
+        }
+
+        // Validar que se cargó correctamente
+        if (!usuarioData) {
+          console.error('Error: No se pudo cargar el usuario después de múltiples intentos');
+          mostrarToast('Error al cargar datos del usuario. Por favor intenta nuevamente');
+          await signOut(auth);
           return;
         }
+
+        usuarioAdminData = usuarioData;
+
+        // Obtener permisos del usuario
+        permisos = obtenerPermisosUsuario(usuarioAdminData);
+
+        // Registrar acceso
+        try {
+          await registrarAcceso(usuario.uid);
+        } catch (error) {
+          console.error('Error al registrar acceso:', error);
+        }
+
+        // Marcar autenticación como verificada
+        autenticacionVerificada = true;
+
+        // Mostrar interfaz
+        mostrarPanel();
+        document.getElementById('usuarioActual').textContent = `${usuarioAdminData.nombre} (${ROLES_DEFINIDOS[usuarioAdminData.rol].nombre})`;
+
+        // Proteger pestañas según permisos
+        protegerPestanas();
+
+        // Inicializar listeners
+        inicializarListenerReservas();
+        inicializarEventosRoles();
+
+        console.log('✅ Autenticación completada exitosamente');
+
+      } else if (!usuario && autenticacionVerificada) {
+        // Usuario cerró sesión
+        console.log('Sesión cerrada');
+        autenticacionVerificada = false;
+        usuarioActual = null;
+        usuarioAdminData = null;
+        mostrarLogin();
+      } else if (!usuario) {
+        // Usuario no autenticado al cargar la página
+        mostrarLogin();
       }
-
-      // Obtener permisos del usuario
-      permisos = obtenerPermisosUsuario(usuarioAdminData);
-
-      // Registrar acceso
-      await registrarAcceso(usuario.uid);
-
-      mostrarPanel();
-      document.getElementById('usuarioActual').textContent = `${usuarioAdminData.nombre} (${ROLES_DEFINIDOS[usuarioAdminData.rol].nombre})`;
-
-      // Proteger pestañas según permisos
-      protegerPestanas();
-
-      // Inicializar listeners
-      inicializarListenerReservas();
-      inicializarEventosRoles();
-
-    } else {
+    } catch (error) {
+      console.error('Error en verificarAutenticacion:', error);
+      mostrarToast('Error de autenticación. Por favor intenta nuevamente');
       mostrarLogin();
     }
   });
@@ -346,9 +384,24 @@ async function iniciarSesion() {
 
 async function cerrarSesion() {
   try {
+    // Limpiar listeners
     if (unsubscribeReservas) {
       unsubscribeReservas();
+      unsubscribeReservas = null;
     }
+
+    // Desuscribirse del listener de autenticación
+    if (unsubscribeAuth) {
+      unsubscribeAuth();
+      unsubscribeAuth = null;
+    }
+
+    // Resetear estado
+    autenticacionVerificada = false;
+    usuarioActual = null;
+    usuarioAdminData = null;
+
+    // Cerrar sesión en Firebase
     await signOut(auth);
     mostrarToast('Sesión cerrada');
   } catch (error) {
