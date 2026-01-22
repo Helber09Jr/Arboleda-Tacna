@@ -878,13 +878,25 @@ body {
   align-items: center;
   gap: 16px;
   transition: all 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 2px solid rgba(0, 0, 0, 0.04);
+}
+
+#filtrarPendientes,
+#filtrarReservados,
+#filtrarCancelados,
+#verTodasReservas {
+  cursor: pointer;
 }
 
 .tarjeta-estadistica:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 82, 180, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 82, 180, 0.2);
+}
+
+.tarjeta-estadistica.activo {
+  border-color: var(--azul-principal);
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.05), rgba(0, 82, 180, 0.02));
 }
 
 .icono-estadistica {
