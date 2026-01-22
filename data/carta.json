@@ -1,0 +1,1984 @@
+{
+  "guarniciones": [
+    "Papas fritas",
+    "Arroz",
+    "Ensalada",
+    "Papas amarillas fritas",
+    "Zarza criolla"
+  ],
+  "categorias": [
+    {
+      "id": "entradas",
+      "nombre": "Entradas",
+      "icono": "🥗"
+    },
+    {
+      "id": "piqueos",
+      "nombre": "Piqueos",
+      "icono": "🍟"
+    },
+    {
+      "id": "carnes",
+      "nombre": "Carnes",
+      "icono": "🥩"
+    },
+    {
+      "id": "pollo",
+      "nombre": "Pollo",
+      "icono": "🍗"
+    },
+    {
+      "id": "pescados",
+      "nombre": "Pescados",
+      "icono": "🐟"
+    },
+    {
+      "id": "pastas",
+      "nombre": "Pastas",
+      "icono": "🍝"
+    },
+    {
+      "id": "ensaladas",
+      "nombre": "Ensaladas",
+      "icono": "🥬"
+    },
+    {
+      "id": "kids",
+      "nombre": "Kids",
+      "icono": "👶"
+    },
+    {
+      "id": "sandwiches",
+      "nombre": "Sándwiches",
+      "icono": "🥪"
+    },
+    {
+      "id": "empanadas",
+      "nombre": "Empanadas",
+      "icono": "🥟"
+    },
+    {
+      "id": "jugos",
+      "nombre": "Jugos",
+      "icono": "🥤"
+    },
+    {
+      "id": "infusiones",
+      "nombre": "Infusiones",
+      "icono": "☕"
+    },
+    {
+      "id": "bebidas",
+      "nombre": "Bebidas",
+      "icono": "🥤"
+    },
+    {
+      "id": "milkshakes",
+      "nombre": "Milkshakes",
+      "icono": "🥛"
+    },
+    {
+      "id": "cocteles",
+      "nombre": "Cócteles",
+      "icono": "🍸"
+    },
+    {
+      "id": "licores",
+      "nombre": "Licores",
+      "icono": "🥃"
+    },
+    {
+      "id": "vinos",
+      "nombre": "Vinos",
+      "icono": "🍷"
+    },
+    {
+      "id": "cervezas",
+      "nombre": "Cervezas",
+      "icono": "🍺"
+    }
+  ],
+  "platos": [
+    {
+      "id": "papa-huancaina",
+      "categoria": "entradas",
+      "nombre": "Papa a la Huancaína",
+      "descripcion": "Finas rodajas de papa bañada en crema huancaína. Acompañadas de aceituna y lechuga.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/papa-huancaina.jpg",
+      "imagenes": [
+        "imagenes/menu/papa-huancaina.jpg","imagenes/menu/causa-limena.jpg","imagenes/menu/palta-reina.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "choclo-queso",
+      "categoria": "entradas",
+      "nombre": "Choclo con Queso",
+      "descripcion": "Choclo tierno acompañado de queso fresco.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/choclo-queso.jpg",
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "palta-reina",
+      "categoria": "entradas",
+      "nombre": "Palta Reina",
+      "descripcion": "Palta seleccionada rellena de pollo y verduras cocidas bañadas en mayonesa.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/palta-reina.jpg",
+      "imagenes": ["imagenes/menu/palta-reina.jpg", "imagenes/menu/palta-reina1.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "causa-limena",
+      "categoria": "entradas",
+      "nombre": "Causa a la Limeña",
+      "descripcion": "Pasta de papa amarilla con pollo deshilachado, palta y mayonesa.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/causa-limena1.jpg",
+      "imagenes": [
+        "imagenes/menu/causa-limena.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "causa-atun",
+      "categoria": "entradas",
+      "nombre": "Causa de Atún",
+      "descripcion": "Pasta de papa amarilla con atún, palta y mayonesa.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/causa-atun.jpg",
+      "imagenes": [
+        "imagenes/menu/causa-atun1.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "leche-tigre",
+      "categoria": "entradas",
+      "nombre": "Leche de Tigre",
+      "descripcion": "Jugo de ceviche con trozos de pescado fresco, cebolla y ají.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/leche-tigre.jpg",
+      "imagenes": ["imagenes/menu/leche-tigre.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tequenos-queso",
+      "categoria": "piqueos",
+      "nombre": "Tequeños con Queso",
+      "descripcion": "Masa frita rellena de queso, acompañado en salsa de guacamole (10 und).",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/tequenos.jpg",
+      "imagenes": ["imagenes/menu/tequenos.jpg"],
+      "opciones": {
+        "salsa": ["Guacamole", "Huancaína"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "yucas-fritas",
+      "categoria": "piqueos",
+      "nombre": "Yucas Fritas",
+      "descripcion": "Yucas prensadas rellenas de queso mozzarella, acompañadas con salsa huancaína (5 und).",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/yucas-fritas.jpg",
+      "imagenes": ["imagenes/menu/yucas-fritas.jpg"],
+      "opciones": {
+        "salsa": ["Guacamole", "Huancaína"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "canchita-picante",
+      "categoria": "piqueos",
+      "nombre": "Canchita Picante",
+      "descripcion": "Canchita acompañada de rocoto finamente picado, cilantro y limón.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/canchita-picante.jpg",
+      "imagenes": ["imagenes/menu/canchita-picante.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Picante"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "salchipapa",
+      "categoria": "piqueos",
+      "nombre": "Salchipapa / Salchipollo / Choripapa",
+      "descripcion": "Papas fritas acompañadas de salchicha, pollo o chorizo a elección.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/salchipapa.jpg",
+      "imagenes": [
+        "imagenes/menu/salchipapa1.jpg","imagenes/menu/choripapa.jpg","imagenes/menu/salchipapa2.jpg"],      
+      "opciones": {
+        "tipo": ["Salchipapa", "Salchipollo", "Choripapa"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "salchitodo",
+      "categoria": "piqueos",
+      "nombre": "Salchitodo",
+      "descripcion": "Papas fritas con salchicha, pollo y chorizo todo junto.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/salchitodo.jpg",
+      "imagenes": ["imagenes/menu/salchitodo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-saltado-arboleda",
+      "categoria": "carnes",
+      "nombre": "Lomo Saltado \"Arboleda\"",
+      "descripcion": "Finos trozos de carne posta flameado con cebolla, tomate, ají, vinagre y sillao, acompañado de papas fritas y arroz.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/lomo-saltado.jpg",
+      "imagenes": ["imagenes/menu/lomo-saltado.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-fino",
+      "categoria": "carnes",
+      "nombre": "Lomo Fino",
+      "descripcion": "Finos trozos de carne de lomo fino flameado con cebolla, tomate, vinagre y sillao, acompañado de papas amarillas fritas y arroz.",
+      "precio": 38.00,
+      "imagen": "imagenes/menu/lomo-fino.jpg",
+      "imagenes": ["imagenes/menu/lomo-fino.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "medallon-lomo",
+      "categoria": "carnes",
+      "nombre": "Medallón de Lomo",
+      "descripcion": "Lomo fino envuelto en láminas de tocino, bañado en una salsa especial acompañado de papas amarillas fritas, arroz o ensalada.",
+      "precio": 38.00,
+      "imagen": "imagenes/menu/medallon-lomo.jpg",
+      "imagenes":["imagenes/menu/medallon-lomo.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Papas amarillas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "sudado-lomo-fino",
+      "categoria": "carnes",
+      "nombre": "Sudado de Lomo Fino",
+      "descripcion": "Lomo fino en salsa de tomate y especias, cocido a fuego lento.",
+      "precio": 32.00,
+      "imagen": "imagenes/menu/sudado-lomo.jpg",
+      "imagenes": ["imagenes/menu/sudado-lomo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-victoriana",
+      "categoria": "carnes",
+      "nombre": "Lomo a la Victoriana",
+      "descripcion": "Filete de lomo fino con queso edam, cubierto de una salsa especial de champiñones.",
+      "precio": 38.00,
+      "imagen": "imagenes/menu/lomo-victoriana.jpg",
+      "imagenes": ["imagenes/menu/lomo-victoriana.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Papas amarillas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-pimienta",
+      "categoria": "carnes",
+      "nombre": "Lomo a la Pimienta",
+      "descripcion": "Lomo fino a la plancha en salsa de pimienta granulada acompañada c/arroz y papas amarilla fritas.",
+      "precio": 36.00,
+      "imagen": "imagenes/menu/lomo-pimienta.jpg",
+      "imagenes": ["imagenes/menu/lomo-pimienta.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Papas amarillas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-champignones",
+      "categoria": "carnes",
+      "nombre": "Lomo en Salsa de Champiñones",
+      "descripcion": "Lomo fino a la plancha c/champiñones y crema de leche c/arroz y papas amarillas fritas.",
+      "precio": 37.00,
+      "imagen": "imagenes/menu/lomo-champignones.jpg",
+      "imagenes": ["imagenes/menu/lomo-champignones.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Papas amarillas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-mozzarella",
+      "categoria": "carnes",
+      "nombre": "Lomo a la Mozzarella",
+      "descripcion": "Lomo fino a la plancha c/queso mozzarella y salsa milash acompañado c/arroz y papas amarilla fritas.",
+      "precio": 37.00,
+      "imagen": "imagenes/menu/lomo-mozzarella.jpg",
+      "imagenes": ["imagenes/menu/lomo-mozzarella.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Papas amarillas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "chuleta-vacuno",
+      "categoria": "carnes",
+      "nombre": "Chuleta de Vacuno al Grill",
+      "descripcion": "Acompañado con papas amarillas fritas y ensalada.",
+      "precio": 25.00,
+      "imagen": "imagenes/menu/chuleta-vacuno.jpg",
+      "imagenes": ["imagenes/menu/chuleta-vacuno.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Papas amarillas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "lomo-strogonof",
+      "categoria": "carnes",
+      "nombre": "Lomo Fino al Strogonoff",
+      "descripcion": "Acompañado con arroz, papas amarillas fritas o ensalada.",
+      "precio": 36.00,
+      "imagen": "imagenes/menu/lomo-strogonof.jpg",
+      "imagenes": ["imagenes/menu/lomo-strogonof.jpg"],
+      "opciones": {
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": {
+        "lista": ["Arroz", "Papas amarillas fritas", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "cordon-blue",
+      "categoria": "pollo",
+      "nombre": "Cordon Blue",
+      "descripcion": "Pechuga de pollo empanizada rellena de jamón y queso, acompañado de papas fritas, arroz o ensalada.",
+      "precio": 30.00,
+      "imagen": "imagenes/menu/cordon-blue.jpg",
+      "imagenes": ["imagenes/menu/cordon-blue.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "milanesa-pollo",
+      "categoria": "pollo",
+      "nombre": "Milanesa de Pollo",
+      "descripcion": "Filete de pollo empanizado acompañado de papas fritas, arroz o ensalada.",
+      "precio": 26.00,
+      "imagen": "imagenes/menu/milanesa-pollo.jpg",
+      "imagenes": ["imagenes/menu/milanesa-pollo.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "chicharron-pollo",
+      "categoria": "pollo",
+      "nombre": "Chicharrón de Pollo",
+      "descripcion": "Trozos de pollo deshuesado, acompañado de arroz, papas fritas o ensalada.",
+      "precio": 26.00,
+      "imagen": "imagenes/menu/chicharron-pollo.jpg",
+      "imagenes": ["imagenes/menu/chicharron-pollo.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "pollo-plancha",
+      "categoria": "pollo",
+      "nombre": "Pollo a la Plancha",
+      "descripcion": "Filete de pollo acompañado de papas fritas, arroz o ensalada.",
+      "precio": 22.00,
+      "imagen": "imagenes/menu/pollo-plancha.jpg",
+      "imagenes": ["imagenes/menu/pollo-plancha.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "ceviche-pescado",
+      "categoria": "pescados",
+      "nombre": "Ceviche de Pescado",
+      "descripcion": "Finos cubos de pescado marinados en zumo de limón, acompañado de cebolla roja, camote y choclo desgranado.",
+      "precio": 25.00,
+      "imagen": "imagenes/menu/ceviche-pescado.jpg",
+      "imagenes": ["imagenes/menu/ceviche-pescado.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ceviche-mixto",
+      "categoria": "pescados",
+      "nombre": "Ceviche Mixto",
+      "descripcion": "Trozos de pescado, pulpo y calamar marinados en zumo de limón, acompañado de cebolla roja, camote y choclo desgranado.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/ceviche-mixto.jpg",
+      "imagenes": ["imagenes/menu/ceviche-mixto.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ceviche-erizo",
+      "categoria": "pescados",
+      "nombre": "Ceviche en Crema de Erizo",
+      "descripcion": "Finos cubos de pescado bañados en crema de erizo, acompañado de cebolla roja, camote y choclo desgranado.",
+      "precio": 30.00,
+      "imagen": "imagenes/menu/ceviche-erizo.jpg",
+      "imagenes": ["imagenes/menu/ceviche-erizo.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ceviche-rocoto",
+      "categoria": "pescados",
+      "nombre": "Ceviche en Crema de Rocoto",
+      "descripcion": "Finos cubos de pescado bañados en crema de rocoto, acompañado de cebolla roja, camote y choclo desgranado.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/ceviche-rocoto.jpg",
+      "imagenes": ["imagenes/menu/ceviche-rocoto.jpg"],
+      "opciones": {
+        "picante": ["Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sudado-pescado",
+      "categoria": "pescados",
+      "nombre": "Sudado de Pescado",
+      "descripcion": "Filete de pescado acompañado de cebolla y tomate concentrado de pescado y arroz blanco.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/sudado-pescado.jpg",
+      "imagenes": ["imagenes/menu/sudado-pescado.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pescado-plancha",
+      "categoria": "pescados",
+      "nombre": "Pescado a la Plancha",
+      "descripcion": "Filete de pescado acompañado de papas fritas, arroz o ensalada.",
+      "precio": 24.00,
+      "imagen": "imagenes/menu/pescado-plancha.jpg",
+      "imagenes": ["imagenes/menu/pescado-plancha.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "chicharron-pescado",
+      "categoria": "pescados",
+      "nombre": "Chicharrón de Pescado",
+      "descripcion": "Finos trozos de pescado acompañado de papa dorada y zarza criolla.",
+      "precio": 26.00,
+      "imagen": "imagenes/menu/chicharron-pescado.jpg",
+      "imagenes": ["imagenes/menu/chicharron-pescado.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Zarza criolla"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "pescado-macho",
+      "categoria": "pescados",
+      "nombre": "Pescado a lo Macho",
+      "descripcion": "Filete de pescado bañado en salsa de mariscos.",
+      "precio": 30.00,
+      "imagen": "imagenes/menu/pescado-macho.jpg",
+      "imagenes": ["imagenes/menu/pescado-macho.jpg"],
+      "opciones": {
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 2
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "arroz-mariscos",
+      "categoria": "pescados",
+      "nombre": "Arroz con Mariscos",
+      "descripcion": "Arroz cocido con variedad de mariscos frescos y especias.",
+      "precio": 26.00,
+      "imagen": "imagenes/menu/arroz-mariscos.jpg",
+      "imagenes": ["imagenes/menu/arroz-mariscos.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "fetuccini-huancaina-lomo",
+      "categoria": "pastas",
+      "nombre": "Fetuccini a la Huancaína con Lomo Saltado",
+      "descripcion": "Fetuccini en salsa huancaína acompañado de lomo saltado.",
+      "precio": 35.00,
+      "imagen": "imagenes/menu/fetuccini-huancaina-lomo.jpg",
+      "imagenes": ["imagenes/menu/fetuccini-huancaina-lomo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tallarin-pesto-bistec",
+      "categoria": "pastas",
+      "nombre": "Tallarín al Pesto con Bistec",
+      "descripcion": "Tallarines en salsa pesto acompañado de bistec a la plancha.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/tallarin-pesto-bistec.jpg",
+      "imagenes": ["imagenes/menu/tallarin-pesto-bistec.jpg"],
+      "opciones": {
+        "tipo": ["Bistec", "Apanado"],
+        "termino": ["3/4", "A punto", "Bien cocido"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "fetuccini-pesto-apanado",
+      "categoria": "pastas",
+      "nombre": "Fetuccini al Pesto con Apanado",
+      "descripcion": "Fetuccini en salsa pesto acompañado de pollo apanado.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/fetuccini-pesto-apanado.jpg",
+      "imagenes": ["imagenes/menu/fetuccini-pesto-apanado.jpg"],
+      "opciones": {
+        "tipo": ["Bistec", "Apanado"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "fetuccini-alfredo",
+      "categoria": "pastas",
+      "nombre": "Fetuccini al Alfredo",
+      "descripcion": "Fetuccini en cremosa salsa alfredo.",
+      "precio": 26.00,
+      "imagen": "imagenes/menu/fetuccini-alfredo.jpg",
+      "imagenes": ["imagenes/menu/fetuccini-alfredo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tallarin-saltado-criollo",
+      "categoria": "pastas",
+      "nombre": "Tallarín Saltado Criollo",
+      "descripcion": "Tallarines salteados al estilo criollo con verduras y carne.",
+      "precio": 22.00,
+      "imagen": "imagenes/menu/tallarin-saltado.jpg",
+      "imagenes": ["imagenes/menu/tallarin-saltado.jpg"],
+      "opciones": {
+        "tipo": ["Carne", "Pollo"],
+        "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ensalada-arboleda",
+      "categoria": "ensaladas",
+      "nombre": "Ensalada La Arboleda",
+      "descripcion": "Tiras de pollo y tocino crocante, lechuga, rodajas de tomate, palta, crutones de pan y pasas acompañado de aliño especial.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/ensalada-arboleda.jpg",
+      "imagenes": ["imagenes/menu/ensalada-arboleda.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ensalada-hawaiana",
+      "categoria": "ensaladas",
+      "nombre": "Ensalada Hawaiana",
+      "descripcion": "Tiras de pollo, tocino, lechuga, tomate, piña en cubos, crutones de pan y pasas, acompañada del aliño especial de la casa.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/ensalada-hawaiana.jpg",
+      "imagenes": ["imagenes/menu/ensalada-hawaiana.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "kids-chicharron-pollo",
+      "categoria": "kids",
+      "nombre": "Chicharrón de Pollo (Kids)",
+      "descripcion": "Porción infantil de chicharrón de pollo con papas fritas.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/kids-chicharron.jpg",
+      "imagenes": ["imagenes/menu/kids-chicharron.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 1
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "kids-nuggets",
+      "categoria": "kids",
+      "nombre": "Nuggets de Pollo (Kids)",
+      "descripcion": "Nuggets de pollo crujientes con papas fritas.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/kids-nuggets.jpg",
+      "imagenes": ["imagenes/menu/kids-nuggets.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 1
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "kids-milanesa",
+      "categoria": "kids",
+      "nombre": "Milanesa de Pollo (Kids)",
+      "descripcion": "Porción infantil de milanesa de pollo con papas fritas.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/kids-milanesa.jpg",
+      "imagenes": ["imagenes/menu/kids-milanesa.jpg"],
+      "opciones": null,
+      "guarniciones": {
+        "lista": ["Papas fritas", "Arroz", "Ensalada"],
+        "max": 1
+      },
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-hot-dog",
+      "categoria": "sandwiches",
+      "nombre": "Hot Dog",
+      "descripcion": "Pan con salchicha y aderezos.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/hot-dog.jpg",
+      "imagenes": ["imagenes/menu/hot-dog.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-chorizo",
+      "categoria": "sandwiches",
+      "nombre": "Sándwich de Chorizo",
+      "descripcion": "Pan con chorizo a la parrilla.",
+      "precio": 10.00,
+      "imagen": "imagenes/menu/sandwich-chorizo.jpg",
+      "imagenes": ["imagenes/menu/sandwich-chorizo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-pollo",
+      "categoria": "sandwiches",
+      "nombre": "Sándwich de Filete de Pollo",
+      "descripcion": "Pan con filete de pollo a la plancha.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/sandwich-pollo.jpg",
+      "imagenes": ["imagenes/menu/sandwich-pollo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-bistec-palta",
+      "categoria": "sandwiches",
+      "nombre": "Sándwich de Bistec con Palta",
+      "descripcion": "Pan con bistec y palta fresca.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/sandwich-bistec-palta.jpg",
+      "imagenes": ["imagenes/menu/sandwich-bistec-palta.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-bistec-queso",
+      "categoria": "sandwiches",
+      "nombre": "Sándwich de Bistec con Queso Mozzarella",
+      "descripcion": "Pan con bistec y queso mozzarella derretido.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/sandwich-bistec-queso.jpg",
+      "imagenes": ["imagenes/menu/sandwich-bistec-queso.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-pollo-palta",
+      "categoria": "sandwiches",
+      "nombre": "Sándwich de Pollo con Palta",
+      "descripcion": "Pan con filete de pollo y palta.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/sandwich-pollo-palta.jpg",
+      "imagenes": ["imagenes/menu/sandwich-pollo-palta.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sandwich-lomo-queso-palta",
+      "categoria": "sandwiches",
+      "nombre": "Sándwich de Lomo con Queso y Palta",
+      "descripcion": "Pan con lomo fino, queso y palta.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/sandwich-lomo-queso-palta.jpg",
+      "imagenes": ["imagenes/menu/sandwich-lomo-queso-palta.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "hamburguesa",
+      "categoria": "sandwiches",
+      "nombre": "Hamburguesa",
+      "descripcion": "Hamburguesa clásica con todos los ingredientes.",
+      "precio": 13.00,
+      "imagen": "imagenes/menu/hamburguesa.jpg",
+      "imagenes": ["imagenes/menu/hamburguesa.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "empanada-mariscos",
+      "categoria": "empanadas",
+      "nombre": "Empanada de Mariscos",
+      "descripcion": "Empanada rellena de mariscos frescos.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/empanada-mariscos.jpg",
+      "imagenes": ["imagenes/menu/empanada-mariscos.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "empanada-pulpo-olivo",
+      "categoria": "empanadas",
+      "nombre": "Empanada de Pulpo al Olivo",
+      "descripcion": "Empanada rellena de pulpo en salsa de olivo.",
+      "precio": 9.00,
+      "imagen": "imagenes/menu/empanada-pulpo.jpg",
+      "imagenes": ["imagenes/menu/empanada-pulpo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "empanada-lomo-saltado",
+      "categoria": "empanadas",
+      "nombre": "Empanada de Lomo Saltado",
+      "descripcion": "Empanada rellena de lomo saltado.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/empanada-lomo.jpg",
+      "imagenes": ["imagenes/menu/empanada-lomo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "empanada-aji-gallina",
+      "categoria": "empanadas",
+      "nombre": "Empanada de Ají de Gallina",
+      "descripcion": "Empanada rellena de ají de gallina.",
+      "precio": 7.50,
+      "imagen": "imagenes/menu/empanada-aji-gallina.jpg",
+      "imagenes": ["imagenes/menu/empanada-aji-gallina.jpg"],
+      "opciones": {
+        "picante": ["Bajo", "Normal", "Fuerte"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jugo-fresa",
+      "categoria": "jugos",
+      "nombre": "Jugo de Fresa",
+      "descripcion": "Jugo natural de fresa fresca.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/jugo-fresa.jpg",
+      "imagenes": ["imagenes/menu/jugo-fresa.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jugo-mango",
+      "categoria": "jugos",
+      "nombre": "Jugo de Mango",
+      "descripcion": "Jugo natural de mango fresco.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/jugo-mango.jpg",
+      "imagenes": ["imagenes/menu/jugo-mango.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jugo-pina",
+      "categoria": "jugos",
+      "nombre": "Jugo de Piña",
+      "descripcion": "Jugo natural de piña fresca.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/jugo-pina.jpg",
+      "imagenes": ["imagenes/menu/jugo-pina.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jugo-papaya",
+      "categoria": "jugos",
+      "nombre": "Jugo de Papaya",
+      "descripcion": "Jugo natural de papaya fresca.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/jugo-papaya.jpg",
+      "imagenes": ["imagenes/menu/jugo-papaya.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jugo-mixto",
+      "categoria": "jugos",
+      "nombre": "Jugo Mixto",
+      "descripcion": "Combinación de frutas frescas de temporada.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/jugo-mixto.jpg",
+      "imagenes": ["imagenes/menu/jugo-mixto.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "te-canela-clavo",
+      "categoria": "infusiones",
+      "nombre": "Té, Canela y Clavo",
+      "descripcion": "Infusión caliente de té con canela y clavo.",
+      "precio": 2.00,
+      "imagen": "imagenes/menu/te-canela.jpg",
+      "imagenes": ["imagenes/menu/te-canela.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "manzanilla",
+      "categoria": "infusiones",
+      "nombre": "Manzanilla",
+      "descripcion": "Infusión caliente de manzanilla.",
+      "precio": 2.00,
+      "imagen": "imagenes/menu/manzanilla.jpg",
+      "imagenes": ["imagenes/menu/manzanilla.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "anis",
+      "categoria": "infusiones",
+      "nombre": "Anís",
+      "descripcion": "Infusión caliente de anís.",
+      "precio": 2.00,
+      "imagen": "imagenes/menu/anis.jpg",
+      "imagenes": ["imagenes/menu/anis.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "hierba-luisa",
+      "categoria": "infusiones",
+      "nombre": "Hierba Luisa",
+      "descripcion": "Infusión caliente de hierba luisa.",
+      "precio": 2.00,
+      "imagen": "imagenes/menu/hierba-luisa.jpg",
+      "imagenes": ["imagenes/menu/hierba-luisa.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "cafe",
+      "categoria": "infusiones",
+      "nombre": "Café",
+      "descripcion": "Café caliente recién preparado.",
+      "precio": 3.00,
+      "imagen": "imagenes/menu/cafe.jpg",
+      "imagenes": ["imagenes/menu/cafe.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "frutos-rojos",
+      "categoria": "infusiones",
+      "nombre": "Frutos Rojos",
+      "descripcion": "Infusión caliente de frutos rojos.",
+      "precio": 6.00,
+      "imagen": "imagenes/menu/frutos-rojos.jpg",
+      "imagenes": ["imagenes/menu/frutos-rojos.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "inca-kola-600",
+      "categoria": "bebidas",
+      "nombre": "Inca Kola 600ml",
+      "descripcion": "Gaseosa Inca Kola personal.",
+      "precio": 3.50,
+      "imagen": "imagenes/menu/inca-kola.jpg",
+      "imagenes": ["imagenes/menu/inca-kola.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "inca-zero-600",
+      "categoria": "bebidas",
+      "nombre": "Inca Zero 600ml",
+      "descripcion": "Gaseosa Inca Kola Zero personal.",
+      "precio": 4.00,
+      "imagen": "imagenes/menu/inca-zero.jpg",
+      "imagenes": ["imagenes/menu/inca-zero.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "inca-kola-2500",
+      "categoria": "bebidas",
+      "nombre": "Inca Kola 2.5L",
+      "descripcion": "Gaseosa Inca Kola familiar.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/inca-kola-grande.jpg",
+      "imagenes": ["imagenes/menu/inca-kola-grande.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "coca-cola-600",
+      "categoria": "bebidas",
+      "nombre": "Coca Cola 600ml",
+      "descripcion": "Gaseosa Coca Cola personal.",
+      "precio": 3.50,
+      "imagen": "imagenes/menu/coca-cola.jpg",
+      "imagenes": ["imagenes/menu/coca-cola.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "coca-zero-600",
+      "categoria": "bebidas",
+      "nombre": "Coca Zero 600ml",
+      "descripcion": "Gaseosa Coca Cola Zero personal.",
+      "precio": 4.00,
+      "imagen": "imagenes/menu/coca-zero.jpg",
+      "imagenes": ["imagenes/menu/coca-zero.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "coca-cola-2500",
+      "categoria": "bebidas",
+      "nombre": "Coca Cola 2.5L",
+      "descripcion": "Gaseosa Coca Cola familiar.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/coca-cola-grande.jpg",
+      "imagenes": ["imagenes/menu/coca-cola-grande.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "fanta-500",
+      "categoria": "bebidas",
+      "nombre": "Fanta 500ml",
+      "descripcion": "Gaseosa Fanta personal.",
+      "precio": 3.50,
+      "imagen": "imagenes/menu/fanta.jpg",
+      "imagenes": ["imagenes/menu/fanta.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "sprite-500",
+      "categoria": "bebidas",
+      "nombre": "Sprite 500ml",
+      "descripcion": "Gaseosa Sprite personal.",
+      "precio": 3.50,
+      "imagen": "imagenes/menu/sprite.jpg",
+      "imagenes": ["imagenes/menu/sprite.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "san-mateo-600",
+      "categoria": "bebidas",
+      "nombre": "San Mateo 600ml",
+      "descripcion": "Agua mineral San Mateo personal.",
+      "precio": 2.50,
+      "imagen": "imagenes/menu/san-mateo.jpg",
+      "imagenes": ["imagenes/menu/san-mateo.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "san-mateo-2500",
+      "categoria": "bebidas",
+      "nombre": "San Mateo 2.5L",
+      "descripcion": "Agua mineral San Mateo familiar.",
+      "precio": 6.00,
+      "imagen": "imagenes/menu/san-mateo-grande.jpg",
+      "imagenes": ["imagenes/menu/san-mateo-grande.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "evervess-1500",
+      "categoria": "bebidas",
+      "nombre": "Evervess 1.5L (Agua Tónica)",
+      "descripcion": "Agua tónica Evervess.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/evervess.jpg",
+      "imagenes": ["imagenes/menu/evervess.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "ginger-ale",
+      "categoria": "bebidas",
+      "nombre": "Ginger Ale",
+      "descripcion": "Gaseosa Ginger Ale.",
+      "precio": 9.00,
+      "imagen": "imagenes/menu/ginger-ale.jpg",
+      "imagenes": ["imagenes/menu/ginger-ale.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "limonada",
+      "categoria": "bebidas",
+      "nombre": "Limonada",
+      "descripcion": "Limonada natural refrescante.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/limonada.jpg",
+      "imagenes": ["imagenes/menu/limonada.jpg"],
+      "opciones":{
+        "temperatura": ["Natural", "Helada"],
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "limonada-rosa",
+      "categoria": "bebidas",
+      "nombre": "Limonada Rosa",
+      "descripcion": "Limonada rosa con toques especiales.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/limonada-rosa.jpg",
+      "imagenes": ["imagenes/menu/limonada-rosa.jpg"],
+      "opciones":{
+        "temperatura": ["Natural", "Helada"],
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "limonada-frozen",
+      "categoria": "bebidas",
+      "nombre": "Limonada Frozen",
+      "descripcion": "Limonada helada estilo frozen.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/limonada-frozen.jpg",
+      "imagenes": ["imagenes/menu/limonada-frozen.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "limonada-rosa-frozen",
+      "categoria": "bebidas",
+      "nombre": "Limonada Rosa Frozen",
+      "descripcion": "Limonada rosa helada estilo frozen.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/limonada-rosa-frozen.jpg",
+      "imagenes": ["imagenes/menu/limonada-rosa-frozen.jpg"],
+      "opciones": {
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "maracuya",
+      "categoria": "bebidas",
+      "nombre": "Maracuyá",
+      "descripcion": "Refresco de maracuyá natural.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/maracuya.jpg",
+      "imagenes": ["imagenes/menu/maracuya.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"],
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "chicha-morada",
+      "categoria": "bebidas",
+      "nombre": "Chicha Morada",
+      "descripcion": "Chicha morada tradicional peruana.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/chicha-morada.jpg",
+      "imagenes": ["imagenes/menu/chicha-morada.jpg"],
+      "opciones":{
+        "temperatura": ["Natural", "Helada"],
+        "tamanio": ["1/2 Jarra (S/7.00)", "Jarra completa (S/14.00)"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "milkshake-oreo",
+      "categoria": "milkshakes",
+      "nombre": "Oreo Shake",
+      "descripcion": "Milkshake cremoso de galleta Oreo.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/oreo-shake.jpg",
+      "imagenes": ["imagenes/menu/oreo-shake.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "milkshake-chocolate",
+      "categoria": "milkshakes",
+      "nombre": "Milkshake de Chocolate",
+      "descripcion": "Milkshake cremoso de chocolate.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/milkshake-chocolate.jpg",
+      "imagenes": ["imagenes/menu/milkshake-chocolate.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "milkshake-fresa",
+      "categoria": "milkshakes",
+      "nombre": "Milkshake de Fresa",
+      "descripcion": "Milkshake cremoso de fresa.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/milkshake-fresa.jpg",
+      "imagenes": ["imagenes/menu/milkshake-fresa.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "milkshake-vainilla",
+      "categoria": "milkshakes",
+      "nombre": "Milkshake de Vainilla",
+      "descripcion": "Milkshake cremoso de vainilla.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/milkshake-vainilla.jpg",
+      "imagenes": ["imagenes/menu/milkshake-vainilla.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pisco-sour",
+      "categoria": "cocteles",
+      "nombre": "Pisco Sour",
+      "descripcion": "Pisco, jarabe de goma, huevo.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/pisco-sour.jpg",
+      "imagenes": ["imagenes/menu/pisco-sour.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tacna-sour",
+      "categoria": "cocteles",
+      "nombre": "Tacna Sour",
+      "descripcion": "Variante regional tacneño del sour tradicional.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/tacna-sour.jpg",
+      "imagenes": ["imagenes/menu/tacna-sour.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "maracuya-sour",
+      "categoria": "cocteles",
+      "nombre": "Maracuyá Sour",
+      "descripcion": "Sour con maracuyá fresco.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/maracuya-sour.jpg",
+      "imagenes": ["imagenes/menu/maracuya-sour.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "chilcano-clasico",
+      "categoria": "cocteles",
+      "nombre": "Chilcano Clásico",
+      "descripcion": "Pisco, ginger ale.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/chilcano-clasico.jpg",
+      "imagenes": ["imagenes/menu/chilcano-clasico.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "chilcano-fresa",
+      "categoria": "cocteles",
+      "nombre": "Chilcano de Fresa",
+      "descripcion": "Chilcano con fresa fresca.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/chilcano-fresa.jpg",
+      "imagenes": ["imagenes/menu/chilcano-fresa.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "chilcano-maracuya",
+      "categoria": "cocteles",
+      "nombre": "Chilcano de Maracuyá",
+      "descripcion": "Chilcano con maracuyá.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/chilcano-maracuya.jpg",
+      "imagenes": ["imagenes/menu/chilcano-maracuya.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "mojito-clasico",
+      "categoria": "cocteles",
+      "nombre": "Mojito Clásico",
+      "descripcion": "Ron, hierba buena, ginger ale.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/mojito-clasico.jpg",
+      "imagenes": ["imagenes/menu/mojito-clasico.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "mojito-fresa",
+      "categoria": "cocteles",
+      "nombre": "Mojito de Fresa",
+      "descripcion": "Mojito con fresa fresca.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/mojito-fresa.jpg",
+      "imagenes": ["imagenes/menu/mojito-fresa.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "mojito-maracuya",
+      "categoria": "cocteles",
+      "nombre": "Mojito de Maracuyá",
+      "descripcion": "Mojito con maracuyá.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/mojito-maracuya.jpg",
+      "imagenes": ["imagenes/menu/mojito-maracuya.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "algarrobina",
+      "categoria": "cocteles",
+      "nombre": "Algarrobina",
+      "descripcion": "Pisco, leche, algarrobina, jarabe de goma.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/algarrobina.jpg",
+      "imagenes": ["imagenes/menu/algarrobina.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "machu-picchu",
+      "categoria": "cocteles",
+      "nombre": "Machu Picchu",
+      "descripcion": "Granadina, naranja, pisco, licor de menta.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/machu-picchu.jpg",
+      "imagenes": ["imagenes/menu/machu-picchu.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "hulk",
+      "categoria": "cocteles",
+      "nombre": "Hulk",
+      "descripcion": "Vodka, pisco, ron, gin, whisky, licor de menta.",
+      "precio": 20.00,
+      "imagen": "imagenes/menu/hulk.jpg",
+      "imagenes": ["imagenes/menu/hulk.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "daiquiri",
+      "categoria": "cocteles",
+      "nombre": "Daiquiri",
+      "descripcion": "Ron, limón.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/daiquiri.jpg",
+      "imagenes": ["imagenes/menu/daiquiri.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pina-colada",
+      "categoria": "cocteles",
+      "nombre": "Piña Colada",
+      "descripcion": "Ron, piña, crema de coco.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/pina-colada.jpg",
+      "imagenes": ["imagenes/menu/pina-colada.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "cuba-libre",
+      "categoria": "cocteles",
+      "nombre": "Cuba Libre",
+      "descripcion": "Ron, coca cola, hielo.",
+      "precio": 14.00,
+      "imagen": "imagenes/menu/cuba-libre.jpg",
+      "imagenes": ["imagenes/menu/cuba-libre.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "alejandra",
+      "categoria": "cocteles",
+      "nombre": "Alejandra",
+      "descripcion": "Ron, baileys, fresa, granadina.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/alejandra.jpg",
+      "imagenes": ["imagenes/menu/alejandra.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ruso-negro",
+      "categoria": "cocteles",
+      "nombre": "Ruso Negro",
+      "descripcion": "Vodka, licor de café.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/ruso-negro.jpg",
+      "imagenes": ["imagenes/menu/ruso-negro.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "ruso-blanco",
+      "categoria": "cocteles",
+      "nombre": "Ruso Blanco",
+      "descripcion": "Vodka, licor de café, leche.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/ruso-blanco.jpg",
+      "imagenes": ["imagenes/menu/ruso-blanco.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "capiroska",
+      "categoria": "cocteles",
+      "nombre": "Capiroska",
+      "descripcion": "Vodka, limón.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/capiroska.jpg",
+      "imagenes": ["imagenes/menu/capiroska.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "laguna-azul",
+      "categoria": "cocteles",
+      "nombre": "Laguna Azul",
+      "descripcion": "Vodka, curacao, limón.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/laguna-azul.jpg",
+      "imagenes": ["imagenes/menu/laguna-azul.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "negroni",
+      "categoria": "cocteles",
+      "nombre": "Negroni",
+      "descripcion": "Vermont, campari, gin, rodaja de naranja.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/negroni.jpg",
+      "imagenes": ["imagenes/menu/negroni.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "gin-tonic",
+      "categoria": "cocteles",
+      "nombre": "Gin Tonic",
+      "descripcion": "Gin, zumo de limón, agua tónica.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/gin-tonic.jpg",
+      "imagenes": ["imagenes/menu/gin-tonic.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "margarita-limon",
+      "categoria": "cocteles",
+      "nombre": "Margarita de Limón",
+      "descripcion": "Tequila, triple sec, limón y sal.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/margarita-limon.jpg",
+      "imagenes": ["imagenes/menu/margarita-limon.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "margarita-blue",
+      "categoria": "cocteles",
+      "nombre": "Margarita Blue",
+      "descripcion": "Tequila, curacao azul, sal.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/margarita-blue.jpg",
+      "imagenes": ["imagenes/menu/margarita-blue.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tequila-sunrise",
+      "categoria": "cocteles",
+      "nombre": "Tequila Sunrise",
+      "descripcion": "Tequila, granadina, jugo de naranja.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/tequila-sunrise.jpg",
+      "imagenes": ["imagenes/menu/tequila-sunrise.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tequila-shot",
+      "categoria": "cocteles",
+      "nombre": "Tequila Shot",
+      "descripcion": "Tequila, limón y sal.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/tequila-shot.jpg",
+      "imagenes": ["imagenes/menu/tequila-shot.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "tinto-verano",
+      "categoria": "cocteles",
+      "nombre": "Tinto de Verano",
+      "descripcion": "Vino semi seco, pisco, jugo de naranja, maracuyá.",
+      "precio": 18.00,
+      "imagen": "imagenes/menu/tinto-verano.jpg",
+      "imagenes": ["imagenes/menu/tinto-verano.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "gin-rosa",
+      "categoria": "cocteles",
+      "nombre": "Gin Rosa",
+      "descripcion": "Gin Beefeater Pink, cerezas, agua tónica.",
+      "precio": 18.00,
+      "imagen": "imagenes/menu/gin-rosa.jpg",
+      "imagenes": ["imagenes/menu/gin-rosa.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "mojito-jagger",
+      "categoria": "cocteles",
+      "nombre": "Mojito Jagger",
+      "descripcion": "Mojito clásico con jaggermeister.",
+      "precio": 15.00,
+      "imagen": "imagenes/menu/mojito-jagger.jpg",
+      "imagenes": ["imagenes/menu/mojito-jagger.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "mojito-corona",
+      "categoria": "cocteles",
+      "nombre": "Mojito Corona",
+      "descripcion": "Mojito clásico con cerveza coronita.",
+      "precio": 18.00,
+      "imagen": "imagenes/menu/mojito-corona.jpg",
+      "imagenes": ["imagenes/menu/mojito-corona.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "old-parr-12",
+      "categoria": "licores",
+      "nombre": "Old Parr 12 Años (Botella)",
+      "descripcion": "Incluye 02 aguas (600ml) + 01 cubeta de hielo.",
+      "precio": 100.00,
+      "imagen": "imagenes/menu/old-parr.jpg",
+      "imagenes": ["imagenes/menu/old-parr.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jw-swing",
+      "categoria": "licores",
+      "nombre": "Johnnie Walker SWING (Botella)",
+      "descripcion": "Incluye 02 aguas (600ml) + 01 cubeta de hielo.",
+      "precio": 135.00,
+      "imagen": "imagenes/menu/jw-swing.jpg",
+      "imagenes": ["imagenes/menu/jw-swing.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jw-double-black",
+      "categoria": "licores",
+      "nombre": "Johnnie Walker DOUBLE BLACK (Botella)",
+      "descripcion": "Incluye 02 aguas (600ml) + 01 cubeta de hielo.",
+      "precio": 115.00,
+      "imagen": "imagenes/menu/jw-double-black.jpg",
+      "imagenes": ["imagenes/menu/jw-double-black.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "jw-gold-label",
+      "categoria": "licores",
+      "nombre": "Johnnie Walker GOLD LABEL (Botella)",
+      "descripcion": "Incluye 02 aguas (600ml) + 01 cubeta de hielo.",
+      "precio": 200.00,
+      "imagen": "imagenes/menu/jw-gold-label.jpg",
+      "imagenes": ["imagenes/menu/jw-gold-label.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "flor-cana-12",
+      "categoria": "licores",
+      "nombre": "Flor de Caña 12 Años (Botella)",
+      "descripcion": "Incluye 02 aguas (600ml) + 01 cubeta de hielo.",
+      "precio": 85.00,
+      "imagen": "imagenes/menu/flor-cana-12.jpg",
+      "imagenes": ["imagenes/menu/flor-cana-12.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "flor-cana-18",
+      "categoria": "licores",
+      "nombre": "Flor de Caña 18 Años (Botella)",
+      "descripcion": "Incluye 02 aguas (600ml) + 01 cubeta de hielo.",
+      "precio": 125.00,
+      "imagen": "imagenes/menu/flor-cana-18.jpg",
+      "imagenes": ["imagenes/menu/flor-cana-18.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pisco-res-chilcanera",
+      "categoria": "licores",
+      "nombre": "Pisco Res Chilcanera (Botella)",
+      "descripcion": "Pisco peruano de calidad.",
+      "precio": 80.00,
+      "imagen": "imagenes/menu/res-chilcanera.jpg",
+      "imagenes": ["imagenes/menu/res-chilcanera.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pisco-mosto-verde-cuneo",
+      "categoria": "licores",
+      "nombre": "Pisco Mosto Verde Cuneo (Botella)",
+      "descripcion": "Pisco mosto verde premium.",
+      "precio": 75.00,
+      "imagen": "imagenes/menu/mosto-verde-cuneo.jpg",
+      "imagenes": ["imagenes/menu/mosto-verde-cuneo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pisco-cuatro-gallos",
+      "categoria": "licores",
+      "nombre": "Pisco Cuatro Gallos (Botella)",
+      "descripcion": "Pisco tradicional peruano.",
+      "precio": 55.00,
+      "imagen": "imagenes/menu/cuatro-gallos.jpg",
+      "imagenes": ["imagenes/menu/cuatro-gallos.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "pisco-porton",
+      "categoria": "licores",
+      "nombre": "Pisco Portón (Botella)",
+      "descripcion": "Pisco premium.",
+      "precio": 95.00,
+      "imagen": "imagenes/menu/pisco-porton.jpg",
+      "imagenes": ["imagenes/menu/pisco-porton.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "gin-beefeater",
+      "categoria": "licores",
+      "nombre": "Beefeater Gin (Botella)",
+      "descripcion": "Gin inglés clásico.",
+      "precio": 70.00,
+      "imagen": "imagenes/menu/beefeater.jpg",
+      "imagenes": ["imagenes/menu/beefeater.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "gin-hendricks",
+      "categoria": "licores",
+      "nombre": "Hendrick's Gin (Botella)",
+      "descripcion": "Gin premium escocés.",
+      "precio": 75.00,
+      "imagen": "imagenes/menu/hendricks.jpg",
+      "imagenes": ["imagenes/menu/hendricks.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "gin-tanqueray-sevilla",
+      "categoria": "licores",
+      "nombre": "Tanqueray Sevilla (Botella)",
+      "descripcion": "Gin con esencia de naranja de Sevilla.",
+      "precio": 100.00,
+      "imagen": "imagenes/menu/tanqueray-sevilla.jpg",
+      "imagenes": ["imagenes/menu/tanqueray-sevilla.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "vino-misiones-dorado",
+      "categoria": "vinos",
+      "nombre": "Misiones de Rengo Dorado",
+      "descripcion": "Vino chileno dorado.",
+      "precio": 35.00,
+      "imagen": "imagenes/menu/misiones-dorado.jpg",
+      "imagenes": ["imagenes/menu/misiones-dorado.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "vino-misiones-morado",
+      "categoria": "vinos",
+      "nombre": "Misiones de Rengo Morado",
+      "descripcion": "Vino chileno tinto.",
+      "precio": 50.00,
+      "imagen": "imagenes/menu/misiones-morado.jpg",
+      "imagenes": ["imagenes/menu/misiones-morado.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "vino-misiones-black",
+      "categoria": "vinos",
+      "nombre": "Misiones de Rengo Black",
+      "descripcion": "Vino chileno premium.",
+      "precio": 55.00,
+      "imagen": "imagenes/menu/misiones-black.jpg",
+      "imagenes": ["imagenes/menu/misiones-black.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "cerveza-stella-artois",
+      "categoria": "cervezas",
+      "nombre": "Stella Artois 330ml",
+      "descripcion": "Cerveza belga premium.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/stella-artois.jpg",
+      "imagenes": ["imagenes/menu/stella-artois.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "cerveza-pilsen-305",
+      "categoria": "cervezas",
+      "nombre": "Pilsen 305ml",
+      "descripcion": "Cerveza peruana clásica personal.",
+      "precio": 4.50,
+      "imagen": "imagenes/menu/pilsen-305.jpg",
+      "imagenes": ["imagenes/menu/pilsen-305.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "cerveza-pilsen-630",
+      "categoria": "cervezas",
+      "nombre": "Pilsen 630ml",
+      "descripcion": "Cerveza peruana clásica grande.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/pilsen-630.jpg",
+      "imagenes": ["imagenes/menu/pilsen-630.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "cerveza-cusquena-310",
+      "categoria": "cervezas",
+      "nombre": "Cusqueña 310ml",
+      "descripcion": "Cerveza cusqueña personal.",
+      "precio": 5.00,
+      "imagen": "imagenes/menu/cusquena-310.jpg",
+      "imagenes": ["imagenes/menu/cusquena-310.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "cerveza-cusquena-620",
+      "categoria": "cervezas",
+      "nombre": "Cusqueña 620ml",
+      "descripcion": "Cerveza cusqueña grande.",
+      "precio": 9.00,
+      "imagen": "imagenes/menu/cusquena-620.jpg",
+      "imagenes": ["imagenes/menu/cusquena-620.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "cerveza-corona",
+      "categoria": "cervezas",
+      "nombre": "Corona 330ml",
+      "descripcion": "Cerveza mexicana premium.",
+      "precio": 8.00,
+      "imagen": "imagenes/menu/corona.jpg",
+      "imagenes": ["imagenes/menu/corona.jpg"],
+      "opciones": {
+        "temperatura": ["Natural", "Helada"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": false
+    }
+  ],
+  "mozos": [
+    {
+      "nombre": "Junior",
+      "telefono": "910003081"
+    },
+    {
+      "nombre": "Alexandra",
+      "telefono": "910003082"
+    },
+    {
+      "nombre": "Richard",
+      "telefono": "962080201"
+    },
+    {
+      "nombre": "Rafael",
+      "telefono": "910003084"
+    },
+    {
+      "nombre": "Soledad",
+      "telefono": "910003085"
+    }
+  ]
+}
+

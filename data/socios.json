@@ -1,0 +1,52 @@
+{
+  "socios": [
+    {
+      "numero": "00101",
+      "dni": "70123456",
+      "nombre": "García López, Juan Carlos",
+      "telefono": "910000101",
+      "tipo": "socio",
+      "estado": "activo"
+    },
+    {
+      "numero": "00102",
+      "dni": "70234567",
+      "nombre": "Rodríguez Mamani, María Elena",
+      "telefono": "910000102",
+      "tipo": "socio",
+      "estado": "activo"
+    },
+    {
+      "numero": "00103",
+      "dni": "70345678",
+      "nombre": "Quispe Fernández, Pedro Antonio",
+      "telefono": "910000103",
+      "tipo": "socio",
+      "estado": "activo"
+    },
+    {
+      "numero": "C0201",
+      "dni": "70456789",
+      "nombre": "Torres Chávez, Ana Lucía",
+      "telefono": "910000201",
+      "tipo": "convenio",
+      "estado": "activo"
+    },
+    {
+      "numero": "C0202",
+      "dni": "70567890",
+      "nombre": "Mendoza Ramos, Carlos Alberto",
+      "telefono": "910000202",
+      "tipo": "convenio",
+      "estado": "activo"
+    },
+    {
+      "numero": "C0203",
+      "dni": "70678901",
+      "nombre": "Vargas Huanca, Rosa María",
+      "telefono": "910000203",
+      "tipo": "convenio",
+      "estado": "activo"
+    }
+  ]
+}
