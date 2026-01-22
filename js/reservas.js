@@ -31,7 +31,7 @@ let unsubscribeReservas = null;
 let firebaseDisponible = false;
 let sociosData = [];
 let socioVerificado = null;
-S
+
 const datosInstalaciones = {
   parrillas: {
     nombre: 'Parrillas',
