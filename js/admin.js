@@ -305,6 +305,7 @@ function inicializarEventos() {
 
   inicializarFiltros();
   inicializarOpcionesVista();
+  inicializarSelectorVista();
   inicializarModal();
   inicializarModalConfirmacion();
   inicializarReservaManual();
@@ -460,6 +461,8 @@ function actualizarEstadisticas() {
 // FILTROS
 // ==========================================================
 
+let sugesterenciasAutocomplete = [];
+
 function inicializarFiltros() {
   const filtroFechaInicio = document.getElementById('filtroFechaInicio');
   const filtroFechaFin = document.getElementById('filtroFechaFin');
@@ -491,7 +494,12 @@ function inicializarFiltros() {
   if (filtroFechaFin) filtroFechaFin.onchange = aplicarFiltros;
   if (filtroInstalacion) filtroInstalacion.onchange = aplicarFiltros;
   if (filtroEstado) filtroEstado.onchange = aplicarFiltros;
-  if (filtroBusqueda) filtroBusqueda.oninput = aplicarFiltros;
+  if (filtroBusqueda) {
+    filtroBusqueda.oninput = aplicarFiltros;
+    filtroBusqueda.addEventListener('focus', () => {
+      mostrarSugerenciasBusqueda();
+    });
+  }
   if (btnLimpiar) btnLimpiar.onclick = limpiarFiltros;
 
   // Event listeners para filtrar por estado desde iconos de estadísticas
@@ -586,9 +594,45 @@ function limpiarFiltros() {
   document.getElementById('filtroInstalacion').value = '';
   document.getElementById('filtroEstado').value = '';
   document.getElementById('filtroBusqueda').value = '';
+  document.getElementById('filtroInstalacionCalendario').value = '';
 
   aplicarFiltros();
   mostrarToast('Filtros limpiados');
+}
+
+function mostrarSugerenciasBusqueda() {
+  const filtroBusqueda = document.getElementById('filtroBusqueda');
+  if (!filtroBusqueda) return;
+
+  const valores = new Set();
+
+  reservasData.forEach(reserva => {
+    if (reserva.socio?.nombre) {
+      valores.add(reserva.socio.nombre);
+    }
+    if (reserva.socio?.telefono) {
+      valores.add(reserva.socio.telefono);
+    }
+    if (reserva.socio?.numero && reserva.socio.numero !== 'MANUAL') {
+      valores.add(`Socio #${reserva.socio.numero}`);
+    }
+    if (reserva.subInstalacion) {
+      valores.add(formatearNombreInstalacion(reserva.subInstalacion));
+    }
+  });
+
+  sugesterenciasAutocomplete = Array.from(valores).sort();
+}
+
+function obtenerSugerenciasParaBusqueda(termino) {
+  if (!termino || termino.length < 1) {
+    return sugesterenciasAutocomplete.slice(0, 5);
+  }
+
+  const termLower = termino.toLowerCase();
+  return sugesterenciasAutocomplete
+    .filter(v => v.toLowerCase().includes(termLower))
+    .slice(0, 8);
 }
 
 function filtrarPorEstado(estado) {
@@ -827,6 +871,292 @@ function renderizarReservas() {
     `;
   });
   
+  contenedor.innerHTML = html;
+
+  actualizarTablaReservas();
+  actualizarEstadisticasInstalaciones();
+}
+
+function renderizarReservasEnTabla() {
+  const tabla = document.getElementById('tablaReservasBody');
+  if (!tabla) return;
+
+  tabla.innerHTML = '';
+
+  if (reservasFiltradas.length === 0) {
+    tabla.innerHTML = '<tr><td colspan="8" style="padding: 40px; text-align: center; color: #999;">No hay reservas que mostrar</td></tr>';
+    return;
+  }
+
+  const reservasOrdenadas = ordenarReservas(reservasFiltradas);
+
+  reservasOrdenadas.forEach(reserva => {
+    const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+    const fechaFormateada = formatearFecha(fecha);
+    const nombreSocio = reserva.socio?.nombre || 'Sin nombre';
+    const telefono = reserva.socio?.telefono || '-';
+    const instalacion = formatearNombreInstalacion(reserva.subInstalacion);
+    const estado = reserva.estado || 'pendiente';
+
+    const fila = document.createElement('tr');
+    fila.innerHTML = `
+      <td>${fechaFormateada}</td>
+      <td>${instalacion}</td>
+      <td>${nombreSocio}</td>
+      <td>${telefono}</td>
+      <td>${reserva.horario}</td>
+      <td>${reserva.personas}</td>
+      <td><span class="badge-estado ${estado}">${capitalizarTexto(estado)}</span></td>
+      <td>
+        <div class="acciones-fila">
+          <button class="boton-accion-tabla" onclick="window.verDetalle('${reserva.id}')">Ver</button>
+        </div>
+      </td>
+    `;
+    tabla.appendChild(fila);
+  });
+}
+
+function actualizarTablaReservas() {
+  if (vistaActual === 'tabla') {
+    renderizarReservasEnTabla();
+  }
+}
+
+// ==========================================================
+// SELECTOR DE VISTA PRINCIPAL (CALENDARIO, TABLA, TARJETAS)
+// ==========================================================
+
+function inicializarSelectorVista() {
+  const btnCalendario = document.getElementById('btnVistaCalendario');
+  const btnTabla = document.getElementById('btnVistaTabla2');
+  const btnTarjetas = document.getElementById('btnVistaTarjetas2');
+
+  if (btnCalendario) btnCalendario.onclick = () => cambiarVistaMain('calendario');
+  if (btnTabla) btnTabla.onclick = () => cambiarVistaMain('tabla');
+  if (btnTarjetas) btnTarjetas.onclick = () => cambiarVistaMain('tarjetas');
+}
+
+function cambiarVistaMain(vista) {
+  const seccionCalendario = document.getElementById('seccionCalendario');
+  const seccionReservas = document.getElementById('seccionReservasAdmin');
+  const listaReservas = document.getElementById('listaReservas');
+  const listaReservasTabla = document.getElementById('listaReservasTabla');
+
+  const btnCalendario = document.getElementById('btnVistaCalendario');
+  const btnTabla = document.getElementById('btnVistaTabla2');
+  const btnTarjetas = document.getElementById('btnVistaTarjetas2');
+
+  document.querySelectorAll('.boton-selector-vista').forEach(btn => {
+    btn.classList.remove('activo');
+  });
+
+  if (vista === 'calendario') {
+    vistaActual = 'calendario';
+    if (seccionCalendario) seccionCalendario.classList.remove('oculto');
+    if (seccionReservas) seccionReservas.classList.add('oculto');
+    if (btnCalendario) btnCalendario.classList.add('activo');
+    inicializarCalendario();
+  } else if (vista === 'tabla') {
+    vistaActual = 'tabla';
+    if (seccionCalendario) seccionCalendario.classList.add('oculto');
+    if (seccionReservas) seccionReservas.classList.remove('oculto');
+    if (listaReservas) listaReservas.classList.add('oculto');
+    if (listaReservasTabla) listaReservasTabla.classList.remove('oculto');
+    if (btnTabla) btnTabla.classList.add('activo');
+    renderizarReservasEnTabla();
+  } else {
+    vistaActual = 'tarjetas';
+    if (seccionCalendario) seccionCalendario.classList.add('oculto');
+    if (seccionReservas) seccionReservas.classList.remove('oculto');
+    if (listaReservas) listaReservas.classList.remove('oculto');
+    if (listaReservasTabla) listaReservasTabla.classList.add('oculto');
+    if (btnTarjetas) btnTarjetas.classList.add('activo');
+    renderizarReservas();
+  }
+}
+
+// ==========================================================
+// CALENDARIO INTERACTIVO
+// ==========================================================
+
+let calendarioActual = null;
+let fechaSeleccionadaCalendario = new Date();
+let filtroInstalacionCalendario = '';
+
+function inicializarCalendario() {
+  const contenedorCalendario = document.getElementById('calendarioReservas');
+  if (!contenedorCalendario) return;
+
+  const filtroInstalacion = document.getElementById('filtroInstalacionCalendario');
+  if (filtroInstalacion) {
+    filtroInstalacion.onchange = () => {
+      filtroInstalacionCalendario = filtroInstalacion.value;
+      if (calendarioActual) {
+        calendarioActual.destroy();
+      }
+      construirCalendario();
+    };
+  }
+
+  construirCalendario();
+}
+
+function construirCalendario() {
+  const contenedorCalendario = document.getElementById('calendarioReservas');
+  if (!contenedorCalendario) return;
+
+  if (typeof flatpickr !== 'undefined') {
+    calendarioActual = flatpickr(contenedorCalendario, {
+      inline: true,
+      mode: 'single',
+      dateFormat: 'd/m/Y',
+      locale: 'es',
+      defaultDate: fechaSeleccionadaCalendario,
+      onChange: (selectedDates) => {
+        if (selectedDates.length > 0) {
+          fechaSeleccionadaCalendario = selectedDates[0];
+          actualizarDetalleDelDia(selectedDates[0]);
+        }
+      },
+      onReady: () => {
+        marcarDiasConReservas();
+      }
+    });
+
+    marcarDiasConReservas();
+    actualizarDetalleDelDia(fechaSeleccionadaCalendario);
+  }
+}
+
+function marcarDiasConReservas() {
+  const diasConReservas = {};
+
+  reservasData.forEach(reserva => {
+    let filtroValido = !filtroInstalacionCalendario || reserva.instalacion === filtroInstalacionCalendario;
+
+    if (!filtroValido) return;
+
+    const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+    const keyFecha = fecha.toISOString().split('T')[0];
+
+    if (!diasConReservas[keyFecha]) {
+      diasConReservas[keyFecha] = { pendiente: 0, reservado: 0, cancelado: 0 };
+    }
+    diasConReservas[keyFecha][reserva.estado]++;
+  });
+
+  if (calendarioActual && calendarioActual.calendarContainer) {
+    const dias = calendarioActual.calendarContainer.querySelectorAll('.flatpickr-day');
+    dias.forEach(dia => {
+      dia.classList.remove('hasEvent', 'hasEventPendiente', 'hasEventReservado', 'hasEventCancelado');
+
+      const fecha = dia.getAttribute('data-datestr');
+      if (fecha && diasConReservas[fecha]) {
+        dia.classList.add('hasEvent');
+
+        if (diasConReservas[fecha].pendiente > 0) {
+          dia.classList.add('hasEventPendiente');
+        } else if (diasConReservas[fecha].reservado > 0) {
+          dia.classList.add('hasEventReservado');
+        } else if (diasConReservas[fecha].cancelado > 0) {
+          dia.classList.add('hasEventCancelado');
+        }
+      }
+    });
+  }
+}
+
+function actualizarDetalleDelDia(fecha) {
+  const contenedor = document.getElementById('detalleReservasDelDia');
+  if (!contenedor) return;
+
+  const fechaString = fecha.toISOString().split('T')[0];
+  const reservasDelDia = reservasData.filter(r => {
+    const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+    const fechaReservaString = fechaReserva.toISOString().split('T')[0];
+
+    let filtroValido = !filtroInstalacionCalendario || r.instalacion === filtroInstalacionCalendario;
+
+    return fechaReservaString === fechaString && filtroValido;
+  }).sort((a, b) => {
+    const horaA = parseInt(a.horario.split(':')[0]);
+    const horaB = parseInt(b.horario.split(':')[0]);
+    return horaA - horaB;
+  });
+
+  let html = '';
+
+  if (reservasDelDia.length === 0) {
+    html = '<p class="sin-reservas">Sin reservas este día</p>';
+  } else {
+    reservasDelDia.forEach(reserva => {
+      const instalacion = formatearNombreInstalacion(reserva.subInstalacion);
+      const socio = reserva.socio?.nombre || 'Sin nombre';
+      const estado = reserva.estado || 'pendiente';
+
+      html += `
+        <div class="item-reserva-dia ${estado}">
+          <div class="info-item-dia">
+            <div class="nombre-inst-dia">${instalacion}</div>
+            <div class="horario-dia">${reserva.horario}</div>
+            <div class="socio-dia">${socio}</div>
+          </div>
+          <button class="boton-accion-tabla" onclick="window.verDetalle('${reserva.id}')" style="padding: 6px 10px; font-size: 0.75rem;">Ver</button>
+        </div>
+      `;
+    });
+  }
+
+  contenedor.innerHTML = html;
+}
+
+// ==========================================================
+// ESTADÍSTICAS POR INSTALACIÓN
+// ==========================================================
+
+function actualizarEstadisticasInstalaciones() {
+  const contenedor = document.getElementById('contenedorEstadisticasInst');
+  if (!contenedor) return;
+
+  const instalaciones = {
+    'parrillas': 'Parrillas',
+    'tenis': 'Tenis',
+    'fronton': 'Frontón',
+    'mesas': 'Mesas'
+  };
+
+  let html = '';
+
+  Object.entries(instalaciones).forEach(([clave, nombre]) => {
+    const reservasInstolacion = reservasData.filter(r => r.instalacion === clave && r.estado === 'reservado');
+    const total = reservasData.filter(r => r.instalacion === clave).length;
+
+    const porcentaje = total > 0 ? Math.round((reservasInstolacion.length / total) * 100) : 0;
+
+    html += `
+      <div class="tarjeta-ocupacion">
+        <div class="nombre-instalacion-est">${nombre}</div>
+        <div class="barra-ocupacion">
+          <div class="barra-ocupacion-visual">
+            <div class="barra-ocupacion-relleno" style="width: ${porcentaje}%"></div>
+          </div>
+          <div class="porcentaje-ocupacion">${porcentaje}%</div>
+        </div>
+        <div class="stats-instalacion">
+          <div class="stat-item">
+            <div class="stat-numero">${reservasInstolacion.length}</div>
+            <div class="stat-label">Reservadas</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-numero">${total - reservasInstolacion.length}</div>
+            <div class="stat-label">Disponibles</div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
   contenedor.innerHTML = html;
 }
 
