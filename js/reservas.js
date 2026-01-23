@@ -214,10 +214,10 @@ function verificarSocio() {
     if (campoTipo) campoTipo.value = socio.tipo;
     
     if (datosContainer) datosContainer.classList.remove('oculto');
-    
-    const campoPersonas = document.getElementById('reservaPersonas');
-    if (campoPersonas) campoPersonas.focus();
-    
+
+    const campoObservaciones = document.getElementById('reservaObservaciones');
+    if (campoObservaciones) campoObservaciones.focus();
+
     mostrarToast('Socio verificado exitosamente');
     
   } else {
@@ -1006,28 +1006,6 @@ function inicializarFormularios() {
       enviarConsultaMesaWhatsApp();
     };
   }
-  
-  // Validación de personas en tiempo real
-  const campoPersonas = document.getElementById('reservaPersonas');
-  if (campoPersonas) {
-    campoPersonas.oninput = () => {
-      const capacidad = obtenerCapacidadSubInstalacion();
-      const valor = parseInt(campoPersonas.value);
-      const aviso = document.getElementById('avisoCapacidad');
-      
-      if (valor > capacidad) {
-        if (aviso) {
-          aviso.textContent = `⚠️ Excede capacidad máxima (${capacidad})`;
-          aviso.style.color = 'var(--rojo-error)';
-        }
-      } else {
-        if (aviso) {
-          aviso.textContent = `Máximo ${capacidad} personas`;
-          aviso.style.color = '';
-        }
-      }
-    };
-  }
 }
 
 function limpiarFormularios() {
@@ -1070,10 +1048,9 @@ async function procesarReserva() {
   const numeroSocio = document.getElementById('reservaNumeroSocio').value.trim();
   const tipoSocio = document.getElementById('reservaTipoSocio').value;
   const telefono = document.getElementById('reservaTelefono').value.trim();
-  const personas = document.getElementById('reservaPersonas').value;
   const observaciones = document.getElementById('reservaObservaciones').value.trim();
-  
-  if (!validarFormularioReserva(nombre, personas)) {
+
+  if (!validarFormularioReserva(nombre)) {
     return;
   }
   
@@ -1105,7 +1082,6 @@ async function procesarReserva() {
       telefono: telefono,
       tipo: tipoSocio
     },
-    personas: parseInt(personas),
     observaciones: observaciones,
     estado: 'pendiente',
     fechaCreacion: serverTimestamp()
@@ -1197,30 +1173,17 @@ async function procesarReservaMesa() {
 // VALIDACIONES
 // ==========================================================
 
-function validarFormularioReserva(nombre, personas) {
+function validarFormularioReserva(nombre) {
   if (!nombre) {
     mostrarToast('Por favor verifica tu número de socio primero');
     return false;
   }
-  
-  if (!personas || personas < 1) {
-    mostrarToast('Por favor ingresa la cantidad de personas');
-    const campo = document.getElementById('reservaPersonas');
-    if (campo) campo.focus();
-    return false;
-  }
-  
-  const capacidadMax = obtenerCapacidadSubInstalacion();
-  if (parseInt(personas) > capacidadMax) {
-    mostrarToast(`La capacidad máxima es ${capacidadMax} personas`);
-    return false;
-  }
-  
+
   if (!fechaSeleccionada) {
     mostrarToast('Error: No hay fecha seleccionada');
     return false;
   }
-  
+
   return true;
 }
 
@@ -1237,10 +1200,9 @@ function enviarReservaWhatsApp() {
   const nombre = document.getElementById('reservaNombre').value.trim();
   const numeroSocio = document.getElementById('reservaNumeroSocio').value.trim();
   const telefono = document.getElementById('reservaTelefono').value.trim();
-  const personas = document.getElementById('reservaPersonas').value;
   const observaciones = document.getElementById('reservaObservaciones').value.trim();
-  
-  if (!validarFormularioReserva(nombre, personas)) {
+
+  if (!validarFormularioReserva(nombre)) {
     return;
   }
   
@@ -1257,7 +1219,6 @@ function enviarReservaWhatsApp() {
   if (numeroSocio) mensaje += ` (N° ${numeroSocio})`;
   mensaje += `\n`;
   if (telefono) mensaje += `📞 *Teléfono:* ${telefono}\n`;
-  mensaje += `👥 *Personas:* ${personas}\n`;
   if (observaciones) mensaje += `📝 *Observaciones:* ${observaciones}\n`;
   mensaje += `\n¡Gracias! Espero su confirmación.`;
   
