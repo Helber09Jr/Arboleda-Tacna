@@ -1037,46 +1037,18 @@ function limpiarFormularioMesas() {
 // ==========================================================
 
 async function procesarReserva() {
-  // Validar que socio esté verificado
   if (!socioVerificado) {
     mostrarToast('Debes verificar tu número de socio primero');
-    const campoBusqueda = document.getElementById('reservaBuscarSocio');
-    if (campoBusqueda) campoBusqueda.focus();
     return;
   }
 
-  // Obtener y validar datos del formulario
-  const campoNombre = document.getElementById('reservaNombre');
-  const campoNumeroSocio = document.getElementById('reservaNumeroSocio');
-  const campoTipoSocio = document.getElementById('reservaTipoSocio');
-  const campoTelefono = document.getElementById('reservaTelefono');
-  const campoObservaciones = document.getElementById('reservaObservaciones');
-
-  if (!campoNombre || !campoNumeroSocio || !campoTipoSocio || !campoTelefono || !campoObservaciones) {
-    console.error('❌ Error: No se encontraron los campos del formulario');
-    mostrarToast('Error: Campos del formulario no encontrados. Recarga la página.');
-    return;
-  }
-
-  const nombre = campoNombre.value.trim();
-  const numeroSocio = campoNumeroSocio.value.trim();
-  const tipoSocio = campoTipoSocio.value;
-  const telefono = campoTelefono.value.trim();
-  const observaciones = campoObservaciones.value.trim();
+  const nombre = document.getElementById('reservaNombre').value.trim();
+  const numeroSocio = document.getElementById('reservaNumeroSocio').value.trim();
+  const tipoSocio = document.getElementById('reservaTipoSocio').value;
+  const telefono = document.getElementById('reservaTelefono').value.trim();
+  const observaciones = document.getElementById('reservaObservaciones').value.trim();
 
   if (!validarFormularioReserva(nombre)) {
-    return;
-  }
-
-  // Validar que fecha esté seleccionada
-  if (!fechaSeleccionada) {
-    mostrarToast('Error: Por favor selecciona una fecha');
-    return;
-  }
-
-  // Validar que instalación esté seleccionada
-  if (!instalacionSeleccionada || !subInstalacionSeleccionada) {
-    mostrarToast('Error: Por favor selecciona una instalación');
     return;
   }
 
@@ -1085,17 +1057,8 @@ async function procesarReserva() {
     return;
   }
 
-  // Verificar una vez más que la fecha no esté reservada
-  const estado = obtenerEstadoReserva(fechaSeleccionada);
-  if (estado === 'reservado') {
-    mostrarToast('Esta fecha ya fue reservada. Por favor elige otra.');
-    cerrarModal('modalReserva');
-    setTimeout(() => abrirCalendario(), 300);
-    return;
-  }
-
   const tipoInstalacion = obtenerTipoInstalacion();
-  const horarioTexto = tipoInstalacion === 'bloque-dia' ? '10:00 AM - 6:00 PM' : horarioSeleccionado || 'No especificado';
+  const horarioTexto = tipoInstalacion === 'bloque-dia' ? '10:00 AM - 6:00 PM' : horarioSeleccionado;
   
   const reserva = {
     instalacion: instalacionSeleccionada,
@@ -1112,20 +1075,12 @@ async function procesarReserva() {
     estado: 'pendiente',
     fechaCreacion: serverTimestamp()
   };
-  
+
   try {
     mostrarCargando(true);
 
-    console.log('📝 Datos de reserva a guardar:', reserva);
-
-    if (!db) {
-      throw new Error('Base de datos no disponible');
-    }
-
     const reservasCollection = collection(db, 'reservas');
     const docRef = await addDoc(reservasCollection, reserva);
-
-    console.log('✅ Reserva guardada con ID:', docRef.id);
 
     cerrarModal('modalReserva');
     mostrarCargando(false);
@@ -1138,26 +1093,9 @@ async function procesarReserva() {
     }, 300);
 
   } catch (error) {
-    console.error('❌ Error al guardar reserva:', error);
-    console.error('Detalles del error:', {
-      message: error.message,
-      code: error.code,
-      stack: error.stack
-    });
+    console.error('Error al guardar reserva:', error);
     mostrarCargando(false);
-
-    let mensajeError = 'Error al guardar la reserva. Intenta nuevamente o usa WhatsApp.';
-
-    if (error.code === 'permission-denied' || error.message.includes('PERMISSION_DENIED')) {
-      console.warn('⚠️ FIRESTORE RULES - Verifica que las reglas permitan crear documentos sin autenticación');
-      mensajeError = '❌ Acceso denegado por Firestore.\n\nContacta al administrador para revisar las reglas de seguridad.\n\nMientras tanto, usa el botón de WhatsApp para reservar.';
-    } else if (error.code === 'unavailable' || error.message.includes('offline')) {
-      mensajeError = '⚠️ Firestore no está disponible. Intenta en unos momentos.';
-    } else if (error.message && error.message.includes('network')) {
-      mensajeError = 'Error de conexión. Verifica tu internet e intenta nuevamente.';
-    }
-
-    mostrarToast(mensajeError);
+    mostrarToast('Error al guardar la reserva. Intenta nuevamente o usa WhatsApp.');
   }
 }
 
