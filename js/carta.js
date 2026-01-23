@@ -30,6 +30,10 @@ let cantidadSeleccionada = 1;
 let galeriaImagenes = [];
 let galeriaIndiceActual = 0;
 
+// Listeners para limpiar después
+let keydownListenerGaleria = null;
+let keydownListenerModal = null;
+
 document.addEventListener('DOMContentLoaded', () => {
   cargarDatosMenu();
   inicializarEventos();
@@ -65,17 +69,33 @@ async function cargarDatosMenu() {
 async function inicializarEtiquetas() {
   try {
     const resultado = await inicializarSistemaEtiquetas(() => {
-
+      // Esta es la callback que se ejecuta cuando hay cambios en Firestore
       renderizarPlatos();
     });
 
     if (resultado.exito) {
       sistemaEtiquetasListo = true;
-      renderizarPlatos();
+      renderizarPlatos(); // Renderizar una sola vez con etiquetas
       console.log('✅ Sistema de etiquetas integrado');
+    } else {
+      mostrarAdvertenciaEtiquetas();
+      sistemaEtiquetasListo = false;
     }
   } catch (error) {
     console.warn('Sistema de etiquetas no disponible:', error);
+    mostrarAdvertenciaEtiquetas();
+    sistemaEtiquetasListo = false;
+  }
+}
+
+function mostrarAdvertenciaEtiquetas() {
+  const filtrosEtiquetas = document.getElementById('filtrosEtiquetas');
+  if (filtrosEtiquetas) {
+    const banner = document.createElement('div');
+    banner.className = 'advertencia-etiquetas';
+    banner.style.cssText = 'background-color: #fff3cd; border: 1px solid #ffc107; padding: 8px 12px; border-radius: 4px; margin-bottom: 10px; font-size: 12px; color: #856404;';
+    banner.textContent = '⚠️ Los filtros de disponibilidad no están disponibles en este momento';
+    filtrosEtiquetas.parentElement.insertBefore(banner, filtrosEtiquetas);
   }
 }
 
@@ -496,7 +516,8 @@ function inicializarModalVistaPrevia() {
     };
   }
 
-  document.addEventListener('keydown', (e) => {
+  // Listener de teclado para galería (se removerá al cerrar modal)
+  keydownListenerGaleria = (e) => {
     if (modal.classList.contains('activo')) {
       if (e.key === 'Escape') {
         cerrarModalVistaPrevia();
@@ -506,7 +527,8 @@ function inicializarModalVistaPrevia() {
         navegarGaleria(1);
       }
     }
-  });
+  };
+  document.addEventListener('keydown', keydownListenerGaleria);
 }
 
 function abrirModalVistaPrevia(platoId) {
@@ -634,6 +656,13 @@ function irAImagenGaleria(indice) {
     img.classList.add('cambiando');
     setTimeout(() => {
       img.src = galeriaImagenes[indice];
+
+      // Validar imagen con error handler
+      img.onerror = () => {
+        console.warn('Error cargando imagen:', galeriaImagenes[indice]);
+        img.src = 'imagenes/placeholder.png';
+      };
+
       img.classList.remove('cambiando');
     }, 150);
   }
@@ -656,6 +685,10 @@ function cerrarModalVistaPrevia() {
   if (modal) {
     modal.classList.remove('activo');
     document.body.style.overflow = 'auto';
+  }
+  // Limpiar listener de teclado
+  if (keydownListenerGaleria) {
+    document.removeEventListener('keydown', keydownListenerGaleria);
   }
 }
 
@@ -718,11 +751,12 @@ function inicializarModalPlato() {
   }
   
   // Cerrar con Escape
-  document.addEventListener('keydown', (e) => {
+  keydownListenerModal = (e) => {
     if (e.key === 'Escape' && modal.classList.contains('activo')) {
       cerrarModalPlato();
     }
-  });
+  };
+  document.addEventListener('keydown', keydownListenerModal);
 }
 
 function abrirModalPlato(platoId) {
@@ -787,6 +821,10 @@ function cerrarModalPlato() {
   if (modal) {
     modal.classList.remove('activo');
     document.body.style.overflow = 'auto';
+  }
+  // Limpiar listener de teclado
+  if (keydownListenerModal) {
+    document.removeEventListener('keydown', keydownListenerModal);
   }
   platoSeleccionado = null;
 }
