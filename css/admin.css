@@ -1316,6 +1316,83 @@ body {
   height: 16px;
 }
 
+/* ==========================================================
+   ACCIONES RÁPIDAS EN TARJETAS
+   ========================================================== */
+
+.acciones-tarjeta-reserva {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.boton-accion-rapida {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.boton-accion-rapida svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.boton-accion-rapida.confirmar {
+  background: rgba(39, 174, 96, 0.15);
+  color: var(--verde-exito);
+}
+
+.boton-accion-rapida.confirmar:hover {
+  background: var(--verde-exito);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.boton-accion-rapida.cancelar {
+  background: rgba(231, 76, 60, 0.15);
+  color: var(--rojo-error);
+}
+
+.boton-accion-rapida.cancelar:hover {
+  background: var(--rojo-error);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.boton-accion-rapida.whatsapp {
+  background: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+}
+
+.boton-accion-rapida.whatsapp:hover {
+  background: #25d366;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+}
+
+.boton-accion-rapida.ver {
+  background: rgba(0, 82, 180, 0.15);
+  color: var(--azul-principal);
+}
+
+.boton-accion-rapida.ver:hover {
+  background: var(--azul-principal);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 82, 180, 0.3);
+}
+
 .sin-resultados {
   text-align: center;
   padding: 60px 20px;
@@ -4764,5 +4841,501 @@ body {
 
   .contenedor-calendario-principal {
     gap: 12px;
+  }
+}
+
+/* ==========================================================
+   SECCIÓN RESUMEN DE HOY
+   ========================================================== */
+
+.seccion-hoy-resumen {
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.08) 0%, rgba(52, 152, 219, 0.05) 100%);
+  border: 1px solid var(--gris-medio);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.cabecera-hoy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.titulo-hoy {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--azul-principal);
+  margin: 0;
+}
+
+.boton-colapsar-hoy {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--azul-principal);
+  transition: all 0.3s ease;
+}
+
+.boton-colapsar-hoy svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+  transition: transform 0.3s ease;
+}
+
+.boton-colapsar-hoy.colapsado svg {
+  transform: rotate(180deg);
+}
+
+.contenido-resumen-hoy {
+  transition: all 0.3s ease;
+}
+
+.contenido-resumen-hoy.colapsado {
+  display: none;
+}
+
+.grid-resumen-hoy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tarjeta-resumen-hoy {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  border-left: 4px solid;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.tarjeta-resumen-hoy:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.tarjeta-resumen-hoy.pendiente {
+  border-left-color: var(--amarillo-pendiente);
+}
+
+.tarjeta-resumen-hoy.reservado {
+  border-left-color: var(--verde-exito);
+}
+
+.tarjeta-resumen-hoy.cancelado {
+  border-left-color: var(--rojo-error);
+}
+
+.tarjeta-resumen-hoy.ocupacion {
+  border-left-color: var(--azul-principal);
+}
+
+.numero-resumen {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--azul-principal);
+  margin-bottom: 6px;
+}
+
+.label-resumen {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.proximasReservasHoy {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gris-medio);
+}
+
+.proximasReservasHoy h3 {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  color: var(--azul-principal);
+  font-weight: 600;
+}
+
+.lista-proximas-hoy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sin-proximas {
+  color: #999;
+  text-align: center;
+  padding: 16px;
+  font-style: italic;
+  margin: 0;
+}
+
+.item-proxima-hoy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f8f7f5;
+  border-radius: 8px;
+  border-left: 3px solid var(--azul-principal);
+  font-size: 0.9rem;
+}
+
+.info-proxima {
+  flex: 1;
+}
+
+.nombre-proxima {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.hora-proxima {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.boton-proxima {
+  padding: 6px 12px;
+  background: var(--azul-principal);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.boton-proxima:hover {
+  background: var(--azul-oscuro);
+  transform: scale(1.05);
+}
+
+/* ==========================================================
+   DASHBOARD DE OCUPACIÓN HOY
+   ========================================================== */
+
+.seccion-ocupacion-hoy {
+  background: white;
+  border: 1px solid var(--gris-medio);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.grid-ocupacion-hoy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.card-ocupacion-hoy {
+  background: var(--gris-claro);
+  border: 1px solid var(--gris-medio);
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-ocupacion-hoy:hover {
+  border-color: var(--azul-principal);
+  box-shadow: 0 4px 12px rgba(0, 82, 180, 0.1);
+}
+
+.nombre-ocupacion {
+  font-weight: 600;
+  color: var(--azul-principal);
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+}
+
+.barra-ocupacion-card {
+  margin-bottom: 12px;
+}
+
+.barra-ocupacion-visual-card {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.barra-ocupacion-relleno-card {
+  height: 100%;
+  background: linear-gradient(90deg, var(--azul-principal), var(--azul-suave));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.estado-ocupacion-card {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.color-disponible { color: var(--verde-exito); }
+.color-algunas { color: var(--amarillo-pendiente); }
+.color-lleno { color: var(--rojo-error); }
+
+/* ==========================================================
+   FILTROS GUARDADOS
+   ========================================================== */
+
+.seccion-filtros-guardados {
+  background: white;
+  border: 1px solid var(--gris-medio);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.cabecera-filtros-guardados {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.titulo-filtros-guardados {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--azul-principal);
+}
+
+.boton-agregar-filtro {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, var(--azul-principal), var(--azul-oscuro));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.boton-agregar-filtro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 82, 180, 0.25);
+}
+
+.boton-agregar-filtro svg {
+  width: 16px;
+  height: 16px;
+}
+
+.contenedor-filtros-guardados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sin-filtros-guardados {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  text-align: center;
+  color: #999;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.tag-filtro-guardado {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--gris-claro);
+  border: 1px solid var(--gris-medio);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--azul-principal);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tag-filtro-guardado:hover {
+  background: var(--azul-principal);
+  color: white;
+  border-color: var(--azul-principal);
+}
+
+.btn-eliminar-filtro {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  color: inherit;
+  font-weight: bold;
+}
+
+/* ==========================================================
+   FILTRO CRÍTICO
+   ========================================================== */
+
+.seccion-filtro-critico {
+  margin-bottom: 25px;
+}
+
+.boton-filtro-critico {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+  position: relative;
+}
+
+.boton-filtro-critico:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(231, 76, 60, 0.35);
+}
+
+.boton-filtro-critico svg {
+  width: 20px;
+  height: 20px;
+}
+
+.badge-critico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background: #fff3cd;
+  color: #d68910;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin-left: 8px;
+}
+
+.badge-critico.activo {
+  background: #ffe5e5;
+  color: #c0392b;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ==========================================================
+   ESTILOS RESPONSIVE NUEVAS SECCIONES
+   ========================================================== */
+
+@media (max-width: 768px) {
+  .grid-resumen-hoy {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .tarjeta-resumen-hoy {
+    padding: 12px;
+  }
+
+  .numero-resumen {
+    font-size: 1.5rem;
+  }
+
+  .grid-ocupacion-hoy {
+    grid-template-columns: repeat(2, 1fr));
+    gap: 12px;
+  }
+
+  .boton-agregar-filtro {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .boton-filtro-critico {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .seccion-hoy-resumen {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .titulo-hoy {
+    font-size: 1.1rem;
+  }
+
+  .grid-resumen-hoy {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .tarjeta-resumen-hoy {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .numero-resumen {
+    font-size: 1.3rem;
+  }
+
+  .grid-ocupacion-hoy {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion-filtros-guardados {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .contenedor-filtros-guardados {
+    gap: 6px;
+  }
+
+  .tag-filtro-guardado {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .boton-filtro-critico {
+    padding: 12px;
+    font-size: 0.85rem;
+    gap: 6px;
+  }
+
+  .badge-critico {
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
   }
 }
