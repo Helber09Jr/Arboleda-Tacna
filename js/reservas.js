@@ -1147,10 +1147,12 @@ async function procesarReserva() {
     mostrarCargando(false);
 
     let mensajeError = 'Error al guardar la reserva. Intenta nuevamente o usa WhatsApp.';
-    if (error.code === 'permission-denied') {
-      mensajeError = 'Permiso denegado. Intenta con tu número de socio verificado.';
-    } else if (error.code === 'PERMISSION_DENIED') {
-      mensajeError = 'Error de permisos en la base de datos.';
+
+    if (error.code === 'permission-denied' || error.message.includes('PERMISSION_DENIED')) {
+      console.warn('⚠️ FIRESTORE RULES - Verifica que las reglas permitan crear documentos sin autenticación');
+      mensajeError = '❌ Acceso denegado por Firestore.\n\nContacta al administrador para revisar las reglas de seguridad.\n\nMientras tanto, usa el botón de WhatsApp para reservar.';
+    } else if (error.code === 'unavailable' || error.message.includes('offline')) {
+      mensajeError = '⚠️ Firestore no está disponible. Intenta en unos momentos.';
     } else if (error.message && error.message.includes('network')) {
       mensajeError = 'Error de conexión. Verifica tu internet e intenta nuevamente.';
     }
