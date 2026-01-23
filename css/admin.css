@@ -5339,3 +5339,67 @@ body {
     font-size: 0.7rem;
   }
 }
+
+/* ==========================================================
+   MODAL OPCIONES DE EXPORTACIÓN
+   ========================================================== */
+
+.opcion-exportacion {
+  margin-bottom: 20px;
+}
+
+.opcion-exportacion label:first-child {
+  display: block;
+  font-weight: 600;
+  color: var(--azul-principal);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.grupo-opciones,
+.grupo-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-opcion,
+.checkbox-opcion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.radio-opcion:hover,
+.checkbox-opcion:hover {
+  background: var(--gris-claro);
+}
+
+.radio-opcion input[type="radio"],
+.checkbox-opcion input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--azul-principal);
+}
+
+.radio-opcion span,
+.checkbox-opcion span {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+#selectInstalacionExportacion {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--gris-medio);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+  color: #333;
+  cursor: pointer;
+}

@@ -909,6 +909,89 @@
     </div>
   </div>
 
+  <!-- Modal Opciones de Exportación -->
+  <div id="modalExportarOpciones" class="modal-admin" role="dialog" aria-modal="true">
+    <div class="modal-overlay-admin"></div>
+    <div class="modal-contenido-admin">
+      <div class="modal-cabecera">
+        <h2>Opciones de Exportación</h2>
+        <button id="btnCerrarExportarOpciones" class="boton-cerrar-modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-cuerpo">
+        <div class="opcion-exportacion">
+          <label>Rango de Fechas:</label>
+          <div class="grupo-opciones">
+            <label class="radio-opcion">
+              <input type="radio" name="rangoExportacion" value="hoy" checked>
+              <span>Hoy</span>
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" name="rangoExportacion" value="semana">
+              <span>Esta Semana</span>
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" name="rangoExportacion" value="mes">
+              <span>Este Mes</span>
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" name="rangoExportacion" value="todos">
+              <span>Todos los Registros</span>
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" name="rangoExportacion" value="personalizado">
+              <span>Personalizado</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="opcion-exportacion">
+          <label>Incluir Estados:</label>
+          <div class="grupo-checkboxes">
+            <label class="checkbox-opcion">
+              <input type="checkbox" name="estadoExportacion" value="pendiente" checked>
+              <span>Pendientes</span>
+            </label>
+            <label class="checkbox-opcion">
+              <input type="checkbox" name="estadoExportacion" value="reservado" checked>
+              <span>Confirmadas</span>
+            </label>
+            <label class="checkbox-opcion">
+              <input type="checkbox" name="estadoExportacion" value="cancelado" checked>
+              <span>Canceladas</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="opcion-exportacion">
+          <label>Filtrar por Instalación (Opcional):</label>
+          <select id="selectInstalacionExportacion">
+            <option value="">Todas</option>
+            <option value="parrillas">Parrillas</option>
+            <option value="tenis">Tenis</option>
+            <option value="fronton">Frontón</option>
+            <option value="mesas">Mesas</option>
+          </select>
+        </div>
+
+        <div class="opcion-exportacion">
+          <label class="checkbox-opcion">
+            <input type="checkbox" id="incluirResumenExportacion" checked>
+            <span>Incluir Resumen Estadístico</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-pie">
+        <button id="btnCancelarExportacion" class="boton-secundario">Cancelar</button>
+        <button id="btnConfirmarExportacion" class="boton-primario">Exportar a Excel</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal Reserva Manual -->
   <div id="modalReservaManual" class="modal-admin" role="dialog" aria-modal="true">
     <div class="modal-overlay-admin"></div>

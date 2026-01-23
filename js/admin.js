@@ -1843,10 +1843,232 @@ function escapeHtml(texto) {
 }
 
 // ==========================================================
+// EXPORTACIÓN MEJORADA
+// ==========================================================
+
+function mostrarOpcionesExportacion() {
+  const modal = document.getElementById('modalExportarOpciones');
+  if (modal) {
+    modal.classList.add('activo');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function cerrarOpcionesExportacion() {
+  const modal = document.getElementById('modalExportarOpciones');
+  if (modal) {
+    modal.classList.remove('activo');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function obtenerReservasParaExportar() {
+  const rangoExportacion = document.querySelector('input[name="rangoExportacion"]:checked').value;
+  const estadosSeleccionados = Array.from(document.querySelectorAll('input[name="estadoExportacion"]:checked')).map(e => e.value);
+  const instalacionSeleccionada = document.getElementById('selectInstalacionExportacion').value;
+
+  let reservasExportacion = reservasFiltradas;
+
+  if (estadosSeleccionados.length < 3) {
+    reservasExportacion = reservasExportacion.filter(r => estadosSeleccionados.includes(r.estado));
+  }
+
+  if (instalacionSeleccionada) {
+    reservasExportacion = reservasExportacion.filter(r => r.instalacion === instalacionSeleccionada);
+  }
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  if (rangoExportacion === 'hoy') {
+    const manana = new Date(hoy);
+    manana.setDate(manana.getDate() + 1);
+    reservasExportacion = reservasExportacion.filter(r => {
+      const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fecha >= hoy && fecha < manana;
+    });
+  } else if (rangoExportacion === 'semana') {
+    const inicioSemana = new Date(hoy);
+    const diaSemana = hoy.getDay();
+    inicioSemana.setDate(hoy.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+    const finSemana = new Date(inicioSemana);
+    finSemana.setDate(inicioSemana.getDate() + 7);
+
+    reservasExportacion = reservasExportacion.filter(r => {
+      const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fecha >= inicioSemana && fecha < finSemana;
+    });
+  } else if (rangoExportacion === 'mes') {
+    const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+    const finMes = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1);
+
+    reservasExportacion = reservasExportacion.filter(r => {
+      const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fecha >= inicioMes && fecha < finMes;
+    });
+  }
+
+  return reservasExportacion;
+}
+
+function exportarAExcelMejorado() {
+  const reservasExportacion = obtenerReservasParaExportar();
+  const incluirResumen = document.getElementById('incluirResumenExportacion').checked;
+
+  if (reservasExportacion.length === 0) {
+    mostrarToast('No hay reservas para exportar con los criterios seleccionados');
+    return;
+  }
+
+  mostrarToast('Generando reporte Excel...');
+
+  const hoy = new Date();
+  const fechaReporte = hoy.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  let htmlContent = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+      <meta charset="UTF-8">
+      <style>
+        table { border-collapse: collapse; width: 100%; }
+        th { background-color: #0052B4; color: white; font-weight: bold; padding: 12px 8px; text-align: center; border: 2px solid #003d8a; }
+        td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .estado-pendiente { background-color: #fff3cd; color: #856404; font-weight: bold; text-align: center; }
+        .estado-reservado { background-color: #d4edda; color: #155724; font-weight: bold; text-align: center; }
+        .estado-cancelado { background-color: #f8d7da; color: #721c24; font-weight: bold; text-align: center; }
+        .titulo-reporte { font-size: 18pt; font-weight: bold; color: #0052B4; text-align: center; padding: 20px; background-color: #f8f9fa; }
+        .subtitulo { font-size: 12pt; color: #666; text-align: center; padding-bottom: 15px; }
+      </style>
+    </head>
+    <body>
+      <div class="titulo-reporte">Reporte de Reservas - La Arboleda Club</div>
+      <div class="subtitulo">Generado: ${fechaReporte}</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Instalación</th>
+            <th>Sub-Instalación</th>
+            <th>Socio</th>
+            <th>Teléfono</th>
+            <th>Horario</th>
+            <th>Personas</th>
+            <th>Estado</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  const pendientes = [];
+  const reservados = [];
+  const cancelados = [];
+
+  reservasExportacion.forEach(reserva => {
+    const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+    const fechaFormateada = fecha.toLocaleDateString('es-ES');
+    const instalacion = {
+      'parrillas': 'Parrillas',
+      'tenis': 'Tenis',
+      'fronton': 'Frontón',
+      'mesas': 'Mesas'
+    }[reserva.instalacion] || reserva.instalacion;
+    const subInst = formatearNombreInstalacion(reserva.subInstalacion);
+    const socio = reserva.socio?.nombre || 'Sin nombre';
+    const tel = reserva.socio?.telefono || '-';
+    const personas = reserva.personas || '-';
+    const observ = reserva.observaciones || '-';
+
+    if (reserva.estado === 'pendiente') pendientes.push(reserva);
+    else if (reserva.estado === 'reservado') reservados.push(reserva);
+    else if (reserva.estado === 'cancelado') cancelados.push(reserva);
+
+    htmlContent += `
+      <tr>
+        <td>${fechaFormateada}</td>
+        <td>${instalacion}</td>
+        <td>${subInst}</td>
+        <td>${socio}</td>
+        <td>${tel}</td>
+        <td>${reserva.horario}</td>
+        <td>${personas}</td>
+        <td class="estado-${reserva.estado}">${reserva.estado.toUpperCase()}</td>
+        <td>${observ}</td>
+      </tr>
+    `;
+  });
+
+  if (incluirResumen) {
+    htmlContent += `
+      </tbody>
+      </table>
+      <br><br>
+      <div class="titulo-reporte" style="font-size: 14pt;">RESUMEN ESTADÍSTICO</div>
+      <table>
+        <tr>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Porcentaje</th>
+        </tr>
+        <tr class="estado-pendiente">
+          <td>Pendientes</td>
+          <td>${pendientes.length}</td>
+          <td>${reservasExportacion.length > 0 ? Math.round((pendientes.length / reservasExportacion.length) * 100) : 0}%</td>
+        </tr>
+        <tr class="estado-reservado">
+          <td>Confirmadas</td>
+          <td>${reservados.length}</td>
+          <td>${reservasExportacion.length > 0 ? Math.round((reservados.length / reservasExportacion.length) * 100) : 0}%</td>
+        </tr>
+        <tr class="estado-cancelado">
+          <td>Canceladas</td>
+          <td>${cancelados.length}</td>
+          <td>${reservasExportacion.length > 0 ? Math.round((cancelados.length / reservasExportacion.length) * 100) : 0}%</td>
+        </tr>
+        <tr style="background-color: #e8e5e0;">
+          <th>TOTAL</th>
+          <th>${reservasExportacion.length}</th>
+          <th>100%</th>
+        </tr>
+      </table>
+    `;
+  } else {
+    htmlContent += `
+      </tbody>
+      </table>
+    `;
+  }
+
+  htmlContent += `
+    </body>
+    </html>
+  `;
+
+  const blob = new Blob(['\ufeff', htmlContent], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  const nombreArchivo = `Reservas_${new Date().getTime()}.xls`;
+  link.setAttribute('href', url);
+  link.setAttribute('download', nombreArchivo);
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  cerrarOpcionesExportacion();
+  mostrarToast('Reporte exportado exitosamente');
+}
+
+// ==========================================================
 // EXPORTAR FUNCIÓN GLOBAL
 // ==========================================================
 
-window.exportarAExcel = exportarAExcel;
+window.exportarAExcel = mostrarOpcionesExportacion;
 window.guardarFiltroActual = guardarFiltroActual;
 window.aplicarFiltroGuardado = aplicarFiltroGuardado;
 window.eliminarFiltroGuardado = eliminarFiltroGuardado;
@@ -1870,6 +2092,29 @@ function inicializarNuevasCaracteristicas() {
       btnColapsarHoy.classList.toggle('colapsado');
       contenido.classList.toggle('colapsado');
     };
+  }
+
+  const btnCerrarExportarOpciones = document.getElementById('btnCerrarExportarOpciones');
+  if (btnCerrarExportarOpciones) {
+    btnCerrarExportarOpciones.onclick = cerrarOpcionesExportacion;
+  }
+
+  const btnCancelarExportacion = document.getElementById('btnCancelarExportacion');
+  if (btnCancelarExportacion) {
+    btnCancelarExportacion.onclick = cerrarOpcionesExportacion;
+  }
+
+  const btnConfirmarExportacion = document.getElementById('btnConfirmarExportacion');
+  if (btnConfirmarExportacion) {
+    btnConfirmarExportacion.onclick = exportarAExcelMejorado;
+  }
+
+  const modalExportarOpciones = document.getElementById('modalExportarOpciones');
+  if (modalExportarOpciones) {
+    const overlay = modalExportarOpciones.querySelector('.modal-overlay-admin');
+    if (overlay) {
+      overlay.onclick = cerrarOpcionesExportacion;
+    }
   }
 }
 
