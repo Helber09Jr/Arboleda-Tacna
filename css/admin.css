@@ -4134,3 +4134,500 @@ body {
   padding: 15px;
   text-align: right;
 }
+
+/* ==========================================================
+   SELECTOR DE VISTA PRINCIPAL
+   ========================================================== */
+
+.seccion-selector-vista-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.controles-vista-principal {
+  display: flex;
+  gap: 12px;
+  background: var(--blanco);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.boton-selector-vista {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #666;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.boton-selector-vista svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.boton-selector-vista:hover {
+  background: var(--gris-claro);
+  color: var(--azul-principal);
+}
+
+.boton-selector-vista.activo {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border-color: var(--azul-principal);
+}
+
+/* ==========================================================
+   TABLA MEJORADA DE RESERVAS
+   ========================================================== */
+
+.tabla-reservas-mejorada {
+  background: var(--blanco);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gris-medio);
+}
+
+.tabla-reservas-mejorada table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-admin thead {
+  background: var(--gris-claro);
+  border-bottom: 2px solid var(--gris-medio);
+}
+
+.tabla-admin thead th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--azul-principal);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 2px solid var(--gris-medio);
+}
+
+.tabla-admin tbody tr {
+  border-bottom: 1px solid var(--gris-medio);
+  transition: background-color 0.2s ease;
+}
+
+.tabla-admin tbody tr:hover {
+  background-color: rgba(0, 82, 180, 0.04);
+}
+
+.tabla-admin tbody tr:last-child {
+  border-bottom: none;
+}
+
+.tabla-admin tbody td {
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: #444;
+  vertical-align: middle;
+}
+
+.tabla-admin .badge-estado {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tabla-admin .badge-estado.pendiente {
+  background: rgba(243, 156, 18, 0.2);
+  color: #d68910;
+}
+
+.tabla-admin .badge-estado.reservado {
+  background: rgba(39, 174, 96, 0.2);
+  color: #1e8449;
+}
+
+.tabla-admin .badge-estado.cancelado {
+  background: rgba(231, 76, 60, 0.2);
+  color: #c0392b;
+}
+
+.tabla-admin .acciones-fila {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.boton-accion-tabla {
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--gris-medio);
+  border-radius: 6px;
+  color: var(--azul-principal);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.boton-accion-tabla:hover {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border-color: var(--azul-principal);
+}
+
+/* ==========================================================
+   SECCIÓN CALENDARIO
+   ========================================================== */
+
+.seccion-calendario {
+  background: var(--blanco);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gris-medio);
+  margin-bottom: 30px;
+}
+
+.seccion-calendario.oculto {
+  display: none;
+}
+
+.contenedor-calendario-principal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.calendario-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.titulo-calendario {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--azul-principal);
+  margin: 0;
+}
+
+.calendario-reservas {
+  background: var(--blanco);
+  border: 1px solid var(--gris-medio);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.flatpickr-calendar {
+  background: var(--blanco);
+  border: none;
+  box-shadow: none;
+}
+
+.flatpickr-months {
+  background: var(--gris-claro);
+}
+
+.flatpickr-day.hasEvent::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--azul-principal);
+}
+
+.flatpickr-day.hasEventPendiente::after {
+  background: var(--amarillo-pendiente);
+}
+
+.flatpickr-day.hasEventReservado::after {
+  background: var(--verde-exito);
+}
+
+.flatpickr-day.hasEventCancelado::after {
+  background: var(--rojo-error);
+}
+
+.leyenda-calendario {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid var(--gris-medio);
+}
+
+.item-leyenda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.punto.pendiente {
+  background: var(--amarillo-pendiente);
+}
+
+.punto.reservado {
+  background: var(--verde-exito);
+}
+
+.punto.cancelado {
+  background: var(--rojo-error);
+}
+
+.detalle-dia-calendario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.titulo-detalle-dia {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--azul-principal);
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gris-medio);
+}
+
+.lista-reservas-del-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.sin-reservas {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+  background: var(--gris-claro);
+  border-radius: 8px;
+  margin: 0;
+}
+
+.item-reserva-dia {
+  padding: 12px;
+  border-left: 4px solid var(--azul-principal);
+  border-radius: 6px;
+  background: var(--gris-claro);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.item-reserva-dia.pendiente {
+  border-left-color: var(--amarillo-pendiente);
+}
+
+.item-reserva-dia.reservado {
+  border-left-color: var(--verde-exito);
+}
+
+.item-reserva-dia.cancelado {
+  border-left-color: var(--rojo-error);
+}
+
+.info-item-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nombre-inst-dia {
+  font-weight: 600;
+  color: #333;
+}
+
+.horario-dia {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.socio-dia {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================
+   ESTADÍSTICAS POR INSTALACIÓN
+   ========================================================== */
+
+.seccion-estadisticas-instalaciones {
+  background: var(--blanco);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gris-medio);
+  margin-bottom: 30px;
+}
+
+.titulo-estadisticas-inst {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--azul-principal);
+  margin: 0 0 20px 0;
+}
+
+.grid-estadisticas-instalaciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.tarjeta-ocupacion {
+  padding: 16px;
+  background: var(--gris-claro);
+  border-radius: 10px;
+  border: 1px solid var(--gris-medio);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.tarjeta-ocupacion:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--azul-principal);
+}
+
+.nombre-instalacion-est {
+  font-weight: 600;
+  color: var(--azul-principal);
+  font-size: 0.95rem;
+}
+
+.barra-ocupacion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.barra-ocupacion-visual {
+  flex: 1;
+  height: 8px;
+  background: var(--gris-medio);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barra-ocupacion-relleno {
+  height: 100%;
+  background: linear-gradient(90deg, var(--azul-principal), var(--azul-suave));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.porcentaje-ocupacion {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--azul-principal);
+  min-width: 35px;
+  text-align: right;
+}
+
+.stats-instalacion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-numero {
+  font-weight: 700;
+  color: var(--azul-principal);
+  font-size: 1.1rem;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================
+   RESPONSIVE PARA NUEVOS ELEMENTOS
+   ========================================================== */
+
+@media (max-width: 1024px) {
+  .contenedor-calendario-principal {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .grid-estadisticas-instalaciones {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .boton-selector-vista span {
+    display: none;
+  }
+
+  .controles-vista-principal {
+    gap: 8px;
+  }
+
+  .boton-selector-vista {
+    padding: 8px 10px;
+  }
+
+  .seccion-calendario {
+    padding: 16px;
+  }
+
+  .tabla-reservas-mejorada {
+    font-size: 0.8rem;
+  }
+
+  .tabla-admin thead th,
+  .tabla-admin tbody td {
+    padding: 10px 8px;
+  }
+
+  .grid-estadisticas-instalaciones {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lista-reservas-del-dia {
+    max-height: 300px;
+  }
+}
