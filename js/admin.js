@@ -468,6 +468,7 @@ function actualizarEstadisticas() {
   actualizarResumenHoy();
   actualizarOcupacionHoy();
   actualizarFiltrosCriticos();
+  actualizarEstadisticasSemana();
 }
 
 // ==========================================================
@@ -2250,6 +2251,37 @@ function actualizarOcupacionHoy() {
   });
 
   contenedor.innerHTML = html;
+}
+
+// ==========================================================
+// ESTADÍSTICAS DE LA SEMANA
+// ==========================================================
+
+function actualizarEstadisticasSemana() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const inicioSemana = new Date(hoy);
+  const diaSemana = hoy.getDay();
+  inicioSemana.setDate(hoy.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+
+  const finSemana = new Date(inicioSemana);
+  finSemana.setDate(inicioSemana.getDate() + 7);
+
+  const reservasSemana = reservasData.filter(r => {
+    const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+    return fechaReserva >= inicioSemana && fechaReserva < finSemana;
+  });
+
+  const totalReservasSemana = reservasSemana.length;
+  const confirmadosSemana = reservasSemana.filter(r => r.estado === 'reservado').length;
+  const pendientesSemana = reservasSemana.filter(r => r.estado === 'pendiente').length;
+  const porcentajeConfirmacion = totalReservasSemana > 0 ? Math.round((confirmadosSemana / totalReservasSemana) * 100) : 0;
+
+  document.getElementById('totalReservasSemana').textContent = totalReservasSemana;
+  document.getElementById('totalConfirmadosSemana').textContent = confirmadosSemana;
+  document.getElementById('totalPendientesSemana').textContent = pendientesSemana;
+  document.getElementById('porcentajeSemana').textContent = porcentajeConfirmacion + '%';
 }
 
 // ==========================================================
