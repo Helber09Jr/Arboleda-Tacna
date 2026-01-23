@@ -255,7 +255,7 @@
             </svg>
           </button>
         </div>
-        <div id="contenidoResumenHoy" class="contenido-resumen-hoy">
+        <div id="contenidoResumenHoy" class="contenido-resumen-hoy colapsado">
           <div class="grid-resumen-hoy">
             <div class="tarjeta-resumen-hoy pendiente">
               <div class="numero-resumen" id="totalHoyPendiente">0</div>
@@ -281,43 +281,6 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- Dashboard de Ocupación por Instalación -->
-      <section class="seccion-ocupacion-hoy">
-        <h2 class="titulo-seccion-admin">Ocupación de Instalaciones Hoy</h2>
-        <div id="dashboardOcupacionHoy" class="grid-ocupacion-hoy">
-          <!-- Se genera dinámicamente -->
-        </div>
-      </section>
-
-      <!-- Filtros Guardados -->
-      <section class="seccion-filtros-guardados">
-        <div class="cabecera-filtros-guardados">
-          <h3 class="titulo-filtros-guardados">Mis Búsquedas</h3>
-          <button id="btnAgregarFiltro" class="boton-agregar-filtro" title="Guardar filtros actuales">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            Guardar Búsqueda
-          </button>
-        </div>
-        <div id="contenedorFiltrosGuardados" class="contenedor-filtros-guardados">
-          <p class="sin-filtros-guardados">No hay búsquedas guardadas</p>
-        </div>
-      </section>
-
-      <!-- Botón Filtro Crítico -->
-      <section class="seccion-filtro-critico">
-        <button id="btnFiltrarCritico" class="boton-filtro-critico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="16"></line>
-            <line x1="8" y1="12" x2="16" y2="12"></line>
-          </svg>
-          Necesita Atención <span id="badgeCritico" class="badge-critico">0</span>
-        </button>
       </section>
 
       <!-- Botón Reserva Manual -->
@@ -373,7 +336,7 @@
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-        <div id="contenedorFiltros" class="contenedor-filtros">
+        <div id="contenedorFiltros" class="contenedor-filtros oculto">
           <div class="filtro-item">
             <label for="filtroFechaInicio">Desde</label>
             <input type="text" id="filtroFechaInicio" placeholder="dd/mm/aaaa">

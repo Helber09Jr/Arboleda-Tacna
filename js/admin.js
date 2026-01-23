@@ -48,11 +48,6 @@ let permisos = [];
 let reservasData = [];
 let reservasFiltradas = [];
 let reservaSeleccionada = null;
-
-let filtrosGuardados = [];
-let filtrosCriticos = [];
-let estadisticasHistorico = {};
-let auditariaReserva = {};
 let unsubscribeReservas = null;
 
 // Variables para gestión de carta
@@ -317,7 +312,6 @@ function inicializarEventos() {
   inicializarTabs();
   inicializarGestionCarta();
 
-  cargarFiltrosGuardados();
   agregarAccionesRapidas();
   inicializarNuevasCaracteristicas();
 }
@@ -466,8 +460,6 @@ function actualizarEstadisticas() {
   document.getElementById('totalGeneral').textContent = reservasData.length;
 
   actualizarResumenHoy();
-  actualizarOcupacionHoy();
-  actualizarFiltrosCriticos();
   actualizarEstadisticasSemana();
 }
 
@@ -2070,22 +2062,8 @@ function exportarAExcelMejorado() {
 // ==========================================================
 
 window.exportarAExcel = mostrarOpcionesExportacion;
-window.guardarFiltroActual = guardarFiltroActual;
-window.aplicarFiltroGuardado = aplicarFiltroGuardado;
-window.eliminarFiltroGuardado = eliminarFiltroGuardado;
-window.mostrarFiltrosCriticos = mostrarFiltrosCriticos;
 
 function inicializarNuevasCaracteristicas() {
-  const btnAgregarFiltro = document.getElementById('btnAgregarFiltro');
-  if (btnAgregarFiltro) {
-    btnAgregarFiltro.onclick = guardarFiltroActual;
-  }
-
-  const btnFiltrarCritico = document.getElementById('btnFiltrarCritico');
-  if (btnFiltrarCritico) {
-    btnFiltrarCritico.onclick = mostrarFiltrosCriticos;
-  }
-
   const btnColapsarHoy = document.getElementById('btnColapsarHoy');
   if (btnColapsarHoy) {
     btnColapsarHoy.onclick = () => {
@@ -2198,62 +2176,6 @@ function renderizarProximasReservas(proximas) {
 }
 
 // ==========================================================
-// OCUPACIÓN HOY
-// ==========================================================
-
-function actualizarOcupacionHoy() {
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-
-  const instalaciones = ['parrillas', 'tenis', 'fronton', 'mesas'];
-  const contenedor = document.getElementById('dashboardOcupacionHoy');
-  if (!contenedor) return;
-
-  let html = '';
-
-  instalaciones.forEach(instalacion => {
-    const reservasInst = reservasData.filter(r => {
-      const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
-      fechaReserva.setHours(0, 0, 0, 0);
-      return r.instalacion === instalacion && fechaReserva.getTime() === hoy.getTime();
-    });
-
-    const reservados = reservasInst.filter(r => r.estado === 'reservado').length;
-    const total = reservasInst.length;
-    const disponibles = total - reservados;
-    const porcentaje = total > 0 ? Math.round((reservados / total) * 100) : 0;
-
-    let estadoColor = 'color-disponible';
-    if (porcentaje > 66) estadoColor = 'color-lleno';
-    else if (porcentaje > 33) estadoColor = 'color-algunas';
-
-    const nombreInst = {
-      'parrillas': 'Parrillas',
-      'tenis': 'Tenis',
-      'fronton': 'Frontón',
-      'mesas': 'Mesas'
-    }[instalacion];
-
-    html += `
-      <div class="card-ocupacion-hoy">
-        <div class="nombre-ocupacion">${nombreInst}</div>
-        <div class="barra-ocupacion-card">
-          <div class="barra-ocupacion-visual-card">
-            <div class="barra-ocupacion-relleno-card" style="width: ${porcentaje}%"></div>
-          </div>
-        </div>
-        <div class="estado-ocupacion-card">
-          <span class="${estadoColor}">${reservados} Reservadas</span>
-          <span>${disponibles} Disponibles</span>
-        </div>
-      </div>
-    `;
-  });
-
-  contenedor.innerHTML = html;
-}
-
-// ==========================================================
 // ESTADÍSTICAS DE LA SEMANA
 // ==========================================================
 
@@ -2282,143 +2204,6 @@ function actualizarEstadisticasSemana() {
   document.getElementById('totalConfirmadosSemana').textContent = confirmadosSemana;
   document.getElementById('totalPendientesSemana').textContent = pendientesSemana;
   document.getElementById('porcentajeSemana').textContent = porcentajeConfirmacion + '%';
-}
-
-// ==========================================================
-// FILTROS GUARDADOS
-// ==========================================================
-
-function cargarFiltrosGuardados() {
-  const almacenado = localStorage.getItem('filtrosGuardados');
-  if (almacenado) {
-    filtrosGuardados = JSON.parse(almacenado);
-  }
-  renderizarFiltrosGuardados();
-}
-
-function guardarFiltroActual() {
-  const fechaInicio = document.getElementById('filtroFechaInicio').value;
-  const fechaFin = document.getElementById('filtroFechaFin').value;
-  const instalacion = document.getElementById('filtroInstalacion').value;
-  const estado = document.getElementById('filtroEstado').value;
-  const busqueda = document.getElementById('filtroBusqueda').value;
-
-  if (!fechaInicio && !fechaFin && !instalacion && !estado && !busqueda) {
-    mostrarToast('No hay filtros para guardar');
-    return;
-  }
-
-  const nombreFiltro = prompt('Nombre para esta búsqueda:');
-  if (!nombreFiltro) return;
-
-  const nuevoFiltro = {
-    id: Date.now(),
-    nombre: nombreFiltro,
-    fechaInicio,
-    fechaFin,
-    instalacion,
-    estado,
-    busqueda
-  };
-
-  filtrosGuardados.push(nuevoFiltro);
-  localStorage.setItem('filtrosGuardados', JSON.stringify(filtrosGuardados));
-  renderizarFiltrosGuardados();
-  mostrarToast('Búsqueda guardada exitosamente');
-}
-
-function aplicarFiltroGuardado(id) {
-  const filtro = filtrosGuardados.find(f => f.id === id);
-  if (!filtro) return;
-
-  document.getElementById('filtroFechaInicio').value = filtro.fechaInicio;
-  document.getElementById('filtroFechaFin').value = filtro.fechaFin;
-  document.getElementById('filtroInstalacion').value = filtro.instalacion;
-  document.getElementById('filtroEstado').value = filtro.estado;
-  document.getElementById('filtroBusqueda').value = filtro.busqueda;
-
-  aplicarFiltros();
-  mostrarToast(`Búsqueda "${filtro.nombre}" aplicada`);
-}
-
-function eliminarFiltroGuardado(id) {
-  filtrosGuardados = filtrosGuardados.filter(f => f.id !== id);
-  localStorage.setItem('filtrosGuardados', JSON.stringify(filtrosGuardados));
-  renderizarFiltrosGuardados();
-  mostrarToast('Búsqueda eliminada');
-}
-
-function renderizarFiltrosGuardados() {
-  const contenedor = document.getElementById('contenedorFiltrosGuardados');
-  if (!contenedor) return;
-
-  if (filtrosGuardados.length === 0) {
-    contenedor.innerHTML = '<p class="sin-filtros-guardados">No hay búsquedas guardadas</p>';
-    return;
-  }
-
-  let html = '';
-  filtrosGuardados.forEach(filtro => {
-    html += `
-      <div class="tag-filtro-guardado" onclick="window.aplicarFiltroGuardado(${filtro.id})">
-        <span>${filtro.nombre}</span>
-        <button class="btn-eliminar-filtro" onclick="event.stopPropagation(); window.eliminarFiltroGuardado(${filtro.id})">✕</button>
-      </div>
-    `;
-  });
-
-  contenedor.innerHTML = html;
-}
-
-// ==========================================================
-// FILTRO CRÍTICO
-// ==========================================================
-
-function actualizarFiltrosCriticos() {
-  filtrosCriticos = [];
-
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-  const manana = new Date(hoy);
-  manana.setDate(manana.getDate() + 1);
-
-  reservasData.forEach(r => {
-    const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
-
-    if (r.estado === 'pendiente' && fechaReserva < manana) {
-      if (!filtrosCriticos.some(f => f.id === r.id)) {
-        filtrosCriticos.push(r);
-      }
-    }
-
-    if (r.estado === 'reservado' && fechaReserva.getTime() === hoy.getTime() && !r.contactoNotificado) {
-      if (!filtrosCriticos.some(f => f.id === r.id)) {
-        filtrosCriticos.push(r);
-      }
-    }
-  });
-
-  const badge = document.getElementById('badgeCritico');
-  if (badge) {
-    badge.textContent = filtrosCriticos.length;
-    if (filtrosCriticos.length > 0) {
-      badge.classList.add('activo');
-    } else {
-      badge.classList.remove('activo');
-    }
-  }
-}
-
-function mostrarFiltrosCriticos() {
-  document.getElementById('filtroEstado').value = 'pendiente';
-  aplicarFiltros();
-
-  const seccionReservas = document.querySelector('.seccion-reservas-admin');
-  if (seccionReservas) {
-    seccionReservas.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  mostrarToast(`${filtrosCriticos.length} elemento(s) necesitan atención`);
 }
 
 // ==========================================================
