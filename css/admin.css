@@ -4143,50 +4143,54 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 0;
 }
 
 .controles-vista-principal {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   background: var(--blanco);
-  padding: 12px;
-  border-radius: 12px;
+  padding: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gris-medio);
 }
 
 .boton-selector-vista {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
+  justify-content: center;
+  padding: 10px 12px;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 8px;
   color: #666;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
+  min-width: 44px;
 }
 
 .boton-selector-vista svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   stroke-width: 2;
 }
 
 .boton-selector-vista:hover {
   background: var(--gris-claro);
   color: var(--azul-principal);
+  border-color: var(--azul-suave);
 }
 
 .boton-selector-vista.activo {
   background: var(--azul-principal);
   color: var(--blanco);
   border-color: var(--azul-principal);
+  box-shadow: 0 2px 8px rgba(0, 82, 180, 0.25);
 }
 
 /* ==========================================================
@@ -4305,6 +4309,58 @@ body {
 
 .seccion-calendario.oculto {
   display: none;
+}
+
+.cabecera-calendario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--gris-medio);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cabecera-calendario h2 {
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filtro-calendario-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 250px;
+}
+
+.filtro-calendario-item label {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.filtro-calendario-item select {
+  padding: 8px 12px;
+  border: 1px solid var(--gris-medio);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtro-calendario-item select:hover {
+  border-color: var(--azul-suave);
+}
+
+.filtro-calendario-item select:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
 }
 
 .contenedor-calendario-principal {
@@ -4591,27 +4647,50 @@ body {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
-  .grid-estadisticas-instalaciones {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
 }
 
 @media (max-width: 768px) {
-  .boton-selector-vista span {
-    display: none;
+  .seccion-selector-vista-principal {
+    margin-bottom: 16px;
   }
 
   .controles-vista-principal {
-    gap: 8px;
+    gap: 6px;
+    padding: 6px;
   }
 
   .boton-selector-vista {
     padding: 8px 10px;
+    min-width: 40px;
+  }
+
+  .boton-selector-vista svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cabecera-calendario {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .cabecera-calendario h2 {
+    min-width: auto;
+  }
+
+  .filtro-calendario-item {
+    width: 100%;
+    min-width: auto;
   }
 
   .seccion-calendario {
     padding: 16px;
+  }
+
+  .contenedor-calendario-principal {
+    gap: 16px;
   }
 
   .tabla-reservas-mejorada {
@@ -4623,11 +4702,67 @@ body {
     padding: 10px 8px;
   }
 
-  .grid-estadisticas-instalaciones {
-    grid-template-columns: repeat(2, 1fr);
+  .lista-reservas-del-dia {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seccion-selector-vista-principal {
+    margin-bottom: 12px;
+  }
+
+  .controles-vista-principal {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .boton-selector-vista {
+    padding: 8px;
+    min-width: 36px;
+  }
+
+  .boton-selector-vista svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .seccion-calendario {
+    padding: 12px;
+  }
+
+  .cabecera-calendario {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .filtro-calendario-item {
+    gap: 6px;
+  }
+
+  .filtro-calendario-item label {
+    font-size: 0.85rem;
+  }
+
+  .filtro-calendario-item select {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .tabla-reservas-mejorada {
+    font-size: 0.75rem;
+  }
+
+  .tabla-admin thead th,
+  .tabla-admin tbody td {
+    padding: 8px 6px;
   }
 
   .lista-reservas-del-dia {
-    max-height: 300px;
+    max-height: 200px;
+  }
+
+  .contenedor-calendario-principal {
+    gap: 12px;
   }
 }

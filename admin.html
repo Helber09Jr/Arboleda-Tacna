@@ -222,14 +222,6 @@
         </div>
       </section>
 
-      <!-- Estadísticas por Instalación -->
-      <section class="seccion-estadisticas-instalaciones">
-        <h3 class="titulo-estadisticas-inst">Ocupación por Instalación</h3>
-        <div id="contenedorEstadisticasInst" class="grid-estadisticas-instalaciones">
-          <!-- Se genera dinámicamente -->
-        </div>
-      </section>
-
       <!-- Botón Reserva Manual -->
       <section class="seccion-acciones-rapidas">
         <button id="btnReservaManual" class="boton-reserva-manual">
@@ -244,16 +236,15 @@
       <!-- Botones de vista: Calendario, Tabla, Tarjetas -->
       <section class="seccion-selector-vista-principal">
         <div class="controles-vista-principal">
-          <button id="btnVistaCalendario" class="boton-selector-vista" title="Vista Calendario">
+          <button id="btnVistaCalendario" class="boton-selector-vista" title="Ver calendario">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            Calendario
           </button>
-          <button id="btnVistaTabla2" class="boton-selector-vista" title="Vista Tabla">
+          <button id="btnVistaTabla2" class="boton-selector-vista" title="Ver historial">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="3" x2="21" y2="3"></line>
               <line x1="3" y1="9" x2="21" y2="9"></line>
@@ -261,16 +252,12 @@
               <line x1="3" y1="21" x2="21" y2="21"></line>
               <line x1="10" y1="3" x2="10" y2="21"></line>
             </svg>
-            Tabla
           </button>
-          <button id="btnVistaTarjetas2" class="boton-selector-vista activo" title="Vista Tarjetas">
+          <button id="btnVistaTarjetas2" class="boton-selector-vista activo" title="Ver próximas">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
+              <path d="M6 4h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <line x1="6" y1="9" x2="18" y2="9"></line>
             </svg>
-            Tarjetas
           </button>
         </div>
       </section>
@@ -320,16 +307,6 @@
             <label for="filtroBusqueda">Buscar</label>
             <input type="text" id="filtroBusqueda" placeholder="Nombre, teléfono...">
           </div>
-          <div class="filtro-item">
-            <label for="filtroInstalacionCalendario">Filtrar por Instalación</label>
-            <select id="filtroInstalacionCalendario">
-              <option value="">Todas las instalaciones</option>
-              <option value="parrillas">Parrillas</option>
-              <option value="tenis">Tenis</option>
-              <option value="fronton">Frontón</option>
-              <option value="mesas">Mesas</option>
-            </select>
-          </div>
           <div class="filtros-acciones">
             <button id="btnLimpiarFiltros" class="boton-limpiar-filtros">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -352,9 +329,21 @@
 
       <!-- Sección Calendario -->
       <section id="seccionCalendario" class="seccion-calendario oculto">
+        <div class="cabecera-calendario">
+          <h2 class="titulo-seccion-admin">Calendario de Reservas</h2>
+          <div class="filtro-calendario-item">
+            <label for="filtroInstalacionCalendario">Filtrar por:</label>
+            <select id="filtroInstalacionCalendario">
+              <option value="">Todas las instalaciones</option>
+              <option value="parrillas">Parrillas</option>
+              <option value="tenis">Tenis</option>
+              <option value="fronton">Frontón</option>
+              <option value="mesas">Mesas</option>
+            </select>
+          </div>
+        </div>
         <div class="contenedor-calendario-principal">
           <div class="calendario-wrapper">
-            <h3 class="titulo-calendario">Calendario de Reservas</h3>
             <div id="calendarioReservas" class="calendario-reservas"></div>
             <div class="leyenda-calendario">
               <div class="item-leyenda">

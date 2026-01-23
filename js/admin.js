@@ -785,9 +785,22 @@ function renderizarReservas() {
 
   if (!contenedor) return;
 
-  contador.textContent = `${reservasFiltradas.length} resultado${reservasFiltradas.length !== 1 ? 's' : ''}`;
+  let reservasAMostrar = reservasFiltradas;
 
-  if (reservasFiltradas.length === 0) {
+  if (vistaActual === 'tarjetas') {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    reservasAMostrar = reservasFiltradas.filter(r => {
+      const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      fechaReserva.setHours(0, 0, 0, 0);
+      return fechaReserva >= hoy;
+    });
+  }
+
+  contador.textContent = `${reservasAMostrar.length} resultado${reservasAMostrar.length !== 1 ? 's' : ''}`;
+
+  if (reservasAMostrar.length === 0) {
     contenedor.innerHTML = '';
     sinResultados.classList.remove('oculto');
     return;
@@ -796,7 +809,7 @@ function renderizarReservas() {
   sinResultados.classList.add('oculto');
 
   // Aplicar ordenamiento
-  const reservasOrdenadas = ordenarReservas(reservasFiltradas);
+  const reservasOrdenadas = ordenarReservas(reservasAMostrar);
 
   // Actualizar clases según la vista actual
   contenedor.className = `lista-reservas-admin vista-${vistaActual}`;
@@ -874,7 +887,6 @@ function renderizarReservas() {
   contenedor.innerHTML = html;
 
   actualizarTablaReservas();
-  actualizarEstadisticasInstalaciones();
 }
 
 function renderizarReservasEnTabla() {
@@ -1113,53 +1125,6 @@ function actualizarDetalleDelDia(fecha) {
 
 // ==========================================================
 // ESTADÍSTICAS POR INSTALACIÓN
-// ==========================================================
-
-function actualizarEstadisticasInstalaciones() {
-  const contenedor = document.getElementById('contenedorEstadisticasInst');
-  if (!contenedor) return;
-
-  const instalaciones = {
-    'parrillas': 'Parrillas',
-    'tenis': 'Tenis',
-    'fronton': 'Frontón',
-    'mesas': 'Mesas'
-  };
-
-  let html = '';
-
-  Object.entries(instalaciones).forEach(([clave, nombre]) => {
-    const reservasInstolacion = reservasData.filter(r => r.instalacion === clave && r.estado === 'reservado');
-    const total = reservasData.filter(r => r.instalacion === clave).length;
-
-    const porcentaje = total > 0 ? Math.round((reservasInstolacion.length / total) * 100) : 0;
-
-    html += `
-      <div class="tarjeta-ocupacion">
-        <div class="nombre-instalacion-est">${nombre}</div>
-        <div class="barra-ocupacion">
-          <div class="barra-ocupacion-visual">
-            <div class="barra-ocupacion-relleno" style="width: ${porcentaje}%"></div>
-          </div>
-          <div class="porcentaje-ocupacion">${porcentaje}%</div>
-        </div>
-        <div class="stats-instalacion">
-          <div class="stat-item">
-            <div class="stat-numero">${reservasInstolacion.length}</div>
-            <div class="stat-label">Reservadas</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-numero">${total - reservasInstolacion.length}</div>
-            <div class="stat-label">Disponibles</div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-
-  contenedor.innerHTML = html;
-}
-
 // ==========================================================
 // MODAL DETALLE
 // ==========================================================
