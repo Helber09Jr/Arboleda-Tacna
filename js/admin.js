@@ -48,6 +48,11 @@ let permisos = [];
 let reservasData = [];
 let reservasFiltradas = [];
 let reservaSeleccionada = null;
+
+let filtrosGuardados = [];
+let filtrosCriticos = [];
+let estadisticasHistorico = {};
+let auditariaReserva = {};
 let unsubscribeReservas = null;
 
 // Variables para gestión de carta
@@ -311,6 +316,10 @@ function inicializarEventos() {
   inicializarReservaManual();
   inicializarTabs();
   inicializarGestionCarta();
+
+  cargarFiltrosGuardados();
+  agregarAccionesRapidas();
+  inicializarNuevasCaracteristicas();
 }
 
 // Función para validar email
@@ -450,11 +459,16 @@ function actualizarEstadisticas() {
   const pendientes = reservasData.filter(r => r.estado === 'pendiente').length;
   const reservados = reservasData.filter(r => r.estado === 'reservado').length;
   const cancelados = reservasData.filter(r => r.estado === 'cancelado').length;
-  
+
   document.getElementById('totalPendientes').textContent = pendientes;
   document.getElementById('totalReservados').textContent = reservados;
   document.getElementById('totalCancelados').textContent = cancelados;
   document.getElementById('totalGeneral').textContent = reservasData.length;
+
+  actualizarResumenHoy();
+  actualizarOcupacionHoy();
+  actualizarFiltrosCriticos();
+  actualizarEstadisticasSemana();
 }
 
 // ==========================================================
@@ -785,9 +799,22 @@ function renderizarReservas() {
 
   if (!contenedor) return;
 
-  contador.textContent = `${reservasFiltradas.length} resultado${reservasFiltradas.length !== 1 ? 's' : ''}`;
+  let reservasAMostrar = reservasFiltradas;
 
-  if (reservasFiltradas.length === 0) {
+  if (vistaActual === 'tarjetas') {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    reservasAMostrar = reservasFiltradas.filter(r => {
+      const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      fechaReserva.setHours(0, 0, 0, 0);
+      return fechaReserva >= hoy;
+    });
+  }
+
+  contador.textContent = `${reservasAMostrar.length} resultado${reservasAMostrar.length !== 1 ? 's' : ''}`;
+
+  if (reservasAMostrar.length === 0) {
     contenedor.innerHTML = '';
     sinResultados.classList.remove('oculto');
     return;
@@ -796,7 +823,7 @@ function renderizarReservas() {
   sinResultados.classList.add('oculto');
 
   // Aplicar ordenamiento
-  const reservasOrdenadas = ordenarReservas(reservasFiltradas);
+  const reservasOrdenadas = ordenarReservas(reservasAMostrar);
 
   // Actualizar clases según la vista actual
   contenedor.className = `lista-reservas-admin vista-${vistaActual}`;
@@ -861,12 +888,33 @@ function renderizarReservas() {
             ${reserva.personas} personas
           </div>
         </div>
-        <button class="boton-ver-detalle" onclick="window.verDetalle('${reserva.id}')">
-          Ver Detalle
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
+        <div class="acciones-tarjeta-reserva">
+          ${estado === 'pendiente' ? `
+            <button class="boton-accion-rapida confirmar" data-id="${reserva.id}" data-accion="confirmar" title="Confirmar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+            <button class="boton-accion-rapida cancelar" data-id="${reserva.id}" data-accion="cancelar" title="Cancelar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          ` : ''}
+          ${telefono && telefono !== 'Sin teléfono' ? `
+            <button class="boton-accion-rapida whatsapp" data-id="${reserva.id}" data-accion="whatsapp" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21.5 2h-19c-1.4 0-2.5 1.1-2.5 2.5v15c0 1.4 1.1 2.5 2.5 2.5h19c1.4 0 2.5-1.1 2.5-2.5v-15c0-1.4-1.1-2.5-2.5-2.5z"></path>
+              </svg>
+            </button>
+          ` : ''}
+          <button class="boton-accion-rapida ver" data-id="${reserva.id}" data-accion="ver" onclick="window.verDetalle('${reserva.id}')" title="Ver Detalles">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
     `;
   });
@@ -874,7 +922,6 @@ function renderizarReservas() {
   contenedor.innerHTML = html;
 
   actualizarTablaReservas();
-  actualizarEstadisticasInstalaciones();
 }
 
 function renderizarReservasEnTabla() {
@@ -1113,53 +1160,6 @@ function actualizarDetalleDelDia(fecha) {
 
 // ==========================================================
 // ESTADÍSTICAS POR INSTALACIÓN
-// ==========================================================
-
-function actualizarEstadisticasInstalaciones() {
-  const contenedor = document.getElementById('contenedorEstadisticasInst');
-  if (!contenedor) return;
-
-  const instalaciones = {
-    'parrillas': 'Parrillas',
-    'tenis': 'Tenis',
-    'fronton': 'Frontón',
-    'mesas': 'Mesas'
-  };
-
-  let html = '';
-
-  Object.entries(instalaciones).forEach(([clave, nombre]) => {
-    const reservasInstolacion = reservasData.filter(r => r.instalacion === clave && r.estado === 'reservado');
-    const total = reservasData.filter(r => r.instalacion === clave).length;
-
-    const porcentaje = total > 0 ? Math.round((reservasInstolacion.length / total) * 100) : 0;
-
-    html += `
-      <div class="tarjeta-ocupacion">
-        <div class="nombre-instalacion-est">${nombre}</div>
-        <div class="barra-ocupacion">
-          <div class="barra-ocupacion-visual">
-            <div class="barra-ocupacion-relleno" style="width: ${porcentaje}%"></div>
-          </div>
-          <div class="porcentaje-ocupacion">${porcentaje}%</div>
-        </div>
-        <div class="stats-instalacion">
-          <div class="stat-item">
-            <div class="stat-numero">${reservasInstolacion.length}</div>
-            <div class="stat-label">Reservadas</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-numero">${total - reservasInstolacion.length}</div>
-            <div class="stat-label">Disponibles</div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-
-  contenedor.innerHTML = html;
-}
-
 // ==========================================================
 // MODAL DETALLE
 // ==========================================================
@@ -1844,16 +1844,608 @@ function escapeHtml(texto) {
 }
 
 // ==========================================================
+// EXPORTACIÓN MEJORADA
+// ==========================================================
+
+function mostrarOpcionesExportacion() {
+  const modal = document.getElementById('modalExportarOpciones');
+  if (modal) {
+    modal.classList.add('activo');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function cerrarOpcionesExportacion() {
+  const modal = document.getElementById('modalExportarOpciones');
+  if (modal) {
+    modal.classList.remove('activo');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function obtenerReservasParaExportar() {
+  const rangoExportacion = document.querySelector('input[name="rangoExportacion"]:checked').value;
+  const estadosSeleccionados = Array.from(document.querySelectorAll('input[name="estadoExportacion"]:checked')).map(e => e.value);
+  const instalacionSeleccionada = document.getElementById('selectInstalacionExportacion').value;
+
+  let reservasExportacion = reservasFiltradas;
+
+  if (estadosSeleccionados.length < 3) {
+    reservasExportacion = reservasExportacion.filter(r => estadosSeleccionados.includes(r.estado));
+  }
+
+  if (instalacionSeleccionada) {
+    reservasExportacion = reservasExportacion.filter(r => r.instalacion === instalacionSeleccionada);
+  }
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  if (rangoExportacion === 'hoy') {
+    const manana = new Date(hoy);
+    manana.setDate(manana.getDate() + 1);
+    reservasExportacion = reservasExportacion.filter(r => {
+      const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fecha >= hoy && fecha < manana;
+    });
+  } else if (rangoExportacion === 'semana') {
+    const inicioSemana = new Date(hoy);
+    const diaSemana = hoy.getDay();
+    inicioSemana.setDate(hoy.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+    const finSemana = new Date(inicioSemana);
+    finSemana.setDate(inicioSemana.getDate() + 7);
+
+    reservasExportacion = reservasExportacion.filter(r => {
+      const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fecha >= inicioSemana && fecha < finSemana;
+    });
+  } else if (rangoExportacion === 'mes') {
+    const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+    const finMes = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1);
+
+    reservasExportacion = reservasExportacion.filter(r => {
+      const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fecha >= inicioMes && fecha < finMes;
+    });
+  }
+
+  return reservasExportacion;
+}
+
+function exportarAExcelMejorado() {
+  const reservasExportacion = obtenerReservasParaExportar();
+  const incluirResumen = document.getElementById('incluirResumenExportacion').checked;
+
+  if (reservasExportacion.length === 0) {
+    mostrarToast('No hay reservas para exportar con los criterios seleccionados');
+    return;
+  }
+
+  mostrarToast('Generando reporte Excel...');
+
+  const hoy = new Date();
+  const fechaReporte = hoy.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  let htmlContent = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+      <meta charset="UTF-8">
+      <style>
+        table { border-collapse: collapse; width: 100%; }
+        th { background-color: #0052B4; color: white; font-weight: bold; padding: 12px 8px; text-align: center; border: 2px solid #003d8a; }
+        td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .estado-pendiente { background-color: #fff3cd; color: #856404; font-weight: bold; text-align: center; }
+        .estado-reservado { background-color: #d4edda; color: #155724; font-weight: bold; text-align: center; }
+        .estado-cancelado { background-color: #f8d7da; color: #721c24; font-weight: bold; text-align: center; }
+        .titulo-reporte { font-size: 18pt; font-weight: bold; color: #0052B4; text-align: center; padding: 20px; background-color: #f8f9fa; }
+        .subtitulo { font-size: 12pt; color: #666; text-align: center; padding-bottom: 15px; }
+      </style>
+    </head>
+    <body>
+      <div class="titulo-reporte">Reporte de Reservas - La Arboleda Club</div>
+      <div class="subtitulo">Generado: ${fechaReporte}</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Instalación</th>
+            <th>Sub-Instalación</th>
+            <th>Socio</th>
+            <th>Teléfono</th>
+            <th>Horario</th>
+            <th>Personas</th>
+            <th>Estado</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  const pendientes = [];
+  const reservados = [];
+  const cancelados = [];
+
+  reservasExportacion.forEach(reserva => {
+    const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+    const fechaFormateada = fecha.toLocaleDateString('es-ES');
+    const instalacion = {
+      'parrillas': 'Parrillas',
+      'tenis': 'Tenis',
+      'fronton': 'Frontón',
+      'mesas': 'Mesas'
+    }[reserva.instalacion] || reserva.instalacion;
+    const subInst = formatearNombreInstalacion(reserva.subInstalacion);
+    const socio = reserva.socio?.nombre || 'Sin nombre';
+    const tel = reserva.socio?.telefono || '-';
+    const personas = reserva.personas || '-';
+    const observ = reserva.observaciones || '-';
+
+    if (reserva.estado === 'pendiente') pendientes.push(reserva);
+    else if (reserva.estado === 'reservado') reservados.push(reserva);
+    else if (reserva.estado === 'cancelado') cancelados.push(reserva);
+
+    htmlContent += `
+      <tr>
+        <td>${fechaFormateada}</td>
+        <td>${instalacion}</td>
+        <td>${subInst}</td>
+        <td>${socio}</td>
+        <td>${tel}</td>
+        <td>${reserva.horario}</td>
+        <td>${personas}</td>
+        <td class="estado-${reserva.estado}">${reserva.estado.toUpperCase()}</td>
+        <td>${observ}</td>
+      </tr>
+    `;
+  });
+
+  if (incluirResumen) {
+    htmlContent += `
+      </tbody>
+      </table>
+      <br><br>
+      <div class="titulo-reporte" style="font-size: 14pt;">RESUMEN ESTADÍSTICO</div>
+      <table>
+        <tr>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Porcentaje</th>
+        </tr>
+        <tr class="estado-pendiente">
+          <td>Pendientes</td>
+          <td>${pendientes.length}</td>
+          <td>${reservasExportacion.length > 0 ? Math.round((pendientes.length / reservasExportacion.length) * 100) : 0}%</td>
+        </tr>
+        <tr class="estado-reservado">
+          <td>Confirmadas</td>
+          <td>${reservados.length}</td>
+          <td>${reservasExportacion.length > 0 ? Math.round((reservados.length / reservasExportacion.length) * 100) : 0}%</td>
+        </tr>
+        <tr class="estado-cancelado">
+          <td>Canceladas</td>
+          <td>${cancelados.length}</td>
+          <td>${reservasExportacion.length > 0 ? Math.round((cancelados.length / reservasExportacion.length) * 100) : 0}%</td>
+        </tr>
+        <tr style="background-color: #e8e5e0;">
+          <th>TOTAL</th>
+          <th>${reservasExportacion.length}</th>
+          <th>100%</th>
+        </tr>
+      </table>
+    `;
+  } else {
+    htmlContent += `
+      </tbody>
+      </table>
+    `;
+  }
+
+  htmlContent += `
+    </body>
+    </html>
+  `;
+
+  const blob = new Blob(['\ufeff', htmlContent], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  const nombreArchivo = `Reservas_${new Date().getTime()}.xls`;
+  link.setAttribute('href', url);
+  link.setAttribute('download', nombreArchivo);
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  cerrarOpcionesExportacion();
+  mostrarToast('Reporte exportado exitosamente');
+}
+
+// ==========================================================
 // EXPORTAR FUNCIÓN GLOBAL
 // ==========================================================
 
-window.exportarAExcel = exportarAExcel;
+window.exportarAExcel = mostrarOpcionesExportacion;
+window.guardarFiltroActual = guardarFiltroActual;
+window.aplicarFiltroGuardado = aplicarFiltroGuardado;
+window.eliminarFiltroGuardado = eliminarFiltroGuardado;
+window.mostrarFiltrosCriticos = mostrarFiltrosCriticos;
+
+function inicializarNuevasCaracteristicas() {
+  const btnAgregarFiltro = document.getElementById('btnAgregarFiltro');
+  if (btnAgregarFiltro) {
+    btnAgregarFiltro.onclick = guardarFiltroActual;
+  }
+
+  const btnFiltrarCritico = document.getElementById('btnFiltrarCritico');
+  if (btnFiltrarCritico) {
+    btnFiltrarCritico.onclick = mostrarFiltrosCriticos;
+  }
+
+  const btnColapsarHoy = document.getElementById('btnColapsarHoy');
+  if (btnColapsarHoy) {
+    btnColapsarHoy.onclick = () => {
+      const contenido = document.getElementById('contenidoResumenHoy');
+      btnColapsarHoy.classList.toggle('colapsado');
+      contenido.classList.toggle('colapsado');
+    };
+  }
+
+  const btnCerrarExportarOpciones = document.getElementById('btnCerrarExportarOpciones');
+  if (btnCerrarExportarOpciones) {
+    btnCerrarExportarOpciones.onclick = cerrarOpcionesExportacion;
+  }
+
+  const btnCancelarExportacion = document.getElementById('btnCancelarExportacion');
+  if (btnCancelarExportacion) {
+    btnCancelarExportacion.onclick = cerrarOpcionesExportacion;
+  }
+
+  const btnConfirmarExportacion = document.getElementById('btnConfirmarExportacion');
+  if (btnConfirmarExportacion) {
+    btnConfirmarExportacion.onclick = exportarAExcelMejorado;
+  }
+
+  const modalExportarOpciones = document.getElementById('modalExportarOpciones');
+  if (modalExportarOpciones) {
+    const overlay = modalExportarOpciones.querySelector('.modal-overlay-admin');
+    if (overlay) {
+      overlay.onclick = cerrarOpcionesExportacion;
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const btnExportar = document.getElementById('btnExportarExcel');
   if (btnExportar) {
     btnExportar.onclick = exportarAExcel;
   }
 });
+
+// ==========================================================
+// RESUMEN DE HOY
+// ==========================================================
+
+function actualizarResumenHoy() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const manana = new Date(hoy);
+  manana.setDate(manana.getDate() + 1);
+
+  const reservasHoy = reservasData.filter(r => {
+    const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+    fechaReserva.setHours(0, 0, 0, 0);
+    return fechaReserva.getTime() === hoy.getTime();
+  });
+
+  const pendientesHoy = reservasHoy.filter(r => r.estado === 'pendiente').length;
+  const reservadosHoy = reservasHoy.filter(r => r.estado === 'reservado').length;
+  const canceladosHoy = reservasHoy.filter(r => r.estado === 'cancelado').length;
+  const ocupacionHoy = reservasHoy.length > 0 ? Math.round((reservadosHoy / reservasHoy.length) * 100) : 0;
+
+  document.getElementById('totalHoyPendiente').textContent = pendientesHoy;
+  document.getElementById('totalHoyReservado').textContent = reservadosHoy;
+  document.getElementById('totalHoyCancelado').textContent = canceladosHoy;
+  document.getElementById('porcentajeOcupacionHoy').textContent = ocupacionHoy + '%';
+
+  const proximasReservas = reservasData
+    .filter(r => {
+      const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      return fechaReserva >= hoy && r.estado === 'pendiente';
+    })
+    .sort((a, b) => {
+      const fechaA = a.fecha.toDate ? a.fecha.toDate() : new Date(a.fecha);
+      const fechaB = b.fecha.toDate ? b.fecha.toDate() : new Date(b.fecha);
+      return fechaA - fechaB;
+    })
+    .slice(0, 3);
+
+  renderizarProximasReservas(proximasReservas);
+}
+
+function renderizarProximasReservas(proximas) {
+  const contenedor = document.getElementById('listaProximasHoy');
+  if (!contenedor) return;
+
+  if (proximas.length === 0) {
+    contenedor.innerHTML = '<p class="sin-proximas">No hay reservas próximas pendientes</p>';
+    return;
+  }
+
+  let html = '';
+  proximas.forEach(reserva => {
+    const fecha = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+    const horaTexto = reserva.horario.split('-')[0].trim();
+    const instalacion = formatearNombreInstalacion(reserva.subInstalacion);
+    const socio = reserva.socio?.nombre || 'Sin nombre';
+
+    html += `
+      <div class="item-proxima-hoy">
+        <div class="info-proxima">
+          <div class="nombre-proxima">${instalacion}</div>
+          <div class="hora-proxima">${horaTexto} - ${socio}</div>
+        </div>
+        <button class="boton-proxima" onclick="window.verDetalle('${reserva.id}')">Ver</button>
+      </div>
+    `;
+  });
+
+  contenedor.innerHTML = html;
+}
+
+// ==========================================================
+// OCUPACIÓN HOY
+// ==========================================================
+
+function actualizarOcupacionHoy() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const instalaciones = ['parrillas', 'tenis', 'fronton', 'mesas'];
+  const contenedor = document.getElementById('dashboardOcupacionHoy');
+  if (!contenedor) return;
+
+  let html = '';
+
+  instalaciones.forEach(instalacion => {
+    const reservasInst = reservasData.filter(r => {
+      const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+      fechaReserva.setHours(0, 0, 0, 0);
+      return r.instalacion === instalacion && fechaReserva.getTime() === hoy.getTime();
+    });
+
+    const reservados = reservasInst.filter(r => r.estado === 'reservado').length;
+    const total = reservasInst.length;
+    const disponibles = total - reservados;
+    const porcentaje = total > 0 ? Math.round((reservados / total) * 100) : 0;
+
+    let estadoColor = 'color-disponible';
+    if (porcentaje > 66) estadoColor = 'color-lleno';
+    else if (porcentaje > 33) estadoColor = 'color-algunas';
+
+    const nombreInst = {
+      'parrillas': 'Parrillas',
+      'tenis': 'Tenis',
+      'fronton': 'Frontón',
+      'mesas': 'Mesas'
+    }[instalacion];
+
+    html += `
+      <div class="card-ocupacion-hoy">
+        <div class="nombre-ocupacion">${nombreInst}</div>
+        <div class="barra-ocupacion-card">
+          <div class="barra-ocupacion-visual-card">
+            <div class="barra-ocupacion-relleno-card" style="width: ${porcentaje}%"></div>
+          </div>
+        </div>
+        <div class="estado-ocupacion-card">
+          <span class="${estadoColor}">${reservados} Reservadas</span>
+          <span>${disponibles} Disponibles</span>
+        </div>
+      </div>
+    `;
+  });
+
+  contenedor.innerHTML = html;
+}
+
+// ==========================================================
+// ESTADÍSTICAS DE LA SEMANA
+// ==========================================================
+
+function actualizarEstadisticasSemana() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const inicioSemana = new Date(hoy);
+  const diaSemana = hoy.getDay();
+  inicioSemana.setDate(hoy.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+
+  const finSemana = new Date(inicioSemana);
+  finSemana.setDate(inicioSemana.getDate() + 7);
+
+  const reservasSemana = reservasData.filter(r => {
+    const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+    return fechaReserva >= inicioSemana && fechaReserva < finSemana;
+  });
+
+  const totalReservasSemana = reservasSemana.length;
+  const confirmadosSemana = reservasSemana.filter(r => r.estado === 'reservado').length;
+  const pendientesSemana = reservasSemana.filter(r => r.estado === 'pendiente').length;
+  const porcentajeConfirmacion = totalReservasSemana > 0 ? Math.round((confirmadosSemana / totalReservasSemana) * 100) : 0;
+
+  document.getElementById('totalReservasSemana').textContent = totalReservasSemana;
+  document.getElementById('totalConfirmadosSemana').textContent = confirmadosSemana;
+  document.getElementById('totalPendientesSemana').textContent = pendientesSemana;
+  document.getElementById('porcentajeSemana').textContent = porcentajeConfirmacion + '%';
+}
+
+// ==========================================================
+// FILTROS GUARDADOS
+// ==========================================================
+
+function cargarFiltrosGuardados() {
+  const almacenado = localStorage.getItem('filtrosGuardados');
+  if (almacenado) {
+    filtrosGuardados = JSON.parse(almacenado);
+  }
+  renderizarFiltrosGuardados();
+}
+
+function guardarFiltroActual() {
+  const fechaInicio = document.getElementById('filtroFechaInicio').value;
+  const fechaFin = document.getElementById('filtroFechaFin').value;
+  const instalacion = document.getElementById('filtroInstalacion').value;
+  const estado = document.getElementById('filtroEstado').value;
+  const busqueda = document.getElementById('filtroBusqueda').value;
+
+  if (!fechaInicio && !fechaFin && !instalacion && !estado && !busqueda) {
+    mostrarToast('No hay filtros para guardar');
+    return;
+  }
+
+  const nombreFiltro = prompt('Nombre para esta búsqueda:');
+  if (!nombreFiltro) return;
+
+  const nuevoFiltro = {
+    id: Date.now(),
+    nombre: nombreFiltro,
+    fechaInicio,
+    fechaFin,
+    instalacion,
+    estado,
+    busqueda
+  };
+
+  filtrosGuardados.push(nuevoFiltro);
+  localStorage.setItem('filtrosGuardados', JSON.stringify(filtrosGuardados));
+  renderizarFiltrosGuardados();
+  mostrarToast('Búsqueda guardada exitosamente');
+}
+
+function aplicarFiltroGuardado(id) {
+  const filtro = filtrosGuardados.find(f => f.id === id);
+  if (!filtro) return;
+
+  document.getElementById('filtroFechaInicio').value = filtro.fechaInicio;
+  document.getElementById('filtroFechaFin').value = filtro.fechaFin;
+  document.getElementById('filtroInstalacion').value = filtro.instalacion;
+  document.getElementById('filtroEstado').value = filtro.estado;
+  document.getElementById('filtroBusqueda').value = filtro.busqueda;
+
+  aplicarFiltros();
+  mostrarToast(`Búsqueda "${filtro.nombre}" aplicada`);
+}
+
+function eliminarFiltroGuardado(id) {
+  filtrosGuardados = filtrosGuardados.filter(f => f.id !== id);
+  localStorage.setItem('filtrosGuardados', JSON.stringify(filtrosGuardados));
+  renderizarFiltrosGuardados();
+  mostrarToast('Búsqueda eliminada');
+}
+
+function renderizarFiltrosGuardados() {
+  const contenedor = document.getElementById('contenedorFiltrosGuardados');
+  if (!contenedor) return;
+
+  if (filtrosGuardados.length === 0) {
+    contenedor.innerHTML = '<p class="sin-filtros-guardados">No hay búsquedas guardadas</p>';
+    return;
+  }
+
+  let html = '';
+  filtrosGuardados.forEach(filtro => {
+    html += `
+      <div class="tag-filtro-guardado" onclick="window.aplicarFiltroGuardado(${filtro.id})">
+        <span>${filtro.nombre}</span>
+        <button class="btn-eliminar-filtro" onclick="event.stopPropagation(); window.eliminarFiltroGuardado(${filtro.id})">✕</button>
+      </div>
+    `;
+  });
+
+  contenedor.innerHTML = html;
+}
+
+// ==========================================================
+// FILTRO CRÍTICO
+// ==========================================================
+
+function actualizarFiltrosCriticos() {
+  filtrosCriticos = [];
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const manana = new Date(hoy);
+  manana.setDate(manana.getDate() + 1);
+
+  reservasData.forEach(r => {
+    const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+
+    if (r.estado === 'pendiente' && fechaReserva < manana) {
+      if (!filtrosCriticos.some(f => f.id === r.id)) {
+        filtrosCriticos.push(r);
+      }
+    }
+
+    if (r.estado === 'reservado' && fechaReserva.getTime() === hoy.getTime() && !r.contactoNotificado) {
+      if (!filtrosCriticos.some(f => f.id === r.id)) {
+        filtrosCriticos.push(r);
+      }
+    }
+  });
+
+  const badge = document.getElementById('badgeCritico');
+  if (badge) {
+    badge.textContent = filtrosCriticos.length;
+    if (filtrosCriticos.length > 0) {
+      badge.classList.add('activo');
+    } else {
+      badge.classList.remove('activo');
+    }
+  }
+}
+
+function mostrarFiltrosCriticos() {
+  document.getElementById('filtroEstado').value = 'pendiente';
+  aplicarFiltros();
+
+  const seccionReservas = document.querySelector('.seccion-reservas-admin');
+  if (seccionReservas) {
+    seccionReservas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  mostrarToast(`${filtrosCriticos.length} elemento(s) necesitan atención`);
+}
+
+// ==========================================================
+// ACCIONES RÁPIDAS EN TARJETAS
+// ==========================================================
+
+function agregarAccionesRapidas() {
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('boton-accion-rapida')) {
+      const reservaId = e.target.getAttribute('data-id');
+      const accion = e.target.getAttribute('data-accion');
+
+      const reserva = reservasData.find(r => r.id === reservaId);
+      if (!reserva) return;
+
+      reservaSeleccionada = reserva;
+
+      if (accion === 'confirmar') {
+        mostrarConfirmacionEstado('reservado');
+      } else if (accion === 'cancelar') {
+        mostrarConfirmacionEstado('cancelado');
+      } else if (accion === 'whatsapp') {
+        enviarNotificacionWhatsApp(reserva);
+      }
+    }
+  });
+}
 
 // ==========================================================
 // FUNCIONES AUXILIARES
