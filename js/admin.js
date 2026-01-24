@@ -996,9 +996,6 @@ function cambiarVistaMain(vista) {
     btn.classList.remove('activo');
   });
 
-  // Limpiar filtros al cambiar de vista
-  limpiarFiltrosReservas();
-
   if (vista === 'calendario') {
     vistaActual = 'calendario';
     if (seccionCalendario) seccionCalendario.classList.remove('oculto');
@@ -1022,27 +1019,6 @@ function cambiarVistaMain(vista) {
     if (btnTarjetas) btnTarjetas.classList.add('activo');
     renderizarReservas();
   }
-}
-
-/**
- * Limpia todos los filtros de reservas para que cada vista sea independiente
- */
-function limpiarFiltrosReservas() {
-  // Limpiar filtros de entrada
-  const filtroEstado = document.getElementById('filtroEstado');
-  const filtroInstalacion = document.getElementById('filtroInstalacion');
-  const filtroBusqueda = document.getElementById('filtroBusqueda');
-
-  if (filtroEstado) filtroEstado.value = '';
-  if (filtroInstalacion) filtroInstalacion.value = '';
-  if (filtroBusqueda) filtroBusqueda.value = '';
-
-  // Resetear variables de filtrado
-  estadoFiltroActual = '';
-  instalacionFiltroActual = '';
-
-  // Aplicar nueva visualización
-  aplicarFiltros();
 }
 
 // ==========================================================
