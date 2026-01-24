@@ -964,6 +964,10 @@ body {
   overflow: hidden;
 }
 
+.seccion-filtros.oculto {
+  display: none;
+}
+
 .boton-toggle-filtros {
   width: 100%;
   padding: 16px 20px;

@@ -985,6 +985,7 @@ function inicializarSelectorVista() {
 function cambiarVistaMain(vista) {
   const seccionCalendario = document.getElementById('seccionCalendario');
   const seccionReservas = document.getElementById('seccionReservasAdmin');
+  const seccionFiltros = document.querySelector('.seccion-filtros');
   const listaReservas = document.getElementById('listaReservas');
   const listaReservasTabla = document.getElementById('listaReservasTabla');
 
@@ -1000,12 +1001,14 @@ function cambiarVistaMain(vista) {
     vistaActual = 'calendario';
     if (seccionCalendario) seccionCalendario.classList.remove('oculto');
     if (seccionReservas) seccionReservas.classList.add('oculto');
+    if (seccionFiltros) seccionFiltros.classList.add('oculto');
     if (btnCalendario) btnCalendario.classList.add('activo');
     inicializarCalendario();
   } else if (vista === 'tabla') {
     vistaActual = 'tabla';
     if (seccionCalendario) seccionCalendario.classList.add('oculto');
     if (seccionReservas) seccionReservas.classList.remove('oculto');
+    if (seccionFiltros) seccionFiltros.classList.remove('oculto');
     if (listaReservas) listaReservas.classList.add('oculto');
     if (listaReservasTabla) listaReservasTabla.classList.remove('oculto');
     if (btnTabla) btnTabla.classList.add('activo');
@@ -1014,6 +1017,7 @@ function cambiarVistaMain(vista) {
     vistaActual = 'tarjetas';
     if (seccionCalendario) seccionCalendario.classList.add('oculto');
     if (seccionReservas) seccionReservas.classList.remove('oculto');
+    if (seccionFiltros) seccionFiltros.classList.remove('oculto');
     if (listaReservas) listaReservas.classList.remove('oculto');
     if (listaReservasTabla) listaReservasTabla.classList.add('oculto');
     if (btnTarjetas) btnTarjetas.classList.add('activo');
@@ -1865,20 +1869,41 @@ function obtenerReservasParaExportar() {
   const rangoExportacion = document.querySelector('input[name="rangoExportacion"]:checked').value;
   const estadosSeleccionados = Array.from(document.querySelectorAll('input[name="estadoExportacion"]:checked')).map(e => e.value);
   const instalacionSeleccionada = document.getElementById('selectInstalacionExportacion').value;
+  const buscarPorIdSocio = document.getElementById('buscarPorIdSocio').value.trim();
+  const buscarPorDNI = document.getElementById('buscarPorDNI').value.trim();
+  const fechaDesdeExportacion = document.getElementById('filtroFechaDesdeExportacion').value;
+  const fechaHastaExportacion = document.getElementById('filtroFechaHastaExportacion').value;
 
   let reservasExportacion = reservasFiltradas;
 
+  // Filtrar por estados
   if (estadosSeleccionados.length < 3) {
     reservasExportacion = reservasExportacion.filter(r => estadosSeleccionados.includes(r.estado));
   }
 
+  // Filtrar por instalación
   if (instalacionSeleccionada) {
     reservasExportacion = reservasExportacion.filter(r => r.instalacion === instalacionSeleccionada);
+  }
+
+  // Filtrar por ID de socio (número)
+  if (buscarPorIdSocio) {
+    reservasExportacion = reservasExportacion.filter(r =>
+      r.socio?.numero && r.socio.numero.toString().includes(buscarPorIdSocio)
+    );
+  }
+
+  // Filtrar por DNI
+  if (buscarPorDNI) {
+    reservasExportacion = reservasExportacion.filter(r =>
+      r.socio?.dni && r.socio.dni.toString().includes(buscarPorDNI)
+    );
   }
 
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
 
+  // Filtros de rango de fechas predefinidos
   if (rangoExportacion === 'hoy') {
     const manana = new Date(hoy);
     manana.setDate(manana.getDate() + 1);
@@ -1905,6 +1930,29 @@ function obtenerReservasParaExportar() {
       const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
       return fecha >= inicioMes && fecha < finMes;
     });
+  } else if (rangoExportacion === 'personalizado') {
+    // Filtrar por rango personalizado si se proporcionan fechas
+    if (fechaDesdeExportacion || fechaHastaExportacion) {
+      reservasExportacion = reservasExportacion.filter(r => {
+        const fecha = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
+
+        if (fechaDesdeExportacion) {
+          const [dia, mes, anio] = fechaDesdeExportacion.split('/');
+          const fechaDesde = new Date(anio, mes - 1, dia);
+          fechaDesde.setHours(0, 0, 0, 0);
+          if (fecha < fechaDesde) return false;
+        }
+
+        if (fechaHastaExportacion) {
+          const [dia, mes, anio] = fechaHastaExportacion.split('/');
+          const fechaHasta = new Date(anio, mes - 1, dia);
+          fechaHasta.setHours(23, 59, 59, 999);
+          if (fecha > fechaHasta) return false;
+        }
+
+        return true;
+      });
+    }
   }
 
   return reservasExportacion;
@@ -2092,6 +2140,24 @@ function inicializarNuevasCaracteristicas() {
   const btnConfirmarExportacion = document.getElementById('btnConfirmarExportacion');
   if (btnConfirmarExportacion) {
     btnConfirmarExportacion.onclick = exportarAExcelMejorado;
+  }
+
+  // Inicializar Flatpickr para fechas de exportación personalizada
+  const filtroFechaDesdeExportacion = document.getElementById('filtroFechaDesdeExportacion');
+  const filtroFechaHastaExportacion = document.getElementById('filtroFechaHastaExportacion');
+
+  if (filtroFechaDesdeExportacion && typeof flatpickr !== 'undefined') {
+    flatpickr(filtroFechaDesdeExportacion, {
+      dateFormat: 'd/m/Y',
+      locale: 'es'
+    });
+  }
+
+  if (filtroFechaHastaExportacion && typeof flatpickr !== 'undefined') {
+    flatpickr(filtroFechaHastaExportacion, {
+      dateFormat: 'd/m/Y',
+      locale: 'es'
+    });
   }
 
   const modalExportarOpciones = document.getElementById('modalExportarOpciones');
