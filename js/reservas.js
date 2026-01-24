@@ -972,7 +972,29 @@ function inicializarFormularios() {
       if (contador) contador.textContent = textareaReserva.value.length;
     };
   }
-  
+
+  // Validación de personas en tiempo real
+  const campoPersonas = document.getElementById('reservaPersonas');
+  if (campoPersonas) {
+    campoPersonas.oninput = () => {
+      const capacidad = obtenerCapacidadSubInstalacion();
+      const valor = parseInt(campoPersonas.value);
+      const aviso = document.getElementById('avisoCapacidad');
+
+      if (valor > capacidad) {
+        if (aviso) {
+          aviso.textContent = `⚠️ Excede capacidad máxima (${capacidad})`;
+          aviso.style.color = 'var(--rojo-error)';
+        }
+      } else {
+        if (aviso) {
+          aviso.textContent = `Máximo ${capacidad} personas`;
+          aviso.style.color = '';
+        }
+      }
+    };
+  }
+
   // Formulario de reserva principal
   const formReserva = document.getElementById('formularioReserva');
   if (formReserva) {
