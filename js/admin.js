@@ -2337,6 +2337,42 @@ function inicializarGestionCarta() {
   if (filtroBusqueda) filtroBusqueda.oninput = aplicarFiltrosCarta;
   if (filtroEtiqueta) filtroEtiqueta.onchange = aplicarFiltrosCarta;
 
+  // Filtros rápidos de iconos
+  const btnDisponibles = document.getElementById('filtrarDisponibles');
+  const btnAgotados = document.getElementById('filtrarAgotados');
+  const btnPromociones = document.getElementById('filtrarPromociones');
+  const btnTodosPlatosCarta = document.getElementById('verTodosPlatosCarta');
+
+  if (btnDisponibles) {
+    btnDisponibles.onclick = () => {
+      if (filtroEtiqueta) filtroEtiqueta.value = 'disponible';
+      aplicarFiltrosCarta();
+    };
+  }
+
+  if (btnAgotados) {
+    btnAgotados.onclick = () => {
+      if (filtroEtiqueta) filtroEtiqueta.value = 'agotado';
+      aplicarFiltrosCarta();
+    };
+  }
+
+  if (btnPromociones) {
+    btnPromociones.onclick = () => {
+      if (filtroEtiqueta) filtroEtiqueta.value = 'promocion';
+      aplicarFiltrosCarta();
+    };
+  }
+
+  if (btnTodosPlatosCarta) {
+    btnTodosPlatosCarta.onclick = () => {
+      if (filtroEtiqueta) filtroEtiqueta.value = '';
+      if (filtroCategoria) filtroCategoria.value = '';
+      if (filtroBusqueda) filtroBusqueda.value = '';
+      aplicarFiltrosCarta();
+    };
+  }
+
   // Modal de etiquetas
   const btnCerrarEtiquetas = document.getElementById('btnCerrarEditarEtiquetas');
   const btnCancelarEtiquetas = document.getElementById('btnCancelarEtiquetas');
@@ -2455,11 +2491,30 @@ function aplicarFiltrosCarta() {
       }
     }
 
-    // Filtro por etiqueta
+    // Filtro por etiqueta (con lógica especial para filtros rápidos)
     if (etiqueta) {
       const etiquetasPlato = estadosPlatosData[plato.id] || [];
-      if (!etiquetasPlato.includes(etiqueta)) {
-        return false;
+
+      if (etiqueta === 'disponible') {
+        // Disponibles = NO agotado Y NO proximamente
+        if (etiquetasPlato.includes('agotado') || etiquetasPlato.includes('proximamente')) {
+          return false;
+        }
+      } else if (etiqueta === 'promocion') {
+        // Promociones = nuevo, popular, 2x1, descuento o recomendado
+        const tienePromocion = etiquetasPlato.includes('nuevo') ||
+                              etiquetasPlato.includes('popular') ||
+                              etiquetasPlato.includes('2x1') ||
+                              etiquetasPlato.includes('descuento') ||
+                              etiquetasPlato.includes('recomendado');
+        if (!tienePromocion) {
+          return false;
+        }
+      } else {
+        // Filtro normal de etiqueta
+        if (!etiquetasPlato.includes(etiqueta)) {
+          return false;
+        }
       }
     }
 
