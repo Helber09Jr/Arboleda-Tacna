@@ -1046,9 +1046,10 @@ async function procesarReserva() {
   const numeroSocio = document.getElementById('reservaNumeroSocio').value.trim();
   const tipoSocio = document.getElementById('reservaTipoSocio').value;
   const telefono = document.getElementById('reservaTelefono').value.trim();
+  const personas = document.getElementById('reservaPersonas').value;
   const observaciones = document.getElementById('reservaObservaciones').value.trim();
 
-  if (!validarFormularioReserva(nombre)) {
+  if (!validarFormularioReserva(nombre, personas)) {
     return;
   }
 
@@ -1071,6 +1072,7 @@ async function procesarReserva() {
       telefono: telefono,
       tipo: tipoSocio
     },
+    personas: parseInt(personas),
     observaciones: observaciones,
     estado: 'pendiente',
     fechaCreacion: serverTimestamp()
@@ -1161,9 +1163,22 @@ async function procesarReservaMesa() {
 // VALIDACIONES
 // ==========================================================
 
-function validarFormularioReserva(nombre) {
+function validarFormularioReserva(nombre, personas) {
   if (!nombre) {
     mostrarToast('Por favor verifica tu número de socio primero');
+    return false;
+  }
+
+  if (!personas || personas < 1) {
+    mostrarToast('Por favor ingresa la cantidad de personas');
+    const campo = document.getElementById('reservaPersonas');
+    if (campo) campo.focus();
+    return false;
+  }
+
+  const capacidadMax = obtenerCapacidadSubInstalacion();
+  if (parseInt(personas) > capacidadMax) {
+    mostrarToast(`La capacidad máxima es ${capacidadMax} personas`);
     return false;
   }
 
@@ -1188,9 +1203,10 @@ function enviarReservaWhatsApp() {
   const nombre = document.getElementById('reservaNombre').value.trim();
   const numeroSocio = document.getElementById('reservaNumeroSocio').value.trim();
   const telefono = document.getElementById('reservaTelefono').value.trim();
+  const personas = document.getElementById('reservaPersonas').value;
   const observaciones = document.getElementById('reservaObservaciones').value.trim();
 
-  if (!validarFormularioReserva(nombre)) {
+  if (!validarFormularioReserva(nombre, personas)) {
     return;
   }
   
@@ -1207,6 +1223,7 @@ function enviarReservaWhatsApp() {
   if (numeroSocio) mensaje += ` (N° ${numeroSocio})`;
   mensaje += `\n`;
   if (telefono) mensaje += `📞 *Teléfono:* ${telefono}\n`;
+  mensaje += `👥 *Personas:* ${personas}\n`;
   if (observaciones) mensaje += `📝 *Observaciones:* ${observaciones}\n`;
   mensaje += `\n¡Gracias! Espero su confirmación.`;
   
