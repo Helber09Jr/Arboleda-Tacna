@@ -67,7 +67,7 @@ let unsubscribeAuth = null;
 let autenticacionVerificada = false;
 
 // Opciones de vista y ordenamiento
-let vistaActual = 'tarjetas'; // 'tarjetas' o 'tabla'
+let vistaActual = 'calendario'; // 'calendario', 'tarjetas' o 'tabla'
 let ordenActual = 'fecha-desc'; // orden por defecto
 
 // ==========================================================
@@ -181,6 +181,11 @@ function mostrarLogin() {
 function mostrarPanel() {
   document.getElementById('pantallaLogin').classList.add('oculto');
   document.getElementById('panelPrincipal').classList.remove('oculto');
+
+  // Por defecto, mostrar vista de calendario
+  setTimeout(() => {
+    cambiarVistaMain('calendario');
+  }, 300);
 }
 
 // ==========================================================
@@ -896,8 +901,9 @@ function renderizarReservas() {
           ` : ''}
           ${telefono && telefono !== 'Sin teléfono' ? `
             <button class="boton-accion-rapida whatsapp" data-id="${reserva.id}" data-accion="whatsapp" title="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21.5 2h-19c-1.4 0-2.5 1.1-2.5 2.5v15c0 1.4 1.1 2.5 2.5 2.5h19c1.4 0 2.5-1.1 2.5-2.5v-15c0-1.4-1.1-2.5-2.5-2.5z"></path>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="11" fill="#25D366"/>
+                <path d="M6 12c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6zm7-3.5v2.2l1.5-1.5c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-2.2 2.2h2.2c.6 0 1 .4 1 1s-.4 1-1 1h-2.2l2.2 2.2c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3s-.5-.1-.7-.3l-1.5-1.5v2.2c0 .6-.4 1-1 1s-1-.4-1-1v-2.2l-1.5 1.5c-.2.2-.5.3-.7.3s-.5-.1-.7-.3c-.4-.4-.4-1 0-1.4l2.2-2.2h-2.2c-.6 0-1-.4-1-1s.4-1 1-1h2.2l-2.2-2.2c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l1.5 1.5v-2.2c0-.6.4-1 1-1s1 .4 1 1z" fill="white"/>
               </svg>
             </button>
           ` : ''}
@@ -990,6 +996,9 @@ function cambiarVistaMain(vista) {
     btn.classList.remove('activo');
   });
 
+  // Limpiar filtros al cambiar de vista
+  limpiarFiltrosReservas();
+
   if (vista === 'calendario') {
     vistaActual = 'calendario';
     if (seccionCalendario) seccionCalendario.classList.remove('oculto');
@@ -1013,6 +1022,27 @@ function cambiarVistaMain(vista) {
     if (btnTarjetas) btnTarjetas.classList.add('activo');
     renderizarReservas();
   }
+}
+
+/**
+ * Limpia todos los filtros de reservas para que cada vista sea independiente
+ */
+function limpiarFiltrosReservas() {
+  // Limpiar filtros de entrada
+  const filtroEstado = document.getElementById('filtroEstado');
+  const filtroInstalacion = document.getElementById('filtroInstalacion');
+  const filtroBusqueda = document.getElementById('filtroBusqueda');
+
+  if (filtroEstado) filtroEstado.value = '';
+  if (filtroInstalacion) filtroInstalacion.value = '';
+  if (filtroBusqueda) filtroBusqueda.value = '';
+
+  // Resetear variables de filtrado
+  estadoFiltroActual = '';
+  instalacionFiltroActual = '';
+
+  // Aplicar nueva visualización
+  aplicarFiltros();
 }
 
 // ==========================================================
