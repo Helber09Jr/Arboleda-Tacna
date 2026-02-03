@@ -513,25 +513,6 @@ function inicializarFiltros() {
   }
   if (btnLimpiar) btnLimpiar.onclick = limpiarFiltros;
 
-  // Event listeners para filtrar por estado desde iconos de estadísticas
-  const filtrarPendientes = document.getElementById('filtrarPendientes');
-  const filtrarReservados = document.getElementById('filtrarReservados');
-  const filtrarCancelados = document.getElementById('filtrarCancelados');
-  const verTodasReservas = document.getElementById('verTodasReservas');
-
-  if (filtrarPendientes) {
-    filtrarPendientes.onclick = () => filtrarPorEstado('pendiente');
-  }
-  if (filtrarReservados) {
-    filtrarReservados.onclick = () => filtrarPorEstado('reservado');
-  }
-  if (filtrarCancelados) {
-    filtrarCancelados.onclick = () => filtrarPorEstado('cancelado');
-  }
-  if (verTodasReservas) {
-    verTodasReservas.onclick = () => filtrarPorEstado('');
-  }
-
   // Accordion para filtros en móvil
   const btnToggleFiltros = document.getElementById('btnToggleFiltros');
   const contenedorFiltros = document.getElementById('contenedorFiltros');
@@ -644,62 +625,6 @@ function obtenerSugerenciasParaBusqueda(termino) {
   return sugesterenciasAutocomplete
     .filter(v => v.toLowerCase().includes(termLower))
     .slice(0, 8);
-}
-
-function filtrarPorEstado(estado) {
-  // Establecer el filtro de estado
-  const filtroEstado = document.getElementById('filtroEstado');
-  if (filtroEstado) {
-    filtroEstado.value = estado;
-  }
-
-  // Actualizar estado visual de los iconos
-  const filtrarPendientes = document.getElementById('filtrarPendientes');
-  const filtrarReservados = document.getElementById('filtrarReservados');
-  const filtrarCancelados = document.getElementById('filtrarCancelados');
-  const verTodasReservas = document.getElementById('verTodasReservas');
-
-  // Remover clase activo de todos
-  if (filtrarPendientes) filtrarPendientes.classList.remove('activo');
-  if (filtrarReservados) filtrarReservados.classList.remove('activo');
-  if (filtrarCancelados) filtrarCancelados.classList.remove('activo');
-  if (verTodasReservas) verTodasReservas.classList.remove('activo');
-
-  // Agregar clase activo al seleccionado
-  switch(estado) {
-    case 'pendiente':
-      if (filtrarPendientes) filtrarPendientes.classList.add('activo');
-      break;
-    case 'reservado':
-      if (filtrarReservados) filtrarReservados.classList.add('activo');
-      break;
-    case 'cancelado':
-      if (filtrarCancelados) filtrarCancelados.classList.add('activo');
-      break;
-    default:
-      if (verTodasReservas) verTodasReservas.classList.add('activo');
-  }
-
-  // Aplicar los filtros
-  aplicarFiltros();
-
-  // Hacer scroll hacia la sección de resultados
-  const seccionReservas = document.querySelector('.seccion-reservas-admin');
-  if (seccionReservas) {
-    seccionReservas.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // Mostrar mensaje
-  if (estado) {
-    const estadoTexto = {
-      'pendiente': 'Pendientes',
-      'reservado': 'Reservados',
-      'cancelado': 'Cancelados'
-    }[estado];
-    mostrarToast(`Mostrando ${estadoTexto}`);
-  } else {
-    mostrarToast('Mostrando todas las reservas');
-  }
 }
 
 // ==========================================================
