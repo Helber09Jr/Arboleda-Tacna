@@ -44,6 +44,11 @@ body {
   --fuente-ui: 'Montserrat', sans-serif;
 }
 
+/* Clase global para ocultar elementos */
+.oculto {
+  display: none !important;
+}
+
 /* ==========================================================
    PANTALLA DE LOGIN - DISEÑO PREMIUM GLASSMORPHISM
    ========================================================== */
@@ -1152,35 +1157,50 @@ body {
 }
 
 .boton-vista {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   padding: 0;
   background: white;
   border: 2px solid transparent;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: #666;
+  font-size: 0;
+  position: relative;
 }
 
 .boton-vista svg {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   stroke: currentColor;
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
 }
 
 .boton-vista:hover {
   color: var(--azul-principal);
   border-color: var(--azul-principal);
+  background: rgba(0, 82, 180, 0.05);
+  transform: translateY(-2px);
+}
+
+.boton-vista:hover svg {
+  transform: scale(1.15);
 }
 
 .boton-vista.activo {
   background: var(--azul-principal);
   color: white;
   border-color: var(--azul-principal);
+  box-shadow: 0 4px 12px rgba(0, 82, 180, 0.3);
+}
+
+.boton-vista.activo svg {
+  stroke-width: 2;
 }
 
 .lista-reservas-admin {
