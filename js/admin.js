@@ -918,28 +918,53 @@ function cambiarVistaMain(vista) {
   const listaReservasTabla = document.getElementById('listaReservasTabla');
   const tituloSeccion = seccionReservas?.querySelector('.titulo-seccion-admin');
 
+  // Limpiar contenedores para evitar apilamiento
+  if (listaReservas) listaReservas.innerHTML = '';
+  if (listaReservasTabla) {
+    const tbody = listaReservasTabla.querySelector('tbody');
+    if (tbody) tbody.innerHTML = '';
+  }
+
   // Remover clase activo de todos los botones
   document.querySelectorAll('.boton-vista').forEach(btn => {
     btn.classList.remove('activo');
   });
 
-  // Ocultar todas las secciones por defecto
-  if (seccionCalendario) seccionCalendario.classList.add('oculto');
-  if (seccionReservas) seccionReservas.classList.add('oculto');
-  if (seccionFiltrosHistorial) seccionFiltrosHistorial.classList.add('oculto');
+  // Ocultar todas las secciones por defecto - usar display: none explícito
+  if (seccionCalendario) {
+    seccionCalendario.classList.add('oculto');
+    seccionCalendario.style.display = 'none';
+  }
+  if (seccionReservas) {
+    seccionReservas.classList.add('oculto');
+    seccionReservas.style.display = 'none';
+  }
+  if (seccionFiltrosHistorial) {
+    seccionFiltrosHistorial.classList.add('oculto');
+    seccionFiltrosHistorial.style.display = 'none';
+  }
 
   // Mostrar la vista correspondiente
   if (vista === 'calendario') {
     vistaActual = 'calendario';
     // Mostrar solo el calendario, sin filtros
-    if (seccionCalendario) seccionCalendario.classList.remove('oculto');
+    if (seccionCalendario) {
+      seccionCalendario.classList.remove('oculto');
+      seccionCalendario.style.display = 'block';
+    }
     document.getElementById('btnVistaCalendario')?.classList.add('activo');
     inicializarCalendario();
   } else if (vista === 'tabla') {
     vistaActual = 'tabla';
     // Mostrar historial con filtros
-    if (seccionReservas) seccionReservas.classList.remove('oculto');
-    if (seccionFiltrosHistorial) seccionFiltrosHistorial.classList.remove('oculto');
+    if (seccionReservas) {
+      seccionReservas.classList.remove('oculto');
+      seccionReservas.style.display = 'block';
+    }
+    if (seccionFiltrosHistorial) {
+      seccionFiltrosHistorial.classList.remove('oculto');
+      seccionFiltrosHistorial.style.display = 'block';
+    }
     if (listaReservas) listaReservas.classList.add('oculto');
     if (listaReservasTabla) listaReservasTabla.classList.remove('oculto');
     if (tituloSeccion) tituloSeccion.textContent = 'Historial de Reservas';
@@ -948,8 +973,14 @@ function cambiarVistaMain(vista) {
   } else if (vista === 'tarjetas') {
     vistaActual = 'tarjetas';
     // Mostrar próximas con filtros
-    if (seccionReservas) seccionReservas.classList.remove('oculto');
-    if (seccionFiltrosHistorial) seccionFiltrosHistorial.classList.remove('oculto');
+    if (seccionReservas) {
+      seccionReservas.classList.remove('oculto');
+      seccionReservas.style.display = 'block';
+    }
+    if (seccionFiltrosHistorial) {
+      seccionFiltrosHistorial.classList.remove('oculto');
+      seccionFiltrosHistorial.style.display = 'block';
+    }
     if (listaReservas) listaReservas.classList.remove('oculto');
     if (listaReservasTabla) listaReservasTabla.classList.add('oculto');
     if (tituloSeccion) tituloSeccion.textContent = 'Próximas Reservas';
