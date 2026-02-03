@@ -294,18 +294,28 @@
         </button>
       </section>
 
-      <!-- Botones de vista: Calendario, Tabla, Tarjetas -->
-      <section class="seccion-selector-vista-principal">
-        <div class="controles-vista-principal">
-          <button id="btnVistaCalendario" class="boton-selector-vista" title="Ver calendario">
+      <!-- Selector de Vistas Principal - Reorganizado y Mejorado -->
+      <section class="seccion-selector-vistas">
+        <div class="contenedor-botones-vistas">
+          <button id="btnVistaCalendario" class="boton-vista activo" data-vista="calendario">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
+            <span>Calendario</span>
           </button>
-          <button id="btnVistaTabla2" class="boton-selector-vista" title="Ver historial">
+
+          <button id="btnVistaTarjetas2" class="boton-vista" data-vista="tarjetas">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 4h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <line x1="6" y1="9" x2="18" y2="9"></line>
+            </svg>
+            <span>Próximas</span>
+          </button>
+
+          <button id="btnVistaTabla2" class="boton-vista" data-vista="tabla">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="3" x2="21" y2="3"></line>
               <line x1="3" y1="9" x2="21" y2="9"></line>
@@ -313,70 +323,61 @@
               <line x1="3" y1="21" x2="21" y2="21"></line>
               <line x1="10" y1="3" x2="10" y2="21"></line>
             </svg>
-          </button>
-          <button id="btnVistaTarjetas2" class="boton-selector-vista activo" title="Ver próximas">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 4h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <line x1="6" y1="9" x2="18" y2="9"></line>
-            </svg>
+            <span>Historial</span>
           </button>
         </div>
       </section>
 
-      <!-- Filtros con Accordion -->
-      <section class="seccion-filtros">
-        <button id="btnToggleFiltros" class="boton-toggle-filtros">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="4" y1="6" x2="20" y2="6"></line>
-            <line x1="4" y1="12" x2="20" y2="12"></line>
-            <line x1="4" y1="18" x2="20" y2="18"></line>
-          </svg>
-          <span>Filtrar Reservas</span>
-          <svg class="icono-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div id="contenedorFiltros" class="contenedor-filtros oculto">
-          <div class="filtro-item">
-            <label for="filtroFechaInicio">Desde</label>
-            <input type="text" id="filtroFechaInicio" placeholder="dd/mm/aaaa">
+      <!-- Barra de Filtros para Historial (Próximas y Historial) -->
+      <section id="seccionFiltrosHistorial" class="seccion-filtros-historial oculto">
+        <div class="barra-filtros">
+          <div class="grupo-filtros">
+            <div class="filtro-input">
+              <label for="filtroFechaInicio">Desde:</label>
+              <input type="text" id="filtroFechaInicio" placeholder="dd/mm/aaaa">
+            </div>
+
+            <div class="filtro-input">
+              <label for="filtroFechaFin">Hasta:</label>
+              <input type="text" id="filtroFechaFin" placeholder="dd/mm/aaaa">
+            </div>
+
+            <div class="filtro-select">
+              <label for="filtroInstalacion">Instalación:</label>
+              <select id="filtroInstalacion">
+                <option value="">Todas</option>
+                <option value="parrillas">Parrillas</option>
+                <option value="tenis">Tenis</option>
+                <option value="fronton">Frontón</option>
+                <option value="mesas">Mesas</option>
+              </select>
+            </div>
+
+            <div class="filtro-select">
+              <label for="filtroEstado">Estado:</label>
+              <select id="filtroEstado">
+                <option value="">Todos</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="reservado">Reservado</option>
+                <option value="cancelado">Cancelado</option>
+              </select>
+            </div>
+
+            <div class="filtro-input">
+              <label for="filtroBusqueda">Buscar:</label>
+              <input type="text" id="filtroBusqueda" placeholder="Nombre, teléfono, DNI...">
+            </div>
           </div>
-          <div class="filtro-item">
-            <label for="filtroFechaFin">Hasta</label>
-            <input type="text" id="filtroFechaFin" placeholder="dd/mm/aaaa">
-          </div>
-          <div class="filtro-item">
-            <label for="filtroInstalacion">Instalación</label>
-            <select id="filtroInstalacion">
-              <option value="">Todas</option>
-              <option value="parrillas">Parrillas</option>
-              <option value="tenis">Tenis</option>
-              <option value="fronton">Frontón</option>
-              <option value="mesas">Mesas</option>
-            </select>
-          </div>
-          <div class="filtro-item">
-            <label for="filtroEstado">Estado</label>
-            <select id="filtroEstado">
-              <option value="">Todos</option>
-              <option value="pendiente">Pendiente</option>
-              <option value="reservado">Reservado</option>
-              <option value="cancelado">Cancelado</option>
-            </select>
-          </div>
-          <div class="filtro-item">
-            <label for="filtroBusqueda">Buscar</label>
-            <input type="text" id="filtroBusqueda" placeholder="Nombre, teléfono...">
-          </div>
-          <div class="filtros-acciones">
-            <button id="btnLimpiarFiltros" class="boton-limpiar-filtros">
+
+          <div class="grupo-acciones">
+            <button id="btnLimpiarFiltros" class="boton-filtro-accion limpiar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="1 4 1 10 7 10"></polyline>
                 <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
               </svg>
               Limpiar
             </button>
-            <button id="btnExportarExcel" class="boton-exportar-excel">
+            <button id="btnExportarExcel" class="boton-filtro-accion exportar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>

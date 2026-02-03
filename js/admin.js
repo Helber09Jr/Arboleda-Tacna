@@ -973,54 +973,62 @@ function actualizarTablaReservas() {
 // ==========================================================
 
 function inicializarSelectorVista() {
-  const btnCalendario = document.getElementById('btnVistaCalendario');
-  const btnTabla = document.getElementById('btnVistaTabla2');
-  const btnTarjetas = document.getElementById('btnVistaTarjetas2');
-
-  if (btnCalendario) btnCalendario.onclick = () => cambiarVistaMain('calendario');
-  if (btnTabla) btnTabla.onclick = () => cambiarVistaMain('tabla');
-  if (btnTarjetas) btnTarjetas.onclick = () => cambiarVistaMain('tarjetas');
+  // Usar delegación de eventos para los botones de vista
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.boton-vista');
+    if (btn) {
+      const vista = btn.getAttribute('data-vista');
+      if (vista) {
+        cambiarVistaMain(vista);
+      }
+    }
+  });
 }
 
 function cambiarVistaMain(vista) {
   const seccionCalendario = document.getElementById('seccionCalendario');
   const seccionReservas = document.getElementById('seccionReservasAdmin');
-  const seccionFiltros = document.querySelector('.seccion-filtros');
+  const seccionFiltrosHistorial = document.getElementById('seccionFiltrosHistorial');
   const listaReservas = document.getElementById('listaReservas');
   const listaReservasTabla = document.getElementById('listaReservasTabla');
+  const tituloSeccion = seccionReservas?.querySelector('.titulo-seccion-admin');
 
-  const btnCalendario = document.getElementById('btnVistaCalendario');
-  const btnTabla = document.getElementById('btnVistaTabla2');
-  const btnTarjetas = document.getElementById('btnVistaTarjetas2');
-
-  document.querySelectorAll('.boton-selector-vista').forEach(btn => {
+  // Remover clase activo de todos los botones
+  document.querySelectorAll('.boton-vista').forEach(btn => {
     btn.classList.remove('activo');
   });
 
+  // Ocultar todas las secciones por defecto
+  if (seccionCalendario) seccionCalendario.classList.add('oculto');
+  if (seccionReservas) seccionReservas.classList.add('oculto');
+  if (seccionFiltrosHistorial) seccionFiltrosHistorial.classList.add('oculto');
+
+  // Mostrar la vista correspondiente
   if (vista === 'calendario') {
     vistaActual = 'calendario';
+    // Mostrar solo el calendario, sin filtros
     if (seccionCalendario) seccionCalendario.classList.remove('oculto');
-    if (seccionReservas) seccionReservas.classList.add('oculto');
-    if (seccionFiltros) seccionFiltros.classList.add('oculto');
-    if (btnCalendario) btnCalendario.classList.add('activo');
+    document.getElementById('btnVistaCalendario')?.classList.add('activo');
     inicializarCalendario();
   } else if (vista === 'tabla') {
     vistaActual = 'tabla';
-    if (seccionCalendario) seccionCalendario.classList.add('oculto');
+    // Mostrar historial con filtros
     if (seccionReservas) seccionReservas.classList.remove('oculto');
-    if (seccionFiltros) seccionFiltros.classList.remove('oculto');
+    if (seccionFiltrosHistorial) seccionFiltrosHistorial.classList.remove('oculto');
     if (listaReservas) listaReservas.classList.add('oculto');
     if (listaReservasTabla) listaReservasTabla.classList.remove('oculto');
-    if (btnTabla) btnTabla.classList.add('activo');
+    if (tituloSeccion) tituloSeccion.textContent = 'Historial de Reservas';
+    document.getElementById('btnVistaTabla2')?.classList.add('activo');
     renderizarReservasEnTabla();
-  } else {
+  } else if (vista === 'tarjetas') {
     vistaActual = 'tarjetas';
-    if (seccionCalendario) seccionCalendario.classList.add('oculto');
+    // Mostrar próximas con filtros
     if (seccionReservas) seccionReservas.classList.remove('oculto');
-    if (seccionFiltros) seccionFiltros.classList.remove('oculto');
+    if (seccionFiltrosHistorial) seccionFiltrosHistorial.classList.remove('oculto');
     if (listaReservas) listaReservas.classList.remove('oculto');
     if (listaReservasTabla) listaReservasTabla.classList.add('oculto');
-    if (btnTarjetas) btnTarjetas.classList.add('activo');
+    if (tituloSeccion) tituloSeccion.textContent = 'Próximas Reservas';
+    document.getElementById('btnVistaTarjetas2')?.classList.add('activo');
     renderizarReservas();
   }
 }
