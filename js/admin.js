@@ -398,6 +398,12 @@ async function iniciarSesion() {
 
 async function cerrarSesion() {
   try {
+    // Mostrar estado de carga
+    const btnCerrar = document.getElementById('btnCerrarSesion');
+    const textoOriginal = btnCerrar?.textContent;
+    if (btnCerrar) btnCerrar.textContent = 'Cerrando...';
+    if (btnCerrar) btnCerrar.disabled = true;
+
     // Limpiar listeners
     if (unsubscribeReservas) {
       unsubscribeReservas();
@@ -415,11 +421,26 @@ async function cerrarSesion() {
     usuarioActual = null;
     usuarioAdminData = null;
 
+    // Limpiar almacenamiento local
+    localStorage.clear();
+    sessionStorage.clear();
+
     // Cerrar sesión en Firebase
     await signOut(auth);
-    mostrarToast('Sesión cerrada');
+
+    mostrarToast('Sesión cerrada correctamente');
+
+    // Limpiar URL y mostrar login inmediatamente
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    // Mostrar login de forma inmediata
+    mostrarLogin();
+
   } catch (error) {
     console.error('Error al cerrar sesión:', error);
+    mostrarToast('Error al cerrar sesión', 'error');
+    // Aun así mostrar login
+    mostrarLogin();
   }
 }
 
