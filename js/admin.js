@@ -425,6 +425,16 @@ async function cerrarSesion() {
     localStorage.clear();
     sessionStorage.clear();
 
+    // Limpiar campos del formulario de login
+    const passwordInput = document.getElementById('passwordAdmin');
+    if (passwordInput) {
+      passwordInput.value = '';
+    }
+    const emailInput = document.getElementById('emailAdmin');
+    if (emailInput) {
+      emailInput.value = '';
+    }
+
     // Cerrar sesión en Firebase
     await signOut(auth);
 
@@ -552,53 +562,69 @@ function aplicarFiltros() {
   const instalacion = document.getElementById('filtroInstalacion').value;
   const estado = document.getElementById('filtroEstado').value;
   const busqueda = document.getElementById('filtroBusqueda').value.toLowerCase().trim();
-  
+
+  // Función para parsear fecha en formato d/m/Y
+  function parsearFecha(fechaString) {
+    if (!fechaString) return null;
+    const [dia, mes, anio] = fechaString.split('/');
+    return new Date(anio, mes - 1, dia);
+  }
+
+  const fechaInicioDate = parsearFecha(fechaInicio);
+  const fechaFinDate = parsearFecha(fechaFin);
+
   reservasFiltradas = reservasData.filter(reserva => {
-    if (instalacion && reserva.instalacion !== instalacion) {
+    if (instalacion && (reserva.instalacion || '').toLowerCase() !== instalacion.toLowerCase()) {
       return false;
     }
-    
+
     if (estado && reserva.estado !== estado) {
       return false;
     }
-    
-    if (fechaInicio) {
-      const fechaInicioDate = new Date(fechaInicio);
+
+    if (fechaInicioDate) {
       const fechaReserva = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+      fechaInicioDate.setHours(0, 0, 0, 0);
       if (fechaReserva < fechaInicioDate) {
         return false;
       }
     }
-    
-    if (fechaFin) {
-      const fechaFinDate = new Date(fechaFin);
-      fechaFinDate.setHours(23, 59, 59, 999);
+
+    if (fechaFinDate) {
       const fechaReserva = reserva.fecha.toDate ? reserva.fecha.toDate() : new Date(reserva.fecha);
+      fechaFinDate.setHours(23, 59, 59, 999);
       if (fechaReserva > fechaFinDate) {
         return false;
       }
     }
-    
+
     if (busqueda) {
       const nombreSocio = reserva.socio?.nombre?.toLowerCase() || '';
       const telefonoSocio = reserva.socio?.telefono?.toLowerCase() || '';
       const numeroSocio = reserva.socio?.numero?.toLowerCase() || '';
       const observaciones = reserva.observaciones?.toLowerCase() || '';
       const subInstalacion = reserva.subInstalacion?.toLowerCase() || '';
-      
+
       const coincide = nombreSocio.includes(busqueda) ||
                        telefonoSocio.includes(busqueda) ||
                        numeroSocio.includes(busqueda) ||
                        observaciones.includes(busqueda) ||
                        subInstalacion.includes(busqueda);
-      
+
       if (!coincide) return false;
     }
-    
+
     return true;
   });
-  
-  renderizarReservas();
+
+  // Renderizar solo el contenedor correspondiente a la vista actual
+  if (vistaActual === 'tabla') {
+    renderizarReservasEnTabla();
+  } else if (vistaActual === 'tarjetas') {
+    renderizarReservas();
+  } else if (vistaActual === 'calendario') {
+    marcarDiasConReservas();
+  }
 }
 
 function limpiarFiltros() {
@@ -1067,7 +1093,11 @@ function marcarDiasConReservas() {
   const diasConReservas = {};
 
   reservasData.forEach(reserva => {
-    let filtroValido = !filtroInstalacionCalendario || reserva.instalacion === filtroInstalacionCalendario;
+    let filtroValido = true;
+    if (filtroInstalacionCalendario) {
+      // Comparación case-insensitive para el filtro
+      filtroValido = (reserva.instalacion || '').toLowerCase() === filtroInstalacionCalendario.toLowerCase();
+    }
 
     if (!filtroValido) return;
 
@@ -1110,7 +1140,11 @@ function actualizarDetalleDelDia(fecha) {
     const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
     const fechaReservaString = fechaReserva.toISOString().split('T')[0];
 
-    let filtroValido = !filtroInstalacionCalendario || r.instalacion === filtroInstalacionCalendario;
+    let filtroValido = true;
+    if (filtroInstalacionCalendario) {
+      // Comparación case-insensitive para el filtro
+      filtroValido = (r.instalacion || '').toLowerCase() === filtroInstalacionCalendario.toLowerCase();
+    }
 
     return fechaReservaString === fechaString && filtroValido;
   }).sort((a, b) => {
