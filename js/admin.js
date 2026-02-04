@@ -1043,6 +1043,7 @@ function cambiarVistaMain(vista) {
 let calendarioActual = null;
 let fechaSeleccionadaCalendario = new Date();
 let filtroInstalacionCalendario = '';
+let reservasDelDiaActual = [];
 
 function inicializarCalendario() {
   const contenedorCalendario = document.getElementById('calendarioReservas');
@@ -1057,6 +1058,12 @@ function inicializarCalendario() {
       }
       construirCalendario();
     };
+  }
+
+  // Event listener para el botón de compartir
+  const btnCompartir = document.getElementById('btnCompartirReservas');
+  if (btnCompartir) {
+    btnCompartir.onclick = compartirReservasDelDia;
   }
 
   construirCalendario();
@@ -1155,6 +1162,9 @@ function actualizarDetalleDelDia(fecha) {
 
   let html = '';
 
+  // Guardar las reservas del día para usarlas en el botón compartir
+  reservasDelDiaActual = reservasDelDia;
+
   if (reservasDelDia.length === 0) {
     html = '<p class="sin-reservas">Sin reservas este día</p>';
   } else {
@@ -1177,6 +1187,57 @@ function actualizarDetalleDelDia(fecha) {
   }
 
   contenedor.innerHTML = html;
+
+  // Mostrar/ocultar botón de compartir
+  const btnCompartir = document.getElementById('btnCompartirReservas');
+  if (btnCompartir) {
+    if (reservasDelDia.length > 0) {
+      btnCompartir.style.display = 'flex';
+    } else {
+      btnCompartir.style.display = 'none';
+    }
+  }
+}
+
+function compartirReservasDelDia() {
+  if (reservasDelDiaActual.length === 0) {
+    mostrarToast('No hay reservas para compartir');
+    return;
+  }
+
+  // Generar texto simple para compartir
+  let textoCompartir = '';
+  const fechaFormato = new Date(fechaSeleccionadaCalendario).toLocaleDateString('es-PE', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  reservasDelDiaActual.forEach((reserva, index) => {
+    const instalacion = formatearNombreInstalacion(reserva.subInstalacion);
+    const socio = reserva.socio?.nombre || 'Sin nombre';
+    const horario = reserva.horario;
+
+    if (index > 0) textoCompartir += '\n\n';
+    textoCompartir += `📅 ${instalacion}\n⏰ ${horario}\n👤 ${socio}`;
+  });
+
+  // Agregar la fecha al inicio
+  textoCompartir = `Reservas del ${fechaFormato}\n\n${textoCompartir}`;
+
+  // Copiar al portapapeles
+  navigator.clipboard.writeText(textoCompartir).then(() => {
+    mostrarToast('✓ Copiado al portapapeles');
+  }).catch(() => {
+    // Fallback para navegadores antiguos
+    const textarea = document.createElement('textarea');
+    textarea.value = textoCompartir;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    mostrarToast('✓ Copiado al portapapeles');
+  });
 }
 
 // ==========================================================

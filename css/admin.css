@@ -4759,6 +4759,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 }
 
 .titulo-detalle-dia {
@@ -4786,6 +4787,40 @@ body {
   background: var(--gris-claro);
   border-radius: 8px;
   margin: 0;
+}
+
+.btn-compartir-reservas {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--azul-principal);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 82, 180, 0.3);
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.btn-compartir-reservas:hover {
+  background: var(--azul-oscuro);
+  box-shadow: 0 4px 12px rgba(0, 82, 180, 0.5);
+  transform: scale(1.1);
+}
+
+.btn-compartir-reservas:active {
+  transform: scale(0.95);
+}
+
+.btn-compartir-reservas svg {
+  width: 20px;
+  height: 20px;
 }
 
 .item-reserva-dia {
