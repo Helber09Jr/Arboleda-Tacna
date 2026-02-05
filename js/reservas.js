@@ -726,12 +726,22 @@ function seleccionarFecha(dia) {
 
 function obtenerEstadoReserva(fecha) {
   const fechaStr = formatearFechaParaClave(fecha);
-  const key = `${subInstalacionSeleccionada}_${fechaStr}`;
-  
-  if (reservasCache[key]) {
-    return reservasCache[key];
+  const tipoInstalacion = obtenerTipoInstalacion();
+
+  // Para instalaciones de bloques-hora, validar también el horario específico
+  if (tipoInstalacion === 'bloques-hora' && horarioSeleccionado) {
+    const key = `${subInstalacionSeleccionada}_${fechaStr}_${horarioSeleccionado}`;
+    if (reservasCache[key]) {
+      return reservasCache[key];
+    }
+  } else {
+    // Para otras instalaciones, validar solo por fecha
+    const key = `${subInstalacionSeleccionada}_${fechaStr}`;
+    if (reservasCache[key]) {
+      return reservasCache[key];
+    }
   }
-  
+
   return 'disponible';
 }
 
@@ -887,28 +897,40 @@ function abrirModalHorarios() {
 function generarHorarios() {
   const contenedor = document.getElementById('listaHorarios');
   if (!contenedor) return;
-  
+
   const datosInst = obtenerDatosInstalacion();
-  
+
   if (!datosInst || datosInst.tipo !== 'bloques-hora') return;
-  
+
   let html = '';
   const fechaStr = formatearFechaParaClave(fechaSeleccionada);
 
-  for (let hora = datosInst.horaInicio; hora < datosInst.horaFin; hora++) {
-    const horaInicio = formatearHora(hora);
-    const horaFin = formatearHora(hora + 1);
-    const bloqueId = `${hora}:00-${hora + 1}:00`;
+  // Generar bloques de 1h 45min + 15min mantenimiento (cada 2 horas)
+  for (let hora = datosInst.horaInicio; hora < datosInst.horaFin; hora += 2) {
+    // Inicio del bloque
+    const horaInicioNum = hora;
+    const minInicioNum = 0;
+
+    // Fin del bloque: inicio + 1h 45min
+    const horas45 = horaInicioNum + 1.75;
+    const horaFinNum = Math.floor(horas45);
+    const minFinNum = Math.round((horas45 % 1) * 60);
+
+    const horaInicio = formatearHora(horaInicioNum, minInicioNum);
+    const horaFin = formatearHora(horaFinNum, minFinNum);
+
+    // ID del bloque en formato HH:MM-HH:MM
+    const bloqueId = `${String(horaInicioNum).padStart(2, '0')}:${String(minInicioNum).padStart(2, '0')}-${String(horaFinNum).padStart(2, '0')}:${String(minFinNum).padStart(2, '0')}`;
 
     const key = `${subInstalacionSeleccionada}_${fechaStr}_${bloqueId}`;
     const estadoReserva = reservasCache[key];
     const reservado = estadoReserva === 'reservado' || estadoReserva === 'pendiente';
-    
+
     const claseEstado = reservado ? 'reservado' : 'disponible';
     const estadoTexto = reservado ? (estadoReserva === 'pendiente' ? '(Pendiente)' : '(Reservado)') : '';
     const onclick = reservado ? '' : `onclick="window.seleccionarHorario('${bloqueId}')"`;
     const tabindex = reservado ? '' : 'tabindex="0" role="button"';
-    
+
     html += `
       <div class="bloque-horario ${claseEstado}" ${onclick} ${tabindex}>
         <span class="horario-texto">${horaInicio} - ${horaFin}</span>
@@ -916,7 +938,7 @@ function generarHorarios() {
       </div>
     `;
   }
-  
+
   contenedor.innerHTML = html;
 }
 
@@ -964,8 +986,14 @@ function abrirFormularioReserva() {
   }
   
   const tipoInstalacion = obtenerTipoInstalacion();
-  let horarioTexto = tipoInstalacion === 'bloque-dia' ? '10:00 AM - 6:00 PM' : horarioSeleccionado;
-  
+  let horarioTexto = '10:00 AM - 6:00 PM';
+
+  if (tipoInstalacion === 'bloque-dia') {
+    horarioTexto = '10:00 AM - 6:00 PM'; // Para parrillas
+  } else if (horarioSeleccionado) {
+    horarioTexto = convertirBloqueHoraFormato12(horarioSeleccionado); // Para tenis, fronton
+  }
+
   const resumenHorario = document.getElementById('resumenHorario');
   if (resumenHorario) {
     resumenHorario.innerHTML = `
@@ -1158,11 +1186,18 @@ async function procesarReserva() {
   }
 
   const tipoInstalacion = obtenerTipoInstalacion();
-  let horarioTexto = horarioSeleccionado || '10:00 AM - 6:00 PM';
+  let horarioTexto = '10:00 AM - 6:00 PM';
 
-  // Para parrillas, usar la hora de ingreso seleccionada
-  if (tipoInstalacion === 'bloque-dia' && horaIngreso) {
-    horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
+  if (tipoInstalacion === 'bloque-dia') {
+    // Para parrillas, usar la hora de ingreso seleccionada
+    if (horaIngreso) {
+      horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
+    }
+  } else {
+    // Para tenis y fronton, convertir el bloque ID a formato legible
+    if (horarioSeleccionado) {
+      horarioTexto = convertirBloqueHoraFormato12(horarioSeleccionado);
+    }
   }
 
   const reserva = {
@@ -1335,11 +1370,18 @@ function enviarReservaWhatsApp() {
   const nombreSub = obtenerNombreSubInstalacion(subInstalacionSeleccionada);
   const fechaFormateada = formatearFechaCompleta(fechaSeleccionada);
   const tipoInstalacion = obtenerTipoInstalacion();
-  let horarioTexto = horarioSeleccionado || '10:00 AM - 6:00 PM';
+  let horarioTexto = '10:00 AM - 6:00 PM';
 
-  // Para parrillas, usar la hora de ingreso seleccionada
-  if (tipoInstalacion === 'bloque-dia' && horaIngreso) {
-    horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
+  if (tipoInstalacion === 'bloque-dia') {
+    // Para parrillas, usar la hora de ingreso seleccionada
+    if (horaIngreso) {
+      horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
+    }
+  } else {
+    // Para tenis y fronton, convertir el bloque ID a formato legible
+    if (horarioSeleccionado) {
+      horarioTexto = convertirBloqueHoraFormato12(horarioSeleccionado);
+    }
   }
   
   let mensaje = `🏡 *SOLICITUD DE RESERVA - LA ARBOLEDA CLUB*\n\n`;
@@ -1426,13 +1468,17 @@ function formatearFechaCompleta(fecha) {
   return fecha.toLocaleDateString('es-PE', opciones);
 }
 
-function formatearHora(hora) {
-  if (hora < 12) {
-    return `${hora}:00 AM`;
-  } else if (hora === 12) {
-    return `12:00 PM`;
+function formatearHora(hora, minutos = 0) {
+  const horas = Math.floor(hora);
+  const mins = minutos || (hora % 1) * 60;
+  const minutosFormato = String(Math.round(mins)).padStart(2, '0');
+
+  if (horas < 12) {
+    return `${horas}:${minutosFormato} AM`;
+  } else if (horas === 12) {
+    return `12:${minutosFormato} PM`;
   } else {
-    return `${hora - 12}:00 PM`;
+    return `${horas - 12}:${minutosFormato} PM`;
   }
 }
 
@@ -1460,8 +1506,8 @@ function mostrarModalExito(idReserva) {
     const horaIngreso = document.getElementById('reservaHoraIngreso')?.value || '10:00';
     hora = convertirHoraFormato12(horaIngreso);
   } else {
-    // Para otros tipos, usar horario seleccionado
-    hora = horarioSeleccionado ? convertirHoraFormato12(horarioSeleccionado) : '10:00 AM';
+    // Para otros tipos (tenis, fronton), usar bloque horario seleccionado
+    hora = horarioSeleccionado ? convertirBloqueHoraFormato12(horarioSeleccionado) : '10:00 AM';
   }
 
   const personas = document.getElementById('reservaPersonas')?.value || 'N/A';
@@ -1560,13 +1606,33 @@ function convertirHoraFormato12(hora) {
   }
 
   // Convertir de formato 24h a 12h
-  const [horaNum] = hora.split(':');
-  const num = parseInt(horaNum);
+  const [horaStr, minutosStr] = hora.split(':');
+  const horaNum = parseInt(horaStr);
+  const minutos = minutosStr ? parseInt(minutosStr) : 0;
+  const minutosFormato = String(minutos).padStart(2, '0');
 
-  if (num === 0) return '12:00 AM';
-  if (num < 12) return `${num}:00 AM`;
-  if (num === 12) return '12:00 PM';
-  return `${num - 12}:00 PM`;
+  if (horaNum === 0) return `12:${minutosFormato} AM`;
+  if (horaNum < 12) return `${horaNum}:${minutosFormato} AM`;
+  if (horaNum === 12) return `12:${minutosFormato} PM`;
+  return `${horaNum - 12}:${minutosFormato} PM`;
+}
+
+function convertirBloqueHoraFormato12(bloqueId) {
+  if (!bloqueId) return '10:00 AM - 6:00 PM';
+
+  // Si ya está en formato 12h, devolver como está
+  if (bloqueId.includes('AM') || bloqueId.includes('PM')) {
+    return bloqueId;
+  }
+
+  // Esperamos formato: HH:MM-HH:MM (en 24h)
+  const [inicio, fin] = bloqueId.split('-');
+  if (!inicio || !fin) return bloqueId;
+
+  const horaInicio = convertirHoraFormato12(inicio);
+  const horaFin = convertirHoraFormato12(fin);
+
+  return `${horaInicio} - ${horaFin}`;
 }
 
 function formatearNombreInstalacion(subId) {
