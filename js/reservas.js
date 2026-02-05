@@ -266,16 +266,19 @@ function inicializarListenerReservas() {
       });
 
       console.log('📊 Reservas actualizadas:', Object.keys(reservasCache).length);
+      console.log('🔑 Claves en caché:', Object.keys(reservasCache));
 
       // Actualizar calendario si está visible (modal abierto)
       const modalCalendario = document.getElementById('modalCalendario');
       if (modalCalendario && modalCalendario.classList.contains('activo')) {
+        console.log('🔄 Regenerando calendario (modal visible)');
         generarCalendario();
       }
 
       // Actualizar horarios si están visibles
       const modalHorarios = document.getElementById('modalHorarios');
       if (modalHorarios && modalHorarios.classList.contains('activo')) {
+        console.log('🔄 Regenerando horarios (modal visible)');
         generarHorarios();
       }
     }, (error) => {
@@ -563,7 +566,11 @@ function abrirCalendario() {
 function generarCalendario() {
   const contenedor = document.getElementById('calendarioDias');
   if (!contenedor) return;
-  
+
+  console.log('📅 Generando calendario para:', subInstalacionSeleccionada);
+  console.log('💾 Caché actual:', reservasCache);
+  console.log('📊 Total reservas en caché:', Object.keys(reservasCache).length);
+
   const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   
   const mesTexto = document.getElementById('mesActualTexto');
@@ -719,18 +726,23 @@ function obtenerEstadoReserva(fecha) {
 function obtenerInfoReservaCompleta(fecha) {
   const fechaStr = fecha.toISOString().split('T')[0];
   const key = `${subInstalacionSeleccionada}_${fechaStr}`;
-  
+
+  console.log(`🔍 Buscando: ${key}`);
+
   if (reservasCompletasCache[key]) {
+    console.log(`✅ Encontrado en caché completo: ${key} -> ${reservasCompletasCache[key].estado}`);
     return reservasCompletasCache[key];
   }
-  
+
   if (reservasCache[key]) {
+    console.log(`✅ Encontrado en caché: ${key} -> ${reservasCache[key]}`);
     return {
       estado: reservasCache[key],
       socioNombre: 'Reservado'
     };
   }
-  
+
+  console.log(`❌ NO encontrado: ${key}`);
   return null;
 }
 
