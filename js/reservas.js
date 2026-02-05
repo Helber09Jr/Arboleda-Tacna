@@ -737,24 +737,40 @@ function obtenerEstadoReserva(fecha) {
 
 function obtenerInfoReservaCompleta(fecha) {
   const fechaStr = formatearFechaParaClave(fecha);
-  const key = `${subInstalacionSeleccionada}_${fechaStr}`;
 
-  console.log(`🔍 Buscando: ${key}`);
+  // Buscar CUALQUIER reserva para esta fecha en esta subInstalacion (ignorando horario)
+  // porque puede haber múltiples reservas con diferentes horarios el mismo día
+  let primeraReserva = null;
 
-  if (reservasCompletasCache[key]) {
-    console.log(`✅ Encontrado en caché completo: ${key} -> ${reservasCompletasCache[key].estado}`);
-    return reservasCompletasCache[key];
+  for (const [key, info] of Object.entries(reservasCompletasCache)) {
+    // Verificar si la clave comienza con subInstalacion_fecha
+    const keyPattern = `${subInstalacionSeleccionada}_${fechaStr}`;
+    if (key.startsWith(keyPattern)) {
+      console.log(`✅ Encontrado en caché completo: ${key} -> ${info.estado}`);
+      // Retornar la primera que encuentre (priorizar reservado > pendiente)
+      if (!primeraReserva || info.estado === 'reservado') {
+        primeraReserva = info;
+      }
+    }
   }
 
-  if (reservasCache[key]) {
-    console.log(`✅ Encontrado en caché: ${key} -> ${reservasCache[key]}`);
-    return {
-      estado: reservasCache[key],
-      socioNombre: 'Reservado'
-    };
+  if (primeraReserva) {
+    return primeraReserva;
   }
 
-  console.log(`❌ NO encontrado: ${key}`);
+  // Fallback a búsqueda en reservasCache
+  for (const [key, estado] of Object.entries(reservasCache)) {
+    const keyPattern = `${subInstalacionSeleccionada}_${fechaStr}`;
+    if (key.startsWith(keyPattern)) {
+      console.log(`✅ Encontrado en caché: ${key} -> ${estado}`);
+      return {
+        estado: estado,
+        socioNombre: 'Reservado'
+      };
+    }
+  }
+
+  console.log(`❌ NO encontrado para: ${subInstalacionSeleccionada}_${fechaStr}`);
   return null;
 }
 
