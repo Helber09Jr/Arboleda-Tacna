@@ -1121,6 +1121,9 @@ async function procesarReserva() {
 
     console.log('✅ Reserva guardada:', idCorto);
 
+    // Actualizar calendario en tiempo real
+    inicializarListenerReservas();
+
     setTimeout(() => {
       mostrarModalExito(idCorto);
     }, 300);
@@ -1365,7 +1368,14 @@ function formatearHora(hora) {
 function mostrarModalExito(idReserva) {
   // Obtener datos de la reserva
   const instalacion = formatearNombreInstalacion(subInstalacionSeleccionada || '');
-  const fechaCompleta = fechaSeleccionada ? formatearFechaCompleta(fechaSeleccionada) : 'Por confirmar';
+
+  // Formato simple de fecha sin día de semana
+  let fechaSimple = 'Por confirmar';
+  if (fechaSeleccionada) {
+    const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+    fechaSimple = fechaSeleccionada.toLocaleDateString('es-PE', opciones);
+  }
+
   const tipoInstalacion = obtenerTipoInstalacion();
 
   // Determinar la hora según el tipo de instalación
@@ -1390,7 +1400,7 @@ function mostrarModalExito(idReserva) {
 
   if (idElement) idElement.textContent = idReserva || 'PENDIENTE';
   if (instElement) instElement.textContent = instalacion;
-  if (fechaElement) fechaElement.textContent = fechaCompleta;
+  if (fechaElement) fechaElement.textContent = fechaSimple;
   if (horaElement) horaElement.textContent = hora;
   if (personasElement) personasElement.textContent = personas;
 
