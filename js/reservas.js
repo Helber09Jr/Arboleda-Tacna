@@ -1143,18 +1143,8 @@ async function procesarReserva() {
 
     console.log('✅ Reserva guardada:', idCorto);
 
-    // Actualizar caché localmente para mostrar inmediatamente
-    const fechaStr = fechaSeleccionada.toISOString().split('T')[0];
-    const key = `${subInstalacionSeleccionada}_${fechaStr}`;
-    reservasCache[key] = 'pendiente';
-    reservasCompletasCache[key] = {
-      estado: 'pendiente',
-      socioNombre: nombre
-    };
-
-    // Actualizar listener en tiempo real
-    inicializarListenerReservas();
-
+    // El listener de Firebase se actualizará automáticamente en tiempo real
+    // Mostrar ticket de confirmación
     setTimeout(() => {
       mostrarModalExito(idCorto);
     }, 300);
