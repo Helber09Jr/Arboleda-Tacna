@@ -266,16 +266,19 @@ function inicializarListenerReservas() {
       });
 
       console.log('📊 Reservas actualizadas:', Object.keys(reservasCache).length);
+      console.log('🔑 Claves en caché:', Object.keys(reservasCache));
 
       // Actualizar calendario si está visible (modal abierto)
       const modalCalendario = document.getElementById('modalCalendario');
       if (modalCalendario && modalCalendario.classList.contains('activo')) {
+        console.log('🔄 Regenerando calendario (modal visible)');
         generarCalendario();
       }
 
       // Actualizar horarios si están visibles
       const modalHorarios = document.getElementById('modalHorarios');
       if (modalHorarios && modalHorarios.classList.contains('activo')) {
+        console.log('🔄 Regenerando horarios (modal visible)');
         generarHorarios();
       }
     }, (error) => {
@@ -287,17 +290,29 @@ function inicializarListenerReservas() {
   }
 }
 
-function generarClaveReserva(reserva) {
-  let fechaStr;
-  
-  if (reserva.fecha && reserva.fecha.toDate) {
-    fechaStr = reserva.fecha.toDate().toISOString().split('T')[0];
-  } else if (reserva.fecha instanceof Date) {
-    fechaStr = reserva.fecha.toISOString().split('T')[0];
+function formatearFechaParaClave(fecha) {
+  let fechaObj;
+
+  // Convertir Timestamp de Firebase a Date si es necesario
+  if (fecha && typeof fecha.toDate === 'function') {
+    fechaObj = fecha.toDate();
+  } else if (fecha instanceof Date) {
+    fechaObj = fecha;
   } else {
-    fechaStr = new Date().toISOString().split('T')[0];
+    fechaObj = new Date();
   }
-  
+
+  // Obtener año, mes, día en zona horaria local
+  const year = fechaObj.getFullYear();
+  const month = String(fechaObj.getMonth() + 1).padStart(2, '0');
+  const day = String(fechaObj.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
+function generarClaveReserva(reserva) {
+  const fechaStr = formatearFechaParaClave(reserva.fecha);
+
   // Para bloques por hora, incluir el horario en la clave
   if (reserva.horario && reserva.horario !== '10:00 AM - 6:00 PM') {
     return `${reserva.subInstalacion}_${fechaStr}_${reserva.horario}`;
@@ -563,7 +578,11 @@ function abrirCalendario() {
 function generarCalendario() {
   const contenedor = document.getElementById('calendarioDias');
   if (!contenedor) return;
-  
+
+  console.log('📅 Generando calendario para:', subInstalacionSeleccionada);
+  console.log('💾 Caché actual:', reservasCache);
+  console.log('📊 Total reservas en caché:', Object.keys(reservasCache).length);
+
   const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   
   const mesTexto = document.getElementById('mesActualTexto');
@@ -706,7 +725,7 @@ function seleccionarFecha(dia) {
 }
 
 function obtenerEstadoReserva(fecha) {
-  const fechaStr = fecha.toISOString().split('T')[0];
+  const fechaStr = formatearFechaParaClave(fecha);
   const key = `${subInstalacionSeleccionada}_${fechaStr}`;
   
   if (reservasCache[key]) {
@@ -717,20 +736,25 @@ function obtenerEstadoReserva(fecha) {
 }
 
 function obtenerInfoReservaCompleta(fecha) {
-  const fechaStr = fecha.toISOString().split('T')[0];
+  const fechaStr = formatearFechaParaClave(fecha);
   const key = `${subInstalacionSeleccionada}_${fechaStr}`;
-  
+
+  console.log(`🔍 Buscando: ${key}`);
+
   if (reservasCompletasCache[key]) {
+    console.log(`✅ Encontrado en caché completo: ${key} -> ${reservasCompletasCache[key].estado}`);
     return reservasCompletasCache[key];
   }
-  
+
   if (reservasCache[key]) {
+    console.log(`✅ Encontrado en caché: ${key} -> ${reservasCache[key]}`);
     return {
       estado: reservasCache[key],
       socioNombre: 'Reservado'
     };
   }
-  
+
+  console.log(`❌ NO encontrado: ${key}`);
   return null;
 }
 
@@ -853,13 +877,13 @@ function generarHorarios() {
   if (!datosInst || datosInst.tipo !== 'bloques-hora') return;
   
   let html = '';
-  const fechaStr = fechaSeleccionada.toISOString().split('T')[0];
-  
+  const fechaStr = formatearFechaParaClave(fechaSeleccionada);
+
   for (let hora = datosInst.horaInicio; hora < datosInst.horaFin; hora++) {
     const horaInicio = formatearHora(hora);
     const horaFin = formatearHora(hora + 1);
     const bloqueId = `${hora}:00-${hora + 1}:00`;
-    
+
     const key = `${subInstalacionSeleccionada}_${fechaStr}_${bloqueId}`;
     const estadoReserva = reservasCache[key];
     const reservado = estadoReserva === 'reservado' || estadoReserva === 'pendiente';
