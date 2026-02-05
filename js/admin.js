@@ -1526,6 +1526,45 @@ function cerrarModalReservaManual() {
   }
 }
 
+async function verificarConflictoReserva(subInstalacion, fecha, horario) {
+  try {
+    // Convertir fecha string (YYYY-MM-DD) a timestamp
+    const fechaInicio = new Date(fecha + 'T00:00:00');
+    const fechaFin = new Date(fecha + 'T23:59:59');
+
+    const q = query(
+      collection(db, 'reservas'),
+      where('subInstalacion', '==', subInstalacion),
+      where('fecha', '>=', Timestamp.fromDate(fechaInicio)),
+      where('fecha', '<=', Timestamp.fromDate(fechaFin))
+    );
+
+    const snapshot = await getDocs(q);
+
+    for (const doc of snapshot.docs) {
+      const reserva = doc.data();
+
+      // Bloquear si el estado es pendiente o reservado
+      if (reserva.estado === 'pendiente' || reserva.estado === 'reservado') {
+        // Para instalaciones con horarios por hora, también comparar el horario
+        if (horario && horario !== '10:00 AM - 6:00 PM') {
+          if (reserva.horario === horario) {
+            return true; // Conflicto encontrado
+          }
+        } else {
+          // Para parrillas (bloque día), cualquier reserva en esa fecha es conflicto
+          return true;
+        }
+      }
+    }
+
+    return false; // Sin conflicto
+  } catch (error) {
+    console.error('Error verificando conflicto:', error);
+    return false;
+  }
+}
+
 async function guardarReservaManual() {
   // VALIDACIÓN DE PERMISO - CREAR RESERVAS
   if (!verificarPermiso(usuarioAdminData, 'reservas.crear')) {
@@ -1545,6 +1584,13 @@ async function guardarReservaManual() {
 
   if (!instalacion || !fecha || !nombre || !telefono || !personas) {
     mostrarToast('Completa todos los campos obligatorios');
+    return;
+  }
+
+  // VALIDAR QUE NO EXISTA CONFLICTO
+  const existeConflicto = await verificarConflictoReserva(instalacion, fecha, horario);
+  if (existeConflicto) {
+    mostrarToast('⚠️ Ya existe una reserva pendiente o confirmada para esa fecha/horario');
     return;
   }
 
