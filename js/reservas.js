@@ -1428,6 +1428,28 @@ function convertirHoraFormato12(hora) {
   return `${num - 12}:00 PM`;
 }
 
+function formatearNombreInstalacion(subId) {
+  const nombres = {
+    'parrilla-central': 'Parrilla Central',
+    'parrilla-grande': 'Parrilla Grande',
+    'parrilla-familiar': 'Parrilla Familiar',
+    'parrilla-1': 'Parrilla 1',
+    'parrilla-2': 'Parrilla 2',
+    'parrilla-3': 'Parrilla 3',
+    'parrilla-4': 'Parrilla 4',
+    'tenis-1': 'Cancha de Tenis 1',
+    'tenis-2': 'Cancha de Tenis 2',
+    'tenis-3': 'Cancha de Tenis 3',
+    'fronton-1': 'Frontón 1',
+    'fronton-2': 'Frontón 2',
+    'fronton-3': 'Frontón 3',
+    'fronton-4': 'Frontón 4',
+    'mesa-restaurante': 'Mesa Restaurante'
+  };
+
+  return nombres[subId] || subId;
+}
+
 function resetearSeleccion() {
   instalacionSeleccionada = null;
   subInstalacionSeleccionada = null;
