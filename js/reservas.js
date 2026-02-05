@@ -632,7 +632,7 @@ function generarCalendario() {
         clases += ' tiene-reserva';
         dataAtributos = `data-socio="${infoReserva.socioNombre}" data-estado="${infoReserva.estado}"`;
 
-        if (infoReserva.estado === 'reservado') {
+        if (infoReserva.estado === 'reservado' || infoReserva.estado === 'pendiente') {
           clickeable = false;
         }
       } else {
@@ -1147,6 +1147,13 @@ async function procesarReserva() {
 
   if (!firebaseDisponible) {
     mostrarToast('Sin conexión a la base de datos. Usa el botón de WhatsApp.');
+    return;
+  }
+
+  // Validar que la fecha/horario esté disponible antes de guardar
+  const estadoActual = obtenerEstadoReserva(fechaSeleccionada);
+  if (estadoActual !== 'disponible') {
+    mostrarToast('⚠️ Esta fecha ya ha sido reservada. Por favor selecciona otra.');
     return;
   }
 
