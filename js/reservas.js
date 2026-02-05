@@ -35,8 +35,9 @@ let socioVerificado = null;
 const datosInstalaciones = {
   parrillas: {
     nombre: 'Parrillas',
-    tipo: 'bloque-dia',
-    horario: '10:00 AM - 6:00 PM',
+    tipo: 'bloques-hora',
+    horaInicio: 10,
+    horaFin: 18,
     subopciones: [
       { id: 'parrilla-central', nombre: 'Parrilla Central', capacidad: 30 },
       { id: 'parrilla-grande', nombre: 'Parrilla Grande', capacidad: 35 },
@@ -1335,18 +1336,69 @@ function formatearHora(hora) {
 // UI HELPERS
 // ==========================================================
 
-function mostrarModalExito(mensaje) {
+function mostrarModalExito(mensaje, idReserva = null, datosReserva = null) {
+  // Generar ID de reserva si no se proporciona
+  if (!idReserva) {
+    idReserva = generarIdReserva();
+  }
+
+  // Obtener datos de la reserva
+  const instalacion = formatearNombreInstalacion(subInstalacionSeleccionada || '');
+  const fecha = fechaSeleccionada ? formatearFecha(fechaSeleccionada) : 'Por confirmar';
+  const hora = horarioSeleccionado ? convertirHoraFormato12(horarioSeleccionado) : '10:00 AM';
+  const personas = document.getElementById('reservaPersonas')?.value || 'N/A';
+
+  // Llenar datos del ticket
+  const idElement = document.getElementById('idReservaConfirmacion');
+  const instElement = document.getElementById('instReservaConfirmacion');
+  const fechaElement = document.getElementById('fechaReservaConfirmacion');
+  const horaElement = document.getElementById('horaReservaConfirmacion');
+  const personasElement = document.getElementById('personasReservaConfirmacion');
+
+  if (idElement) idElement.textContent = idReserva;
+  if (instElement) instElement.textContent = instalacion;
+  if (fechaElement) fechaElement.textContent = fecha;
+  if (horaElement) horaElement.textContent = hora;
+  if (personasElement) personasElement.textContent = personas;
+
+  // Actualizar mensaje si se proporciona
   const mensajeEl = document.getElementById('mensajeExito');
-  if (mensajeEl) {
-    // Preservar saltos de línea
+  if (mensajeEl && mensaje) {
     mensajeEl.innerHTML = mensaje.replace(/\n/g, '<br>');
   }
-  
+
   const modal = document.getElementById('modalExito');
   if (modal) {
     modal.classList.add('activo');
     document.body.style.overflow = 'hidden';
   }
+}
+
+function generarIdReserva() {
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let id = '';
+  for (let i = 0; i < 8; i++) {
+    id += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+  }
+  return id;
+}
+
+function convertirHoraFormato12(hora) {
+  if (!hora) return '10:00 AM';
+
+  // Si ya está en formato 12h, devolver como está
+  if (hora.includes('AM') || hora.includes('PM')) {
+    return hora;
+  }
+
+  // Convertir de formato 24h a 12h
+  const [horaNum] = hora.split(':');
+  const num = parseInt(horaNum);
+
+  if (num === 0) return '12:00 AM';
+  if (num < 12) return `${num}:00 AM`;
+  if (num === 12) return '12:00 PM';
+  return `${num - 12}:00 PM`;
 }
 
 function resetearSeleccion() {
