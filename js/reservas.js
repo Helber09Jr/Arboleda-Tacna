@@ -1086,14 +1086,15 @@ async function procesarReserva() {
 
   // Para parrillas, usar la hora de ingreso seleccionada
   if (tipoInstalacion === 'bloque-dia' && horaIngreso) {
-    horarioTexto = `${convertirHoraFormato12(horaIngreso)}`;
+    horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
   }
-  
+
   const reserva = {
     instalacion: instalacionSeleccionada,
     subInstalacion: subInstalacionSeleccionada,
     fecha: Timestamp.fromDate(fechaSeleccionada),
     horario: horarioTexto,
+    horaIngreso: horaIngreso, // Guardar hora de ingreso para parrillas
     socio: {
       nombre: nombre,
       numero: numeroSocio,
@@ -1118,12 +1119,14 @@ async function procesarReserva() {
 
     const idCorto = docRef.id.substring(0, 8).toUpperCase();
 
+    console.log('✅ Reserva guardada:', idCorto);
+
     setTimeout(() => {
       mostrarModalExito(idCorto);
     }, 300);
 
   } catch (error) {
-    console.error('Error al guardar reserva:', error);
+    console.error('❌ Error al guardar reserva:', error);
     mostrarCargando(false);
     mostrarToast('Error al guardar la reserva. Intenta nuevamente o usa WhatsApp.');
   }
