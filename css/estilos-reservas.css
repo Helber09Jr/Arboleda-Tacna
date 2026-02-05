@@ -1424,6 +1424,12 @@ button {
   gap: 15px;
 }
 
+.fila-campos-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
 .aviso-capacidad {
   font-size: 0.8rem;
   color: var(--amarillo-pendiente);

@@ -35,9 +35,8 @@ let socioVerificado = null;
 const datosInstalaciones = {
   parrillas: {
     nombre: 'Parrillas',
-    tipo: 'bloques-hora',
-    horaInicio: 10,
-    horaFin: 18,
+    tipo: 'bloque-dia',
+    horario: '10:00 AM - 6:00 PM',
     subopciones: [
       { id: 'parrilla-central', nombre: 'Parrilla Central', capacidad: 30 },
       { id: 'parrilla-grande', nombre: 'Parrilla Grande', capacidad: 35 },
@@ -1071,6 +1070,7 @@ async function procesarReserva() {
   const telefono = document.getElementById('reservaTelefono').value.trim();
   const personas = document.getElementById('reservaPersonas').value;
   const observaciones = document.getElementById('reservaObservaciones').value.trim();
+  const horaIngreso = document.getElementById('reservaHoraIngreso')?.value || '';
 
   if (!validarFormularioReserva(nombre, personas)) {
     return;
@@ -1082,7 +1082,12 @@ async function procesarReserva() {
   }
 
   const tipoInstalacion = obtenerTipoInstalacion();
-  const horarioTexto = tipoInstalacion === 'bloque-dia' ? '10:00 AM - 6:00 PM' : horarioSeleccionado;
+  let horarioTexto = horarioSeleccionado || '10:00 AM - 6:00 PM';
+
+  // Para parrillas, usar la hora de ingreso seleccionada
+  if (tipoInstalacion === 'bloque-dia' && horaIngreso) {
+    horarioTexto = `${convertirHoraFormato12(horaIngreso)}`;
+  }
   
   const reserva = {
     instalacion: instalacionSeleccionada,
@@ -1210,6 +1215,18 @@ function validarFormularioReserva(nombre, personas) {
     return false;
   }
 
+  // Validar hora de ingreso para parrillas
+  const tipoInstalacion = obtenerTipoInstalacion();
+  if (tipoInstalacion === 'bloque-dia') {
+    const horaIngreso = document.getElementById('reservaHoraIngreso')?.value;
+    if (!horaIngreso) {
+      mostrarToast('Por favor selecciona la hora de ingreso');
+      const campo = document.getElementById('reservaHoraIngreso');
+      if (campo) campo.focus();
+      return false;
+    }
+  }
+
   return true;
 }
 
@@ -1228,15 +1245,21 @@ function enviarReservaWhatsApp() {
   const telefono = document.getElementById('reservaTelefono').value.trim();
   const personas = document.getElementById('reservaPersonas').value;
   const observaciones = document.getElementById('reservaObservaciones').value.trim();
+  const horaIngreso = document.getElementById('reservaHoraIngreso')?.value || '';
 
   if (!validarFormularioReserva(nombre, personas)) {
     return;
   }
-  
+
   const nombreSub = obtenerNombreSubInstalacion(subInstalacionSeleccionada);
   const fechaFormateada = formatearFechaCompleta(fechaSeleccionada);
   const tipoInstalacion = obtenerTipoInstalacion();
-  const horarioTexto = tipoInstalacion === 'bloque-dia' ? '10:00 AM - 6:00 PM' : horarioSeleccionado;
+  let horarioTexto = horarioSeleccionado || '10:00 AM - 6:00 PM';
+
+  // Para parrillas, usar la hora de ingreso seleccionada
+  if (tipoInstalacion === 'bloque-dia' && horaIngreso) {
+    horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
+  }
   
   let mensaje = `🏡 *SOLICITUD DE RESERVA - LA ARBOLEDA CLUB*\n\n`;
   mensaje += `📍 *Instalación:* ${nombreSub}\n`;
