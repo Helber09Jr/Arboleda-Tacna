@@ -638,10 +638,18 @@
               <input type="tel" id="reservaTelefono" placeholder="Ej: 908881162" maxlength="15">
             </div>
 
-            <div class="campo-formulario">
-              <label for="reservaPersonas">Cantidad de personas *</label>
-              <input type="number" id="reservaPersonas" required min="1" max="50" placeholder="Ej: 10">
-              <span id="avisoCapacidad" class="aviso-capacidad"></span>
+            <!-- Fila con Personas y Hora de Ingreso -->
+            <div class="fila-campos-dual">
+              <div class="campo-formulario">
+                <label for="reservaPersonas">Cantidad de personas *</label>
+                <input type="number" id="reservaPersonas" required min="1" max="50" placeholder="Ej: 10">
+                <span id="avisoCapacidad" class="aviso-capacidad"></span>
+              </div>
+
+              <div class="campo-formulario">
+                <label for="reservaHoraIngreso">Hora de ingreso *</label>
+                <input type="time" id="reservaHoraIngreso" required>
+              </div>
             </div>
 
             <div class="campo-formulario">
