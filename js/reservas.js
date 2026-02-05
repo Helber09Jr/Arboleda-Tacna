@@ -290,17 +290,29 @@ function inicializarListenerReservas() {
   }
 }
 
-function generarClaveReserva(reserva) {
-  let fechaStr;
-  
-  if (reserva.fecha && reserva.fecha.toDate) {
-    fechaStr = reserva.fecha.toDate().toISOString().split('T')[0];
-  } else if (reserva.fecha instanceof Date) {
-    fechaStr = reserva.fecha.toISOString().split('T')[0];
+function formatearFechaParaClave(fecha) {
+  let fechaObj;
+
+  // Convertir Timestamp de Firebase a Date si es necesario
+  if (fecha && typeof fecha.toDate === 'function') {
+    fechaObj = fecha.toDate();
+  } else if (fecha instanceof Date) {
+    fechaObj = fecha;
   } else {
-    fechaStr = new Date().toISOString().split('T')[0];
+    fechaObj = new Date();
   }
-  
+
+  // Obtener año, mes, día en zona horaria local
+  const year = fechaObj.getFullYear();
+  const month = String(fechaObj.getMonth() + 1).padStart(2, '0');
+  const day = String(fechaObj.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
+function generarClaveReserva(reserva) {
+  const fechaStr = formatearFechaParaClave(reserva.fecha);
+
   // Para bloques por hora, incluir el horario en la clave
   if (reserva.horario && reserva.horario !== '10:00 AM - 6:00 PM') {
     return `${reserva.subInstalacion}_${fechaStr}_${reserva.horario}`;
@@ -713,7 +725,7 @@ function seleccionarFecha(dia) {
 }
 
 function obtenerEstadoReserva(fecha) {
-  const fechaStr = fecha.toISOString().split('T')[0];
+  const fechaStr = formatearFechaParaClave(fecha);
   const key = `${subInstalacionSeleccionada}_${fechaStr}`;
   
   if (reservasCache[key]) {
@@ -724,7 +736,7 @@ function obtenerEstadoReserva(fecha) {
 }
 
 function obtenerInfoReservaCompleta(fecha) {
-  const fechaStr = fecha.toISOString().split('T')[0];
+  const fechaStr = formatearFechaParaClave(fecha);
   const key = `${subInstalacionSeleccionada}_${fechaStr}`;
 
   console.log(`🔍 Buscando: ${key}`);
@@ -865,13 +877,13 @@ function generarHorarios() {
   if (!datosInst || datosInst.tipo !== 'bloques-hora') return;
   
   let html = '';
-  const fechaStr = fechaSeleccionada.toISOString().split('T')[0];
-  
+  const fechaStr = formatearFechaParaClave(fechaSeleccionada);
+
   for (let hora = datosInst.horaInicio; hora < datosInst.horaFin; hora++) {
     const horaInicio = formatearHora(hora);
     const horaFin = formatearHora(hora + 1);
     const bloqueId = `${hora}:00-${hora + 1}:00`;
-    
+
     const key = `${subInstalacionSeleccionada}_${fechaStr}_${bloqueId}`;
     const estadoReserva = reservasCache[key];
     const reservado = estadoReserva === 'reservado' || estadoReserva === 'pendiente';
