@@ -1430,6 +1430,72 @@ button {
   gap: 15px;
 }
 
+.cantidad-personas-spinner {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: #f8f9fa;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cantidad-personas-spinner:focus-within {
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+}
+
+.btn-cantidad {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--azul-principal);
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cantidad:hover {
+  background: rgba(0, 82, 180, 0.1);
+  color: #003d8a;
+}
+
+.btn-cantidad:active {
+  transform: scale(0.95);
+}
+
+.cantidad-personas-spinner input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--azul-principal);
+  padding: 0 10px;
+  outline: none;
+}
+
+.cantidad-personas-spinner input::placeholder {
+  color: #bbb;
+}
+
+/* Remove spinner arrows from number input */
+.cantidad-personas-spinner input::-webkit-outer-spin-button,
+.cantidad-personas-spinner input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cantidad-personas-spinner input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .aviso-capacidad {
   font-size: 0.8rem;
   color: var(--amarillo-pendiente);
@@ -1546,26 +1612,30 @@ button {
   padding: 0;
   display: flex;
   flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 82, 180, 0.15);
+  background: white;
 }
 
-/* Encabezado con Logo */
+/* Encabezado con Logo - Premium */
 .ticket-encabezado {
   background: linear-gradient(135deg, #0052B4 0%, #003d8a 100%);
-  padding: 16px 20px;
+  padding: 24px 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   color: white;
 }
 
 .ticket-logo-compacto {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
   background: white;
-  padding: 4px;
+  padding: 8px;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .ticket-estado {
@@ -1574,74 +1644,79 @@ button {
 
 .estado-badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
+  padding: 6px 14px;
+  border-radius: 24px;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .estado-badge.pendiente {
-  background: rgba(255, 193, 7, 0.9);
+  background: rgba(255, 193, 7, 0.95);
   color: #333;
 }
 
 .ticket-subtitulo {
-  margin: 4px 0 0 0;
-  font-size: 0.9rem;
+  margin: 6px 0 0 0;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.98);
 }
 
-/* Datos de Reserva */
+/* Datos de Reserva - Premium */
 .ticket-datos {
-  padding: 16px 20px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 24px;
+  background: white;
 }
 
 .dato-fila {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  font-size: 0.9rem;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .dato-fila:last-child {
   padding-bottom: 0;
+  border-bottom: none;
 }
 
 .dato-label {
   font-weight: 600;
-  color: var(--azul-principal);
-  min-width: 70px;
+  color: #666;
+  min-width: 80px;
+  font-size: 0.9rem;
 }
 
 .dato-valor {
-  color: #333;
+  color: #0052B4;
   font-weight: 700;
   text-align: right;
+  font-size: 1rem;
 }
 
 /* Separador */
 .ticket-linea-separadora {
-  height: 1px;
-  background: #ddd;
+  height: 0px;
+  background: transparent;
   margin: 0;
 }
 
-/* Mensaje de Confirmación */
+/* Mensaje de Confirmación - Premium */
 .ticket-mensaje {
-  padding: 14px 20px;
-  background: #f0f7ff;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
   text-align: center;
-  border-bottom: 1px solid #ddd;
 }
 
 .ticket-mensaje p {
   margin: 4px 0;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
   color: #333;
   line-height: 1.3;
 }

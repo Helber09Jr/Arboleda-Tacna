@@ -1038,9 +1038,9 @@ function inicializarFormularios() {
   // Validación de personas en tiempo real
   const campoPersonas = document.getElementById('reservaPersonas');
   if (campoPersonas) {
-    campoPersonas.oninput = () => {
+    const actualizarAviso = () => {
       const capacidad = obtenerCapacidadSubInstalacion();
-      const valor = parseInt(campoPersonas.value);
+      const valor = parseInt(campoPersonas.value) || 0;
       const aviso = document.getElementById('avisoCapacidad');
 
       if (valor > capacidad) {
@@ -1048,13 +1048,20 @@ function inicializarFormularios() {
           aviso.textContent = `⚠️ Excede capacidad máxima (${capacidad})`;
           aviso.style.color = 'var(--rojo-error)';
         }
+      } else if (valor >= capacidad * 0.8) {
+        if (aviso) {
+          aviso.textContent = `⚠️ Proche al máximo (${capacidad})`;
+          aviso.style.color = '#ff9800';
+        }
       } else {
         if (aviso) {
-          aviso.textContent = `Máximo ${capacidad} personas`;
-          aviso.style.color = '';
+          aviso.textContent = '';
         }
       }
     };
+
+    campoPersonas.oninput = actualizarAviso;
+    campoPersonas.onchange = actualizarAviso;
   }
 
   // Formulario de reserva principal
@@ -1470,6 +1477,62 @@ function mostrarModalExito(idReserva) {
     modal.classList.add('activo');
     document.body.style.overflow = 'hidden';
   }
+}
+
+// ==========================================================
+// FUNCIONES DE CANTIDAD DE PERSONAS (SPINNER)
+// ==========================================================
+
+function incrementarPersonas() {
+  const input = document.getElementById('reservaPersonas');
+  if (input) {
+    let valor = parseInt(input.value) || 0;
+    if (valor < 50) {
+      input.value = valor + 1;
+      validarCapacidadPersonas();
+    }
+  }
+}
+
+function decrementarPersonas() {
+  const input = document.getElementById('reservaPersonas');
+  if (input) {
+    let valor = parseInt(input.value) || 0;
+    if (valor > 1) {
+      input.value = valor - 1;
+      validarCapacidadPersonas();
+    }
+  }
+}
+
+function validarCapacidadPersonas() {
+  const input = document.getElementById('reservaPersonas');
+  const avisoCapacidad = document.getElementById('avisoCapacidad');
+
+  if (!input) return;
+
+  let valor = parseInt(input.value) || 0;
+
+  // Asegurar que esté dentro de rangos válidos
+  if (valor > 50) {
+    valor = 50;
+    input.value = 50;
+  } else if (valor < 1) {
+    valor = 1;
+    input.value = 1;
+  }
+
+  // Mostrar advertencia si es necesario
+  if (avisoCapacidad) {
+    if (valor >= 45) {
+      avisoCapacidad.textContent = '⚠️ Próximo al máximo (50)';
+      avisoCapacidad.style.color = '#ff9800';
+    } else {
+      avisoCapacidad.textContent = '';
+    }
+  }
+
+  return valor;
 }
 
 function generarIdReserva() {

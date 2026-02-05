@@ -19,7 +19,11 @@
   <link rel="apple-touch-icon" href="imagenes/logo-arboleda.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/estilos-reservas.css">
+  <!-- Cache busting: Force reload on changes -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="stylesheet" href="css/estilos-reservas.css?v=3.0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -642,7 +646,11 @@
             <div class="fila-campos-dual">
               <div class="campo-formulario">
                 <label for="reservaPersonas">Cantidad de personas *</label>
-                <input type="number" id="reservaPersonas" required min="1" max="50" placeholder="Ej: 10">
+                <div class="cantidad-personas-spinner">
+                  <button type="button" class="btn-cantidad" onclick="decrementarPersonas()" aria-label="Disminuir">−</button>
+                  <input type="number" id="reservaPersonas" required min="1" max="50" placeholder="0" value="1">
+                  <button type="button" class="btn-cantidad" onclick="incrementarPersonas()" aria-label="Aumentar">+</button>
+                </div>
                 <span id="avisoCapacidad" class="aviso-capacidad"></span>
               </div>
 
