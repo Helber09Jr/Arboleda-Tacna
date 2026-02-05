@@ -235,23 +235,28 @@ function verificarSocio() {
 
 function inicializarListenerReservas() {
   if (!firebaseDisponible || !db) return;
-  
+
   try {
+    // Desuscribirse del listener anterior si existe
+    if (unsubscribeReservas) {
+      unsubscribeReservas();
+    }
+
     const reservasCollection = collection(db, 'reservas');
     const q = query(reservasCollection, orderBy('fechaCreacion', 'desc'));
-    
+
     unsubscribeReservas = onSnapshot(q, (snapshot) => {
       reservasCache = {};
       reservasCompletasCache = {};
-      
+
       snapshot.forEach((documento) => {
         const reserva = documento.data();
         const key = generarClaveReserva(reserva);
-        
+
         // Solo considerar reservas activas (pendiente o reservado)
         if (reserva.estado !== 'cancelado') {
           reservasCache[key] = reserva.estado;
-          
+
           // Guardar info completa para mostrar en calendario
           reservasCompletasCache[key] = {
             estado: reserva.estado,
@@ -259,15 +264,15 @@ function inicializarListenerReservas() {
           };
         }
       });
-      
+
       console.log('📊 Reservas actualizadas:', Object.keys(reservasCache).length);
-      
+
       // Actualizar calendario si está visible
       const calendarioDias = document.getElementById('calendarioDias');
       if (calendarioDias && calendarioDias.innerHTML !== '') {
         generarCalendario();
       }
-      
+
       // Actualizar horarios si están visibles
       const listaHorarios = document.getElementById('listaHorarios');
       if (listaHorarios && listaHorarios.innerHTML !== '') {
@@ -412,8 +417,25 @@ function inicializarModales() {
   if (btnCerrarExito) {
     btnCerrarExito.onclick = () => {
       cerrarModal('modalExito');
-      resetearSeleccion();
       limpiarFormularios();
+
+      // Guardar la sub-instalación seleccionada antes de resetear
+      const subInstalacionTemp = subInstalacionSeleccionada;
+
+      // Resetear pero mantener la instalación actual
+      fechaSeleccionada = null;
+      horarioSeleccionado = null;
+      socioVerificado = null;
+      mesActual = new Date().getMonth();
+      anioActual = new Date().getFullYear();
+
+      // Volver a abrir el calendario con la sub-instalación
+      if (subInstalacionTemp) {
+        subInstalacionSeleccionada = subInstalacionTemp;
+        setTimeout(() => {
+          abrirCalendario();
+        }, 300);
+      }
     };
   }
 
@@ -1121,7 +1143,16 @@ async function procesarReserva() {
 
     console.log('✅ Reserva guardada:', idCorto);
 
-    // Actualizar calendario en tiempo real
+    // Actualizar caché localmente para mostrar inmediatamente
+    const fechaStr = fechaSeleccionada.toISOString().split('T')[0];
+    const key = `${subInstalacionSeleccionada}_${fechaStr}`;
+    reservasCache[key] = 'pendiente';
+    reservasCompletasCache[key] = {
+      estado: 'pendiente',
+      socioNombre: nombre
+    };
+
+    // Actualizar listener en tiempo real
     inicializarListenerReservas();
 
     setTimeout(() => {
