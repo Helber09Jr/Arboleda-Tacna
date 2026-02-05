@@ -267,15 +267,15 @@ function inicializarListenerReservas() {
 
       console.log('📊 Reservas actualizadas:', Object.keys(reservasCache).length);
 
-      // Actualizar calendario si está visible
-      const calendarioDias = document.getElementById('calendarioDias');
-      if (calendarioDias && calendarioDias.innerHTML !== '') {
+      // Actualizar calendario si está visible (modal abierto)
+      const modalCalendario = document.getElementById('modalCalendario');
+      if (modalCalendario && modalCalendario.classList.contains('activo')) {
         generarCalendario();
       }
 
       // Actualizar horarios si están visibles
-      const listaHorarios = document.getElementById('listaHorarios');
-      if (listaHorarios && listaHorarios.innerHTML !== '') {
+      const modalHorarios = document.getElementById('modalHorarios');
+      if (modalHorarios && modalHorarios.classList.contains('activo')) {
         generarHorarios();
       }
     }, (error) => {
