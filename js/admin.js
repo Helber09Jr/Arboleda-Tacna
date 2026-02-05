@@ -1099,7 +1099,8 @@ function construirCalendario() {
 function marcarDiasConReservas() {
   const diasConReservas = {};
 
-  reservasData.forEach(reserva => {
+  // Usar reservasFiltradas para respetar todos los filtros aplicados (fecha, estado, búsqueda, etc.)
+  reservasFiltradas.forEach(reserva => {
     let filtroValido = true;
     if (filtroInstalacionCalendario) {
       // Comparación case-insensitive para el filtro
@@ -1143,7 +1144,8 @@ function actualizarDetalleDelDia(fecha) {
   if (!contenedor) return;
 
   const fechaString = fecha.toISOString().split('T')[0];
-  const reservasDelDia = reservasData.filter(r => {
+  // Usar reservasFiltradas para respetar todos los filtros aplicados
+  const reservasDelDia = reservasFiltradas.filter(r => {
     const fechaReserva = r.fecha.toDate ? r.fecha.toDate() : new Date(r.fecha);
     const fechaReservaString = fechaReserva.toISOString().split('T')[0];
 
