@@ -1086,14 +1086,15 @@ async function procesarReserva() {
 
   // Para parrillas, usar la hora de ingreso seleccionada
   if (tipoInstalacion === 'bloque-dia' && horaIngreso) {
-    horarioTexto = `${convertirHoraFormato12(horaIngreso)}`;
+    horarioTexto = `Ingreso a las ${convertirHoraFormato12(horaIngreso)}`;
   }
-  
+
   const reserva = {
     instalacion: instalacionSeleccionada,
     subInstalacion: subInstalacionSeleccionada,
     fecha: Timestamp.fromDate(fechaSeleccionada),
     horario: horarioTexto,
+    horaIngreso: horaIngreso, // Guardar hora de ingreso para parrillas
     socio: {
       nombre: nombre,
       numero: numeroSocio,
@@ -1118,12 +1119,14 @@ async function procesarReserva() {
 
     const idCorto = docRef.id.substring(0, 8).toUpperCase();
 
+    console.log('✅ Reserva guardada:', idCorto);
+
     setTimeout(() => {
-      mostrarModalExito(`Tu reserva ha sido registrada exitosamente.\n\nID de Reserva: ${idCorto}\n\nRecibirás una confirmación pronto.`);
+      mostrarModalExito(idCorto);
     }, 300);
 
   } catch (error) {
-    console.error('Error al guardar reserva:', error);
+    console.error('❌ Error al guardar reserva:', error);
     mostrarCargando(false);
     mostrarToast('Error al guardar la reserva. Intenta nuevamente o usa WhatsApp.');
   }
@@ -1359,16 +1362,23 @@ function formatearHora(hora) {
 // UI HELPERS
 // ==========================================================
 
-function mostrarModalExito(mensaje, idReserva = null, datosReserva = null) {
-  // Generar ID de reserva si no se proporciona
-  if (!idReserva) {
-    idReserva = generarIdReserva();
-  }
-
+function mostrarModalExito(idReserva) {
   // Obtener datos de la reserva
   const instalacion = formatearNombreInstalacion(subInstalacionSeleccionada || '');
-  const fecha = fechaSeleccionada ? formatearFecha(fechaSeleccionada) : 'Por confirmar';
-  const hora = horarioSeleccionado ? convertirHoraFormato12(horarioSeleccionado) : '10:00 AM';
+  const fechaCompleta = fechaSeleccionada ? formatearFechaCompleta(fechaSeleccionada) : 'Por confirmar';
+  const tipoInstalacion = obtenerTipoInstalacion();
+
+  // Determinar la hora según el tipo de instalación
+  let hora = '10:00 AM';
+  if (tipoInstalacion === 'bloque-dia') {
+    // Para parrillas, usar hora de ingreso
+    const horaIngreso = document.getElementById('reservaHoraIngreso')?.value || '10:00';
+    hora = convertirHoraFormato12(horaIngreso);
+  } else {
+    // Para otros tipos, usar horario seleccionado
+    hora = horarioSeleccionado ? convertirHoraFormato12(horarioSeleccionado) : '10:00 AM';
+  }
+
   const personas = document.getElementById('reservaPersonas')?.value || 'N/A';
 
   // Llenar datos del ticket
@@ -1378,17 +1388,11 @@ function mostrarModalExito(mensaje, idReserva = null, datosReserva = null) {
   const horaElement = document.getElementById('horaReservaConfirmacion');
   const personasElement = document.getElementById('personasReservaConfirmacion');
 
-  if (idElement) idElement.textContent = idReserva;
+  if (idElement) idElement.textContent = idReserva || 'PENDIENTE';
   if (instElement) instElement.textContent = instalacion;
-  if (fechaElement) fechaElement.textContent = fecha;
+  if (fechaElement) fechaElement.textContent = fechaCompleta;
   if (horaElement) horaElement.textContent = hora;
   if (personasElement) personasElement.textContent = personas;
-
-  // Actualizar mensaje si se proporciona
-  const mensajeEl = document.getElementById('mensajeExito');
-  if (mensajeEl && mensaje) {
-    mensajeEl.innerHTML = mensaje.replace(/\n/g, '<br>');
-  }
 
   const modal = document.getElementById('modalExito');
   if (modal) {
