@@ -2229,14 +2229,14 @@ button {
 .separador-total {
   height: 1px;
   background: repeating-linear-gradient(90deg, #0d3b66, #0d3b66 5px, transparent 5px, transparent 10px);
-  margin: 8px 0;
+  margin: 3px 0;
 }
 
 .carrito-total {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .total-contenido {
@@ -2273,7 +2273,7 @@ button {
 
 .datos-cliente-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
