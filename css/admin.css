@@ -5464,4 +5464,106 @@ body {
   .numero-semana {
     font-size: 1.8rem;
   }
+
+  /* Menú hamburguesa para tabs en móvil */
+  .boton-menu-tabs-movil {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+  }
+
+  .boton-menu-tabs-movil .linea {
+    width: 24px;
+    height: 2px;
+    background: var(--dorado-claro);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  .boton-menu-tabs-movil .linea:not(:last-child) {
+    margin-bottom: 6px;
+  }
+
+  .boton-menu-tabs-movil.activo .linea:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .boton-menu-tabs-movil.activo .linea:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .boton-menu-tabs-movil.activo .linea:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* En móvil, ocultar nav-tabs y mostrar hamburguesa */
+  @media (max-width: 768px) {
+    .boton-menu-tabs-movil {
+      display: flex;
+    }
+
+    .nav-tabs-admin {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      background: rgba(0, 52, 138, 0.98);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      border-bottom: 3px solid var(--dorado-claro);
+    }
+
+    .nav-tabs-admin.mostrar {
+      display: flex;
+    }
+
+    .tab-admin {
+      display: flex !important;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 20px !important;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .tab-admin:hover {
+      background: rgba(217, 184, 108, 0.1);
+      color: var(--dorado-claro);
+    }
+
+    .tab-admin.activo {
+      background: rgba(217, 184, 108, 0.15);
+      color: var(--dorado-claro);
+      border-left: 4px solid var(--dorado-claro);
+      padding-left: 16px !important;
+    }
+
+    .tab-admin svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+  }
 }

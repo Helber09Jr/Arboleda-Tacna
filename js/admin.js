@@ -315,6 +315,7 @@ function inicializarEventos() {
   inicializarModalConfirmacion();
   inicializarReservaManual();
   inicializarTabs();
+  inicializarMenuTabsMovil();
   inicializarGestionCarta();
 
   agregarAccionesRapidas();
@@ -2520,6 +2521,41 @@ function inicializarTabs() {
         cargarDatosCarta();
       }
     };
+  });
+}
+
+function inicializarMenuTabsMovil() {
+  const botonMenu = document.querySelector('.boton-menu-tabs-movil');
+  const menuNav = document.querySelector('.nav-tabs-admin');
+  const tabs = document.querySelectorAll('.tab-admin');
+
+  if (!botonMenu || !menuNav) return;
+
+  // Toggle del menú hamburguesa
+  botonMenu.addEventListener('click', () => {
+    botonMenu.classList.toggle('activo');
+    menuNav.classList.toggle('mostrar');
+    const expandido = botonMenu.classList.contains('activo');
+    botonMenu.setAttribute('aria-expanded', expandido);
+  });
+
+  // Cerrar menú al hacer click en un tab
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Cerrar menú en móvil
+      menuNav.classList.remove('mostrar');
+      botonMenu.classList.remove('activo');
+      botonMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Cerrar menú al hacer click fuera
+  document.addEventListener('click', (e) => {
+    if (!botonMenu.contains(e.target) && !menuNav.contains(e.target)) {
+      menuNav.classList.remove('mostrar');
+      botonMenu.classList.remove('activo');
+      botonMenu.setAttribute('aria-expanded', 'false');
+    }
   });
 }
 
