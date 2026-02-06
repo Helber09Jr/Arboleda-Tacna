@@ -71,28 +71,33 @@ function inicializarPanelCarrito() {
   const btnCerrar = document.getElementById('btnCerrarCarrito');
   const overlay = document.getElementById('overlayCarrito');
   const panel = document.getElementById('panelCarrito');
-  
+
   // Abrir carrito
   btnAbrir.addEventListener('click', () => {
     abrirPanelCarrito();
   });
-  
+
   // Cerrar carrito
   btnCerrar.addEventListener('click', () => {
     cerrarPanelCarrito();
   });
-  
+
   // Cerrar con overlay
   overlay.addEventListener('click', () => {
     cerrarPanelCarrito();
   });
-  
+
   // Cerrar con Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && panel.classList.contains('activo')) {
       cerrarPanelCarrito();
     }
   });
+
+  // Inicializar número de pedido y hora
+  inicializarNumeroPedidoYHora();
+  actualizarHoraPedido();
+  setInterval(actualizarHoraPedido, 60000); // Actualizar cada minuto
 }
 
 function abrirPanelCarrito() {
@@ -486,6 +491,51 @@ function construirMensajeWhatsApp(cliente, mozo, observacionGeneral) {
   mensaje += ` www.laarboledaclub.com`;
   
   return mensaje;
+}
+
+// ==========================================================
+// NÚMERO DE PEDIDO Y HORA (ESTILO BOLETA)
+// ==========================================================
+
+function inicializarNumeroPedidoYHora() {
+  let numeroPedido = localStorage.getItem('arboleda_numero_pedido');
+
+  // Si no existe o es un nuevo día, generar nuevo número
+  const hoyString = new Date().toISOString().split('T')[0];
+  const ultimoDia = localStorage.getItem('arboleda_ultimo_dia_pedido');
+
+  if (!numeroPedido || ultimoDia !== hoyString) {
+    // Generar número de pedido: YYYYMMDD + 001
+    const hoy = new Date();
+    const año = hoy.getFullYear();
+    const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoy.getDate()).padStart(2, '0');
+    numeroPedido = `${año}${mes}${dia}001`;
+
+    localStorage.setItem('arboleda_numero_pedido', numeroPedido);
+    localStorage.setItem('arboleda_ultimo_dia_pedido', hoyString);
+  } else {
+    // Incrementar número de pedido
+    const numero = parseInt(numeroPedido.slice(-3)) + 1;
+    numeroPedido = numeroPedido.slice(0, -3) + String(numero).padStart(3, '0');
+    localStorage.setItem('arboleda_numero_pedido', numeroPedido);
+  }
+
+  // Mostrar número en la interfaz
+  const elementoNumeroPedido = document.getElementById('numeroPedido');
+  if (elementoNumeroPedido) {
+    elementoNumeroPedido.textContent = numeroPedido.slice(-4); // Mostrar últimos 4 dígitos
+  }
+}
+
+function actualizarHoraPedido() {
+  const elementoHora = document.getElementById('horaPedido');
+  if (elementoHora) {
+    const ahora = new Date();
+    const horas = String(ahora.getHours()).padStart(2, '0');
+    const minutos = String(ahora.getMinutes()).padStart(2, '0');
+    elementoHora.textContent = `${horas}:${minutos}`;
+  }
 }
 
 // ==========================================================
