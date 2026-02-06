@@ -414,7 +414,7 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   flex-wrap: wrap;
 }
 
@@ -486,23 +486,24 @@ button {
   align-items: center;
   gap: 0;
   background: var(--blanco);
-  padding: 4px;
-  border-radius: 25px;
+  padding: 3px;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 2px solid var(--gris-medio);
+  border: 1px solid var(--gris-medio);
+  flex-shrink: 0;
 }
 
 .btn-vista {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border: none;
   background: transparent;
-  border-radius: 20px;
+  border-radius: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #888;
   white-space: nowrap;
@@ -526,12 +527,12 @@ button {
 /* Filtros de categorías */
 .filtros-categorias {
   display: flex;
-  gap: 10px;
-  padding: 15px 0;
+  gap: 8px;
+  padding: 10px 0;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--dorado) transparent;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -551,12 +552,12 @@ button {
 .filtro-categoria {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+  gap: 6px;
+  padding: 8px 16px;
   background: var(--blanco);
-  border: 2px solid var(--gris-medio);
+  border: 1px solid var(--gris-medio);
   border-radius: 50px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #555;
   cursor: pointer;
@@ -594,12 +595,12 @@ button {
 
 .filtros-etiquetas-carta {
   display: flex;
-  gap: 10px;
-  padding: 12px 0;
+  gap: 8px;
+  padding: 8px 0;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--dorado) transparent;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -615,12 +616,12 @@ button {
 .filtro-etiqueta-carta {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: 5px;
+  padding: 6px 14px;
   background: var(--blanco);
-  border: 2px solid var(--gris-medio);
+  border: 1px solid var(--gris-medio);
   border-radius: 25px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #555;
   cursor: pointer;
@@ -676,11 +677,19 @@ button {
   background: var(--blanco);
 }
 
+/* Header de resultados con toggle */
+.header-resultados {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
 /* Contador de resultados */
 .contador-resultados {
   font-size: 0.9rem;
   color: #666;
-  margin-bottom: 20px;
   font-weight: 500;
 }
 
@@ -2652,11 +2661,17 @@ button {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .buscador-carta {
     max-width: 100%;
   }
-  
+
+  /* Header de resultados responsive */
+  .header-resultados {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .toggle-vista {
     align-self: flex-end;
   }
