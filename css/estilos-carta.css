@@ -2220,7 +2220,7 @@ button {
 
 /* Footer del carrito */
 .panel-carrito-footer {
-  padding: 15px;
+  padding: 12px;
   background: var(--blanco);
   border-top: 2px solid var(--gris-medio);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
@@ -2229,58 +2229,64 @@ button {
 .separador-total {
   height: 1px;
   background: repeating-linear-gradient(90deg, #0d3b66, #0d3b66 5px, transparent 5px, transparent 10px);
-  margin: 12px 0;
+  margin: 8px 0;
 }
 
 .carrito-total {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
+  padding: 10px 0;
 }
 
 .total-contenido {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
 }
 
 .total-etiqueta {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #666;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .total-valor {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: #0d3b66;
   font-family: 'Courier New', monospace;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 /* Datos del cliente */
 .datos-cliente {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 12px;
   padding: 12px 0;
+}
+
+.datos-cliente-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .campo-cliente {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .campo-cliente label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: #333;
+  color: #0d3b66;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -2288,13 +2294,21 @@ button {
 .campo-cliente input,
 .campo-cliente select,
 .campo-cliente textarea {
-  padding: 10px 12px;
-  border: 1.5px solid #d0d0d0;
+  padding: 9px 11px;
+  border: 1px solid #cbd5e0;
   border-radius: 6px;
   font-family: inherit;
-  font-size: 0.85rem;
-  transition: all 0.3s;
+  font-size: 0.8rem;
+  transition: all 0.25s ease;
   background: #fff;
+  color: #333;
+}
+
+.campo-cliente input::placeholder,
+.campo-cliente select,
+.campo-cliente textarea::placeholder {
+  color: #999;
+  font-size: 0.8rem;
 }
 
 .campo-cliente input:focus,
@@ -2302,12 +2316,13 @@ button {
 .campo-cliente textarea:focus {
   outline: none;
   border-color: #0d3b66;
-  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.1);
+  box-shadow: 0 0 0 2px rgba(13, 59, 102, 0.08);
+  background: #f7f9fb;
 }
 
 .campo-cliente textarea {
   resize: none;
-  height: 50px;
+  height: 45px;
   font-family: inherit;
 }
 
@@ -2316,29 +2331,30 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   background: linear-gradient(135deg, #25D366 0%, #20ba5a 100%);
   color: var(--blanco);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
 }
 
 .boton-enviar-pedido svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .boton-enviar-pedido:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
 }
 
 .boton-enviar-pedido:disabled {
@@ -2356,29 +2372,29 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  padding: 10px;
+  padding: 9px;
   background: transparent;
   color: #e8484e;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   border: 1.5px solid #e8484e;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
 }
 
 .boton-limpiar-carrito svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
 .boton-limpiar-carrito:hover {
   background: #e8484e;
   color: var(--blanco);
-  box-shadow: 0 4px 12px rgba(232, 72, 78, 0.2);
+  box-shadow: 0 3px 10px rgba(232, 72, 78, 0.15);
 }
 
 /* Overlay del carrito */
