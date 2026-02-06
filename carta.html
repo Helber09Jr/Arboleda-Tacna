@@ -313,7 +313,22 @@
   <!-- Panel lateral del carrito -->
   <div id="panelCarrito" class="panel-carrito" aria-hidden="true">
     <div class="panel-carrito-header">
-      <h3>Tu Pedido</h3>
+      <div class="header-contenido">
+        <div class="header-titulo">
+          <h3>TU PEDIDO</h3>
+          <p class="header-subtitulo">TICKET DE ORDEN</p>
+        </div>
+        <div class="header-info">
+          <div class="info-item">
+            <span class="info-label">Pedido #</span>
+            <span id="numeroPedido" class="info-valor">0001</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Hora</span>
+            <span id="horaPedido" class="info-valor">--:--</span>
+          </div>
+        </div>
+      </div>
       <button id="btnCerrarCarrito" class="btn-cerrar-carrito" aria-label="Cerrar carrito">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -321,6 +336,8 @@
         </svg>
       </button>
     </div>
+
+    <div class="panel-carrito-separador"></div>
 
     <div class="panel-carrito-contenido">
       <!-- Lista de items del carrito -->
@@ -341,11 +358,18 @@
     </div>
 
     <div class="panel-carrito-footer">
+      <!-- Separador premium -->
+      <div class="separador-total"></div>
+
       <!-- Total -->
       <div class="carrito-total">
-        <span>Total:</span>
-        <span id="totalCarrito" class="total-valor">S/ 0.00</span>
+        <div class="total-contenido">
+          <span class="total-etiqueta">TOTAL A PAGAR</span>
+          <span id="totalCarrito" class="total-valor">S/ 0.00</span>
+        </div>
       </div>
+
+      <div class="separador-total"></div>
 
       <!-- Datos del cliente -->
       <div class="datos-cliente">
