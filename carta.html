@@ -373,17 +373,19 @@
 
       <!-- Datos del cliente -->
       <div class="datos-cliente">
-        <div class="campo-cliente">
-          <label for="nombreCliente">Nombre / Mesa</label>
-          <input type="text" id="nombreCliente" placeholder="Ej: Mesa 5 o Juan Pérez" maxlength="50">
-        </div>
+        <div class="datos-cliente-row">
+          <div class="campo-cliente">
+            <label for="nombreCliente">Nombre / Mesa</label>
+            <input type="text" id="nombreCliente" placeholder="Ej: Mesa 5 o Juan Pérez" maxlength="50">
+          </div>
 
-        <div class="campo-cliente">
-          <label for="selectorMozo">Seleccionar Mozo</label>
-          <select id="selectorMozo">
-            <option value="">-- Selecciona un mozo --</option>
-            <!-- Se genera dinámicamente -->
-          </select>
+          <div class="campo-cliente">
+            <label for="selectorMozo">Mozo</label>
+            <select id="selectorMozo">
+              <option value="">-- Selecciona --</option>
+              <!-- Se genera dinámicamente -->
+            </select>
+          </div>
         </div>
 
         <div class="campo-cliente">
