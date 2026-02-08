@@ -135,6 +135,24 @@
         </div>
       </div>
 
+      <div class="seccion-botones-flotantes animar-entrada">
+        <h2 class="titulo-flotantes">Explora Más Sobre Nosotros</h2>
+        <div class="contenedor-botones-flotantes">
+          <button class="boton-flotante-premium equipo" onclick="abrirModalEquipo()" aria-label="Abrir modal de Equipo">
+            <div class="icono-flotante">👥</div>
+            <h3>Nuestro Equipo</h3>
+            <p>Conoce a nuestro cuerpo directivo y administrativo</p>
+            <span class="flecha-boton">→</span>
+          </button>
+          <button class="boton-flotante-premium reglamentos" onclick="abrirModalReglamentos()" aria-label="Abrir modal de Reglamentos">
+            <div class="icono-flotante">📋</div>
+            <h3>Reglamentos</h3>
+            <p>Consulta nuestros reglamentos y documentos</p>
+            <span class="flecha-boton">→</span>
+          </button>
+        </div>
+      </div>
+
       <div class="seccion-contacto-sobre animar-entrada">
         <div class="tarjeta-contacto-info-sobre">
           <h2>¿Deseas visitarnos?</h2>
@@ -164,6 +182,132 @@
       </div>
     </div>
   </section>
+
+  <!-- Modal Equipo -->
+  <div id="modalEquipo" class="modal-flotante" role="dialog" aria-modal="true" aria-labelledby="tituloModalEquipo">
+    <div class="modal-overlay-flotante" onclick="cerrarModalEquipo()"></div>
+    <div class="modal-contenido-flotante">
+      <button class="boton-cerrar-flotante" onclick="cerrarModalEquipo()" aria-label="Cerrar modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 id="tituloModalEquipo" class="titulo-modal-flotante">Nuestro Equipo</h2>
+
+      <div class="contenido-equipo">
+        <div class="seccion-equipo">
+          <h3 class="subtitulo-equipo">Cuerpo Directivo</h3>
+          <div class="grilla-miembros">
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">👔</div>
+              <h4>Presidente</h4>
+              <p class="cargo-miembro">Liderazgo y dirección del club</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">📊</div>
+              <h4>Vicepresidente</h4>
+              <p class="cargo-miembro">Apoyo en gestión administrativa</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">💰</div>
+              <h4>Tesorero</h4>
+              <p class="cargo-miembro">Gestión financiera y presupuestos</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">📝</div>
+              <h4>Secretario</h4>
+              <p class="cargo-miembro">Documentación y registros</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="seccion-equipo">
+          <h3 class="subtitulo-equipo">Equipo Administrativo</h3>
+          <div class="grilla-miembros">
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">🍽️</div>
+              <h4>Gerente de Alimentos</h4>
+              <p class="cargo-miembro">Coordinación de restaurante y bar</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">🏗️</div>
+              <h4>Gerente de Instalaciones</h4>
+              <p class="cargo-miembro">Mantenimiento y facilities</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">👨‍💼</div>
+              <h4>Gerente de Eventos</h4>
+              <p class="cargo-miembro">Coordinación de eventos y reservas</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro">👥</div>
+              <h4>Gerente de RRHH</h4>
+              <p class="cargo-miembro">Recursos humanos y personal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Reglamentos -->
+  <div id="modalReglamentos" class="modal-flotante" role="dialog" aria-modal="true" aria-labelledby="tituloModalReglamentos">
+    <div class="modal-overlay-flotante" onclick="cerrarModalReglamentos()"></div>
+    <div class="modal-contenido-flotante">
+      <button class="boton-cerrar-flotante" onclick="cerrarModalReglamentos()" aria-label="Cerrar modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 id="tituloModalReglamentos" class="titulo-modal-flotante">Reglamentos</h2>
+
+      <div class="contenido-reglamentos">
+        <div class="lista-documentos">
+          <a href="javascript:void(0)" class="documento-pdf" onclick="descargarPDF('reglamento-general')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento General</h4>
+              <p>Normas y disposiciones generales del club</p>
+            </div>
+          </a>
+
+          <a href="javascript:void(0)" class="documento-pdf" onclick="descargarPDF('reglamento-deportivo')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento Deportivo</h4>
+              <p>Normas para uso de canchas deportivas</p>
+            </div>
+          </a>
+
+          <a href="javascript:void(0)" class="documento-pdf" onclick="descargarPDF('reglamento-restaurante')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento de Restaurante</h4>
+              <p>Normas para servicios de alimentos</p>
+            </div>
+          </a>
+
+          <a href="javascript:void(0)" class="documento-pdf" onclick="descargarPDF('reglamento-seguridad')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento de Seguridad</h4>
+              <p>Medidas de seguridad e higiene</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer id="contacto" class="pie-pagina">
     <div class="contenedor-footer">
@@ -229,6 +373,43 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
     }
+
+    // Funciones para modales flotantes
+    function abrirModalEquipo() {
+      const modal = document.getElementById('modalEquipo');
+      modal.classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModalEquipo() {
+      const modal = document.getElementById('modalEquipo');
+      modal.classList.remove('activo');
+      document.body.style.overflow = 'auto';
+    }
+
+    function abrirModalReglamentos() {
+      const modal = document.getElementById('modalReglamentos');
+      modal.classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModalReglamentos() {
+      const modal = document.getElementById('modalReglamentos');
+      modal.classList.remove('activo');
+      document.body.style.overflow = 'auto';
+    }
+
+    function descargarPDF(tipo) {
+      alert('PDF de ' + tipo + ' disponible para descargar.\n\nNota: Agrega tus PDFs en una carpeta /documentos/');
+    }
+
+    // Cerrar modales con tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        cerrarModalEquipo();
+        cerrarModalReglamentos();
+      }
+    });
   </script>
 </body>
 </html>
