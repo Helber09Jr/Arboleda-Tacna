@@ -35,6 +35,8 @@ let keydownListenerGaleria = null;
 let keydownListenerModal = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+  inicializarMenuDesplegable();
+  inicializarMenuMovil();
   cargarDatosMenu();
   inicializarEventos();
   ocultarCargador();
@@ -1075,6 +1077,68 @@ function mostrarToast(mensaje) {
       toast.classList.remove('mostrar');
     }, 3000);
   }
+}
+
+// ==========================================================
+// MENÚ DESPLEGABLE (DROPDOWN)
+// ==========================================================
+
+function inicializarMenuDesplegable() {
+  const botonesDropdown = document.querySelectorAll('.item-menu-desplegable > button');
+
+  botonesDropdown.forEach(boton => {
+    boton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Alternar aria-expanded
+      const estaExpandido = boton.getAttribute('aria-expanded') === 'true';
+      boton.setAttribute('aria-expanded', !estaExpandido);
+
+      // Cerrar otros dropdowns abiertos (opcional)
+      botonesDropdown.forEach(otroBoton => {
+        if (otroBoton !== boton) {
+          otroBoton.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  });
+}
+
+// ==========================================================
+// MENÚ MÓVIL
+// ==========================================================
+
+function inicializarMenuMovil() {
+  const botonMenu = document.querySelector('.boton-menu-movil');
+  const menuNav = document.querySelector('.lista-navegacion');
+
+  if (!botonMenu || !menuNav) return;
+
+  botonMenu.onclick = () => {
+    botonMenu.classList.toggle('activo');
+    menuNav.classList.toggle('mostrar');
+    const expandido = botonMenu.classList.contains('activo');
+    botonMenu.setAttribute('aria-expanded', expandido);
+  };
+
+  // Cerrar menú al hacer click en un enlace (pero no en el dropdown)
+  document.querySelectorAll('.enlace-nav:not(.item-menu-desplegable > button)').forEach(enlace => {
+    enlace.onclick = () => {
+      menuNav.classList.remove('mostrar');
+      botonMenu.classList.remove('activo');
+      botonMenu.setAttribute('aria-expanded', 'false');
+    };
+  });
+
+  // Cerrar menú al hacer click fuera
+  document.addEventListener('click', (e) => {
+    if (!botonMenu.contains(e.target) && !menuNav.contains(e.target)) {
+      menuNav.classList.remove('mostrar');
+      botonMenu.classList.remove('activo');
+      botonMenu.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 // ==========================================================
