@@ -43,7 +43,7 @@
               </svg>
             </button>
             <ul class="submenu" role="menu">
-              <li role="none"><a href="index.html#sobre" class="enlace-submenu" role="menuitem">Quiénes somos</a></li>
+              <li role="none"><a href="sobre-nosotros.html" class="enlace-submenu" role="menuitem">Quiénes somos</a></li>
               <li role="none"><a href="equipo.html" class="enlace-submenu activo" role="menuitem">Equipo</a></li>
               <li role="none"><a href="reglamentos.html" class="enlace-submenu" role="menuitem">Reglamentos</a></li>
             </ul>
@@ -76,16 +76,24 @@
         <p class="descripcion-equipo">El equipo dedicado que impulsa La Arboleda Club hacia la excelencia</p>
       </div>
 
-      <div class="filtro-categoria">
-        <button class="boton-filtro activo" data-filtro="todos">Todos</button>
-        <button class="boton-filtro" data-filtro="directiva">Junta Directiva</button>
-        <button class="boton-filtro" data-filtro="administrativa">Administrativa</button>
-        <button class="boton-filtro" data-filtro="operativa">Operativa</button>
+      <div class="clasificacion-equipo">
+        <div class="categoria-directiva">
+          <h2 class="titulo-categoria">Junta Directiva</h2>
+          <div class="linea-categoria"></div>
+        </div>
+        <div class="categoria-administrativa">
+          <h2 class="titulo-categoria">Administración</h2>
+          <div class="linea-categoria"></div>
+        </div>
+        <div class="categoria-operativa">
+          <h2 class="titulo-categoria">Operaciones</h2>
+          <div class="linea-categoria"></div>
+        </div>
       </div>
 
-      <div class="grilla-equipo">
+      <div class="grilla-equipo" id="equipo-grid">
         <!-- JUNTA DIRECTIVA -->
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.1s" data-categoria="directiva">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.1s" data-categoria="directiva">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
               <span class="inicial-nombre">GD</span>
@@ -104,7 +112,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.15s" data-categoria="directiva">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.15s" data-categoria="directiva">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
               <span class="inicial-nombre">JG</span>
@@ -123,7 +131,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.2s" data-categoria="directiva">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.2s" data-categoria="directiva">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">
               <span class="inicial-nombre">RC</span>
@@ -143,7 +151,7 @@
         </article>
 
         <!-- ADMINISTRATIVA -->
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.25s" data-categoria="administrativa">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.25s" data-categoria="administrativa">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
               <span class="inicial-nombre">FL</span>
@@ -162,7 +170,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.3s" data-categoria="administrativa">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.3s" data-categoria="administrativa">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
               <span class="inicial-nombre">MM</span>
@@ -182,7 +190,7 @@
         </article>
 
         <!-- OPERATIVA -->
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.35s" data-categoria="operativa">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.35s" data-categoria="operativa">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">
               <span class="inicial-nombre">CV</span>
@@ -201,7 +209,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.4s" data-categoria="operativa">
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.4s" data-categoria="operativa">
           <div class="imagen-miembro">
             <div class="placeholder-foto" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%)">
               <span class="inicial-nombre">DE</span>
@@ -216,6 +224,44 @@
               <span class="cualidad">Gastronomía</span>
               <span class="cualidad">Liderazgo de Equipo</span>
               <span class="cualidad">Innovación Culinaria</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.45s" data-categoria="operativa">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+              <span class="inicial-nombre">AG</span>
+            </div>
+            <div class="insignia-cargo">Mantenimiento</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Andrés García Morales</h2>
+            <p class="cargo-miembro">Jefe de Mantenimiento</p>
+            <p class="descripcion-miembro">Responsable del mantenimiento integral de todas las instalaciones y garantiza su óptimo funcionamiento.</p>
+            <div class="cualidades">
+              <span class="cualidad">Mantenimiento</span>
+              <span class="cualidad">Prevención</span>
+              <span class="cualidad">Eficiencia</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.5s" data-categoria="administrativa">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+              <span class="inicial-nombre">LR</span>
+            </div>
+            <div class="insignia-cargo">Recursos Humanos</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Laura Rodríguez Tapia</h2>
+            <p class="cargo-miembro">Jefa de Recursos Humanos</p>
+            <p class="descripcion-miembro">Gestiona el talento humano del club, asegurando un ambiente laboral profesional y productivo.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gestión de Talento</span>
+              <span class="cualidad">Comunicación</span>
+              <span class="cualidad">Desarrollo Organizacional</span>
             </div>
           </div>
         </article>

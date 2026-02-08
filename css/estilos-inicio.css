@@ -2879,3 +2879,468 @@ a {
   }
 }
 
+/* ========== ESTILOS PREMIUM Y ELEGANTES ========== */
+
+/* Tarjetas Premium */
+.tarjeta-miembro.premium {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border: 2px solid rgba(200, 169, 94, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 82, 180, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.tarjeta-miembro.premium:hover {
+  box-shadow: 0 30px 80px rgba(0, 82, 180, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  border-color: var(--dorado-claro);
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf5 100%);
+}
+
+.tarjeta-reglamento.premium {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border: 2px solid rgba(200, 169, 94, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 82, 180, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.tarjeta-reglamento.premium:hover {
+  box-shadow: 0 30px 80px rgba(0, 82, 180, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  border-color: var(--dorado-claro);
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf5 100%);
+}
+
+/* Clasificación de Equipo */
+.clasificacion-equipo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 50px 0;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, rgba(5, 82, 180, 0.02) 0%, rgba(200, 169, 94, 0.02) 100%);
+  border-radius: 20px;
+}
+
+.categoria-directiva,
+.categoria-administrativa,
+.categoria-operativa {
+  padding: 25px;
+  border-left: 5px solid var(--dorado-claro);
+  background: var(--blanco);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.categoria-directiva:hover,
+.categoria-administrativa:hover,
+.categoria-operativa:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 82, 180, 0.1);
+}
+
+.titulo-categoria {
+  font-size: 1.3rem;
+  color: var(--azul-principal);
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.linea-categoria {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--dorado-claro), transparent);
+  margin-top: 12px;
+  border-radius: 3px;
+}
+
+/* Clasificación de Reglamentos */
+.clasificacion-reglamentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 50px 0;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, rgba(5, 82, 180, 0.02) 0%, rgba(200, 169, 94, 0.02) 100%);
+  border-radius: 20px;
+}
+
+.seccion-reglamentos-instalaciones,
+.seccion-reglamentos-admin,
+.seccion-reglamentos-politicas {
+  padding: 25px;
+  border-left: 5px solid var(--dorado-claro);
+  background: var(--blanco);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.seccion-reglamentos-instalaciones:hover,
+.seccion-reglamentos-admin:hover,
+.seccion-reglamentos-politicas:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 82, 180, 0.1);
+}
+
+.titulo-categoria-reg {
+  font-size: 1.3rem;
+  color: var(--azul-principal);
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.linea-categoria-reg {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--dorado-claro), transparent);
+  margin-top: 12px;
+  border-radius: 3px;
+}
+
+/* Grilla mejorada */
+.grilla-equipo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  margin-top: 50px;
+}
+
+.grilla-reglamentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+/* Insignia de cargo mejorada */
+.insignia-cargo {
+  background: linear-gradient(135deg, var(--dorado-claro), var(--dorado));
+  color: var(--blanco);
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 5px 15px rgba(200, 169, 94, 0.3);
+}
+
+/* Secciones de misión y visión mejoradas */
+.seccion-mision-vision {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, rgba(200, 169, 94, 0.05) 0%, rgba(5, 82, 180, 0.05) 100%);
+  border-radius: 20px;
+}
+
+.tarjeta-mision-vision {
+  background: var(--blanco);
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid var(--dorado-claro);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tarjeta-mision-vision:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 82, 180, 0.15);
+}
+
+.titulo-mv {
+  font-size: 1.4rem;
+  color: var(--azul-principal);
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tarjeta-mision-vision p {
+  color: #555;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* Mejora en el encabezado de secciones */
+.encabezado-seccion.centrado {
+  margin-bottom: 40px;
+}
+
+.etiqueta-seccion {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--azul-principal), var(--azul-suave));
+  color: var(--blanco);
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0, 82, 180, 0.2);
+}
+
+.titulo-seccion {
+  font-size: 2.5rem;
+  color: var(--azul-principal);
+  margin: 15px 0 20px 0;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+}
+
+.linea-decorativa {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--dorado-claro), var(--dorado), var(--dorado-claro));
+  border-radius: 4px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(200, 169, 94, 0.3);
+}
+
+.descripcion-equipo,
+.descripcion-reglamentos {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 15px;
+}
+
+/* ========== PÁGINA SOBRE NOSOTROS ========== */
+
+.seccion-informacion-limpia {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, var(--gris-claro) 0%, var(--blanco) 100%);
+  min-height: 100vh;
+}
+
+.contenedor-sobre-nosotros {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.bloque-introduccion {
+  margin: 50px 0;
+  padding: 40px;
+  background: var(--blanco);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid var(--dorado-claro);
+}
+
+.texto-intro {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: #555;
+  margin: 0;
+}
+
+.texto-intro strong {
+  color: var(--azul-principal);
+  font-weight: 700;
+}
+
+.tarjeta-horarios-sobre {
+  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
+  color: var(--blanco);
+  padding: 40px;
+  border-radius: 15px;
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  box-shadow: 0 15px 40px rgba(0, 82, 180, 0.2);
+  animation: slideIn 0.6s ease;
+}
+
+.icono-horario {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.contenido-horario h3 {
+  font-size: 1.6rem;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.contenido-horario p {
+  margin: 8px 0;
+  font-size: 1.05rem;
+}
+
+.seccion-mision-vision-limpia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 70px 0;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, rgba(200, 169, 94, 0.05) 0%, rgba(5, 82, 180, 0.05) 100%);
+  border-radius: 20px;
+}
+
+.tarjeta-mision-vision-limpia {
+  background: var(--blanco);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid var(--dorado-claro);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tarjeta-mision-vision-limpia:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 82, 180, 0.12);
+}
+
+.tarjeta-mision-vision-limpia .titulo-mv {
+  color: var(--azul-principal);
+  margin-bottom: 15px;
+}
+
+.tarjeta-mision-vision-limpia p {
+  color: #666;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.seccion-características-sobre {
+  margin: 70px 0;
+  padding: 50px 20px;
+  background: var(--blanco);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-características {
+  font-size: 2.2rem;
+  color: var(--azul-principal);
+  text-align: center;
+  margin: 0 0 50px 0;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.grilla-características {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.característica-item {
+  padding: 35px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border-radius: 15px;
+  border: 2px solid rgba(200, 169, 94, 0.1);
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.característica-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--dorado-claro);
+  box-shadow: 0 15px 40px rgba(0, 82, 180, 0.1);
+}
+
+.icono-característica {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.característica-item h3 {
+  font-size: 1.3rem;
+  color: var(--azul-principal);
+  margin: 15px 0 10px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.característica-item p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.seccion-contacto-sobre {
+  margin-top: 70px;
+}
+
+.tarjeta-contacto-info-sobre {
+  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
+  color: var(--blanco);
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 82, 180, 0.2);
+}
+
+.tarjeta-contacto-info-sobre h2 {
+  font-size: 2.2rem;
+  margin: 0 0 15px 0;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tarjeta-contacto-info-sobre p {
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+.enlaces-contacto-sobre {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.boton-contacto-sobre {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: var(--blanco);
+  color: var(--azul-principal);
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.boton-contacto-sobre:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.boton-contacto-sobre svg {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

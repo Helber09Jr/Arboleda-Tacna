@@ -43,7 +43,7 @@
               </svg>
             </button>
             <ul class="submenu" role="menu">
-              <li role="none"><a href="index.html#sobre" class="enlace-submenu" role="menuitem">Quiénes somos</a></li>
+              <li role="none"><a href="sobre-nosotros.html" class="enlace-submenu" role="menuitem">Quiénes somos</a></li>
               <li role="none"><a href="equipo.html" class="enlace-submenu" role="menuitem">Equipo</a></li>
               <li role="none"><a href="reglamentos.html" class="enlace-submenu activo" role="menuitem">Reglamentos</a></li>
             </ul>
@@ -76,16 +76,24 @@
         <p class="descripcion-reglamentos">Las normas que rigen el funcionamiento y convivencia en nuestro club</p>
       </div>
 
-      <div class="filtro-categoria-reg">
-        <button class="boton-filtro-reg activo" data-filtro="todos">Todos</button>
-        <button class="boton-filtro-reg" data-filtro="instalaciones">Instalaciones</button>
-        <button class="boton-filtro-reg" data-filtro="administrativo">Administrativo</button>
-        <button class="boton-filtro-reg" data-filtro="politicas">Políticas</button>
+      <div class="clasificacion-reglamentos">
+        <div class="seccion-reglamentos-instalaciones">
+          <h2 class="titulo-categoria-reg">📍 Instalaciones</h2>
+          <div class="linea-categoria-reg"></div>
+        </div>
+        <div class="seccion-reglamentos-admin">
+          <h2 class="titulo-categoria-reg">📋 Administrativo</h2>
+          <div class="linea-categoria-reg"></div>
+        </div>
+        <div class="seccion-reglamentos-politicas">
+          <h2 class="titulo-categoria-reg">✅ Políticas Generales</h2>
+          <div class="linea-categoria-reg"></div>
+        </div>
       </div>
 
       <div class="grilla-reglamentos">
         <!-- REGLAMENTOS DE INSTALACIONES -->
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.1s" data-categoria="instalaciones">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.1s" data-categoria="instalaciones">
           <div class="icono-reglamento">🏊</div>
           <h2 class="titulo-reglamento">Reglamento de Piscina</h2>
           <p class="resumen-reglamento">Normas de uso y seguridad de las instalaciones de piscina</p>
@@ -108,7 +116,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.15s" data-categoria="instalaciones">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.15s" data-categoria="instalaciones">
           <div class="icono-reglamento">🏐</div>
           <h2 class="titulo-reglamento">Reglamento de Canchas Deportivas</h2>
           <p class="resumen-reglamento">Normas para uso y reserva de canchas de fútbol y vóley</p>
@@ -131,7 +139,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.2s" data-categoria="instalaciones">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.2s" data-categoria="instalaciones">
           <div class="icono-reglamento">🍽️</div>
           <h2 class="titulo-reglamento">Reglamento del Restaurante</h2>
           <p class="resumen-reglamento">Normas de uso y conducta en las áreas del restaurante</p>
@@ -154,7 +162,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.25s" data-categoria="instalaciones">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.25s" data-categoria="instalaciones">
           <div class="icono-reglamento">🏨</div>
           <h2 class="titulo-reglamento">Reglamento de Bungalows</h2>
           <p class="resumen-reglamento">Normas para hospedaje y uso de bungalows</p>
@@ -178,7 +186,7 @@
         </article>
 
         <!-- REGLAMENTOS ADMINISTRATIVOS -->
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.3s" data-categoria="administrativo">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.3s" data-categoria="administrativo">
           <div class="icono-reglamento">📋</div>
           <h2 class="titulo-reglamento">Reglamento de Afiliación</h2>
           <p class="resumen-reglamento">Requisitos y procedimientos para ser miembro del club</p>
@@ -201,7 +209,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.35s" data-categoria="administrativo">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.35s" data-categoria="administrativo">
           <div class="icono-reglamento">💳</div>
           <h2 class="titulo-reglamento">Reglamento de Cuotas</h2>
           <p class="resumen-reglamento">Información sobre cuotas de membresía y aranceles</p>
@@ -225,7 +233,7 @@
         </article>
 
         <!-- POLÍTICAS GENERALES -->
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.4s" data-categoria="politicas">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.4s" data-categoria="politicas">
           <div class="icono-reglamento">🎉</div>
           <h2 class="titulo-reglamento">Reglamento de Eventos</h2>
           <p class="resumen-reglamento">Normas y procedimientos para organizar eventos en el club</p>
@@ -248,7 +256,7 @@
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.45s" data-categoria="politicas">
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.45s" data-categoria="politicas">
           <div class="icono-reglamento">✅</div>
           <h2 class="titulo-reglamento">Normas Generales</h2>
           <p class="resumen-reglamento">Disposiciones generales para todos los miembros y visitantes</p>
@@ -261,6 +269,75 @@
               Ver PDF
             </button>
             <a href="#" class="boton-descargar-pdf" download="Normas_Generales.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
+          </div>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.5s" data-categoria="instalaciones">
+          <div class="icono-reglamento">🏡</div>
+          <h2 class="titulo-reglamento">Reglamento de Bungalows VIP</h2>
+          <p class="resumen-reglamento">Términos especiales para hospedaje en categoría premium</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="bungalows-vip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Bungalows_VIP.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
+          </div>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.55s" data-categoria="administrativo">
+          <div class="icono-reglamento">🎟️</div>
+          <h2 class="titulo-reglamento">Reglamento de Membresía</h2>
+          <p class="resumen-reglamento">Categorías de membresía y beneficios asociados</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="membresía">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Membresía.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
+          </div>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.6s" data-categoria="politicas">
+          <div class="icono-reglamento">♻️</div>
+          <h2 class="titulo-reglamento">Política Ambiental</h2>
+          <p class="resumen-reglamento">Compromiso con la sostenibilidad y protección ambiental</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="ambiental">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Política_Ambiental.pdf">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
