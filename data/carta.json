@@ -43,6 +43,11 @@
       "icono": "🥬"
     },
     {
+      "id": "sopas",
+      "nombre": "Sopas",
+      "icono": "🍲"
+    },
+    {
       "id": "kids",
       "nombre": "Kids",
       "icono": "👶"
@@ -117,7 +122,7 @@
       "categoria": "entradas",
       "nombre": "Choclo con Queso",
       "descripcion": "Choclo tierno acompañado de queso fresco.",
-      "precio": 12.00,
+      "precio": 14.00,
       "imagen": "imagenes/menu/choclo-queso.jpg",
       "opciones": null,
       "guarniciones": null,
@@ -166,7 +171,7 @@
       "categoria": "entradas",
       "nombre": "Leche de Tigre",
       "descripcion": "Jugo de ceviche con trozos de pescado fresco, cebolla y ají.",
-      "precio": 12.00,
+      "precio": 15.00,
       "imagen": "imagenes/menu/leche-tigre.jpg",
       "imagenes": ["imagenes/menu/leche-tigre.jpg"],
       "opciones": {
@@ -194,7 +199,7 @@
       "categoria": "piqueos",
       "nombre": "Yucas Fritas",
       "descripcion": "Yucas prensadas rellenas de queso mozzarella, acompañadas con salsa huancaína (5 und).",
-      "precio": 14.00,
+      "precio": 15.00,
       "imagen": "imagenes/menu/yucas-fritas.jpg",
       "imagenes": ["imagenes/menu/yucas-fritas.jpg"],
       "opciones": {
@@ -237,7 +242,7 @@
       "categoria": "piqueos",
       "nombre": "Salchitodo",
       "descripcion": "Papas fritas con salchicha, pollo y chorizo todo junto.",
-      "precio": 15.00,
+      "precio": 16.00,
       "imagen": "imagenes/menu/salchitodo.jpg",
       "imagenes": ["imagenes/menu/salchitodo.jpg"],
       "opciones": null,
@@ -453,7 +458,7 @@
       "categoria": "pollo",
       "nombre": "Pollo a la Plancha",
       "descripcion": "Filete de pollo acompañado de papas fritas, arroz o ensalada.",
-      "precio": 22.00,
+      "precio": 25.00,
       "imagen": "imagenes/menu/pollo-plancha.jpg",
       "imagenes": ["imagenes/menu/pollo-plancha.jpg"],
       "opciones": null,
@@ -468,7 +473,7 @@
       "categoria": "pescados",
       "nombre": "Ceviche de Pescado",
       "descripcion": "Finos cubos de pescado marinados en zumo de limón, acompañado de cebolla roja, camote y choclo desgranado.",
-      "precio": 25.00,
+      "precio": 26.00,
       "imagen": "imagenes/menu/ceviche-pescado.jpg",
       "imagenes": ["imagenes/menu/ceviche-pescado.jpg"],
       "opciones": {
@@ -553,7 +558,7 @@
       "categoria": "pescados",
       "nombre": "Chicharrón de Pescado",
       "descripcion": "Finos trozos de pescado acompañado de papa dorada y zarza criolla.",
-      "precio": 26.00,
+      "precio": 28.00,
       "imagen": "imagenes/menu/chicharron-pescado.jpg",
       "imagenes": ["imagenes/menu/chicharron-pescado.jpg"],
       "opciones": null,
@@ -589,6 +594,34 @@
       "imagen": "imagenes/menu/arroz-mariscos.jpg",
       "imagenes": ["imagenes/menu/arroz-mariscos.jpg"],
       "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "duos-marinos",
+      "categoria": "pescados",
+      "nombre": "Dúos Marinos",
+      "descripcion": "Combina 2: arroz con mariscos, chicharrón de pescado o ceviche de pescado.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/duos-marinos.jpg",
+      "imagenes": ["imagenes/menu/duos-marinos.jpg"],
+      "opciones": {
+        "tipo": ["Arroz con Mariscos + Chicharrón", "Arroz con Mariscos + Ceviche", "Chicharrón + Ceviche"]
+      },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "trio-marinos",
+      "categoria": "pescados",
+      "nombre": "Trío Marinos",
+      "descripcion": "Combina 3: arroz con mariscos, chicharrón de pescado o ceviche de pescado o causa de atún.",
+      "precio": 30.00,
+      "imagen": "imagenes/menu/trio-marinos.jpg",
+      "imagenes": ["imagenes/menu/trio-marinos.jpg"],
+      "opciones": {
+        "tipo": ["Arroz + Chicharrón + Ceviche", "Arroz + Chicharrón + Causa", "Arroz + Ceviche + Causa", "Chicharrón + Ceviche + Causa"]
+      },
       "guarniciones": null,
       "permiteObservacion": true
     },
@@ -638,7 +671,7 @@
       "categoria": "pastas",
       "nombre": "Fetuccini al Alfredo",
       "descripcion": "Fetuccini en cremosa salsa alfredo.",
-      "precio": 26.00,
+      "precio": 28.00,
       "imagen": "imagenes/menu/fetuccini-alfredo.jpg",
       "imagenes": ["imagenes/menu/fetuccini-alfredo.jpg"],
       "opciones": null,
@@ -650,13 +683,25 @@
       "categoria": "pastas",
       "nombre": "Tallarín Saltado Criollo",
       "descripcion": "Tallarines salteados al estilo criollo con verduras y carne.",
-      "precio": 22.00,
+      "precio": 26.00,
       "imagen": "imagenes/menu/tallarin-saltado.jpg",
       "imagenes": ["imagenes/menu/tallarin-saltado.jpg"],
       "opciones": {
         "tipo": ["Carne", "Pollo"],
         "picante": ["Sin picante", "Bajo", "Normal", "Fuerte"]
       },
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "spaghetti-frutos-mar",
+      "categoria": "pastas",
+      "nombre": "Spaghetti con Frutos del Mar",
+      "descripcion": "Spaghetti acompañado de variedad de frutos del mar frescos.",
+      "precio": 28.00,
+      "imagen": "imagenes/menu/spaghetti-frutos-mar.jpg",
+      "imagenes": ["imagenes/menu/spaghetti-frutos-mar.jpg"],
+      "opciones": null,
       "guarniciones": null,
       "permiteObservacion": true
     },
@@ -680,6 +725,42 @@
       "precio": 16.00,
       "imagen": "imagenes/menu/ensalada-hawaiana.jpg",
       "imagenes": ["imagenes/menu/ensalada-hawaiana.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "dieta-pollo",
+      "categoria": "sopas",
+      "nombre": "Dieta de Pollo",
+      "descripcion": "Finos cortes de pollo con verduras y fideo cabello de ángel.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/dieta-pollo.jpg",
+      "imagenes": ["imagenes/menu/dieta-pollo.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sopa-minuta",
+      "categoria": "sopas",
+      "nombre": "Sopa a la Minuta",
+      "descripcion": "Finos cortes de carne de res previamente aderezados y fideo cabello de ángel.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/sopa-minuta.jpg",
+      "imagenes": ["imagenes/menu/sopa-minuta.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": true
+    },
+    {
+      "id": "sopa-criolla",
+      "categoria": "sopas",
+      "nombre": "Sopa Criolla",
+      "descripcion": "Finos cortes de carne de res previamente aderezados, fideo cabello de ángel, huevo pochado y leche.",
+      "precio": 16.00,
+      "imagen": "imagenes/menu/sopa-criolla.jpg",
+      "imagenes": ["imagenes/menu/sopa-criolla.jpg"],
       "opciones": null,
       "guarniciones": null,
       "permiteObservacion": true
@@ -792,7 +873,7 @@
     {
       "id": "sandwich-pollo-palta",
       "categoria": "sandwiches",
-      "nombre": "Sándwich de Pollo con Palta",
+      "nombre": "Pollo con Palta",
       "descripcion": "Pan con filete de pollo y palta.",
       "precio": 14.00,
       "imagen": "imagenes/menu/sandwich-pollo-palta.jpg",
@@ -818,7 +899,7 @@
       "categoria": "sandwiches",
       "nombre": "Hamburguesa",
       "descripcion": "Hamburguesa clásica con todos los ingredientes.",
-      "precio": 13.00,
+      "precio": 12.00,
       "imagen": "imagenes/menu/hamburguesa.jpg",
       "imagenes": ["imagenes/menu/hamburguesa.jpg"],
       "opciones": null,
@@ -830,7 +911,7 @@
       "categoria": "empanadas",
       "nombre": "Empanada de Mariscos",
       "descripcion": "Empanada rellena de mariscos frescos.",
-      "precio": 8.00,
+      "precio": 8.50,
       "imagen": "imagenes/menu/empanada-mariscos.jpg",
       "imagenes": ["imagenes/menu/empanada-mariscos.jpg"],
       "opciones": null,
@@ -842,7 +923,7 @@
       "categoria": "empanadas",
       "nombre": "Empanada de Pulpo al Olivo",
       "descripcion": "Empanada rellena de pulpo en salsa de olivo.",
-      "precio": 9.00,
+      "precio": 9.50,
       "imagen": "imagenes/menu/empanada-pulpo.jpg",
       "imagenes": ["imagenes/menu/empanada-pulpo.jpg"],
       "opciones": null,
@@ -854,7 +935,7 @@
       "categoria": "empanadas",
       "nombre": "Empanada de Lomo Saltado",
       "descripcion": "Empanada rellena de lomo saltado.",
-      "precio": 8.00,
+      "precio": 8.50,
       "imagen": "imagenes/menu/empanada-lomo.jpg",
       "imagenes": ["imagenes/menu/empanada-lomo.jpg"],
       "opciones": null,
@@ -866,7 +947,7 @@
       "categoria": "empanadas",
       "nombre": "Empanada de Ají de Gallina",
       "descripcion": "Empanada rellena de ají de gallina.",
-      "precio": 7.50,
+      "precio": 8.00,
       "imagen": "imagenes/menu/empanada-aji-gallina.jpg",
       "imagenes": ["imagenes/menu/empanada-aji-gallina.jpg"],
       "opciones": {
