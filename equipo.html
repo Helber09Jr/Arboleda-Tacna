@@ -76,15 +76,26 @@
         <p class="descripcion-equipo">El equipo dedicado que impulsa La Arboleda Club hacia la excelencia</p>
       </div>
 
+      <div class="filtro-categoria">
+        <button class="boton-filtro activo" data-filtro="todos">Todos</button>
+        <button class="boton-filtro" data-filtro="directiva">Junta Directiva</button>
+        <button class="boton-filtro" data-filtro="administrativa">Administrativa</button>
+        <button class="boton-filtro" data-filtro="operativa">Operativa</button>
+      </div>
+
       <div class="grilla-equipo">
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.1s">
+        <!-- JUNTA DIRECTIVA -->
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.1s" data-categoria="directiva">
           <div class="imagen-miembro">
-            <div class="placeholder-imagen">👔</div>
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+              <span class="inicial-nombre">GD</span>
+            </div>
+            <div class="insignia-cargo">Presidente</div>
           </div>
           <div class="contenido-miembro">
-            <h2 class="nombre-miembro">Guido Díaz</h2>
+            <h2 class="nombre-miembro">Guido Díaz Nuñes</h2>
             <p class="cargo-miembro">Presidente</p>
-            <p class="descripcion-miembro">Lidera la visión y dirección estratégica de La Arboleda Club, garantizando el crecimiento y desarrollo de nuestras instalaciones y servicios.</p>
+            <p class="descripcion-miembro">Lidera la visión y dirección estratégica de La Arboleda Club, garantizando el crecimiento y desarrollo sostenible de nuestras instalaciones y servicios.</p>
             <div class="cualidades">
               <span class="cualidad">Liderazgo</span>
               <span class="cualidad">Visión Estratégica</span>
@@ -93,18 +104,118 @@
           </div>
         </article>
 
-        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.2s">
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.15s" data-categoria="directiva">
           <div class="imagen-miembro">
-            <div class="placeholder-imagen">👩‍💼</div>
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+              <span class="inicial-nombre">JG</span>
+            </div>
+            <div class="insignia-cargo">Vicepresidente</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Jorge García López</h2>
+            <p class="cargo-miembro">Vicepresidente</p>
+            <p class="descripcion-miembro">Asiste al presidente en la toma de decisiones estratégicas y se encarga de proyectos especiales del club.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gestión</span>
+              <span class="cualidad">Estrategia</span>
+              <span class="cualidad">Liderazgo</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.2s" data-categoria="directiva">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">
+              <span class="inicial-nombre">RC</span>
+            </div>
+            <div class="insignia-cargo">Tesorero</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Raúl Choque Mamani</h2>
+            <p class="cargo-miembro">Tesorero</p>
+            <p class="descripcion-miembro">Responsable de la gestión financiera y contable del club, asegurando transparencia en todas las operaciones.</p>
+            <div class="cualidades">
+              <span class="cualidad">Finanzas</span>
+              <span class="cualidad">Auditoría</span>
+              <span class="cualidad">Transparencia</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADMINISTRATIVA -->
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.25s" data-categoria="administrativa">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
+              <span class="inicial-nombre">FL</span>
+            </div>
+            <div class="insignia-cargo">Administradora</div>
           </div>
           <div class="contenido-miembro">
             <h2 class="nombre-miembro">Fernanda López Cabello</h2>
-            <p class="cargo-miembro">Administradora</p>
+            <p class="cargo-miembro">Administradora General</p>
             <p class="descripcion-miembro">Responsable de la gestión administrativa y operativa del club, coordinando todos los aspectos para garantizar un funcionamiento eficiente y de calidad.</p>
             <div class="cualidades">
               <span class="cualidad">Gestión</span>
               <span class="cualidad">Organización</span>
               <span class="cualidad">Coordinación</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.3s" data-categoria="administrativa">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
+              <span class="inicial-nombre">MM</span>
+            </div>
+            <div class="insignia-cargo">Secretaria</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Margarita Morales Rivera</h2>
+            <p class="cargo-miembro">Secretaria General</p>
+            <p class="descripcion-miembro">Encargada de la correspondencia, documentación y actas de las reuniones del club.</p>
+            <div class="cualidades">
+              <span class="cualidad">Documentación</span>
+              <span class="cualidad">Comunicación</span>
+              <span class="cualidad">Organización</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- OPERATIVA -->
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.35s" data-categoria="operativa">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">
+              <span class="inicial-nombre">CV</span>
+            </div>
+            <div class="insignia-cargo">Jefe Operativo</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Carlos Vargas Soto</h2>
+            <p class="cargo-miembro">Jefe de Operaciones</p>
+            <p class="descripcion-miembro">Supervisa el funcionamiento diario de todas las instalaciones y coordina con el personal del club.</p>
+            <div class="cualidades">
+              <span class="cualidad">Supervisión</span>
+              <span class="cualidad">Operaciones</span>
+              <span class="cualidad">Control de Calidad</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta" style="--retraso: 0.4s" data-categoria="operativa">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%)">
+              <span class="inicial-nombre">DE</span>
+            </div>
+            <div class="insignia-cargo">Chef</div>
+          </div>
+          <div class="contenido-miembro">
+            <h2 class="nombre-miembro">Diego Estrada Campos</h2>
+            <p class="cargo-miembro">Chef - Restaurante</p>
+            <p class="descripcion-miembro">Lidera la cocina del restaurante, garantizando la calidad y excelencia de nuestros platos.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gastronomía</span>
+              <span class="cualidad">Liderazgo de Equipo</span>
+              <span class="cualidad">Innovación Culinaria</span>
             </div>
           </div>
         </article>

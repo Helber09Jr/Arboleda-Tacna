@@ -620,7 +620,7 @@ function inicializarParallax() {
 
 function prevenirDobleTap() {
   let ultimoTap = 0;
-  
+
   document.addEventListener('touchend', (e) => {
     const ahora = Date.now();
     if (ahora - ultimoTap < 300) {
@@ -628,6 +628,104 @@ function prevenirDobleTap() {
     }
     ultimoTap = ahora;
   });
+}
+
+// FUNCIONES PARA FILTRAR EQUIPOS
+function inicializarFiltrosEquipo() {
+  const botonesEquipo = document.querySelectorAll('.filtro-categoria .boton-filtro');
+  const tarjetasEquipo = document.querySelectorAll('.grilla-equipo .tarjeta-miembro');
+
+  botonesEquipo.forEach(boton => {
+    boton.addEventListener('click', () => {
+      // Actualizar botón activo
+      botonesEquipo.forEach(b => b.classList.remove('activo'));
+      boton.classList.add('activo');
+
+      // Filtrar tarjetas
+      const filtro = boton.dataset.filtro;
+      tarjetasEquipo.forEach(tarjeta => {
+        if (filtro === 'todos' || tarjeta.dataset.categoria === filtro) {
+          tarjeta.style.display = 'block';
+          tarjeta.style.animation = 'fadeIn 0.3s ease';
+        } else {
+          tarjeta.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+// FUNCIONES PARA FILTRAR REGLAMENTOS
+function inicializarFiltrosReglamentos() {
+  const botonesReg = document.querySelectorAll('.filtro-categoria-reg .boton-filtro-reg');
+  const tarjetasReg = document.querySelectorAll('.grilla-reglamentos .tarjeta-reglamento');
+
+  botonesReg.forEach(boton => {
+    boton.addEventListener('click', () => {
+      // Actualizar botón activo
+      botonesReg.forEach(b => b.classList.remove('activo'));
+      boton.classList.add('activo');
+
+      // Filtrar tarjetas
+      const filtro = boton.dataset.filtro;
+      tarjetasReg.forEach(tarjeta => {
+        if (filtro === 'todos' || tarjeta.dataset.categoria === filtro) {
+          tarjeta.style.display = 'block';
+          tarjeta.style.animation = 'fadeIn 0.3s ease';
+        } else {
+          tarjeta.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+// FUNCIONES PARA MODAL PDF
+function inicializarModalPDF() {
+  const modal = document.getElementById('modal-pdf');
+  if (!modal) return;
+
+  const botonesVer = document.querySelectorAll('.boton-ver-pdf');
+  const btnCerrar = document.querySelector('.boton-cerrar-modal');
+
+  // Abrir modal
+  botonesVer.forEach(boton => {
+    boton.addEventListener('click', () => {
+      const nombrePDF = boton.dataset.pdf;
+      const viewer = modal.querySelector('.viewer-pdf');
+
+      // Actualizar mensaje con el nombre del PDF
+      const mensaje = viewer.querySelector('.mensaje-placeholder');
+      mensaje.textContent = `📄 ${nombrePDF.charAt(0).toUpperCase() + nombrePDF.slice(1)}.pdf`;
+
+      modal.classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Cerrar modal
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModal);
+  }
+
+  // Cerrar al hacer click fuera del modal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      cerrarModal();
+    }
+  });
+
+  // Cerrar con ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('activo')) {
+      cerrarModal();
+    }
+  });
+
+  function cerrarModal() {
+    modal.classList.remove('activo');
+    document.body.style.overflow = 'auto';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -638,4 +736,9 @@ document.addEventListener('DOMContentLoaded', () => {
   inicializarAnimaciones();
   inicializarParallax();
   prevenirDobleTap();
+
+  // Inicializar funciones de equipos y reglamentos
+  inicializarFiltrosEquipo();
+  inicializarFiltrosReglamentos();
+  inicializarModalPDF();
 });
