@@ -76,90 +76,216 @@
         <p class="descripcion-reglamentos">Las normas que rigen el funcionamiento y convivencia en nuestro club</p>
       </div>
 
+      <div class="filtro-categoria-reg">
+        <button class="boton-filtro-reg activo" data-filtro="todos">Todos</button>
+        <button class="boton-filtro-reg" data-filtro="instalaciones">Instalaciones</button>
+        <button class="boton-filtro-reg" data-filtro="administrativo">Administrativo</button>
+        <button class="boton-filtro-reg" data-filtro="politicas">Políticas</button>
+      </div>
+
       <div class="grilla-reglamentos">
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.1s">
-          <h2 class="titulo-reglamento">🏊 Normas de Piscina</h2>
-          <div class="contenido-reglamento">
-            <ul class="lista-reglamento">
-              <li>El uso de la piscina es permitido desde las 9:00 AM hasta las 5:00 PM</li>
-              <li>Es obligatorio el uso de bañador (no shorts jeans ni prendas de algodón)</li>
-              <li>Niños menores de 5 años deben estar siempre bajo supervisión de un adulto</li>
-              <li>No se permite el uso de botellas de vidrio dentro del área de la piscina</li>
-              <li>Se prohíbe la comida dentro de la piscina; consumir alimentos en las zonas designadas</li>
-              <li>El horario de cuidavidas activo es de 10:00 AM a 4:00 PM</li>
-            </ul>
+        <!-- REGLAMENTOS DE INSTALACIONES -->
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.1s" data-categoria="instalaciones">
+          <div class="icono-reglamento">🏊</div>
+          <h2 class="titulo-reglamento">Reglamento de Piscina</h2>
+          <p class="resumen-reglamento">Normas de uso y seguridad de las instalaciones de piscina</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="piscina">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Piscina.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.2s">
-          <h2 class="titulo-reglamento">🏐 Normas de Canchas Deportivas</h2>
-          <div class="contenido-reglamento">
-            <ul class="lista-reglamento">
-              <li>Las reservas deben realizarse mínimo 24 horas antes</li>
-              <li>Los horarios se reservan por bloques de una hora</li>
-              <li>Se permite máximo dos horas de uso consecutivo por día</li>
-              <li>El pago debe realizarse una vez finalizado el uso</li>
-              <li>Es responsabilidad del usuario mantener limpias las instalaciones</li>
-              <li>Se prohíbe el ingreso con calzado que perjudique la superficie</li>
-            </ul>
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.15s" data-categoria="instalaciones">
+          <div class="icono-reglamento">🏐</div>
+          <h2 class="titulo-reglamento">Reglamento de Canchas Deportivas</h2>
+          <p class="resumen-reglamento">Normas para uso y reserva de canchas de fútbol y vóley</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="canchas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Canchas_Deportivas.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.3s">
-          <h2 class="titulo-reglamento">🍽️ Normas del Restaurante</h2>
-          <div class="contenido-reglamento">
-            <ul class="lista-reglamento">
-              <li>Se respeta el derecho de admisión del establecimiento</li>
-              <li>El código de vestuario es casual; se prohíbe ingreso en ropa de baño</li>
-              <li>Las reservas pueden realizarse por WhatsApp o teléfono</li>
-              <li>Se cobra automáticamente la consumición mínima en mesas reservadas</li>
-              <li>Prohibido hacer ruido excesivo que incomode a otros comensales</li>
-              <li>Los menores deben estar bajo supervisión de un adulto responsable</li>
-            </ul>
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.2s" data-categoria="instalaciones">
+          <div class="icono-reglamento">🍽️</div>
+          <h2 class="titulo-reglamento">Reglamento del Restaurante</h2>
+          <p class="resumen-reglamento">Normas de uso y conducta en las áreas del restaurante</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="restaurante">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Restaurante.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.4s">
-          <h2 class="titulo-reglamento">🎉 Normas de Eventos</h2>
-          <div class="contenido-reglamento">
-            <ul class="lista-reglamento">
-              <li>Las solicitudes de eventos deben realizarse con mínimo 15 días de anticipación</li>
-              <li>Se requiere un depósito del 50% para confirmar la reserva</li>
-              <li>Horario máximo de eventos: hasta las 12:00 AM (medianoche)</li>
-              <li>El organizador es responsable del comportamiento de sus invitados</li>
-              <li>Se debe mantener limpia el área del evento durante y después</li>
-              <li>Está prohibido el consumo de alcohol fuera de las zonas designadas</li>
-            </ul>
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.25s" data-categoria="instalaciones">
+          <div class="icono-reglamento">🏨</div>
+          <h2 class="titulo-reglamento">Reglamento de Bungalows</h2>
+          <p class="resumen-reglamento">Normas para hospedaje y uso de bungalows</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="bungalows">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Bungalows.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.5s">
-          <h2 class="titulo-reglamento">🏨 Normas de Bungalows</h2>
-          <div class="contenido-reglamento">
-            <ul class="lista-reglamento">
-              <li>Check-in a partir de las 2:00 PM; Check-out antes de las 12:00 PM</li>
-              <li>Se requiere identificación válida al momento de la reserva</li>
-              <li>El hospedaje es únicamente para uso de huéspedes registrados</li>
-              <li>Se prohíbe hacer ruido excesivo que afecte a otros hospedados</li>
-              <li>Los huéspedes son responsables de cualquier daño en la propiedad</li>
-              <li>El incumplimiento de normas puede resultar en expulsión sin devolución</li>
-            </ul>
+        <!-- REGLAMENTOS ADMINISTRATIVOS -->
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.3s" data-categoria="administrativo">
+          <div class="icono-reglamento">📋</div>
+          <h2 class="titulo-reglamento">Reglamento de Afiliación</h2>
+          <p class="resumen-reglamento">Requisitos y procedimientos para ser miembro del club</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="afiliacion">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Afiliacion.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
           </div>
         </article>
 
-        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.6s">
-          <h2 class="titulo-reglamento">✅ Normas Generales</h2>
-          <div class="contenido-reglamento">
-            <ul class="lista-reglamento">
-              <li>Se prohíbe el ingreso de mascotas (excepto perros guía)</li>
-              <li>Fumar está permitido solo en zonas designadas</li>
-              <li>Se prohíbe el consumo de alcohol fuera de zonas autorizadas</li>
-              <li>Prohibido el uso de drogas y sustancias ilegales</li>
-              <li>Cada visitante es responsable de sus pertenencias</li>
-              <li>El incumplimiento de reglamentos puede resultar en prohibición de ingreso</li>
-            </ul>
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.35s" data-categoria="administrativo">
+          <div class="icono-reglamento">💳</div>
+          <h2 class="titulo-reglamento">Reglamento de Cuotas</h2>
+          <p class="resumen-reglamento">Información sobre cuotas de membresía y aranceles</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="cuotas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Cuotas.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
           </div>
         </article>
+
+        <!-- POLÍTICAS GENERALES -->
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.4s" data-categoria="politicas">
+          <div class="icono-reglamento">🎉</div>
+          <h2 class="titulo-reglamento">Reglamento de Eventos</h2>
+          <p class="resumen-reglamento">Normas y procedimientos para organizar eventos en el club</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="eventos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Reglamento_Eventos.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
+          </div>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta" style="--retraso: 0.45s" data-categoria="politicas">
+          <div class="icono-reglamento">✅</div>
+          <h2 class="titulo-reglamento">Normas Generales</h2>
+          <p class="resumen-reglamento">Disposiciones generales para todos los miembros y visitantes</p>
+          <div class="botones-reglamento">
+            <button class="boton-ver-pdf" data-pdf="generales">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Ver PDF
+            </button>
+            <a href="#" class="boton-descargar-pdf" download="Normas_Generales.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Descargar
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- MODAL PARA VER PDFs -->
+      <div id="modal-pdf" class="modal-pdf">
+        <div class="contenedor-modal-pdf">
+          <button class="boton-cerrar-modal" aria-label="Cerrar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <div class="viewer-pdf">
+            <p class="mensaje-placeholder">📄 Vista previa del PDF</p>
+            <p class="subtitle-placeholder">Los PDFs están listos para ser configurados en el servidor</p>
+          </div>
+        </div>
       </div>
 
       <div class="seccion-contacto-reglamentos animar-entrada">

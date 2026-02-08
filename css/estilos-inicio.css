@@ -2559,5 +2559,323 @@ a {
     width: 18px;
     height: 18px;
   }
+
+  /* ESTILOS NUEVOS PARA EQUIPO Y REGLAMENTOS */
+
+  /* Filtros de categoría */
+  .filtro-categoria,
+  .filtro-categoria-reg {
+    display: flex;
+    gap: 10px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .boton-filtro,
+  .boton-filtro-reg {
+    padding: 8px 16px;
+    border: 2px solid var(--gris-medio);
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #2a2a2a;
+  }
+
+  .boton-filtro:hover,
+  .boton-filtro-reg:hover {
+    border-color: var(--azul-principal);
+    color: var(--azul-principal);
+  }
+
+  .boton-filtro.activo,
+  .boton-filtro-reg.activo {
+    background: var(--azul-principal);
+    color: white;
+    border-color: var(--azul-principal);
+  }
+
+  /* Placeholder de foto mejorado */
+  .placeholder-foto {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .inicial-nombre {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    font-family: var(--fuente-titulos);
+  }
+
+  /* Insignia de cargo */
+  .insignia-cargo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Mejoras en tarjetas de miembro */
+  .tarjeta-miembro {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tarjeta-miembro:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  }
+
+  .contenido-miembro {
+    padding: 20px;
+  }
+
+  .nombre-miembro {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+  }
+
+  .cargo-miembro {
+    color: var(--azul-principal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .descripcion-miembro {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+
+  .cualidades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cualidad {
+    display: inline-block;
+    background: #f0f4ff;
+    color: var(--azul-principal);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Modal PDF */
+  .modal-pdf {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-pdf.activo {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .contenedor-modal-pdf {
+    background: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .boton-cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .boton-cerrar-modal:hover {
+    background: var(--azul-principal);
+  }
+
+  .boton-cerrar-modal:hover svg {
+    stroke: white;
+  }
+
+  .boton-cerrar-modal svg {
+    width: 24px;
+    height: 24px;
+    stroke: #2a2a2a;
+  }
+
+  .viewer-pdf {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .mensaje-placeholder {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .subtitle-placeholder {
+    color: #999;
+    font-size: 0.95rem;
+  }
+
+  /* Tarjetas de reglamento mejoradas */
+  .tarjeta-reglamento {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tarjeta-reglamento:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  }
+
+  .icono-reglamento {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .titulo-reglamento {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+  }
+
+  .resumen-reglamento {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .botones-reglamento {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .boton-ver-pdf,
+  .boton-descargar-pdf {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .boton-ver-pdf {
+    background: #f0f4ff;
+    color: var(--azul-principal);
+    border: 1px solid var(--azul-principal);
+  }
+
+  .boton-ver-pdf:hover {
+    background: var(--azul-principal);
+    color: white;
+  }
+
+  .boton-descargar-pdf {
+    background: var(--azul-principal);
+    color: white;
+  }
+
+  .boton-descargar-pdf:hover {
+    background: var(--azul-oscuro);
+    transform: translateY(-2px);
+  }
+
+  .boton-ver-pdf svg,
+  .boton-descargar-pdf svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
