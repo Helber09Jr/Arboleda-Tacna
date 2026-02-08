@@ -101,6 +101,11 @@
       "id": "cervezas",
       "nombre": "Cervezas",
       "icono": "🍺"
+    },
+    {
+      "id": "postres",
+      "nombre": "Postres",
+      "icono": "🍰"
     }
   ],
   "platos": [
@@ -615,12 +620,12 @@
       "id": "trio-marinos",
       "categoria": "pescados",
       "nombre": "Trío Marinos",
-      "descripcion": "Combina 3: arroz con mariscos, chicharrón de pescado o ceviche de pescado o causa de atún.",
+      "descripcion": "Combina 3: arroz con mariscos, chicharrón de pescado o ceviche de pescado.",
       "precio": 30.00,
       "imagen": "imagenes/menu/trio-marinos.jpg",
       "imagenes": ["imagenes/menu/trio-marinos.jpg"],
       "opciones": {
-        "tipo": ["Arroz + Chicharrón + Ceviche", "Arroz + Chicharrón + Causa", "Arroz + Ceviche + Causa", "Chicharrón + Ceviche + Causa"]
+        "tipo": ["Arroz + Chicharrón + Ceviche"]
       },
       "guarniciones": null,
       "permiteObservacion": true
@@ -2231,6 +2236,118 @@
       },
       "guarniciones": null,
       "permiteObservacion": false
+    },
+    {
+      "id": "torta-chocolate",
+      "categoria": "postres",
+      "nombre": "Torta de Chocolate",
+      "descripcion": "Deliciosa torta casera de chocolate.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/torta-chocolate.jpg",
+      "imagenes": ["imagenes/menu/torta-chocolate.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "cheesecake-maracuya",
+      "categoria": "postres",
+      "nombre": "Cheesecake de Maracuyá",
+      "descripcion": "Cheesecake cremoso con sabor a maracuyá.",
+      "precio": 12.00,
+      "imagen": "imagenes/menu/cheesecake-maracuya.jpg",
+      "imagenes": ["imagenes/menu/cheesecake-maracuya.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "pie-limon",
+      "categoria": "postres",
+      "nombre": "Pie de Limón",
+      "descripcion": "Pie refrescante con sabor a limón.",
+      "precio": 10.00,
+      "imagen": "imagenes/menu/pie-limon.jpg",
+      "imagenes": ["imagenes/menu/pie-limon.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "copa-helado",
+      "categoria": "postres",
+      "nombre": "Copa de Helado",
+      "descripcion": "Refrescante copa de helado.",
+      "precio": 5.00,
+      "imagen": "imagenes/menu/copa-helado.jpg",
+      "imagenes": ["imagenes/menu/copa-helado.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "helados-artika",
+      "categoria": "postres",
+      "nombre": "Helados Artika",
+      "descripcion": "Helados Artika. Disponibles en la terraza.",
+      "precio": 0.00,
+      "imagen": "imagenes/menu/helados-artika.jpg",
+      "imagenes": ["imagenes/menu/helados-artika.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "helados-donofrio",
+      "categoria": "postres",
+      "nombre": "Helados Donofrio",
+      "descripcion": "Helados Donofrio. Disponibles en la terraza.",
+      "precio": 0.00,
+      "imagen": "imagenes/menu/helados-donofrio.jpg",
+      "imagenes": ["imagenes/menu/helados-donofrio.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "helados-villaizan",
+      "categoria": "postres",
+      "nombre": "Helados Artesanales Villaizan",
+      "descripcion": "Helados artesanales de Villaizan. Disponibles en la terraza.",
+      "precio": 0.00,
+      "imagen": "imagenes/menu/helados-villaizan.jpg",
+      "imagenes": ["imagenes/menu/helados-villaizan.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false
+    },
+    {
+      "id": "postre-fantasma-novedad-1",
+      "categoria": "postres",
+      "nombre": "Postre Especial Novedad",
+      "descripcion": "Próximamente en Arboleda Club.",
+      "precio": 0.00,
+      "imagen": "imagenes/menu/postre-novedad-1.jpg",
+      "imagenes": ["imagenes/menu/postre-novedad-1.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false,
+      "esFantasma": true,
+      "etiqueta": "novedad"
+    },
+    {
+      "id": "postre-fantasma-novedad-2",
+      "categoria": "postres",
+      "nombre": "Postre Premium Novedad",
+      "descripcion": "Próximamente en Arboleda Club.",
+      "precio": 0.00,
+      "imagen": "imagenes/menu/postre-novedad-2.jpg",
+      "imagenes": ["imagenes/menu/postre-novedad-2.jpg"],
+      "opciones": null,
+      "guarniciones": null,
+      "permiteObservacion": false,
+      "esFantasma": true,
+      "etiqueta": "novedad"
     }
   ],
   "mozos": [
