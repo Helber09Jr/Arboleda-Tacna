@@ -252,6 +252,467 @@ a {
   border-radius: 4px;
 }
 
+/* Menú desplegable */
+.item-menu-desplegable {
+  position: relative;
+}
+
+.item-menu-desplegable > button {
+  background: none;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blanco);
+  position: relative;
+}
+
+.item-menu-desplegable > button:hover {
+  color: var(--dorado-claro);
+}
+
+.icono-flecha {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.item-menu-desplegable > button[aria-expanded="true"] .icono-flecha {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--azul-oscuro);
+  list-style: none;
+  padding: 12px 0;
+  margin-top: 8px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  display: none;
+  flex-direction: column;
+  z-index: 2000;
+  border: 1px solid rgba(200, 169, 94, 0.3);
+}
+
+.item-menu-desplegable > button[aria-expanded="true"] ~ .submenu {
+  display: flex;
+}
+
+.enlace-submenu {
+  color: rgba(255, 255, 255, 0.9);
+  padding: 12px 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+}
+
+.enlace-submenu:hover {
+  color: var(--dorado-claro);
+  background: rgba(200, 169, 94, 0.1);
+  padding-left: 24px;
+}
+
+/* Estilos para la página de equipo */
+.seccion-equipo {
+  padding: 60px 20px;
+  background: var(--blanco);
+}
+
+.contenedor-equipo {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.descripcion-equipo {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.grilla-equipo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+.tarjeta-miembro {
+  background: var(--blanco);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta-miembro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--azul-principal), var(--azul-suave), var(--dorado-claro));
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tarjeta-miembro:hover::before {
+  transform: scaleX(1);
+}
+
+.tarjeta-miembro:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 25px 60px rgba(0, 82, 180, 0.18);
+  border-color: var(--azul-suave);
+}
+
+.imagen-miembro {
+  height: 280px;
+  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholder-imagen {
+  font-size: 120px;
+  opacity: 0.8;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tarjeta-miembro:hover .placeholder-imagen {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.contenido-miembro {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: linear-gradient(180deg, var(--blanco) 0%, #f8f9ff 100%);
+}
+
+.nombre-miembro {
+  font-size: 1.6rem;
+  color: var(--azul-principal);
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.cargo-miembro {
+  font-size: 1.1rem;
+  color: var(--dorado-claro);
+  margin: 0 0 16px 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.descripcion-miembro {
+  color: #555;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.cualidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.cualidad {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--azul-principal), var(--azul-suave));
+  color: var(--blanco);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 82, 180, 0.2);
+  transition: all 0.3s ease;
+}
+
+.cualidad:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 82, 180, 0.35);
+}
+
+/* Sección Misión, Visión y Valores */
+.seccion-mision-vision {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.tarjeta-mision-vision {
+  background: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 2px solid var(--gris-medio);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-mision-vision::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(200, 169, 94, 0.1), transparent);
+  transition: all 0.5s ease;
+}
+
+.tarjeta-mision-vision:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  border-color: var(--dorado-claro);
+}
+
+.tarjeta-mision-vision:hover::before {
+  top: 0;
+  right: 0;
+}
+
+.titulo-mv {
+  font-size: 1.4rem;
+  color: var(--azul-principal);
+  margin: 0 0 16px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titulo-mv::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(180deg, var(--dorado-claro), transparent);
+  border-radius: 2px;
+}
+
+.tarjeta-mision-vision p {
+  color: #555;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilos para la página de reglamentos */
+.seccion-reglamentos {
+  padding: 60px 20px;
+  background: var(--blanco);
+}
+
+.contenedor-reglamentos {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.descripcion-reglamentos {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.grilla-reglamentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.tarjeta-reglamento {
+  background: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 2px solid var(--gris-medio);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-reglamento::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--azul-principal), var(--azul-suave), var(--dorado-claro));
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tarjeta-reglamento:hover::before {
+  transform: scaleX(1);
+}
+
+.tarjeta-reglamento:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  border-color: var(--dorado-claro);
+}
+
+.titulo-reglamento {
+  font-size: 1.3rem;
+  color: var(--azul-principal);
+  margin: 0 0 20px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contenido-reglamento {
+  position: relative;
+  z-index: 1;
+}
+
+.lista-reglamento {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lista-reglamento li {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding-left: 28px;
+  position: relative;
+}
+
+.lista-reglamento li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--verde-acento);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Sección de contacto en reglamentos */
+.seccion-contacto-reglamentos {
+  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
+  border-radius: 20px;
+  padding: 50px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.tarjeta-contacto-info {
+  color: var(--blanco);
+}
+
+.tarjeta-contacto-info h2 {
+  font-size: 2rem;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tarjeta-contacto-info p {
+  font-size: 1.05rem;
+  margin: 0 0 32px 0;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.enlaces-contacto {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.boton-contacto-secundario,
+.boton-contacto-primario {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.boton-contacto-secundario {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--blanco);
+  border: 2px solid var(--blanco);
+}
+
+.boton-contacto-secundario:hover {
+  background: var(--blanco);
+  color: var(--azul-principal);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+.boton-contacto-primario {
+  background: var(--dorado-claro);
+  color: var(--azul-principal);
+}
+
+.boton-contacto-primario:hover {
+  background: var(--blanco);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+.boton-contacto-secundario svg,
+.boton-contacto-primario svg {
+  width: 20px;
+  height: 20px;
+}
+
 .boton-menu-movil {
   display: none;
   flex-direction: column;
