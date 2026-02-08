@@ -79,6 +79,7 @@ const datosInstalaciones = {
 document.addEventListener('DOMContentLoaded', () => {
   ocultarCargador();
   cargarSocios();
+  inicializarMenuDesplegable();
   inicializarMenuMovil();
   inicializarEventosInstalaciones();
   inicializarModales();
@@ -324,6 +325,28 @@ function generarClaveReserva(reserva) {
 // MENÚ MÓVIL
 // ==========================================================
 
+function inicializarMenuDesplegable() {
+  const botonesDropdown = document.querySelectorAll('.item-menu-desplegable > button');
+
+  botonesDropdown.forEach(boton => {
+    boton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Alternar aria-expanded
+      const estaExpandido = boton.getAttribute('aria-expanded') === 'true';
+      boton.setAttribute('aria-expanded', !estaExpandido);
+
+      // Cerrar otros dropdowns abiertos (opcional)
+      botonesDropdown.forEach(otroBoton => {
+        if (otroBoton !== boton) {
+          otroBoton.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  });
+}
+
 function inicializarMenuMovil() {
   const botonMenu = document.querySelector('.boton-menu-movil');
   const menuNav = document.querySelector('.lista-navegacion');
@@ -337,7 +360,7 @@ function inicializarMenuMovil() {
     botonMenu.setAttribute('aria-expanded', expandido);
   };
 
-  document.querySelectorAll('.enlace-nav').forEach(enlace => {
+  document.querySelectorAll('.enlace-nav:not(.item-menu-desplegable > button)').forEach(enlace => {
     enlace.onclick = () => {
       menuNav.classList.remove('mostrar');
       botonMenu.classList.remove('activo');
