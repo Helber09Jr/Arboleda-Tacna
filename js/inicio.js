@@ -630,55 +630,6 @@ function prevenirDobleTap() {
   });
 }
 
-// FUNCIONES PARA FILTRAR EQUIPOS
-function inicializarFiltrosEquipo() {
-  const botonesEquipo = document.querySelectorAll('.filtro-categoria .boton-filtro');
-  const tarjetasEquipo = document.querySelectorAll('.grilla-equipo .tarjeta-miembro');
-
-  botonesEquipo.forEach(boton => {
-    boton.addEventListener('click', () => {
-      // Actualizar botón activo
-      botonesEquipo.forEach(b => b.classList.remove('activo'));
-      boton.classList.add('activo');
-
-      // Filtrar tarjetas
-      const filtro = boton.dataset.filtro;
-      tarjetasEquipo.forEach(tarjeta => {
-        if (filtro === 'todos' || tarjeta.dataset.categoria === filtro) {
-          tarjeta.style.display = 'block';
-          tarjeta.style.animation = 'fadeIn 0.3s ease';
-        } else {
-          tarjeta.style.display = 'none';
-        }
-      });
-    });
-  });
-}
-
-// FUNCIONES PARA FILTRAR REGLAMENTOS
-function inicializarFiltrosReglamentos() {
-  const botonesReg = document.querySelectorAll('.filtro-categoria-reg .boton-filtro-reg');
-  const tarjetasReg = document.querySelectorAll('.grilla-reglamentos .tarjeta-reglamento');
-
-  botonesReg.forEach(boton => {
-    boton.addEventListener('click', () => {
-      // Actualizar botón activo
-      botonesReg.forEach(b => b.classList.remove('activo'));
-      boton.classList.add('activo');
-
-      // Filtrar tarjetas
-      const filtro = boton.dataset.filtro;
-      tarjetasReg.forEach(tarjeta => {
-        if (filtro === 'todos' || tarjeta.dataset.categoria === filtro) {
-          tarjeta.style.display = 'block';
-          tarjeta.style.animation = 'fadeIn 0.3s ease';
-        } else {
-          tarjeta.style.display = 'none';
-        }
-      });
-    });
-  });
-}
 
 // FUNCIONES PARA MODAL PDF
 function inicializarModalPDF() {
@@ -738,7 +689,5 @@ document.addEventListener('DOMContentLoaded', () => {
   prevenirDobleTap();
 
   // Inicializar funciones de equipos y reglamentos
-  inicializarFiltrosEquipo();
-  inicializarFiltrosReglamentos();
   inicializarModalPDF();
 });
