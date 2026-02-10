@@ -52,7 +52,19 @@
       <nav class="menu-navegacion" aria-label="Menú principal">
         <ul class="lista-navegacion" role="menu">
           <li role="none"><a href="#inicio" class="enlace-nav activo" role="menuitem">Inicio</a></li>
-          <li role="none"><a href="#sobre" class="enlace-nav" role="menuitem">Sobre Nosotros</a></li>
+          <li role="none" class="item-menu-desplegable">
+            <button class="enlace-nav" role="menuitem" aria-expanded="false" aria-haspopup="true">
+              Sobre Nosotros
+              <svg class="icono-flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <ul class="submenu" role="menu">
+              <li role="none"><a href="#sobre" class="enlace-submenu" role="menuitem">Quiénes somos</a></li>
+              <li role="none"><a href="#equipo" class="enlace-submenu" role="menuitem">Equipo</a></li>
+              <li role="none"><a href="#reglamentos" class="enlace-submenu" role="menuitem">Reglamentos</a></li>
+            </ul>
+          </li>
           <li role="none"><a href="#instalaciones" class="enlace-nav" role="menuitem">Instalaciones</a></li>
           <li role="none"><a href="carta.html" class="enlace-nav" role="menuitem">Carta</a></li>
           <li role="none"><a href="reservas.html" class="enlace-nav" role="menuitem">Reservas</a></li>
@@ -88,41 +100,490 @@
     </div>
   </section>
 
-  <section id="sobre" class="seccion-informacion">
-    <div class="contenedor-info-compacto">
-      <div class="info-texto animar-entrada">
-        <span class="etiqueta-seccion">Sobre Nosotros</span>
-        <h2 class="titulo-seccion">Un espacio pensado para disfrutar en familia</h2>
+  <section id="sobre" class="seccion-informacion-limpia">
+    <div class="contenedor-sobre-nosotros">
+      <div class="encabezado-seccion centrado animar-entrada">
+        <span class="etiqueta-seccion">Nuestra Historia</span>
+        <h1 class="titulo-seccion">Un espacio pensado para disfrutar en familia</h1>
         <div class="linea-decorativa"></div>
-        <p class="descripcion-principal">
-          En <strong>La Arboleda Club</strong> encontrarás áreas verdes, zonas deportivas, ambientes de recreación y un restaurante con una experiencia única. Nos hemos dedicado a crear momentos memorables para familias y amigos que buscan un lugar especial en Tacna.
-        </p>
       </div>
-      <div class="tarjeta-horarios-compacta animar-entrada">
-        <div class="icono-horario" aria-hidden="true">⏰</div>
-        <div class="contenido-horario">
-          <h3>Horario de Atención</h3>
-          <p><strong>Martes - Domingo:</strong> 9:00 AM - 5:00 PM</p>
-          <span class="nota-horarios">Lunes cerrado</span>
+
+      <div class="contenido-sobre-principal">
+        <div class="bloque-introduccion animar-entrada">
+          <p class="texto-intro">
+            En <strong>La Arboleda Club</strong> encontrarás áreas verdes, zonas deportivas, ambientes de recreación y un restaurante con una experiencia única. Nos hemos dedicado a crear momentos memorables para familias y amigos que buscan un lugar especial en Tacna.
+          </p>
+        </div>
+
+        <div class="tarjeta-horarios-sobre animar-entrada">
+          <div class="icono-horario" aria-hidden="true">⏰</div>
+          <div class="contenido-horario">
+            <h3>Horario de Atención</h3>
+            <p><strong>Martes - Domingo:</strong> 9:00 AM - 5:00 PM</p>
+            <p><strong>Lunes:</strong> Cerrado</p>
+          </div>
         </div>
       </div>
 
-      <div class="contenedor-botones-sobre animar-entrada">
-        <button class="boton-sobre-modal equipo" onclick="abrirModalEquipo()" aria-label="Abrir información del equipo">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-          </svg>
-          <span>Nuestro Equipo</span>
-          <p>Cuerpo directivo y administrativo</p>
-        </button>
-        <button class="boton-sobre-modal reglamentos" onclick="abrirModalReglamentos()" aria-label="Abrir reglamentos">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-          <span>Reglamentos</span>
-          <p>Normas y documentos</p>
-        </button>
+      <div class="seccion-mision-vision-limpia">
+        <div class="tarjeta-mision-vision-limpia animar-entrada">
+          <h2 class="titulo-mv">Nuestra Misión</h2>
+          <p>Proporcionar un espacio recreativo de calidad, donde las familias y amigos se reúnan para disfrutar de instalaciones modernas, gastronomía excepcional y momentos memorables en un ambiente acogedor y seguro.</p>
+        </div>
+
+        <div class="tarjeta-mision-vision-limpia animar-entrada">
+          <h2 class="titulo-mv">Nuestra Visión</h2>
+          <p>Ser el club más preferido de Tacna, reconocido por la excelencia en servicios, la calidad de nuestras instalaciones y el compromiso con el bienestar de nuestros miembros y sus familias.</p>
+        </div>
+
+        <div class="tarjeta-mision-vision-limpia animar-entrada">
+          <h2 class="titulo-mv">Nuestros Valores</h2>
+          <p>Compromiso con la calidad, respeto hacia nuestros miembros, transparencia en la gestión, innovación continua y responsabilidad social hacia nuestra comunidad.</p>
+        </div>
+      </div>
+
+      <div class="seccion-características-sobre animar-entrada">
+        <h2 class="titulo-características">¿Por qué elegir La Arboleda Club?</h2>
+        <p class="subtitulo-caracteristicas">Descubre los atributos que nos hacen únicos en Tacna</p>
+        <div class="grilla-características">
+          <div class="característica-item premium-card">
+            <div class="icono-característica-premium">
+              <div class="icono-fondo-premium">🏗️</div>
+            </div>
+            <h3>Instalaciones Modernas</h3>
+            <p>Espacios diseñados con estándares internacionales y mantenimiento continuo</p>
+            <div class="linea-caracteristica"></div>
+          </div>
+
+          <div class="característica-item premium-card">
+            <div class="icono-característica-premium">
+              <div class="icono-fondo-premium">👨‍⚖️</div>
+            </div>
+            <h3>Equipo Profesional</h3>
+            <p>Personal capacitado y comprometido con tu satisfacción</p>
+            <div class="linea-caracteristica"></div>
+          </div>
+
+          <div class="característica-item premium-card">
+            <div class="icono-característica-premium">
+              <div class="icono-fondo-premium">🍽️</div>
+            </div>
+            <h3>Gastronomía Excepcional</h3>
+            <p>Chef experto con menú variado y opciones premium</p>
+            <div class="linea-caracteristica"></div>
+          </div>
+
+          <div class="característica-item premium-card">
+            <div class="icono-característica-premium">
+              <div class="icono-fondo-premium">👨‍👩‍👧‍👦</div>
+            </div>
+            <h3>Ambiente Familiar</h3>
+            <p>Espacio seguro y acogedor para todas las edades</p>
+            <div class="linea-caracteristica"></div>
+          </div>
+
+          <div class="característica-item premium-card">
+            <div class="icono-característica-premium">
+              <div class="icono-fondo-premium">🎯</div>
+            </div>
+            <h3>Ubicación Estratégica</h3>
+            <p>Fácil acceso en el corazón de Tacna</p>
+            <div class="linea-caracteristica"></div>
+          </div>
+
+          <div class="característica-item premium-card">
+            <div class="icono-característica-premium">
+              <div class="icono-fondo-premium">💰</div>
+            </div>
+            <h3>Precio Justo</h3>
+            <p>Excelente relación calidad-precio en todos nuestros servicios</p>
+            <div class="linea-caracteristica"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo" class="seccion-equipo">
+    <div class="contenedor-equipo">
+      <div class="encabezado-seccion centrado animar-entrada">
+        <span class="etiqueta-seccion">Conoce a Nuestro Equipo</span>
+        <h2 class="titulo-seccion">Directivos y Administración</h2>
+        <div class="linea-decorativa"></div>
+        <p class="descripcion-equipo">El equipo dedicado que impulsa La Arboleda Club hacia la excelencia</p>
+      </div>
+
+      <div class="grilla-equipo" id="equipo-grid">
+        <!-- JUNTA DIRECTIVA -->
+        <article class="tarjeta-miembro animar-tarjeta premium elevated" style="--retraso: 0.1s">
+          <div class="overlay-brillante"></div>
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+              <span class="inicial-nombre">GD</span>
+              <div class="efecto-brillo"></div>
+            </div>
+            <div class="insignia-cargo premium-insignia">👑 Presidente</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Guido Díaz Nuñes</h3>
+            <p class="cargo-miembro">Presidente</p>
+            <p class="descripcion-miembro">Lidera la visión y dirección estratégica de La Arboleda Club, garantizando el crecimiento y desarrollo sostenible de nuestras instalaciones y servicios.</p>
+            <div class="cualidades">
+              <span class="cualidad">Liderazgo</span>
+              <span class="cualidad">Visión Estratégica</span>
+              <span class="cualidad">Experiencia</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium elevated" style="--retraso: 0.15s">
+          <div class="overlay-brillante"></div>
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+              <span class="inicial-nombre">JG</span>
+              <div class="efecto-brillo"></div>
+            </div>
+            <div class="insignia-cargo premium-insignia">🎯 Vicepresidente</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Jorge García López</h3>
+            <p class="cargo-miembro">Vicepresidente</p>
+            <p class="descripcion-miembro">Asiste al presidente en la toma de decisiones estratégicas y se encarga de proyectos especiales del club.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gestión</span>
+              <span class="cualidad">Estrategia</span>
+              <span class="cualidad">Liderazgo</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.2s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">
+              <span class="inicial-nombre">RC</span>
+            </div>
+            <div class="insignia-cargo">💰 Tesorero</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Raúl Choque Mamani</h3>
+            <p class="cargo-miembro">Tesorero</p>
+            <p class="descripcion-miembro">Responsable de la gestión financiera y contable del club, asegurando transparencia en todas las operaciones.</p>
+            <div class="cualidades">
+              <span class="cualidad">Finanzas</span>
+              <span class="cualidad">Auditoría</span>
+              <span class="cualidad">Transparencia</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.25s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
+              <span class="inicial-nombre">FL</span>
+            </div>
+            <div class="insignia-cargo">👩‍💼 Administradora</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Fernanda López Cabello</h3>
+            <p class="cargo-miembro">Administradora General</p>
+            <p class="descripcion-miembro">Responsable de la gestión administrativa y operativa del club, coordinando todos los aspectos para garantizar un funcionamiento eficiente y de calidad.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gestión</span>
+              <span class="cualidad">Organización</span>
+              <span class="cualidad">Coordinación</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.3s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
+              <span class="inicial-nombre">MM</span>
+            </div>
+            <div class="insignia-cargo">📝 Secretaria</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Margarita Morales Rivera</h3>
+            <p class="cargo-miembro">Secretaria General</p>
+            <p class="descripcion-miembro">Encargada de la correspondencia, documentación y actas de las reuniones del club.</p>
+            <div class="cualidades">
+              <span class="cualidad">Documentación</span>
+              <span class="cualidad">Comunicación</span>
+              <span class="cualidad">Organización</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.35s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">
+              <span class="inicial-nombre">CV</span>
+            </div>
+            <div class="insignia-cargo">🔧 Jefe Operativo</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Carlos Vargas Soto</h3>
+            <p class="cargo-miembro">Jefe de Operaciones</p>
+            <p class="descripcion-miembro">Supervisa el funcionamiento diario de todas las instalaciones y coordina con el personal del club.</p>
+            <div class="cualidades">
+              <span class="cualidad">Supervisión</span>
+              <span class="cualidad">Operaciones</span>
+              <span class="cualidad">Control de Calidad</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.4s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%)">
+              <span class="inicial-nombre">DE</span>
+            </div>
+            <div class="insignia-cargo">👨‍🍳 Chef</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Diego Estrada Campos</h3>
+            <p class="cargo-miembro">Chef - Restaurante</p>
+            <p class="descripcion-miembro">Lidera la cocina del restaurante, garantizando la calidad y excelencia de nuestros platos.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gastronomía</span>
+              <span class="cualidad">Liderazgo de Equipo</span>
+              <span class="cualidad">Innovación Culinaria</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.45s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+              <span class="inicial-nombre">AG</span>
+            </div>
+            <div class="insignia-cargo">🔨 Mantenimiento</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Andrés García Morales</h3>
+            <p class="cargo-miembro">Jefe de Mantenimiento</p>
+            <p class="descripcion-miembro">Responsable del mantenimiento integral de todas las instalaciones y garantiza su óptimo funcionamiento.</p>
+            <div class="cualidades">
+              <span class="cualidad">Mantenimiento</span>
+              <span class="cualidad">Prevención</span>
+              <span class="cualidad">Eficiencia</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta-miembro animar-tarjeta premium" style="--retraso: 0.5s">
+          <div class="imagen-miembro">
+            <div class="placeholder-foto" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+              <span class="inicial-nombre">LR</span>
+            </div>
+            <div class="insignia-cargo">👥 Recursos Humanos</div>
+          </div>
+          <div class="contenido-miembro">
+            <h3 class="nombre-miembro">Laura Rodríguez Tapia</h3>
+            <p class="cargo-miembro">Jefa de Recursos Humanos</p>
+            <p class="descripcion-miembro">Gestiona el talento humano del club, asegurando un ambiente laboral profesional y productivo.</p>
+            <div class="cualidades">
+              <span class="cualidad">Gestión de Talento</span>
+              <span class="cualidad">Comunicación</span>
+              <span class="cualidad">Desarrollo Organizacional</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="seccion-mision-vision">
+        <div class="tarjeta-mision-vision animar-entrada">
+          <h3 class="titulo-mv">Nuestra Misión</h3>
+          <p>Proporcionar un espacio recreativo de calidad, donde las familias y amigos se reúnan para disfrutar de instalaciones modernas, gastronomía excepcional y momentos memorables en un ambiente acogedor y seguro.</p>
+        </div>
+
+        <div class="tarjeta-mision-vision animar-entrada">
+          <h3 class="titulo-mv">Nuestra Visión</h3>
+          <p>Ser el club más preferido de Tacna, reconocido por la excelencia en servicios, la calidad de nuestras instalaciones y el compromiso con el bienestar de nuestros miembros y sus familias.</p>
+        </div>
+
+        <div class="tarjeta-mision-vision animar-entrada">
+          <h3 class="titulo-mv">Nuestros Valores</h3>
+          <p>Compromiso con la calidad, respeto hacia nuestros miembros, transparencia en la gestión, innovación continua y responsabilidad social hacia nuestra comunidad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reglamentos" class="seccion-reglamentos">
+    <div class="contenedor-reglamentos">
+      <div class="encabezado-seccion centrado animar-entrada">
+        <span class="etiqueta-seccion">Normas y Políticas</span>
+        <h2 class="titulo-seccion">Reglamentos de La Arboleda Club</h2>
+        <div class="linea-decorativa"></div>
+        <p class="descripcion-reglamentos">Las normas que rigen el funcionamiento y convivencia en nuestro club</p>
+      </div>
+
+      <div class="grilla-reglamentos">
+        <!-- REGLAMENTOS DE INSTALACIONES -->
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.1s">
+          <div class="icono-reglamento">🏊</div>
+          <h3 class="titulo-reglamento">Reglamento de Piscina</h3>
+          <p class="resumen-reglamento">Normas de uso y seguridad de las instalaciones de piscina</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Piscina disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.15s">
+          <div class="icono-reglamento">🏐</div>
+          <h3 class="titulo-reglamento">Reglamento de Canchas Deportivas</h3>
+          <p class="resumen-reglamento">Normas para uso y reserva de canchas de fútbol y vóley</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Canchas Deportivas disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.2s">
+          <div class="icono-reglamento">🍽️</div>
+          <h3 class="titulo-reglamento">Reglamento del Restaurante</h3>
+          <p class="resumen-reglamento">Normas de uso y conducta en las áreas del restaurante</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento del Restaurante disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.25s">
+          <div class="icono-reglamento">🏨</div>
+          <h3 class="titulo-reglamento">Reglamento de Bungalows</h3>
+          <p class="resumen-reglamento">Normas para hospedaje y uso de bungalows</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Bungalows disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.3s">
+          <div class="icono-reglamento">📋</div>
+          <h3 class="titulo-reglamento">Reglamento de Afiliación</h3>
+          <p class="resumen-reglamento">Requisitos y procedimientos para ser miembro del club</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Afiliación disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.35s">
+          <div class="icono-reglamento">💳</div>
+          <h3 class="titulo-reglamento">Reglamento de Cuotas</h3>
+          <p class="resumen-reglamento">Información sobre cuotas de membresía y aranceles</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Cuotas disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.4s">
+          <div class="icono-reglamento">🎉</div>
+          <h3 class="titulo-reglamento">Reglamento de Eventos</h3>
+          <p class="resumen-reglamento">Normas y procedimientos para organizar eventos en el club</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Eventos disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.45s">
+          <div class="icono-reglamento">✅</div>
+          <h3 class="titulo-reglamento">Normas Generales</h3>
+          <p class="resumen-reglamento">Disposiciones generales para todos los miembros y visitantes</p>
+          <button class="boton-ver-pdf" onclick="alert('Normas Generales disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.5s">
+          <div class="icono-reglamento">🏡</div>
+          <h3 class="titulo-reglamento">Reglamento de Bungalows VIP</h3>
+          <p class="resumen-reglamento">Términos especiales para hospedaje en categoría premium</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Bungalows VIP disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.55s">
+          <div class="icono-reglamento">🎟️</div>
+          <h3 class="titulo-reglamento">Reglamento de Membresía</h3>
+          <p class="resumen-reglamento">Categorías de membresía y beneficios asociados</p>
+          <button class="boton-ver-pdf" onclick="alert('Reglamento de Membresía disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+
+        <article class="tarjeta-reglamento animar-tarjeta premium" style="--retraso: 0.6s">
+          <div class="icono-reglamento">♻️</div>
+          <h3 class="titulo-reglamento">Política Ambiental</h3>
+          <p class="resumen-reglamento">Compromiso con la sostenibilidad y protección ambiental</p>
+          <button class="boton-ver-pdf" onclick="alert('Política Ambiental disponible')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Ver Más
+          </button>
+        </article>
+      </div>
+
+      <div class="seccion-contacto-reglamentos animar-entrada">
+        <div class="tarjeta-contacto-info">
+          <h2>¿Dudas sobre nuestros reglamentos?</h2>
+          <p>Si tienes preguntas adicionales o necesitas aclaraciones sobre algún reglamento, no dudes en contactarnos.</p>
+          <div class="enlaces-contacto">
+            <a href="tel:+51908881162" class="boton-contacto-secundario">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              Llamar
+            </a>
+            <a href="https://wa.me/51908881162" target="_blank" rel="noopener" class="boton-contacto-primario">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
