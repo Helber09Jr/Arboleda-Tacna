@@ -52,7 +52,7 @@
       <nav class="menu-navegacion" aria-label="Menú principal">
         <ul class="lista-navegacion" role="menu">
           <li role="none"><a href="#inicio" class="enlace-nav activo" role="menuitem">Inicio</a></li>
-          <li role="none"><a href="sobre-nosotros.html" class="enlace-nav" role="menuitem">Sobre Nosotros</a></li>
+          <li role="none"><a href="#sobre" class="enlace-nav" role="menuitem">Sobre Nosotros</a></li>
           <li role="none"><a href="#instalaciones" class="enlace-nav" role="menuitem">Instalaciones</a></li>
           <li role="none"><a href="carta.html" class="enlace-nav" role="menuitem">Carta</a></li>
           <li role="none"><a href="reservas.html" class="enlace-nav" role="menuitem">Reservas</a></li>
@@ -105,6 +105,24 @@
           <p><strong>Martes - Domingo:</strong> 9:00 AM - 5:00 PM</p>
           <span class="nota-horarios">Lunes cerrado</span>
         </div>
+      </div>
+
+      <div class="contenedor-botones-sobre animar-entrada">
+        <button class="boton-sobre-modal equipo" onclick="abrirModalEquipo()" aria-label="Abrir información del equipo">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+          <span>Nuestro Equipo</span>
+          <p>Cuerpo directivo y administrativo</p>
+        </button>
+        <button class="boton-sobre-modal reglamentos" onclick="abrirModalReglamentos()" aria-label="Abrir reglamentos">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span>Reglamentos</span>
+          <p>Normas y documentos</p>
+        </button>
       </div>
     </div>
   </section>
@@ -373,6 +391,144 @@
   </svg>
 </a>
 
+  <!-- Modal Equipo -->
+  <div id="modalEquipo" class="modal-flotante" role="dialog" aria-modal="true" aria-labelledby="tituloModalEquipo">
+    <div class="modal-overlay-flotante" onclick="cerrarModalEquipo()"></div>
+    <div class="modal-contenido-flotante">
+      <button class="boton-cerrar-flotante" onclick="cerrarModalEquipo()" aria-label="Cerrar modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 id="tituloModalEquipo" class="titulo-modal-flotante">Nuestro Equipo</h2>
+
+      <div class="contenido-equipo">
+        <div class="seccion-equipo">
+          <h3 class="subtitulo-equipo">Cuerpo Directivo</h3>
+          <div class="grilla-miembros">
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">👔</div>
+              <h4>Presidente</h4>
+              <p class="cargo-miembro">Guido Díaz Nuñes</p>
+              <p class="descripcion-cargo">Liderazgo y dirección del club</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">📊</div>
+              <h4>Vicepresidente</h4>
+              <p class="cargo-miembro">Jorge García López</p>
+              <p class="descripcion-cargo">Apoyo en gestión administrativa</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">💰</div>
+              <h4>Tesorero</h4>
+              <p class="cargo-miembro">Raúl Choque Mamani</p>
+              <p class="descripcion-cargo">Gestión financiera</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)">📝</div>
+              <h4>Secretaria</h4>
+              <p class="cargo-miembro">Margarita Morales Rivera</p>
+              <p class="descripcion-cargo">Documentación y registros</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="seccion-equipo">
+          <h3 class="subtitulo-equipo">Equipo Administrativo</h3>
+          <div class="grilla-miembros">
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">🍽️</div>
+              <h4>Administradora</h4>
+              <p class="cargo-miembro">Fernanda López Cabello</p>
+              <p class="descripcion-cargo">Gestión administrativa</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">👨‍💼</div>
+              <h4>Jefe de RRHH</h4>
+              <p class="cargo-miembro">Laura Rodríguez Tapia</p>
+              <p class="descripcion-cargo">Recursos humanos</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%)">👨‍🍳</div>
+              <h4>Chef</h4>
+              <p class="cargo-miembro">Diego Estrada Campos</p>
+              <p class="descripcion-cargo">Restaurante</p>
+            </div>
+            <div class="miembro-equipo">
+              <div class="avatar-miembro" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">🔧</div>
+              <h4>Jefe de Mantenimiento</h4>
+              <p class="cargo-miembro">Andrés García Morales</p>
+              <p class="descripcion-cargo">Mantenimiento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Reglamentos -->
+  <div id="modalReglamentos" class="modal-flotante" role="dialog" aria-modal="true" aria-labelledby="tituloModalReglamentos">
+    <div class="modal-overlay-flotante" onclick="cerrarModalReglamentos()"></div>
+    <div class="modal-contenido-flotante">
+      <button class="boton-cerrar-flotante" onclick="cerrarModalReglamentos()" aria-label="Cerrar modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 id="tituloModalReglamentos" class="titulo-modal-flotante">Reglamentos</h2>
+
+      <div class="contenido-reglamentos-modal">
+        <div class="lista-documentos">
+          <a href="javascript:void(0)" class="documento-pdf" onclick="alert('Reglamento General disponible')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento General</h4>
+              <p>Normas y disposiciones generales del club</p>
+            </div>
+          </a>
+
+          <a href="javascript:void(0)" class="documento-pdf" onclick="alert('Reglamento de Instalaciones disponible')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento de Instalaciones</h4>
+              <p>Normas para uso de canchas deportivas</p>
+            </div>
+          </a>
+
+          <a href="javascript:void(0)" class="documento-pdf" onclick="alert('Reglamento del Restaurante disponible')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento de Restaurante</h4>
+              <p>Normas para servicios de alimentos</p>
+            </div>
+          </a>
+
+          <a href="javascript:void(0)" class="documento-pdf" onclick="alert('Reglamento de Seguridad disponible')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="info-documento">
+              <h4>Reglamento de Seguridad</h4>
+              <p>Medidas de seguridad e higiene</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="modalInstalacion" class="modal-instalacion" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
     <div class="modal-overlay"></div>
     <div class="modal-contenido-mejorado">
@@ -415,6 +571,39 @@
 
   <script src="js/inicio.js"></script>
   <script>
+    // Funciones para modales flotantes
+    function abrirModalEquipo() {
+      const modal = document.getElementById('modalEquipo');
+      modal.classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModalEquipo() {
+      const modal = document.getElementById('modalEquipo');
+      modal.classList.remove('activo');
+      document.body.style.overflow = 'auto';
+    }
+
+    function abrirModalReglamentos() {
+      const modal = document.getElementById('modalReglamentos');
+      modal.classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModalReglamentos() {
+      const modal = document.getElementById('modalReglamentos');
+      modal.classList.remove('activo');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cerrar modales con tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        cerrarModalEquipo();
+        cerrarModalReglamentos();
+      }
+    });
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
     }
