@@ -497,27 +497,6 @@ class ModalInstalacion {
 }
 
 // MENÚ DESPLEGABLE (Dropdown)
-function inicializarMenuDesplegable() {
-  const botonesDropdown = document.querySelectorAll('.item-menu-desplegable > button');
-
-  botonesDropdown.forEach(boton => {
-    boton.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // Alternar aria-expanded
-      const estaExpandido = boton.getAttribute('aria-expanded') === 'true';
-      boton.setAttribute('aria-expanded', !estaExpandido);
-
-      // Cerrar otros dropdowns abiertos (opcional)
-      botonesDropdown.forEach(otroBoton => {
-        if (otroBoton !== boton) {
-          otroBoton.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-  });
-}
 
 // MENÚ MÓVIL MEJORADO - Igual que carta.html
 function inicializarMenuMovil() {
@@ -681,7 +660,6 @@ function inicializarModalPDF() {
 
 document.addEventListener('DOMContentLoaded', () => {
   new ModalInstalacion();
-  inicializarMenuDesplegable();
   inicializarMenuMovil();
   inicializarScrollSuave();
   inicializarAnimaciones();
