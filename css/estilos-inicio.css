@@ -4537,4 +4537,87 @@ a {
     padding: 12px 20px;
     font-size: 0.85rem;
   }
+
+  .botones-acciones-sobre {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .boton-accion-primario,
+  .boton-accion-secundario {
+    width: 100%;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Estilos para botones de acciones en Sobre Nosotros */
+.botones-acciones-sobre {
+  display: flex;
+  gap: 24px;
+  margin-top: 42px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.boton-accion-primario,
+.boton-accion-secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 44px;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  letter-spacing: 0.7px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.boton-accion-primario {
+  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-oscuro) 100%);
+  color: var(--dorado-claro);
+  box-shadow: 0 8px 28px rgba(0, 82, 180, 0.3);
+}
+
+.boton-accion-primario:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 82, 180, 0.5);
+  color: var(--dorado);
+}
+
+.boton-accion-primario:focus-visible {
+  outline: 3px solid var(--azul-principal);
+  outline-offset: 4px;
+}
+
+.boton-accion-primario svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
+}
+
+.boton-accion-secundario {
+  background: linear-gradient(135deg, var(--verde-acento) 0%, #1f5f3d 100%);
+  color: var(--blanco);
+  box-shadow: 0 8px 28px rgba(45, 134, 89, 0.3);
+}
+
+.boton-accion-secundario:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(45, 134, 89, 0.5);
+  color: var(--gris-claro);
+}
+
+.boton-accion-secundario:focus-visible {
+  outline: 3px solid var(--verde-acento);
+  outline-offset: 4px;
+}
+
+.boton-accion-secundario svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
 }
