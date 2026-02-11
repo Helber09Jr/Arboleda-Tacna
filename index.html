@@ -108,74 +108,118 @@
         <div class="linea-decorativa"></div>
       </div>
 
+      <!-- Carrusel de Imágenes -->
+      <div class="carrusel-sobre animar-entrada">
+        <div class="contenedor-carrusel">
+          <img src="imagenes/instalaciones/deportes-principal.jpg" alt="Instalaciones deportivas de La Arboleda Club" class="imagen-carrusel activa" loading="lazy">
+          <img src="imagenes/instalaciones/bungalows-principal.jpg" alt="Áreas verdes y bungalows de La Arboleda Club" class="imagen-carrusel" loading="lazy">
+          <img src="imagenes/instalaciones/eventos-piscina-1.jpg" alt="Piscina y áreas de eventos de La Arboleda Club" class="imagen-carrusel" loading="lazy">
+        </div>
+        <button class="boton-carrusel anterior" onclick="moverCarrusel(-1)" aria-label="Imagen anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="boton-carrusel siguiente" onclick="moverCarrusel(1)" aria-label="Siguiente imagen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        <div class="indicadores-carrusel">
+          <span class="indicador activo" onclick="irAlCarrusel(0)"></span>
+          <span class="indicador" onclick="irAlCarrusel(1)"></span>
+          <span class="indicador" onclick="irAlCarrusel(2)"></span>
+        </div>
+      </div>
+
+      <!-- Contenido de Historia, Misión y Visión -->
       <div class="grid-sobre-contenido">
-        <!-- Columna Izquierda: Descripción -->
+        <!-- Columna Izquierda: Historia -->
         <div class="bloque-descripcion animar-entrada">
-          <h2 class="subtitulo-sobre">Bienvenido a La Arboleda Club</h2>
+          <h2 class="subtitulo-sobre">Nuestra Historia</h2>
           <p class="texto-descripcion">
-            En <strong>La Arboleda Club</strong> encontrarás áreas verdes, zonas deportivas, ambientes de recreación y un restaurante con una experiencia única. Nos hemos dedicado a crear momentos memorables para familias y amigos que buscan un lugar especial en Tacna.
+            <strong>La Arboleda Club</strong> nace como un sueño compartido de crear un espacio donde la familia, el deporte y la gastronomía convergen en perfecta armonía. Desde sus inicios, hemos trabajado para transformar cada visita en una experiencia memorable, combinando naturaleza, diversión y excelencia.
           </p>
-          <div class="lista-atributos">
-            <div class="atributo-item">
-              <span class="icono-atributo">🌳</span>
-              <span>Áreas Verdes Naturales</span>
+          <p class="texto-descripcion">
+            Cada rincón de nuestro club refleja nuestro compromiso con la calidad y la atención al detalle. Nos enorgullece ser el destino preferido de familias y amigos en Tacna.
+          </p>
+        </div>
+
+        <!-- Columna Derecha: Misión y Visión -->
+        <div class="bloque-acciones animar-entrada">
+          <div class="tarjeta-mision-vision">
+            <div class="mision-contenido">
+              <h3 class="subtitulo-mv">
+                <span class="icono-mv">🎯</span>
+                Nuestra Misión
+              </h3>
+              <p class="texto-mv">Ofrecer un entorno integrador donde nuestros miembros y visitantes disfruten de instalaciones de clase mundial, gastronomía excepcional y momentos inolvidables en familia.</p>
             </div>
-            <div class="atributo-item">
-              <span class="icono-atributo">⚽</span>
-              <span>Instalaciones Deportivas</span>
-            </div>
-            <div class="atributo-item">
-              <span class="icono-atributo">🍽️</span>
-              <span>Gastronomía Premium</span>
-            </div>
-            <div class="atributo-item">
-              <span class="icono-atributo">👨‍👩‍👧‍👦</span>
-              <span>Espacios Familiares</span>
+            <div class="linea-separadora-mv"></div>
+            <div class="vision-contenido">
+              <h3 class="subtitulo-mv">
+                <span class="icono-mv">✨</span>
+                Nuestra Visión
+              </h3>
+              <p class="texto-mv">Ser el club de referencia en Tacna, reconocido por excelencia en servicios, infraestructura moderna y compromiso con la comunidad.</p>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Columna Derecha: Horarios y Acciones -->
-        <div class="bloque-acciones animar-entrada">
-          <div class="tarjeta-horarios-premium">
-            <div class="icono-seccion-horarios">⏰</div>
-            <h3>Horario de Atención</h3>
-            <div class="horario-detalle">
-              <div class="horario-fila">
-                <span class="dia">Mar - Dom:</span>
-                <span class="hora">9:00 AM - 5:00 PM</span>
-              </div>
-              <div class="horario-fila">
-                <span class="dia">Lunes:</span>
-                <span class="hora estado-cerrado">Cerrado</span>
-              </div>
-            </div>
+      <!-- Sección de Valores y Botones de Acción -->
+      <div class="seccion-valores-acciones">
+        <div class="grid-valores">
+          <div class="valor-item animar-entrada">
+            <span class="icono-valor">🌱</span>
+            <h4>Sostenibilidad</h4>
+            <p>Cuidamos nuestras áreas verdes y recursos naturales</p>
           </div>
+          <div class="valor-item animar-entrada">
+            <span class="icono-valor">👥</span>
+            <h4>Comunidad</h4>
+            <p>Creamos espacios para conexiones significativas</p>
+          </div>
+          <div class="valor-item animar-entrada">
+            <span class="icono-valor">⭐</span>
+            <h4>Excelencia</h4>
+            <p>Mantenemos altos estándares en todo lo que hacemos</p>
+          </div>
+          <div class="valor-item animar-entrada">
+            <span class="icono-valor">❤️</span>
+            <h4>Pasión</h4>
+            <p>Nos dedicamos con amor a cada detalle</p>
+          </div>
+        </div>
 
-          <div class="grilla-botones-sobre">
-            <button class="boton-sobre-accion boton-equipo" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+        <!-- Botones de Acción Principales -->
+        <div class="grilla-botones-principales animar-entrada">
+          <button class="boton-accion-principal boton-equipo" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
+            <div class="boton-contenido">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                 <circle cx="9" cy="7" r="4"></circle>
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
-              <span class="texto-boton">
+              <div class="boton-texto-principal">
                 <strong>Nuestro Equipo</strong>
-                <small>Conoce al equipo</small>
-              </span>
-            </button>
-            <button class="boton-sobre-accion boton-reglamentos" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <small>Profesionales dedicados</small>
+              </div>
+            </div>
+          </button>
+          <button class="boton-accion-principal boton-reglamentos" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
+            <div class="boton-contenido">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
               </svg>
-              <span class="texto-boton">
+              <div class="boton-texto-principal">
                 <strong>Reglamentos</strong>
-                <small>Normas del club</small>
-              </span>
-            </button>
-          </div>
+                <small>Normas y reglas</small>
+              </div>
+            </div>
+          </button>
         </div>
       </div>
     </div>
