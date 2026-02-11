@@ -3125,6 +3125,102 @@ a {
   margin: 0 auto;
 }
 
+/* Carrusel de Imágenes */
+.carrusel-sobre {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin: 50px 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.contenedor-carrusel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen-carrusel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.imagen-carrusel.activa {
+  opacity: 1;
+  z-index: 2;
+}
+
+.boton-carrusel {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  color: var(--azul-principal);
+}
+
+.boton-carrusel:hover {
+  background: var(--blanco);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.boton-carrusel svg {
+  width: 24px;
+  height: 24px;
+}
+
+.boton-carrusel.anterior {
+  left: 20px;
+}
+
+.boton-carrusel.siguiente {
+  right: 20px;
+}
+
+.indicadores-carrusel {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.indicador {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.indicador.activo {
+  background: var(--blanco);
+  transform: scale(1.2);
+}
+
 .grid-sobre-contenido {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3161,41 +3257,6 @@ a {
   font-weight: 700;
 }
 
-/* Lista de Atributos */
-.lista-atributos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 30px;
-}
-
-.atributo-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 18px 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  border-left: 4px solid var(--dorado-claro);
-  transition: all 0.4s ease;
-}
-
-.atributo-item:hover {
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  transform: translateX(8px);
-}
-
-.icono-atributo {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-}
-
-.atributo-item span:last-child {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.95rem;
-}
-
 /* Bloque de Acciones - Columna Derecha */
 .bloque-acciones {
   display: flex;
@@ -3203,99 +3264,159 @@ a {
   gap: 30px;
 }
 
-/* Tarjeta de Horarios Premium */
-.tarjeta-horarios-premium {
-  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-suave) 100%);
-  color: var(--blanco);
-  padding: 40px 35px;
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 82, 180, 0.15);
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+/* Tarjeta de Misión y Visión */
+.tarjeta-mision-vision {
+  background: var(--blanco);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  border: 1px solid rgba(0, 82, 180, 0.1);
 }
 
-.icono-seccion-horarios {
-  font-size: 3rem;
-  margin-bottom: 15px;
+.mision-contenido,
+.vision-contenido {
+  padding: 20px 0;
+}
+
+.subtitulo-mv {
+  font-size: 1.3rem;
+  color: var(--azul-principal);
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icono-mv {
+  font-size: 1.8rem;
   display: block;
+  flex-shrink: 0;
 }
 
-.tarjeta-horarios-premium h3 {
-  font-size: 1.5rem;
-  margin: 0 0 25px 0;
+.texto-mv {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #555;
+  margin: 0;
+}
+
+.linea-separadora-mv {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 82, 180, 0.2), transparent);
+  margin: 30px 0;
+}
+
+/* Sección de Valores y Botones */
+.seccion-valores-acciones {
+  margin-top: 60px;
+}
+
+.grid-valores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.valor-item {
+  text-align: center;
+  padding: 35px 25px;
+  background: var(--blanco);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-top: 4px solid var(--dorado-claro);
+}
+
+.valor-item:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 82, 180, 0.12);
+}
+
+.icono-valor {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.valor-item h4 {
+  font-size: 1.2rem;
+  color: var(--azul-principal);
+  margin: 0 0 10px 0;
   font-weight: 700;
   font-family: 'Montserrat', sans-serif;
 }
 
-.horario-detalle {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.valor-item p {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
 }
 
-.horario-fila {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.horario-fila:last-child {
-  border-bottom: none;
-}
-
-.horario-fila .dia {
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.horario-fila .hora {
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.estado-cerrado {
-  color: #ffcccc !important;
-  font-style: italic;
-}
-
-/* Grilla de Botones */
-.grilla-botones-sobre {
+/* Grilla de Botones Principales */
+.grilla-botones-principales {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
 }
 
-.boton-sobre-accion {
+.boton-accion-principal {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 28px 24px;
+  align-items: stretch;
+  padding: 0;
   background: var(--blanco);
   border: 2px solid transparent;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   font-family: 'Poppins', sans-serif;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.boton-sobre-accion:hover {
+.boton-contenido {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 35px 30px;
+  width: 100%;
+}
+
+.boton-accion-principal svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+}
+
+.boton-texto-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.boton-texto-principal strong {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.boton-texto-principal small {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.boton-accion-principal:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
 }
 
-.boton-sobre-accion:focus-visible {
+.boton-accion-principal:focus-visible {
   outline: 3px solid var(--azul-principal);
   outline-offset: 4px;
-}
-
-.boton-sobre-accion svg {
-  width: 32px;
-  height: 32px;
-  transition: all 0.4s ease;
 }
 
 .boton-equipo {
@@ -3310,7 +3431,7 @@ a {
 }
 
 .boton-equipo:hover svg {
-  stroke: currentColor;
+  color: var(--blanco);
 }
 
 .boton-reglamentos {
@@ -3325,24 +3446,51 @@ a {
 }
 
 .boton-reglamentos:hover svg {
-  stroke: currentColor;
+  color: var(--blanco);
 }
 
-.texto-boton {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
+/* Responsive para Carrusel */
+@media (max-width: 768px) {
+  .carrusel-sobre {
+    height: 280px;
+  }
+
+  .boton-carrusel {
+    width: 40px;
+    height: 40px;
+  }
+
+  .boton-carrusel.anterior {
+    left: 12px;
+  }
+
+  .boton-carrusel.siguiente {
+    right: 12px;
+  }
+
+  .grid-sobre-contenido {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .grid-valores {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.texto-boton strong {
-  font-weight: 700;
-  font-size: 1rem;
-}
+@media (max-width: 480px) {
+  .carrusel-sobre {
+    height: 220px;
+    margin: 30px 0;
+  }
 
-.texto-boton small {
-  font-size: 0.8rem;
-  opacity: 0.8;
+  .grid-valores {
+    grid-template-columns: 1fr;
+  }
+
+  .grilla-botones-principales {
+    grid-template-columns: 1fr;
+  }
 }
 
 .seccion-mision-vision-limpia {

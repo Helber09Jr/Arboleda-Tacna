@@ -658,6 +658,41 @@ function inicializarModalPDF() {
   }
 }
 
+// Sistema de Carrusel para Sobre Nosotros
+let indiceCarruselActual = 0;
+const imagenes = document.querySelectorAll('.imagen-carrusel');
+const totalImagenes = imagenes.length;
+
+function mostrarImagen(indice) {
+  // Remover clase activa de todas las imágenes
+  imagenes.forEach(img => img.classList.remove('activa'));
+
+  // Obtener todos los indicadores
+  const indicadores = document.querySelectorAll('.indicador');
+  indicadores.forEach(ind => ind.classList.remove('activo'));
+
+  // Validar índice
+  indiceCarruselActual = (indice + totalImagenes) % totalImagenes;
+
+  // Agregar clase activa a la imagen actual
+  if (imagenes[indiceCarruselActual]) {
+    imagenes[indiceCarruselActual].classList.add('activa');
+  }
+
+  // Agregar clase activa al indicador actual
+  if (indicadores[indiceCarruselActual]) {
+    indicadores[indiceCarruselActual].classList.add('activo');
+  }
+}
+
+function moverCarrusel(direccion) {
+  mostrarImagen(indiceCarruselActual + direccion);
+}
+
+function irAlCarrusel(indice) {
+  mostrarImagen(indice);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   new ModalInstalacion();
   inicializarMenuMovil();
@@ -668,4 +703,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Inicializar funciones de equipos y reglamentos
   inicializarModalPDF();
+
+  // Inicializar carrusel
+  if (imagenes.length > 0) {
+    mostrarImagen(0);
+  }
 });
