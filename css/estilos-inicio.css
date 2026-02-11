@@ -3308,54 +3308,6 @@ a {
   margin: 30px 0;
 }
 
-/* Sección de Valores y Botones */
-.seccion-valores-acciones {
-  margin-top: 60px;
-}
-
-.grid-valores {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
-  margin-bottom: 60px;
-}
-
-.valor-item {
-  text-align: center;
-  padding: 35px 25px;
-  background: var(--blanco);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border-top: 4px solid var(--dorado-claro);
-}
-
-.valor-item:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 25px 50px rgba(0, 82, 180, 0.12);
-}
-
-.icono-valor {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: 15px;
-}
-
-.valor-item h4 {
-  font-size: 1.2rem;
-  color: var(--azul-principal);
-  margin: 0 0 10px 0;
-  font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.valor-item p {
-  font-size: 0.95rem;
-  color: #666;
-  margin: 0;
-  line-height: 1.6;
-}
-
 /* Grilla de Botones Principales */
 .grilla-botones-principales {
   display: grid;
@@ -3472,20 +3424,12 @@ a {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
-  .grid-valores {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 480px) {
   .carrusel-sobre {
     height: 220px;
     margin: 30px 0;
-  }
-
-  .grid-valores {
-    grid-template-columns: 1fr;
   }
 
   .grilla-botones-principales {
