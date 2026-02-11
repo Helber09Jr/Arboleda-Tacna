@@ -3271,28 +3271,73 @@ a {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 08);
   padding: 32px;
   border: 1px solid rgba(0, 82, 180, 0.1);
+  transition: all 0.3s ease;
 }
 
-.mision-contenido,
+.tarjeta-mision-vision:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 82, 180, 0.2);
+}
+
+.mision-contenido {
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.04) 0%, rgba(0, 82, 180, 0.02) 100%);
+  transition: all 0.3s ease;
+}
+
+.mision-contenido:hover {
+  background: linear-gradient(135deg, rgba(0, 82, 180, 0.08) 0%, rgba(0, 82, 180, 0.04) 100%);
+}
+
 .vision-contenido {
-  padding: 20px 0;
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.04) 0%, rgba(255, 179, 71, 0.02) 100%);
+  transition: all 0.3s ease;
+}
+
+.vision-contenido:hover {
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.08) 0%, rgba(255, 179, 71, 0.04) 100%);
 }
 
 .subtitulo-mv {
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   color: var(--azul-principal);
-  margin: 0 0 15px 0;
+  margin: 0 0 16px 0;
   font-weight: 700;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  letter-spacing: -0.5px;
 }
 
 .icono-mv {
-  font-size: 1.8rem;
-  display: block;
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(0, 82, 180, 0.08);
+  transition: all 0.3s ease;
+}
+
+.vision-contenido .icono-mv {
+  background: rgba(255, 179, 71, 0.1);
+}
+
+.mision-contenido:hover .icono-mv {
+  background: rgba(0, 82, 180, 0.15);
+  transform: scale(1.05);
+}
+
+.vision-contenido:hover .icono-mv {
+  background: rgba(255, 179, 71, 0.15);
+  transform: scale(1.05);
 }
 
 .texto-mv {
@@ -3300,12 +3345,14 @@ a {
   line-height: 1.8;
   color: #555;
   margin: 0;
+  font-weight: 500;
 }
 
 .linea-separadora-mv {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 82, 180, 0.2), transparent);
-  margin: 30px 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 82, 180, 0.15), transparent);
+  margin: 32px 0;
+  border-radius: 1px;
 }
 
 /* Grilla de Botones Principales */
