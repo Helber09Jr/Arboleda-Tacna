@@ -3437,6 +3437,126 @@ a {
   color: var(--blanco);
 }
 
+/* Estilos para el badge de año "desde 1986" */
+.year-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-claro) 100%);
+  color: var(--blanco);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin: 0 8px;
+  box-shadow: 0 4px 12px rgba(200, 169, 94, 0.3);
+}
+
+/* Grilla de Botones Compactos */
+.grilla-botones-compactos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Botones de Acción Compactos */
+.boton-accion-compacto {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: var(--blanco);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  min-height: 80px;
+}
+
+.boton-contenido-compacto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.boton-accion-compacto svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.boton-texto-compacto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.boton-texto-compacto strong {
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.2px;
+}
+
+.boton-accion-compacto:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.boton-accion-compacto:active {
+  transform: translateY(-3px);
+}
+
+.boton-accion-compacto:focus-visible {
+  outline: 2px solid var(--azul-principal);
+  outline-offset: 3px;
+}
+
+/* Variante Equipo Compacto */
+.boton-equipo-compacto {
+  background: linear-gradient(135deg, rgba(52, 104, 219, 0.08) 0%, rgba(52, 104, 219, 0.02) 100%);
+  border: 2px solid rgba(52, 104, 219, 0.25);
+  color: var(--azul-principal);
+}
+
+.boton-equipo-compacto:hover {
+  background: linear-gradient(135deg, var(--azul-principal) 0%, #4078d9 100%);
+  color: var(--blanco);
+  border-color: var(--azul-principal);
+  box-shadow: 0 12px 28px rgba(52, 104, 219, 0.25);
+}
+
+.boton-equipo-compacto:hover svg {
+  color: var(--blanco);
+  transform: scale(1.1);
+}
+
+/* Variante Reglamentos Compacto */
+.boton-reglamentos-compacto {
+  background: linear-gradient(135deg, rgba(34, 139, 80, 0.08) 0%, rgba(34, 139, 80, 0.02) 100%);
+  border: 2px solid rgba(34, 139, 80, 0.25);
+  color: var(--verde-acento);
+}
+
+.boton-reglamentos-compacto:hover {
+  background: linear-gradient(135deg, var(--verde-acento) 0%, #1f5f3d 100%);
+  color: var(--blanco);
+  border-color: var(--verde-acento);
+  box-shadow: 0 12px 28px rgba(34, 139, 80, 0.25);
+}
+
+.boton-reglamentos-compacto:hover svg {
+  color: var(--blanco);
+  transform: scale(1.1);
+}
+
 /* Responsive para Carrusel */
 @media (max-width: 768px) {
   .carrusel-sobre {

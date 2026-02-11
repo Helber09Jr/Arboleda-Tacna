@@ -138,11 +138,39 @@
         <div class="bloque-descripcion animar-entrada">
           <h2 class="subtitulo-sobre">Nuestra Historia</h2>
           <p class="texto-descripcion">
-            <strong>La Arboleda Club</strong> nace como un sueño compartido de crear un espacio donde la familia, el deporte y la gastronomía convergen en perfecta armonía. Desde sus inicios, hemos trabajado para transformar cada visita en una experiencia memorable, combinando naturaleza, diversión y excelencia.
+            <strong>La Arboleda Club</strong> nace como un sueño compartido de crear un espacio donde la familia, el deporte y la gastronomía convergen en perfecta armonía. Desde sus inicios <span class="year-badge">desde 1986</span>, hemos trabajado para transformar cada visita en una experiencia memorable, combinando naturaleza, diversión y excelencia.
           </p>
           <p class="texto-descripcion">
             Cada rincón de nuestro club refleja nuestro compromiso con la calidad y la atención al detalle. Nos enorgullece ser el destino preferido de familias y amigos en Tacna.
           </p>
+
+          <!-- Botones de Acción Compactos -->
+          <div class="grilla-botones-compactos animar-entrada">
+            <button class="boton-accion-compacto boton-equipo-compacto" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
+              <div class="boton-contenido-compacto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <div class="boton-texto-compacto">
+                  <strong>Nuestro Equipo</strong>
+                </div>
+              </div>
+            </button>
+            <button class="boton-accion-compacto boton-reglamentos-compacto" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
+              <div class="boton-contenido-compacto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <div class="boton-texto-compacto">
+                  <strong>Reglamento</strong>
+                </div>
+              </div>
+            </button>
+          </div>
         </div>
 
         <!-- Columna Derecha: Misión y Visión -->
@@ -165,36 +193,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Botones de Acción Principales -->
-      <div class="grilla-botones-principales animar-entrada">
-        <button class="boton-accion-principal boton-equipo" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
-          <div class="boton-contenido">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            <div class="boton-texto-principal">
-              <strong>Nuestro Equipo</strong>
-              <small>Profesionales dedicados</small>
-            </div>
-          </div>
-        </button>
-        <button class="boton-accion-principal boton-reglamentos" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
-          <div class="boton-contenido">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-            </svg>
-            <div class="boton-texto-principal">
-              <strong>Reglamentos</strong>
-              <small>Normas y reglas</small>
-            </div>
-          </div>
-        </button>
       </div>
     </div>
   </section>
