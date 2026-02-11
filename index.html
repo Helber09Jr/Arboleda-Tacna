@@ -100,47 +100,82 @@
     </div>
   </section>
 
-  <section id="sobre" class="seccion-informacion-limpia">
-    <div class="contenedor-sobre-nosotros">
+  <section id="sobre" class="seccion-sobre-premium">
+    <div class="contenedor-sobre-premium">
       <div class="encabezado-seccion centrado animar-entrada">
         <span class="etiqueta-seccion">Nuestra Historia</span>
         <h1 class="titulo-seccion">Un espacio pensado para disfrutar en familia</h1>
         <div class="linea-decorativa"></div>
       </div>
 
-      <div class="contenido-sobre-principal">
-        <div class="bloque-introduccion animar-entrada">
-          <p class="texto-intro">
+      <div class="grid-sobre-contenido">
+        <!-- Columna Izquierda: Descripción -->
+        <div class="bloque-descripcion animar-entrada">
+          <h2 class="subtitulo-sobre">Bienvenido a La Arboleda Club</h2>
+          <p class="texto-descripcion">
             En <strong>La Arboleda Club</strong> encontrarás áreas verdes, zonas deportivas, ambientes de recreación y un restaurante con una experiencia única. Nos hemos dedicado a crear momentos memorables para familias y amigos que buscan un lugar especial en Tacna.
           </p>
-        </div>
-
-        <div class="tarjeta-horarios-sobre animar-entrada">
-          <div class="icono-horario" aria-hidden="true">⏰</div>
-          <div class="contenido-horario">
-            <h3>Horario de Atención</h3>
-            <p><strong>Martes - Domingo:</strong> 9:00 AM - 5:00 PM</p>
-            <p><strong>Lunes:</strong> Cerrado</p>
+          <div class="lista-atributos">
+            <div class="atributo-item">
+              <span class="icono-atributo">🌳</span>
+              <span>Áreas Verdes Naturales</span>
+            </div>
+            <div class="atributo-item">
+              <span class="icono-atributo">⚽</span>
+              <span>Instalaciones Deportivas</span>
+            </div>
+            <div class="atributo-item">
+              <span class="icono-atributo">🍽️</span>
+              <span>Gastronomía Premium</span>
+            </div>
+            <div class="atributo-item">
+              <span class="icono-atributo">👨‍👩‍👧‍👦</span>
+              <span>Espacios Familiares</span>
+            </div>
           </div>
         </div>
 
-        <div class="botones-acciones-sobre animar-entrada">
-          <button class="boton-accion-primario" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            Nuestro Equipo
-          </button>
-          <button class="boton-accion-secundario" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-            </svg>
-            Reglamentos
-          </button>
+        <!-- Columna Derecha: Horarios y Acciones -->
+        <div class="bloque-acciones animar-entrada">
+          <div class="tarjeta-horarios-premium">
+            <div class="icono-seccion-horarios">⏰</div>
+            <h3>Horario de Atención</h3>
+            <div class="horario-detalle">
+              <div class="horario-fila">
+                <span class="dia">Mar - Dom:</span>
+                <span class="hora">9:00 AM - 5:00 PM</span>
+              </div>
+              <div class="horario-fila">
+                <span class="dia">Lunes:</span>
+                <span class="hora estado-cerrado">Cerrado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grilla-botones-sobre">
+            <button class="boton-sobre-accion boton-equipo" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span class="texto-boton">
+                <strong>Nuestro Equipo</strong>
+                <small>Conoce al equipo</small>
+              </span>
+            </button>
+            <button class="boton-sobre-accion boton-reglamentos" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span class="texto-boton">
+                <strong>Reglamentos</strong>
+                <small>Normas del club</small>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
