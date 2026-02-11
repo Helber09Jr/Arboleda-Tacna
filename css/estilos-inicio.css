@@ -3268,41 +3268,41 @@ a {
 .tarjeta-mision-vision {
   background: var(--blanco);
   border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 08);
+  box-shadow: none;
   padding: 32px;
   border: 1px solid rgba(0, 82, 180, 0.1);
   transition: all 0.3s ease;
 }
 
 .tarjeta-mision-vision:hover {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   border-color: rgba(0, 82, 180, 0.2);
 }
 
 .mision-contenido {
   padding: 24px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(0, 82, 180, 0.04) 0%, rgba(0, 82, 180, 0.02) 100%);
+  background: transparent;
   transition: all 0.3s ease;
 }
 
 .mision-contenido:hover {
-  background: linear-gradient(135deg, rgba(0, 82, 180, 0.08) 0%, rgba(0, 82, 180, 0.04) 100%);
+  background: transparent;
 }
 
 .vision-contenido {
   padding: 24px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 179, 71, 0.04) 0%, rgba(255, 179, 71, 0.02) 100%);
+  background: transparent;
   transition: all 0.3s ease;
 }
 
 .vision-contenido:hover {
-  background: linear-gradient(135deg, rgba(255, 179, 71, 0.08) 0%, rgba(255, 179, 71, 0.04) 100%);
+  background: transparent;
 }
 
 .subtitulo-mv {
-  font-size: 1.45rem;
+  font-size: 1.1rem;
   color: var(--azul-principal);
   margin: 0 0 16px 0;
   font-weight: 700;
