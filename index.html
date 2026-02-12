@@ -90,98 +90,91 @@
 
   <section id="sobre" class="seccion-sobre-premium">
     <div class="contenedor-sobre-premium">
-      <div class="encabezado-seccion centrado animar-entrada">
-        <span class="etiqueta-seccion">Nuestra Historia</span>
-        <h1 class="titulo-seccion">Un espacio pensado para disfrutar en familia</h1>
-        <div class="linea-decorativa"></div>
-      </div>
 
-      <!-- Carrusel de Imágenes -->
-      <div class="carrusel-sobre animar-entrada">
-        <div class="contenedor-carrusel">
-          <img src="imagenes/instalaciones/deportes-principal.jpg" alt="Instalaciones deportivas de La Arboleda Club" class="imagen-carrusel activa" loading="lazy">
-          <img src="imagenes/instalaciones/bungalows-principal.jpg" alt="Áreas verdes y bungalows de La Arboleda Club" class="imagen-carrusel" loading="lazy">
-          <img src="imagenes/instalaciones/eventos-piscina-1.jpg" alt="Piscina y áreas de eventos de La Arboleda Club" class="imagen-carrusel" loading="lazy">
+      <div class="sobre-hero-bloque animar-entrada">
+        <div class="sobre-hero-carrusel">
+          <div class="carrusel-sobre">
+            <div class="contenedor-carrusel">
+              <img src="imagenes/instalaciones/deportes-principal.jpg" alt="Instalaciones deportivas de La Arboleda Club" class="imagen-carrusel activa" loading="lazy">
+              <img src="imagenes/instalaciones/bungalows-principal.jpg" alt="Áreas verdes y bungalows de La Arboleda Club" class="imagen-carrusel" loading="lazy">
+              <img src="imagenes/instalaciones/eventos-piscina-1.jpg" alt="Piscina y áreas de eventos de La Arboleda Club" class="imagen-carrusel" loading="lazy">
+            </div>
+            <div class="carrusel-overlay"></div>
+            <button class="boton-carrusel anterior" onclick="moverCarrusel(-1)" aria-label="Imagen anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button class="boton-carrusel siguiente" onclick="moverCarrusel(1)" aria-label="Siguiente imagen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <div class="indicadores-carrusel">
+              <span class="indicador activo" onclick="irAlCarrusel(0)"></span>
+              <span class="indicador" onclick="irAlCarrusel(1)"></span>
+              <span class="indicador" onclick="irAlCarrusel(2)"></span>
+            </div>
+          </div>
         </div>
-        <button class="boton-carrusel anterior" onclick="moverCarrusel(-1)" aria-label="Imagen anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <button class="boton-carrusel siguiente" onclick="moverCarrusel(1)" aria-label="Siguiente imagen">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-        <div class="indicadores-carrusel">
-          <span class="indicador activo" onclick="irAlCarrusel(0)"></span>
-          <span class="indicador" onclick="irAlCarrusel(1)"></span>
-          <span class="indicador" onclick="irAlCarrusel(2)"></span>
-        </div>
-      </div>
-
-      <!-- Contenido de Historia, Misión y Visión -->
-      <div class="grid-sobre-contenido">
-        <!-- Columna Izquierda: Historia -->
-        <div class="bloque-descripcion animar-entrada">
-          <h2 class="subtitulo-sobre">Nuestra Historia</h2>
-          <p class="texto-descripcion">
-            <strong>La Arboleda Club</strong> nace como un sueño compartido de crear un espacio donde la familia, el deporte y la gastronomía convergen en perfecta armonía. Desde sus inicios <span class="year-badge">desde 1986</span>, hemos trabajado para transformar cada visita en una experiencia memorable, combinando naturaleza, diversión y excelencia.
+        <div class="sobre-hero-texto">
+          <span class="sobre-anio-badge">Desde 1986</span>
+          <h1 class="sobre-titulo-hero">Un espacio pensado para disfrutar en familia</h1>
+          <p class="sobre-descripcion-hero">
+            <strong>La Arboleda Club</strong> nace como un sueño compartido de crear un espacio donde la familia, el deporte y la gastronomía convergen en perfecta armonía. Hemos trabajado para transformar cada visita en una experiencia memorable, combinando naturaleza, diversión y excelencia.
           </p>
-          <p class="texto-descripcion">
+          <p class="sobre-descripcion-hero">
             Cada rincón de nuestro club refleja nuestro compromiso con la calidad y la atención al detalle. Nos enorgullece ser el destino preferido de familias y amigos en Tacna.
           </p>
-
-          <!-- Botones de Acción Compactos -->
-          <div class="grilla-botones-compactos animar-entrada">
-            <button class="boton-accion-compacto boton-equipo-compacto" onclick="abrirModalEquipo()" aria-label="Ver nuestro equipo">
-              <div class="boton-contenido-compacto">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-                <div class="boton-texto-compacto">
-                  <strong>Nuestro Equipo</strong>
-                </div>
-              </div>
+          <div class="sobre-acciones-hero">
+            <button class="sobre-btn-primario" onclick="abrirModalEquipo()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              Nuestro Equipo
             </button>
-            <button class="boton-accion-compacto boton-reglamentos-compacto" onclick="abrirModalReglamentos()" aria-label="Ver reglamentos">
-              <div class="boton-contenido-compacto">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                </svg>
-                <div class="boton-texto-compacto">
-                  <strong>Reglamento</strong>
-                </div>
-              </div>
+            <button class="sobre-btn-secundario" onclick="abrirModalReglamentos()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Reglamento
             </button>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Misión y Visión -->
-        <div class="bloque-acciones">
-          <div class="tarjeta-mision-vision">
-            <div class="mision-contenido">
-              <h3 class="subtitulo-mv">
-                <span class="icono-mv">🎯</span>
-                Nuestra Misión
-              </h3>
-              <p class="texto-mv">Ofrecer un entorno integrador donde nuestros miembros y visitantes disfruten de instalaciones de clase mundial, gastronomía excepcional y momentos inolvidables en familia.</p>
-            </div>
-            <div class="linea-separadora-mv"></div>
-            <div class="vision-contenido">
-              <h3 class="subtitulo-mv">
-                <span class="icono-mv">✨</span>
-                Nuestra Visión
-              </h3>
-              <p class="texto-mv">Ser el club de referencia en Tacna, reconocido por excelencia en servicios, infraestructura moderna y compromiso con la comunidad.</p>
-            </div>
           </div>
         </div>
       </div>
+
+      <div class="sobre-mv-grid animar-entrada">
+        <div class="sobre-mv-tarjeta sobre-mv-mision">
+          <div class="sobre-mv-icono-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <div class="sobre-mv-contenido">
+            <h3>Nuestra Misión</h3>
+            <p>Ofrecer un entorno integrador donde nuestros miembros y visitantes disfruten de instalaciones de clase mundial, gastronomía excepcional y momentos inolvidables en familia.</p>
+          </div>
+        </div>
+        <div class="sobre-mv-tarjeta sobre-mv-vision">
+          <div class="sobre-mv-icono-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <div class="sobre-mv-contenido">
+            <h3>Nuestra Visión</h3>
+            <p>Ser el club de referencia en Tacna, reconocido por excelencia en servicios, infraestructura moderna y compromiso con la comunidad.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
